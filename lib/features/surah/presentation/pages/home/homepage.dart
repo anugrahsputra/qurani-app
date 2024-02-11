@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../injection.dart';
+import '../../../domain/domain.dart';
 import '../../logic/logic.dart';
+
+part 'homepage.component.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -12,35 +15,28 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  final SurahBloc surahBloc = sl<SurahBloc>();
+
+  @override
+  void initState() {
+    super.initState();
+    surahBloc.add(const OnGetSurah());
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => sl<SurahBloc>()..add(const OnGetSurah()),
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Qurani'),
-          ),
-          body: BlocBuilder<SurahBloc, SurahState>(
-            builder: (context, state) {
-              return state.map(
-                initial: (_) =>
-                    const Center(child: CircularProgressIndicator()),
-                loading: (_) =>
-                    const Center(child: CircularProgressIndicator()),
-                loaded: (state) => ListView.builder(
-                  itemCount: state.listSurah.length,
-                  itemBuilder: (context, index) {
-                    final surah = state.listSurah[index];
-                    return ListTile(
-                      title: Text(surah.name.translation.id),
-                      subtitle: Text(surah.name.long),
-                    );
-                  },
-                ),
-                error: (state) => Center(child: Text(state.message)),
-              );
-            },
-          ),
-        ));
+      create: (context) => surahBloc,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Qurani'),
+        ),
+        body: const Column(
+          children: [
+            SurahCards(),
+          ],
+        ),
+      ),
+    );
   }
 }
