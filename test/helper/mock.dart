@@ -9,6 +9,8 @@ export 'mock.mocks.dart';
   /* Network */
   MockSpec<Dio>(),
   MockSpec<DioClient>(),
+  MockSpec<CustomInterceptor>(),
+  MockSpec<RequestRetrier>(),
   /* Data */
   MockSpec<RemoteDataSource>(),
   /* Domain */
