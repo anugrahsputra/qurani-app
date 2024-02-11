@@ -22,15 +22,17 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
 
   @override
   void onRequest(options, handler) {
-    log.info("Request: ${options.uri}");
+    log.info("Request: ${options.data}");
     log.info("Request Headers: ${options.headers}");
     handler.next(options);
   }
 
   @override
   void onResponse(response, handler) {
-    log.info("Response: ${response.requestOptions.uri}");
+    final data = Parser.getMap(response.data);
+    log.info("Response: $data");
     log.info("Response Headers: ${response.headers}");
+
     handler.next(response);
   }
 
