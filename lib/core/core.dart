@@ -3,3 +3,4 @@ export 'logging/logging.dart';
 export 'mixins/mixins.dart';
 export 'networks/networks.dart';
 export 'routes/routes.dart';
+export 'utils/utils.dart';
