@@ -13,6 +13,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
   @override
   Future<SurahRes> getSurahs() async {
     final response = await dioClient.get(Endpoint.surah);
-    return SurahRes.fromJson(response.data);
+    final surahRes = Parser.getMap(response.data);
+    return SurahRes.fromJson(surahRes!);
   }
 }
