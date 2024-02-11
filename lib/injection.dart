@@ -15,7 +15,6 @@ Future<void> setup() async {
         connectTimeout: const Duration(seconds: 35),
         receiveTimeout: const Duration(seconds: 35),
         sendTimeout: const Duration(seconds: 35),
-        contentType: 'application/json',
       ),
     ),
     instanceName: "interceptor",
@@ -27,7 +26,6 @@ Future<void> setup() async {
         connectTimeout: const Duration(seconds: 35),
         receiveTimeout: const Duration(seconds: 35),
         sendTimeout: const Duration(seconds: 35),
-        contentType: 'application/json',
       ),
     )..interceptors.add(CustomInterceptor()),
   );

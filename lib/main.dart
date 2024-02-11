@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qurani/core/core.dart';
 
-import 'features/surah/surah.dart';
 import 'injection.dart';
 
 Future<void> main() async {
@@ -22,7 +21,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Homepage(),
+      initialRoute: AppRoutes.initial,
+      routes: AppRoutes.routes,
     );
   }
 }
