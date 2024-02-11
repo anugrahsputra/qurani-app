@@ -15,10 +15,7 @@ class SurahCards extends StatelessWidget {
               itemCount: surahs.length,
               itemBuilder: (context, index) {
                 final surah = state.listSurah[index];
-                return ListTile(
-                  title: Text(surah.name.translation.id),
-                  subtitle: Text(surah.name.long),
-                );
+                return CardView(surah: surah);
               },
             ),
           );
@@ -32,6 +29,74 @@ class SurahCards extends StatelessWidget {
           );
         }
       },
+    );
+  }
+}
+
+class CardView extends StatelessWidget {
+  const CardView({super.key, required this.surah});
+
+  final SurahEntity surah;
+
+  @override
+  Widget build(BuildContext context) {
+    String translation = surah.name.short;
+    String numberOfVerses = surah.numberOfVerses.toString();
+    String revelationType = surah.revelation.id;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+        vertical: 5,
+      ),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.deepPurple,
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Text(
+                surah.number.toString(),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const Gap(10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                surah.name.transliteration.id,
+              ),
+              const Gap(5),
+              Text(
+                '$revelationType - $numberOfVerses ayat',
+              )
+            ],
+          ),
+          const Spacer(),
+          Text(
+            translation,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
