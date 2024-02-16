@@ -215,8 +215,8 @@ Map<String, dynamic> _$$MetaModelImplToJson(_$MetaModelImpl instance) =>
 
 _$SajdaModelImpl _$$SajdaModelImplFromJson(Map<String, dynamic> json) =>
     _$SajdaModelImpl(
-      recommended: json['recommended'] as bool,
-      obligatory: json['obligatory'] as bool,
+      recommended: json['recommended'] as bool?,
+      obligatory: json['obligatory'] as bool?,
     );
 
 Map<String, dynamic> _$$SajdaModelImplToJson(_$SajdaModelImpl instance) =>
@@ -227,8 +227,8 @@ Map<String, dynamic> _$$SajdaModelImplToJson(_$SajdaModelImpl instance) =>
 
 _$NumberModelImpl _$$NumberModelImplFromJson(Map<String, dynamic> json) =>
     _$NumberModelImpl(
-      inQuran: json['inQuran'] as int,
-      inSurah: json['inSurah'] as int,
+      inQuran: json['inQuran'] as int?,
+      inSurah: json['inSurah'] as int?,
     );
 
 Map<String, dynamic> _$$NumberModelImplToJson(_$NumberModelImpl instance) =>
@@ -240,19 +240,21 @@ Map<String, dynamic> _$$NumberModelImplToJson(_$NumberModelImpl instance) =>
 _$VerseTafsirModelImpl _$$VerseTafsirModelImplFromJson(
         Map<String, dynamic> json) =>
     _$VerseTafsirModelImpl(
-      id: IdModel.fromJson(json['id'] as Map<String, dynamic>),
+      id: json['id'] == null
+          ? null
+          : IdModel.fromJson(json['id'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$VerseTafsirModelImplToJson(
         _$VerseTafsirModelImpl instance) =>
     <String, dynamic>{
-      'id': instance.id.toJson(),
+      'id': instance.id?.toJson(),
     };
 
 _$IdModelImpl _$$IdModelImplFromJson(Map<String, dynamic> json) =>
     _$IdModelImpl(
-      short: json['short'] as String,
-      long: json['long'] as String,
+      short: json['short'] as String?,
+      long: json['long'] as String?,
     );
 
 Map<String, dynamic> _$$IdModelImplToJson(_$IdModelImpl instance) =>

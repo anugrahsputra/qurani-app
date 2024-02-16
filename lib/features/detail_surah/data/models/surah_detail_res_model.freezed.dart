@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-SurahDetailRes _$SurahDetailResFromJson(Map<String, dynamic> json) {
-  return _SurahDetailRes.fromJson(json);
+SurahDetailResModel _$SurahDetailResModelFromJson(Map<String, dynamic> json) {
+  return _SurahDetailResModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SurahDetailRes {
+mixin _$SurahDetailResModel {
   @JsonKey(name: "code")
   int get code => throw _privateConstructorUsedError;
   @JsonKey(name: "status")
@@ -31,15 +31,15 @@ mixin _$SurahDetailRes {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SurahDetailResCopyWith<SurahDetailRes> get copyWith =>
+  $SurahDetailResModelCopyWith<SurahDetailResModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SurahDetailResCopyWith<$Res> {
-  factory $SurahDetailResCopyWith(
-          SurahDetailRes value, $Res Function(SurahDetailRes) then) =
-      _$SurahDetailResCopyWithImpl<$Res, SurahDetailRes>;
+abstract class $SurahDetailResModelCopyWith<$Res> {
+  factory $SurahDetailResModelCopyWith(
+          SurahDetailResModel value, $Res Function(SurahDetailResModel) then) =
+      _$SurahDetailResModelCopyWithImpl<$Res, SurahDetailResModel>;
   @useResult
   $Res call(
       {@JsonKey(name: "code") int code,
@@ -51,9 +51,9 @@ abstract class $SurahDetailResCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SurahDetailResCopyWithImpl<$Res, $Val extends SurahDetailRes>
-    implements $SurahDetailResCopyWith<$Res> {
-  _$SurahDetailResCopyWithImpl(this._value, this._then);
+class _$SurahDetailResModelCopyWithImpl<$Res, $Val extends SurahDetailResModel>
+    implements $SurahDetailResModelCopyWith<$Res> {
+  _$SurahDetailResModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -98,11 +98,11 @@ class _$SurahDetailResCopyWithImpl<$Res, $Val extends SurahDetailRes>
 }
 
 /// @nodoc
-abstract class _$$SurahDetailResImplCopyWith<$Res>
-    implements $SurahDetailResCopyWith<$Res> {
-  factory _$$SurahDetailResImplCopyWith(_$SurahDetailResImpl value,
-          $Res Function(_$SurahDetailResImpl) then) =
-      __$$SurahDetailResImplCopyWithImpl<$Res>;
+abstract class _$$SurahDetailResModelImplCopyWith<$Res>
+    implements $SurahDetailResModelCopyWith<$Res> {
+  factory _$$SurahDetailResModelImplCopyWith(_$SurahDetailResModelImpl value,
+          $Res Function(_$SurahDetailResModelImpl) then) =
+      __$$SurahDetailResModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -116,11 +116,11 @@ abstract class _$$SurahDetailResImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$SurahDetailResImplCopyWithImpl<$Res>
-    extends _$SurahDetailResCopyWithImpl<$Res, _$SurahDetailResImpl>
-    implements _$$SurahDetailResImplCopyWith<$Res> {
-  __$$SurahDetailResImplCopyWithImpl(
-      _$SurahDetailResImpl _value, $Res Function(_$SurahDetailResImpl) _then)
+class __$$SurahDetailResModelImplCopyWithImpl<$Res>
+    extends _$SurahDetailResModelCopyWithImpl<$Res, _$SurahDetailResModelImpl>
+    implements _$$SurahDetailResModelImplCopyWith<$Res> {
+  __$$SurahDetailResModelImplCopyWithImpl(_$SurahDetailResModelImpl _value,
+      $Res Function(_$SurahDetailResModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -131,7 +131,7 @@ class __$$SurahDetailResImplCopyWithImpl<$Res>
     Object? message = null,
     Object? data = null,
   }) {
-    return _then(_$SurahDetailResImpl(
+    return _then(_$SurahDetailResModelImpl(
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -155,15 +155,15 @@ class __$$SurahDetailResImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$SurahDetailResImpl implements _SurahDetailRes {
-  const _$SurahDetailResImpl(
+class _$SurahDetailResModelImpl implements _SurahDetailResModel {
+  const _$SurahDetailResModelImpl(
       {@JsonKey(name: "code") required this.code,
       @JsonKey(name: "status") required this.status,
       @JsonKey(name: "message") required this.message,
       @JsonKey(name: "data") required this.data});
 
-  factory _$SurahDetailResImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SurahDetailResImplFromJson(json);
+  factory _$SurahDetailResModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SurahDetailResModelImplFromJson(json);
 
   @override
   @JsonKey(name: "code")
@@ -180,14 +180,14 @@ class _$SurahDetailResImpl implements _SurahDetailRes {
 
   @override
   String toString() {
-    return 'SurahDetailRes(code: $code, status: $status, message: $message, data: $data)';
+    return 'SurahDetailResModel(code: $code, status: $status, message: $message, data: $data)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SurahDetailResImpl &&
+            other is _$SurahDetailResModelImpl &&
             (identical(other.code, code) || other.code == code) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.message, message) || other.message == message) &&
@@ -201,28 +201,28 @@ class _$SurahDetailResImpl implements _SurahDetailRes {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SurahDetailResImplCopyWith<_$SurahDetailResImpl> get copyWith =>
-      __$$SurahDetailResImplCopyWithImpl<_$SurahDetailResImpl>(
+  _$$SurahDetailResModelImplCopyWith<_$SurahDetailResModelImpl> get copyWith =>
+      __$$SurahDetailResModelImplCopyWithImpl<_$SurahDetailResModelImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SurahDetailResImplToJson(
+    return _$$SurahDetailResModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _SurahDetailRes implements SurahDetailRes {
-  const factory _SurahDetailRes(
+abstract class _SurahDetailResModel implements SurahDetailResModel {
+  const factory _SurahDetailResModel(
           {@JsonKey(name: "code") required final int code,
           @JsonKey(name: "status") required final String status,
           @JsonKey(name: "message") required final String message,
           @JsonKey(name: "data") required final SurahDetailModel data}) =
-      _$SurahDetailResImpl;
+      _$SurahDetailResModelImpl;
 
-  factory _SurahDetailRes.fromJson(Map<String, dynamic> json) =
-      _$SurahDetailResImpl.fromJson;
+  factory _SurahDetailResModel.fromJson(Map<String, dynamic> json) =
+      _$SurahDetailResModelImpl.fromJson;
 
   @override
   @JsonKey(name: "code")
@@ -238,6 +238,6 @@ abstract class _SurahDetailRes implements SurahDetailRes {
   SurahDetailModel get data;
   @override
   @JsonKey(ignore: true)
-  _$$SurahDetailResImplCopyWith<_$SurahDetailResImpl> get copyWith =>
+  _$$SurahDetailResModelImplCopyWith<_$SurahDetailResModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

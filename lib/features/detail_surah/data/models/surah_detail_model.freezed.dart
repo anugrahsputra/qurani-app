@@ -2384,9 +2384,9 @@ SajdaModel _$SajdaModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SajdaModel {
   @JsonKey(name: "recommended")
-  bool get recommended => throw _privateConstructorUsedError;
+  bool? get recommended => throw _privateConstructorUsedError;
   @JsonKey(name: "obligatory")
-  bool get obligatory => throw _privateConstructorUsedError;
+  bool? get obligatory => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2401,8 +2401,8 @@ abstract class $SajdaModelCopyWith<$Res> {
       _$SajdaModelCopyWithImpl<$Res, SajdaModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "recommended") bool recommended,
-      @JsonKey(name: "obligatory") bool obligatory});
+      {@JsonKey(name: "recommended") bool? recommended,
+      @JsonKey(name: "obligatory") bool? obligatory});
 }
 
 /// @nodoc
@@ -2418,18 +2418,18 @@ class _$SajdaModelCopyWithImpl<$Res, $Val extends SajdaModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? recommended = null,
-    Object? obligatory = null,
+    Object? recommended = freezed,
+    Object? obligatory = freezed,
   }) {
     return _then(_value.copyWith(
-      recommended: null == recommended
+      recommended: freezed == recommended
           ? _value.recommended
           : recommended // ignore: cast_nullable_to_non_nullable
-              as bool,
-      obligatory: null == obligatory
+              as bool?,
+      obligatory: freezed == obligatory
           ? _value.obligatory
           : obligatory // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ) as $Val);
   }
 }
@@ -2443,8 +2443,8 @@ abstract class _$$SajdaModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "recommended") bool recommended,
-      @JsonKey(name: "obligatory") bool obligatory});
+      {@JsonKey(name: "recommended") bool? recommended,
+      @JsonKey(name: "obligatory") bool? obligatory});
 }
 
 /// @nodoc
@@ -2458,18 +2458,18 @@ class __$$SajdaModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? recommended = null,
-    Object? obligatory = null,
+    Object? recommended = freezed,
+    Object? obligatory = freezed,
   }) {
     return _then(_$SajdaModelImpl(
-      recommended: null == recommended
+      recommended: freezed == recommended
           ? _value.recommended
           : recommended // ignore: cast_nullable_to_non_nullable
-              as bool,
-      obligatory: null == obligatory
+              as bool?,
+      obligatory: freezed == obligatory
           ? _value.obligatory
           : obligatory // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
     ));
   }
 }
@@ -2478,18 +2478,18 @@ class __$$SajdaModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SajdaModelImpl implements _SajdaModel {
   const _$SajdaModelImpl(
-      {@JsonKey(name: "recommended") required this.recommended,
-      @JsonKey(name: "obligatory") required this.obligatory});
+      {@JsonKey(name: "recommended") this.recommended,
+      @JsonKey(name: "obligatory") this.obligatory});
 
   factory _$SajdaModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SajdaModelImplFromJson(json);
 
   @override
   @JsonKey(name: "recommended")
-  final bool recommended;
+  final bool? recommended;
   @override
   @JsonKey(name: "obligatory")
-  final bool obligatory;
+  final bool? obligatory;
 
   @override
   String toString() {
@@ -2527,19 +2527,18 @@ class _$SajdaModelImpl implements _SajdaModel {
 
 abstract class _SajdaModel implements SajdaModel {
   const factory _SajdaModel(
-          {@JsonKey(name: "recommended") required final bool recommended,
-          @JsonKey(name: "obligatory") required final bool obligatory}) =
-      _$SajdaModelImpl;
+      {@JsonKey(name: "recommended") final bool? recommended,
+      @JsonKey(name: "obligatory") final bool? obligatory}) = _$SajdaModelImpl;
 
   factory _SajdaModel.fromJson(Map<String, dynamic> json) =
       _$SajdaModelImpl.fromJson;
 
   @override
   @JsonKey(name: "recommended")
-  bool get recommended;
+  bool? get recommended;
   @override
   @JsonKey(name: "obligatory")
-  bool get obligatory;
+  bool? get obligatory;
   @override
   @JsonKey(ignore: true)
   _$$SajdaModelImplCopyWith<_$SajdaModelImpl> get copyWith =>
@@ -2553,9 +2552,9 @@ NumberModel _$NumberModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$NumberModel {
   @JsonKey(name: "inQuran")
-  int get inQuran => throw _privateConstructorUsedError;
+  int? get inQuran => throw _privateConstructorUsedError;
   @JsonKey(name: "inSurah")
-  int get inSurah => throw _privateConstructorUsedError;
+  int? get inSurah => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2570,8 +2569,8 @@ abstract class $NumberModelCopyWith<$Res> {
       _$NumberModelCopyWithImpl<$Res, NumberModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "inQuran") int inQuran,
-      @JsonKey(name: "inSurah") int inSurah});
+      {@JsonKey(name: "inQuran") int? inQuran,
+      @JsonKey(name: "inSurah") int? inSurah});
 }
 
 /// @nodoc
@@ -2587,18 +2586,18 @@ class _$NumberModelCopyWithImpl<$Res, $Val extends NumberModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? inQuran = null,
-    Object? inSurah = null,
+    Object? inQuran = freezed,
+    Object? inSurah = freezed,
   }) {
     return _then(_value.copyWith(
-      inQuran: null == inQuran
+      inQuran: freezed == inQuran
           ? _value.inQuran
           : inQuran // ignore: cast_nullable_to_non_nullable
-              as int,
-      inSurah: null == inSurah
+              as int?,
+      inSurah: freezed == inSurah
           ? _value.inSurah
           : inSurah // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -2612,8 +2611,8 @@ abstract class _$$NumberModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "inQuran") int inQuran,
-      @JsonKey(name: "inSurah") int inSurah});
+      {@JsonKey(name: "inQuran") int? inQuran,
+      @JsonKey(name: "inSurah") int? inSurah});
 }
 
 /// @nodoc
@@ -2627,18 +2626,18 @@ class __$$NumberModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? inQuran = null,
-    Object? inSurah = null,
+    Object? inQuran = freezed,
+    Object? inSurah = freezed,
   }) {
     return _then(_$NumberModelImpl(
-      inQuran: null == inQuran
+      inQuran: freezed == inQuran
           ? _value.inQuran
           : inQuran // ignore: cast_nullable_to_non_nullable
-              as int,
-      inSurah: null == inSurah
+              as int?,
+      inSurah: freezed == inSurah
           ? _value.inSurah
           : inSurah // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -2647,18 +2646,18 @@ class __$$NumberModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$NumberModelImpl implements _NumberModel {
   const _$NumberModelImpl(
-      {@JsonKey(name: "inQuran") required this.inQuran,
-      @JsonKey(name: "inSurah") required this.inSurah});
+      {@JsonKey(name: "inQuran") this.inQuran,
+      @JsonKey(name: "inSurah") this.inSurah});
 
   factory _$NumberModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$NumberModelImplFromJson(json);
 
   @override
   @JsonKey(name: "inQuran")
-  final int inQuran;
+  final int? inQuran;
   @override
   @JsonKey(name: "inSurah")
-  final int inSurah;
+  final int? inSurah;
 
   @override
   String toString() {
@@ -2694,19 +2693,18 @@ class _$NumberModelImpl implements _NumberModel {
 
 abstract class _NumberModel implements NumberModel {
   const factory _NumberModel(
-          {@JsonKey(name: "inQuran") required final int inQuran,
-          @JsonKey(name: "inSurah") required final int inSurah}) =
-      _$NumberModelImpl;
+      {@JsonKey(name: "inQuran") final int? inQuran,
+      @JsonKey(name: "inSurah") final int? inSurah}) = _$NumberModelImpl;
 
   factory _NumberModel.fromJson(Map<String, dynamic> json) =
       _$NumberModelImpl.fromJson;
 
   @override
   @JsonKey(name: "inQuran")
-  int get inQuran;
+  int? get inQuran;
   @override
   @JsonKey(name: "inSurah")
-  int get inSurah;
+  int? get inSurah;
   @override
   @JsonKey(ignore: true)
   _$$NumberModelImplCopyWith<_$NumberModelImpl> get copyWith =>
@@ -2720,7 +2718,7 @@ VerseTafsirModel _$VerseTafsirModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$VerseTafsirModel {
   @JsonKey(name: "id")
-  IdModel get id => throw _privateConstructorUsedError;
+  IdModel? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2734,9 +2732,9 @@ abstract class $VerseTafsirModelCopyWith<$Res> {
           VerseTafsirModel value, $Res Function(VerseTafsirModel) then) =
       _$VerseTafsirModelCopyWithImpl<$Res, VerseTafsirModel>;
   @useResult
-  $Res call({@JsonKey(name: "id") IdModel id});
+  $Res call({@JsonKey(name: "id") IdModel? id});
 
-  $IdModelCopyWith<$Res> get id;
+  $IdModelCopyWith<$Res>? get id;
 }
 
 /// @nodoc
@@ -2752,20 +2750,24 @@ class _$VerseTafsirModelCopyWithImpl<$Res, $Val extends VerseTafsirModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as IdModel,
+              as IdModel?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $IdModelCopyWith<$Res> get id {
-    return $IdModelCopyWith<$Res>(_value.id, (value) {
+  $IdModelCopyWith<$Res>? get id {
+    if (_value.id == null) {
+      return null;
+    }
+
+    return $IdModelCopyWith<$Res>(_value.id!, (value) {
       return _then(_value.copyWith(id: value) as $Val);
     });
   }
@@ -2779,10 +2781,10 @@ abstract class _$$VerseTafsirModelImplCopyWith<$Res>
       __$$VerseTafsirModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "id") IdModel id});
+  $Res call({@JsonKey(name: "id") IdModel? id});
 
   @override
-  $IdModelCopyWith<$Res> get id;
+  $IdModelCopyWith<$Res>? get id;
 }
 
 /// @nodoc
@@ -2796,13 +2798,13 @@ class __$$VerseTafsirModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
   }) {
     return _then(_$VerseTafsirModelImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as IdModel,
+              as IdModel?,
     ));
   }
 }
@@ -2811,14 +2813,14 @@ class __$$VerseTafsirModelImplCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$VerseTafsirModelImpl implements _VerseTafsirModel {
-  const _$VerseTafsirModelImpl({@JsonKey(name: "id") required this.id});
+  const _$VerseTafsirModelImpl({@JsonKey(name: "id") this.id});
 
   factory _$VerseTafsirModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$VerseTafsirModelImplFromJson(json);
 
   @override
   @JsonKey(name: "id")
-  final IdModel id;
+  final IdModel? id;
 
   @override
   String toString() {
@@ -2853,8 +2855,7 @@ class _$VerseTafsirModelImpl implements _VerseTafsirModel {
 }
 
 abstract class _VerseTafsirModel implements VerseTafsirModel {
-  const factory _VerseTafsirModel(
-          {@JsonKey(name: "id") required final IdModel id}) =
+  const factory _VerseTafsirModel({@JsonKey(name: "id") final IdModel? id}) =
       _$VerseTafsirModelImpl;
 
   factory _VerseTafsirModel.fromJson(Map<String, dynamic> json) =
@@ -2862,7 +2863,7 @@ abstract class _VerseTafsirModel implements VerseTafsirModel {
 
   @override
   @JsonKey(name: "id")
-  IdModel get id;
+  IdModel? get id;
   @override
   @JsonKey(ignore: true)
   _$$VerseTafsirModelImplCopyWith<_$VerseTafsirModelImpl> get copyWith =>
@@ -2876,9 +2877,9 @@ IdModel _$IdModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$IdModel {
   @JsonKey(name: "short")
-  String get short => throw _privateConstructorUsedError;
+  String? get short => throw _privateConstructorUsedError;
   @JsonKey(name: "long")
-  String get long => throw _privateConstructorUsedError;
+  String? get long => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2891,8 +2892,8 @@ abstract class $IdModelCopyWith<$Res> {
       _$IdModelCopyWithImpl<$Res, IdModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "short") String short,
-      @JsonKey(name: "long") String long});
+      {@JsonKey(name: "short") String? short,
+      @JsonKey(name: "long") String? long});
 }
 
 /// @nodoc
@@ -2908,18 +2909,18 @@ class _$IdModelCopyWithImpl<$Res, $Val extends IdModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? short = null,
-    Object? long = null,
+    Object? short = freezed,
+    Object? long = freezed,
   }) {
     return _then(_value.copyWith(
-      short: null == short
+      short: freezed == short
           ? _value.short
           : short // ignore: cast_nullable_to_non_nullable
-              as String,
-      long: null == long
+              as String?,
+      long: freezed == long
           ? _value.long
           : long // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -2932,8 +2933,8 @@ abstract class _$$IdModelImplCopyWith<$Res> implements $IdModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "short") String short,
-      @JsonKey(name: "long") String long});
+      {@JsonKey(name: "short") String? short,
+      @JsonKey(name: "long") String? long});
 }
 
 /// @nodoc
@@ -2947,18 +2948,18 @@ class __$$IdModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? short = null,
-    Object? long = null,
+    Object? short = freezed,
+    Object? long = freezed,
   }) {
     return _then(_$IdModelImpl(
-      short: null == short
+      short: freezed == short
           ? _value.short
           : short // ignore: cast_nullable_to_non_nullable
-              as String,
-      long: null == long
+              as String?,
+      long: freezed == long
           ? _value.long
           : long // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -2967,18 +2968,17 @@ class __$$IdModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$IdModelImpl implements _IdModel {
   const _$IdModelImpl(
-      {@JsonKey(name: "short") required this.short,
-      @JsonKey(name: "long") required this.long});
+      {@JsonKey(name: "short") this.short, @JsonKey(name: "long") this.long});
 
   factory _$IdModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$IdModelImplFromJson(json);
 
   @override
   @JsonKey(name: "short")
-  final String short;
+  final String? short;
   @override
   @JsonKey(name: "long")
-  final String long;
+  final String? long;
 
   @override
   String toString() {
@@ -3014,17 +3014,17 @@ class _$IdModelImpl implements _IdModel {
 
 abstract class _IdModel implements IdModel {
   const factory _IdModel(
-      {@JsonKey(name: "short") required final String short,
-      @JsonKey(name: "long") required final String long}) = _$IdModelImpl;
+      {@JsonKey(name: "short") final String? short,
+      @JsonKey(name: "long") final String? long}) = _$IdModelImpl;
 
   factory _IdModel.fromJson(Map<String, dynamic> json) = _$IdModelImpl.fromJson;
 
   @override
   @JsonKey(name: "short")
-  String get short;
+  String? get short;
   @override
   @JsonKey(name: "long")
-  String get long;
+  String? get long;
   @override
   @JsonKey(ignore: true)
   _$$IdModelImplCopyWith<_$IdModelImpl> get copyWith =>

@@ -139,8 +139,8 @@ class MetaModel with _$MetaModel {
 @freezed
 class SajdaModel with _$SajdaModel {
   const factory SajdaModel({
-    @JsonKey(name: "recommended") required bool recommended,
-    @JsonKey(name: "obligatory") required bool obligatory,
+    @JsonKey(name: "recommended") bool? recommended,
+    @JsonKey(name: "obligatory") bool? obligatory,
   }) = _SajdaModel;
 
   factory SajdaModel.fromJson(Map<String, dynamic> json) =>
@@ -150,8 +150,8 @@ class SajdaModel with _$SajdaModel {
 @freezed
 class NumberModel with _$NumberModel {
   const factory NumberModel({
-    @JsonKey(name: "inQuran") required int inQuran,
-    @JsonKey(name: "inSurah") required int inSurah,
+    @JsonKey(name: "inQuran") int? inQuran,
+    @JsonKey(name: "inSurah") int? inSurah,
   }) = _NumberModel;
 
   factory NumberModel.fromJson(Map<String, dynamic> json) =>
@@ -162,7 +162,7 @@ class NumberModel with _$NumberModel {
 class VerseTafsirModel with _$VerseTafsirModel {
   @JsonSerializable(explicitToJson: true)
   const factory VerseTafsirModel({
-    @JsonKey(name: "id") required IdModel id,
+    @JsonKey(name: "id") IdModel? id,
   }) = _VerseTafsirModel;
 
   factory VerseTafsirModel.fromJson(Map<String, dynamic> json) =>
@@ -172,8 +172,8 @@ class VerseTafsirModel with _$VerseTafsirModel {
 @freezed
 class IdModel with _$IdModel {
   const factory IdModel({
-    @JsonKey(name: "short") required String short,
-    @JsonKey(name: "long") required String long,
+    @JsonKey(name: "short") String? short,
+    @JsonKey(name: "long") String? long,
   }) = _IdModel;
 
   factory IdModel.fromJson(Map<String, dynamic> json) =>

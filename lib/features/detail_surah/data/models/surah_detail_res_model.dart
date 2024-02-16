@@ -6,15 +6,15 @@ part 'surah_detail_res_model.freezed.dart';
 part 'surah_detail_res_model.g.dart';
 
 @freezed
-class SurahDetailRes with _$SurahDetailRes {
+class SurahDetailResModel with _$SurahDetailResModel {
   @JsonSerializable(explicitToJson: true)
-  const factory SurahDetailRes({
+  const factory SurahDetailResModel({
     @JsonKey(name: "code") required int code,
     @JsonKey(name: "status") required String status,
     @JsonKey(name: "message") required String message,
     @JsonKey(name: "data") required SurahDetailModel data,
-  }) = _SurahDetailRes;
+  }) = _SurahDetailResModel;
 
-  factory SurahDetailRes.fromJson(Map<String, dynamic> json) =>
-      _$SurahDetailResFromJson(json);
+  factory SurahDetailResModel.fromJson(Map<String, dynamic> json) =>
+      _$SurahDetailResModelFromJson(json);
 }
