@@ -5,7 +5,7 @@ import '../../domain/domain.dart';
 import '../data.dart';
 
 class SurahRepositoryImpl implements BaseSurahRepository {
-  final RemoteDataSource remoteDataSource;
+  final SurahRemoteDataSource remoteDataSource;
 
   SurahRepositoryImpl({required this.remoteDataSource});
 
