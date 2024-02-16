@@ -122,7 +122,7 @@ _$TextModelImpl _$$TextModelImplFromJson(Map<String, dynamic> json) =>
       arab: json['arab'] as String?,
       transliteration: json['transliteration'] == null
           ? null
-          : TranslationModel.fromJson(
+          : TransliterationModel.fromJson(
               json['transliteration'] as Map<String, dynamic>),
     );
 
@@ -130,6 +130,18 @@ Map<String, dynamic> _$$TextModelImplToJson(_$TextModelImpl instance) =>
     <String, dynamic>{
       'arab': instance.arab,
       'transliteration': instance.transliteration?.toJson(),
+    };
+
+_$TransliterationModelImpl _$$TransliterationModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TransliterationModelImpl(
+      en: json['en'] as String?,
+    );
+
+Map<String, dynamic> _$$TransliterationModelImplToJson(
+        _$TransliterationModelImpl instance) =>
+    <String, dynamic>{
+      'en': instance.en,
     };
 
 _$RevelationModelImpl _$$RevelationModelImplFromJson(

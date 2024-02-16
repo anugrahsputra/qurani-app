@@ -75,11 +75,21 @@ class TextModel with _$TextModel {
   @JsonSerializable(explicitToJson: true)
   const factory TextModel({
     @JsonKey(name: "arab") String? arab,
-    @JsonKey(name: "transliteration") TranslationModel? transliteration,
+    @JsonKey(name: "transliteration") TransliterationModel? transliteration,
   }) = _TextModel;
 
   factory TextModel.fromJson(Map<String, dynamic> json) =>
       _$TextModelFromJson(json);
+}
+
+@freezed
+class TransliterationModel with _$TransliterationModel {
+  const factory TransliterationModel({
+    @JsonKey(name: "en") String? en,
+  }) = _TransliterationModel;
+
+  factory TransliterationModel.fromJson(Map<String, dynamic> json) =>
+      _$TransliterationModelFromJson(json);
 }
 
 @freezed

@@ -1240,7 +1240,8 @@ mixin _$TextModel {
   @JsonKey(name: "arab")
   String? get arab => throw _privateConstructorUsedError;
   @JsonKey(name: "transliteration")
-  TranslationModel? get transliteration => throw _privateConstructorUsedError;
+  TransliterationModel? get transliteration =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1255,9 +1256,9 @@ abstract class $TextModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "arab") String? arab,
-      @JsonKey(name: "transliteration") TranslationModel? transliteration});
+      @JsonKey(name: "transliteration") TransliterationModel? transliteration});
 
-  $TranslationModelCopyWith<$Res>? get transliteration;
+  $TransliterationModelCopyWith<$Res>? get transliteration;
 }
 
 /// @nodoc
@@ -1284,18 +1285,19 @@ class _$TextModelCopyWithImpl<$Res, $Val extends TextModel>
       transliteration: freezed == transliteration
           ? _value.transliteration
           : transliteration // ignore: cast_nullable_to_non_nullable
-              as TranslationModel?,
+              as TransliterationModel?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $TranslationModelCopyWith<$Res>? get transliteration {
+  $TransliterationModelCopyWith<$Res>? get transliteration {
     if (_value.transliteration == null) {
       return null;
     }
 
-    return $TranslationModelCopyWith<$Res>(_value.transliteration!, (value) {
+    return $TransliterationModelCopyWith<$Res>(_value.transliteration!,
+        (value) {
       return _then(_value.copyWith(transliteration: value) as $Val);
     });
   }
@@ -1311,10 +1313,10 @@ abstract class _$$TextModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: "arab") String? arab,
-      @JsonKey(name: "transliteration") TranslationModel? transliteration});
+      @JsonKey(name: "transliteration") TransliterationModel? transliteration});
 
   @override
-  $TranslationModelCopyWith<$Res>? get transliteration;
+  $TransliterationModelCopyWith<$Res>? get transliteration;
 }
 
 /// @nodoc
@@ -1339,7 +1341,7 @@ class __$$TextModelImplCopyWithImpl<$Res>
       transliteration: freezed == transliteration
           ? _value.transliteration
           : transliteration // ignore: cast_nullable_to_non_nullable
-              as TranslationModel?,
+              as TransliterationModel?,
     ));
   }
 }
@@ -1360,7 +1362,7 @@ class _$TextModelImpl implements _TextModel {
   final String? arab;
   @override
   @JsonKey(name: "transliteration")
-  final TranslationModel? transliteration;
+  final TransliterationModel? transliteration;
 
   @override
   String toString() {
@@ -1399,7 +1401,7 @@ abstract class _TextModel implements TextModel {
   const factory _TextModel(
       {@JsonKey(name: "arab") final String? arab,
       @JsonKey(name: "transliteration")
-      final TranslationModel? transliteration}) = _$TextModelImpl;
+      final TransliterationModel? transliteration}) = _$TextModelImpl;
 
   factory _TextModel.fromJson(Map<String, dynamic> json) =
       _$TextModelImpl.fromJson;
@@ -1409,11 +1411,154 @@ abstract class _TextModel implements TextModel {
   String? get arab;
   @override
   @JsonKey(name: "transliteration")
-  TranslationModel? get transliteration;
+  TransliterationModel? get transliteration;
   @override
   @JsonKey(ignore: true)
   _$$TextModelImplCopyWith<_$TextModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+TransliterationModel _$TransliterationModelFromJson(Map<String, dynamic> json) {
+  return _TransliterationModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TransliterationModel {
+  @JsonKey(name: "en")
+  String? get en => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TransliterationModelCopyWith<TransliterationModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TransliterationModelCopyWith<$Res> {
+  factory $TransliterationModelCopyWith(TransliterationModel value,
+          $Res Function(TransliterationModel) then) =
+      _$TransliterationModelCopyWithImpl<$Res, TransliterationModel>;
+  @useResult
+  $Res call({@JsonKey(name: "en") String? en});
+}
+
+/// @nodoc
+class _$TransliterationModelCopyWithImpl<$Res,
+        $Val extends TransliterationModel>
+    implements $TransliterationModelCopyWith<$Res> {
+  _$TransliterationModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? en = freezed,
+  }) {
+    return _then(_value.copyWith(
+      en: freezed == en
+          ? _value.en
+          : en // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TransliterationModelImplCopyWith<$Res>
+    implements $TransliterationModelCopyWith<$Res> {
+  factory _$$TransliterationModelImplCopyWith(_$TransliterationModelImpl value,
+          $Res Function(_$TransliterationModelImpl) then) =
+      __$$TransliterationModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({@JsonKey(name: "en") String? en});
+}
+
+/// @nodoc
+class __$$TransliterationModelImplCopyWithImpl<$Res>
+    extends _$TransliterationModelCopyWithImpl<$Res, _$TransliterationModelImpl>
+    implements _$$TransliterationModelImplCopyWith<$Res> {
+  __$$TransliterationModelImplCopyWithImpl(_$TransliterationModelImpl _value,
+      $Res Function(_$TransliterationModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? en = freezed,
+  }) {
+    return _then(_$TransliterationModelImpl(
+      en: freezed == en
+          ? _value.en
+          : en // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$TransliterationModelImpl implements _TransliterationModel {
+  const _$TransliterationModelImpl({@JsonKey(name: "en") this.en});
+
+  factory _$TransliterationModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TransliterationModelImplFromJson(json);
+
+  @override
+  @JsonKey(name: "en")
+  final String? en;
+
+  @override
+  String toString() {
+    return 'TransliterationModel(en: $en)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TransliterationModelImpl &&
+            (identical(other.en, en) || other.en == en));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, en);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TransliterationModelImplCopyWith<_$TransliterationModelImpl>
+      get copyWith =>
+          __$$TransliterationModelImplCopyWithImpl<_$TransliterationModelImpl>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TransliterationModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TransliterationModel implements TransliterationModel {
+  const factory _TransliterationModel({@JsonKey(name: "en") final String? en}) =
+      _$TransliterationModelImpl;
+
+  factory _TransliterationModel.fromJson(Map<String, dynamic> json) =
+      _$TransliterationModelImpl.fromJson;
+
+  @override
+  @JsonKey(name: "en")
+  String? get en;
+  @override
+  @JsonKey(ignore: true)
+  _$$TransliterationModelImplCopyWith<_$TransliterationModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 RevelationModel _$RevelationModelFromJson(Map<String, dynamic> json) {
