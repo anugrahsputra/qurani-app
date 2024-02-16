@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/core.dart';
+import 'features/detail_surah/detail_surah.dart';
 import 'features/surah/surah.dart';
 
 final sl = GetIt.instance;
@@ -32,13 +33,16 @@ Future<void> setup() async {
   sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
 
   /* -----------------> Data <-----------------*/
-  sl.registerLazySingleton<RemoteDataSource>(
-    () => RemoteDataSourceImpl(dioClient: sl<DioClient>()),
+  sl.registerLazySingleton<SurahRemoteDataSource>(
+    () => SurahRemoteDataSourceImpl(dioClient: sl<DioClient>()),
   );
 
+  sl.registerLazySingleton<DetailSurahRemoteDataSource>(
+    () => DetailSurahRemoteDataSourceImpl(dioClient: sl<DioClient>()),
+  );
   /* -----------------> Repository <-----------------*/
   sl.registerLazySingleton<BaseSurahRepository>(
-    () => SurahRepositoryImpl(remoteDataSource: sl<RemoteDataSource>()),
+    () => SurahRepositoryImpl(remoteDataSource: sl<SurahRemoteDataSource>()),
   );
 
   /* -----------------> UseCase <-----------------*/
