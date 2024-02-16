@@ -85,7 +85,7 @@ _$PreBismillahModelImpl _$$PreBismillahModelImplFromJson(
     _$PreBismillahModelImpl(
       text: json['text'] == null
           ? null
-          : TextModel.fromJson(json['text'] as Map<String, dynamic>),
+          : TextsModel.fromJson(json['text'] as Map<String, dynamic>),
       translation: json['translation'] == null
           ? null
           : TranslationModel.fromJson(
@@ -117,8 +117,8 @@ Map<String, dynamic> _$$AudioModelImplToJson(_$AudioModelImpl instance) =>
       'secondary': instance.secondary,
     };
 
-_$TextModelImpl _$$TextModelImplFromJson(Map<String, dynamic> json) =>
-    _$TextModelImpl(
+_$TextsModelImpl _$$TextsModelImplFromJson(Map<String, dynamic> json) =>
+    _$TextsModelImpl(
       arab: json['arab'] as String?,
       transliteration: json['transliteration'] == null
           ? null
@@ -126,7 +126,7 @@ _$TextModelImpl _$$TextModelImplFromJson(Map<String, dynamic> json) =>
               json['transliteration'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$TextModelImplToJson(_$TextModelImpl instance) =>
+Map<String, dynamic> _$$TextsModelImplToJson(_$TextsModelImpl instance) =>
     <String, dynamic>{
       'arab': instance.arab,
       'transliteration': instance.transliteration?.toJson(),
@@ -180,7 +180,7 @@ _$VerseModelImpl _$$VerseModelImplFromJson(Map<String, dynamic> json) =>
           : MetaModel.fromJson(json['meta'] as Map<String, dynamic>),
       text: json['text'] == null
           ? null
-          : TextModel.fromJson(json['text'] as Map<String, dynamic>),
+          : TextsModel.fromJson(json['text'] as Map<String, dynamic>),
       translation: json['translation'] == null
           ? null
           : TranslationModel.fromJson(

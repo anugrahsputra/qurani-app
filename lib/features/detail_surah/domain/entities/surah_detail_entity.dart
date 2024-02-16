@@ -37,7 +37,7 @@ class Translation with _$Translation {
 @freezed
 class PreBismillah with _$PreBismillah {
   const factory PreBismillah({
-    Text? text,
+    Texts? text,
     Translation? translation,
     Audio? audio,
   }) = _PreBismillah;
@@ -52,11 +52,11 @@ class Audio with _$Audio {
 }
 
 @freezed
-class Text with _$Text {
-  const factory Text({
+class Texts with _$Texts {
+  const factory Texts({
     String? arab,
     Transliteration? transliteration,
-  }) = _Text;
+  }) = _Texts;
 }
 
 @freezed
@@ -87,7 +87,7 @@ class Verse with _$Verse {
   const factory Verse({
     Number? number,
     Meta? meta,
-    Text? text,
+    Texts? text,
     Translation? translation,
     Audio? audio,
     VerseTafsir? tafsir,

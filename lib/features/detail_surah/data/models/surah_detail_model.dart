@@ -50,7 +50,7 @@ class TranslationModel with _$TranslationModel {
 class PreBismillahModel with _$PreBismillahModel {
   @JsonSerializable(explicitToJson: true)
   const factory PreBismillahModel({
-    @JsonKey(name: "text") TextModel? text,
+    @JsonKey(name: "text") TextsModel? text,
     @JsonKey(name: "translation") TranslationModel? translation,
     @JsonKey(name: "audio") AudioModel? audio,
   }) = _PreBismillahModel;
@@ -71,15 +71,15 @@ class AudioModel with _$AudioModel {
 }
 
 @freezed
-class TextModel with _$TextModel {
+class TextsModel with _$TextsModel {
   @JsonSerializable(explicitToJson: true)
-  const factory TextModel({
+  const factory TextsModel({
     @JsonKey(name: "arab") String? arab,
     @JsonKey(name: "transliteration") TransliterationModel? transliteration,
-  }) = _TextModel;
+  }) = _TextsModel;
 
-  factory TextModel.fromJson(Map<String, dynamic> json) =>
-      _$TextModelFromJson(json);
+  factory TextsModel.fromJson(Map<String, dynamic> json) =>
+      _$TextsModelFromJson(json);
 }
 
 @freezed
@@ -120,7 +120,7 @@ class VerseModel with _$VerseModel {
   const factory VerseModel({
     @JsonKey(name: "number") NumberModel? number,
     @JsonKey(name: "meta") MetaModel? meta,
-    @JsonKey(name: "text") TextModel? text,
+    @JsonKey(name: "text") TextsModel? text,
     @JsonKey(name: "translation") TranslationModel? translation,
     @JsonKey(name: "audio") AudioModel? audio,
     @JsonKey(name: "tafsir") VerseTafsirModel? tafsir,

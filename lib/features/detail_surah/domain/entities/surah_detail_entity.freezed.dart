@@ -703,7 +703,7 @@ abstract class _Translation implements Translation {
 
 /// @nodoc
 mixin _$PreBismillah {
-  Text? get text => throw _privateConstructorUsedError;
+  Texts? get text => throw _privateConstructorUsedError;
   Translation? get translation => throw _privateConstructorUsedError;
   Audio? get audio => throw _privateConstructorUsedError;
 
@@ -718,9 +718,9 @@ abstract class $PreBismillahCopyWith<$Res> {
           PreBismillah value, $Res Function(PreBismillah) then) =
       _$PreBismillahCopyWithImpl<$Res, PreBismillah>;
   @useResult
-  $Res call({Text? text, Translation? translation, Audio? audio});
+  $Res call({Texts? text, Translation? translation, Audio? audio});
 
-  $TextCopyWith<$Res>? get text;
+  $TextsCopyWith<$Res>? get text;
   $TranslationCopyWith<$Res>? get translation;
   $AudioCopyWith<$Res>? get audio;
 }
@@ -746,7 +746,7 @@ class _$PreBismillahCopyWithImpl<$Res, $Val extends PreBismillah>
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as Text?,
+              as Texts?,
       translation: freezed == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
@@ -760,12 +760,12 @@ class _$PreBismillahCopyWithImpl<$Res, $Val extends PreBismillah>
 
   @override
   @pragma('vm:prefer-inline')
-  $TextCopyWith<$Res>? get text {
+  $TextsCopyWith<$Res>? get text {
     if (_value.text == null) {
       return null;
     }
 
-    return $TextCopyWith<$Res>(_value.text!, (value) {
+    return $TextsCopyWith<$Res>(_value.text!, (value) {
       return _then(_value.copyWith(text: value) as $Val);
     });
   }
@@ -803,10 +803,10 @@ abstract class _$$PreBismillahImplCopyWith<$Res>
       __$$PreBismillahImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Text? text, Translation? translation, Audio? audio});
+  $Res call({Texts? text, Translation? translation, Audio? audio});
 
   @override
-  $TextCopyWith<$Res>? get text;
+  $TextsCopyWith<$Res>? get text;
   @override
   $TranslationCopyWith<$Res>? get translation;
   @override
@@ -832,7 +832,7 @@ class __$$PreBismillahImplCopyWithImpl<$Res>
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as Text?,
+              as Texts?,
       translation: freezed == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
@@ -851,7 +851,7 @@ class _$PreBismillahImpl implements _PreBismillah {
   const _$PreBismillahImpl({this.text, this.translation, this.audio});
 
   @override
-  final Text? text;
+  final Texts? text;
   @override
   final Translation? translation;
   @override
@@ -885,12 +885,12 @@ class _$PreBismillahImpl implements _PreBismillah {
 
 abstract class _PreBismillah implements PreBismillah {
   const factory _PreBismillah(
-      {final Text? text,
+      {final Texts? text,
       final Translation? translation,
       final Audio? audio}) = _$PreBismillahImpl;
 
   @override
-  Text? get text;
+  Texts? get text;
   @override
   Translation? get translation;
   @override
@@ -1043,18 +1043,18 @@ abstract class _Audio implements Audio {
 }
 
 /// @nodoc
-mixin _$Text {
+mixin _$Texts {
   String? get arab => throw _privateConstructorUsedError;
   Transliteration? get transliteration => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $TextCopyWith<Text> get copyWith => throw _privateConstructorUsedError;
+  $TextsCopyWith<Texts> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TextCopyWith<$Res> {
-  factory $TextCopyWith(Text value, $Res Function(Text) then) =
-      _$TextCopyWithImpl<$Res, Text>;
+abstract class $TextsCopyWith<$Res> {
+  factory $TextsCopyWith(Texts value, $Res Function(Texts) then) =
+      _$TextsCopyWithImpl<$Res, Texts>;
   @useResult
   $Res call({String? arab, Transliteration? transliteration});
 
@@ -1062,9 +1062,9 @@ abstract class $TextCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TextCopyWithImpl<$Res, $Val extends Text>
-    implements $TextCopyWith<$Res> {
-  _$TextCopyWithImpl(this._value, this._then);
+class _$TextsCopyWithImpl<$Res, $Val extends Texts>
+    implements $TextsCopyWith<$Res> {
+  _$TextsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1103,10 +1103,10 @@ class _$TextCopyWithImpl<$Res, $Val extends Text>
 }
 
 /// @nodoc
-abstract class _$$TextImplCopyWith<$Res> implements $TextCopyWith<$Res> {
-  factory _$$TextImplCopyWith(
-          _$TextImpl value, $Res Function(_$TextImpl) then) =
-      __$$TextImplCopyWithImpl<$Res>;
+abstract class _$$TextsImplCopyWith<$Res> implements $TextsCopyWith<$Res> {
+  factory _$$TextsImplCopyWith(
+          _$TextsImpl value, $Res Function(_$TextsImpl) then) =
+      __$$TextsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? arab, Transliteration? transliteration});
@@ -1116,10 +1116,11 @@ abstract class _$$TextImplCopyWith<$Res> implements $TextCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TextImplCopyWithImpl<$Res>
-    extends _$TextCopyWithImpl<$Res, _$TextImpl>
-    implements _$$TextImplCopyWith<$Res> {
-  __$$TextImplCopyWithImpl(_$TextImpl _value, $Res Function(_$TextImpl) _then)
+class __$$TextsImplCopyWithImpl<$Res>
+    extends _$TextsCopyWithImpl<$Res, _$TextsImpl>
+    implements _$$TextsImplCopyWith<$Res> {
+  __$$TextsImplCopyWithImpl(
+      _$TextsImpl _value, $Res Function(_$TextsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1128,7 +1129,7 @@ class __$$TextImplCopyWithImpl<$Res>
     Object? arab = freezed,
     Object? transliteration = freezed,
   }) {
-    return _then(_$TextImpl(
+    return _then(_$TextsImpl(
       arab: freezed == arab
           ? _value.arab
           : arab // ignore: cast_nullable_to_non_nullable
@@ -1143,8 +1144,8 @@ class __$$TextImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TextImpl implements _Text {
-  const _$TextImpl({this.arab, this.transliteration});
+class _$TextsImpl implements _Texts {
+  const _$TextsImpl({this.arab, this.transliteration});
 
   @override
   final String? arab;
@@ -1153,14 +1154,14 @@ class _$TextImpl implements _Text {
 
   @override
   String toString() {
-    return 'Text(arab: $arab, transliteration: $transliteration)';
+    return 'Texts(arab: $arab, transliteration: $transliteration)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TextImpl &&
+            other is _$TextsImpl &&
             (identical(other.arab, arab) || other.arab == arab) &&
             (identical(other.transliteration, transliteration) ||
                 other.transliteration == transliteration));
@@ -1172,14 +1173,14 @@ class _$TextImpl implements _Text {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TextImplCopyWith<_$TextImpl> get copyWith =>
-      __$$TextImplCopyWithImpl<_$TextImpl>(this, _$identity);
+  _$$TextsImplCopyWith<_$TextsImpl> get copyWith =>
+      __$$TextsImplCopyWithImpl<_$TextsImpl>(this, _$identity);
 }
 
-abstract class _Text implements Text {
-  const factory _Text(
+abstract class _Texts implements Texts {
+  const factory _Texts(
       {final String? arab,
-      final Transliteration? transliteration}) = _$TextImpl;
+      final Transliteration? transliteration}) = _$TextsImpl;
 
   @override
   String? get arab;
@@ -1187,7 +1188,7 @@ abstract class _Text implements Text {
   Transliteration? get transliteration;
   @override
   @JsonKey(ignore: true)
-  _$$TextImplCopyWith<_$TextImpl> get copyWith =>
+  _$$TextsImplCopyWith<_$TextsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1579,7 +1580,7 @@ abstract class _Tafsir implements Tafsir {
 mixin _$Verse {
   Number? get number => throw _privateConstructorUsedError;
   Meta? get meta => throw _privateConstructorUsedError;
-  Text? get text => throw _privateConstructorUsedError;
+  Texts? get text => throw _privateConstructorUsedError;
   Translation? get translation => throw _privateConstructorUsedError;
   Audio? get audio => throw _privateConstructorUsedError;
   VerseTafsir? get tafsir => throw _privateConstructorUsedError;
@@ -1596,14 +1597,14 @@ abstract class $VerseCopyWith<$Res> {
   $Res call(
       {Number? number,
       Meta? meta,
-      Text? text,
+      Texts? text,
       Translation? translation,
       Audio? audio,
       VerseTafsir? tafsir});
 
   $NumberCopyWith<$Res>? get number;
   $MetaCopyWith<$Res>? get meta;
-  $TextCopyWith<$Res>? get text;
+  $TextsCopyWith<$Res>? get text;
   $TranslationCopyWith<$Res>? get translation;
   $AudioCopyWith<$Res>? get audio;
   $VerseTafsirCopyWith<$Res>? get tafsir;
@@ -1641,7 +1642,7 @@ class _$VerseCopyWithImpl<$Res, $Val extends Verse>
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as Text?,
+              as Texts?,
       translation: freezed == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
@@ -1683,12 +1684,12 @@ class _$VerseCopyWithImpl<$Res, $Val extends Verse>
 
   @override
   @pragma('vm:prefer-inline')
-  $TextCopyWith<$Res>? get text {
+  $TextsCopyWith<$Res>? get text {
     if (_value.text == null) {
       return null;
     }
 
-    return $TextCopyWith<$Res>(_value.text!, (value) {
+    return $TextsCopyWith<$Res>(_value.text!, (value) {
       return _then(_value.copyWith(text: value) as $Val);
     });
   }
@@ -1740,7 +1741,7 @@ abstract class _$$VerseImplCopyWith<$Res> implements $VerseCopyWith<$Res> {
   $Res call(
       {Number? number,
       Meta? meta,
-      Text? text,
+      Texts? text,
       Translation? translation,
       Audio? audio,
       VerseTafsir? tafsir});
@@ -1750,7 +1751,7 @@ abstract class _$$VerseImplCopyWith<$Res> implements $VerseCopyWith<$Res> {
   @override
   $MetaCopyWith<$Res>? get meta;
   @override
-  $TextCopyWith<$Res>? get text;
+  $TextsCopyWith<$Res>? get text;
   @override
   $TranslationCopyWith<$Res>? get translation;
   @override
@@ -1789,7 +1790,7 @@ class __$$VerseImplCopyWithImpl<$Res>
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as Text?,
+              as Texts?,
       translation: freezed == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
@@ -1822,7 +1823,7 @@ class _$VerseImpl implements _Verse {
   @override
   final Meta? meta;
   @override
-  final Text? text;
+  final Texts? text;
   @override
   final Translation? translation;
   @override
@@ -1864,7 +1865,7 @@ abstract class _Verse implements Verse {
   const factory _Verse(
       {final Number? number,
       final Meta? meta,
-      final Text? text,
+      final Texts? text,
       final Translation? translation,
       final Audio? audio,
       final VerseTafsir? tafsir}) = _$VerseImpl;
@@ -1874,7 +1875,7 @@ abstract class _Verse implements Verse {
   @override
   Meta? get meta;
   @override
-  Text? get text;
+  Texts? get text;
   @override
   Translation? get translation;
   @override

@@ -821,7 +821,7 @@ PreBismillahModel _$PreBismillahModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PreBismillahModel {
   @JsonKey(name: "text")
-  TextModel? get text => throw _privateConstructorUsedError;
+  TextsModel? get text => throw _privateConstructorUsedError;
   @JsonKey(name: "translation")
   TranslationModel? get translation => throw _privateConstructorUsedError;
   @JsonKey(name: "audio")
@@ -840,11 +840,11 @@ abstract class $PreBismillahModelCopyWith<$Res> {
       _$PreBismillahModelCopyWithImpl<$Res, PreBismillahModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "text") TextModel? text,
+      {@JsonKey(name: "text") TextsModel? text,
       @JsonKey(name: "translation") TranslationModel? translation,
       @JsonKey(name: "audio") AudioModel? audio});
 
-  $TextModelCopyWith<$Res>? get text;
+  $TextsModelCopyWith<$Res>? get text;
   $TranslationModelCopyWith<$Res>? get translation;
   $AudioModelCopyWith<$Res>? get audio;
 }
@@ -870,7 +870,7 @@ class _$PreBismillahModelCopyWithImpl<$Res, $Val extends PreBismillahModel>
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as TextModel?,
+              as TextsModel?,
       translation: freezed == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
@@ -884,12 +884,12 @@ class _$PreBismillahModelCopyWithImpl<$Res, $Val extends PreBismillahModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $TextModelCopyWith<$Res>? get text {
+  $TextsModelCopyWith<$Res>? get text {
     if (_value.text == null) {
       return null;
     }
 
-    return $TextModelCopyWith<$Res>(_value.text!, (value) {
+    return $TextsModelCopyWith<$Res>(_value.text!, (value) {
       return _then(_value.copyWith(text: value) as $Val);
     });
   }
@@ -928,12 +928,12 @@ abstract class _$$PreBismillahModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "text") TextModel? text,
+      {@JsonKey(name: "text") TextsModel? text,
       @JsonKey(name: "translation") TranslationModel? translation,
       @JsonKey(name: "audio") AudioModel? audio});
 
   @override
-  $TextModelCopyWith<$Res>? get text;
+  $TextsModelCopyWith<$Res>? get text;
   @override
   $TranslationModelCopyWith<$Res>? get translation;
   @override
@@ -959,7 +959,7 @@ class __$$PreBismillahModelImplCopyWithImpl<$Res>
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as TextModel?,
+              as TextsModel?,
       translation: freezed == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
@@ -986,7 +986,7 @@ class _$PreBismillahModelImpl implements _PreBismillahModel {
 
   @override
   @JsonKey(name: "text")
-  final TextModel? text;
+  final TextsModel? text;
   @override
   @JsonKey(name: "translation")
   final TranslationModel? translation;
@@ -1031,7 +1031,7 @@ class _$PreBismillahModelImpl implements _PreBismillahModel {
 
 abstract class _PreBismillahModel implements PreBismillahModel {
   const factory _PreBismillahModel(
-          {@JsonKey(name: "text") final TextModel? text,
+          {@JsonKey(name: "text") final TextsModel? text,
           @JsonKey(name: "translation") final TranslationModel? translation,
           @JsonKey(name: "audio") final AudioModel? audio}) =
       _$PreBismillahModelImpl;
@@ -1041,7 +1041,7 @@ abstract class _PreBismillahModel implements PreBismillahModel {
 
   @override
   @JsonKey(name: "text")
-  TextModel? get text;
+  TextsModel? get text;
   @override
   @JsonKey(name: "translation")
   TranslationModel? get translation;
@@ -1231,12 +1231,12 @@ abstract class _AudioModel implements AudioModel {
       throw _privateConstructorUsedError;
 }
 
-TextModel _$TextModelFromJson(Map<String, dynamic> json) {
-  return _TextModel.fromJson(json);
+TextsModel _$TextsModelFromJson(Map<String, dynamic> json) {
+  return _TextsModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$TextModel {
+mixin _$TextsModel {
   @JsonKey(name: "arab")
   String? get arab => throw _privateConstructorUsedError;
   @JsonKey(name: "transliteration")
@@ -1245,14 +1245,15 @@ mixin _$TextModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TextModelCopyWith<TextModel> get copyWith =>
+  $TextsModelCopyWith<TextsModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TextModelCopyWith<$Res> {
-  factory $TextModelCopyWith(TextModel value, $Res Function(TextModel) then) =
-      _$TextModelCopyWithImpl<$Res, TextModel>;
+abstract class $TextsModelCopyWith<$Res> {
+  factory $TextsModelCopyWith(
+          TextsModel value, $Res Function(TextsModel) then) =
+      _$TextsModelCopyWithImpl<$Res, TextsModel>;
   @useResult
   $Res call(
       {@JsonKey(name: "arab") String? arab,
@@ -1262,9 +1263,9 @@ abstract class $TextModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$TextModelCopyWithImpl<$Res, $Val extends TextModel>
-    implements $TextModelCopyWith<$Res> {
-  _$TextModelCopyWithImpl(this._value, this._then);
+class _$TextsModelCopyWithImpl<$Res, $Val extends TextsModel>
+    implements $TextsModelCopyWith<$Res> {
+  _$TextsModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1304,11 +1305,11 @@ class _$TextModelCopyWithImpl<$Res, $Val extends TextModel>
 }
 
 /// @nodoc
-abstract class _$$TextModelImplCopyWith<$Res>
-    implements $TextModelCopyWith<$Res> {
-  factory _$$TextModelImplCopyWith(
-          _$TextModelImpl value, $Res Function(_$TextModelImpl) then) =
-      __$$TextModelImplCopyWithImpl<$Res>;
+abstract class _$$TextsModelImplCopyWith<$Res>
+    implements $TextsModelCopyWith<$Res> {
+  factory _$$TextsModelImplCopyWith(
+          _$TextsModelImpl value, $Res Function(_$TextsModelImpl) then) =
+      __$$TextsModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1320,11 +1321,11 @@ abstract class _$$TextModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$TextModelImplCopyWithImpl<$Res>
-    extends _$TextModelCopyWithImpl<$Res, _$TextModelImpl>
-    implements _$$TextModelImplCopyWith<$Res> {
-  __$$TextModelImplCopyWithImpl(
-      _$TextModelImpl _value, $Res Function(_$TextModelImpl) _then)
+class __$$TextsModelImplCopyWithImpl<$Res>
+    extends _$TextsModelCopyWithImpl<$Res, _$TextsModelImpl>
+    implements _$$TextsModelImplCopyWith<$Res> {
+  __$$TextsModelImplCopyWithImpl(
+      _$TextsModelImpl _value, $Res Function(_$TextsModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1333,7 +1334,7 @@ class __$$TextModelImplCopyWithImpl<$Res>
     Object? arab = freezed,
     Object? transliteration = freezed,
   }) {
-    return _then(_$TextModelImpl(
+    return _then(_$TextsModelImpl(
       arab: freezed == arab
           ? _value.arab
           : arab // ignore: cast_nullable_to_non_nullable
@@ -1349,13 +1350,13 @@ class __$$TextModelImplCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(explicitToJson: true)
-class _$TextModelImpl implements _TextModel {
-  const _$TextModelImpl(
+class _$TextsModelImpl implements _TextsModel {
+  const _$TextsModelImpl(
       {@JsonKey(name: "arab") this.arab,
       @JsonKey(name: "transliteration") this.transliteration});
 
-  factory _$TextModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TextModelImplFromJson(json);
+  factory _$TextsModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TextsModelImplFromJson(json);
 
   @override
   @JsonKey(name: "arab")
@@ -1366,14 +1367,14 @@ class _$TextModelImpl implements _TextModel {
 
   @override
   String toString() {
-    return 'TextModel(arab: $arab, transliteration: $transliteration)';
+    return 'TextsModel(arab: $arab, transliteration: $transliteration)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TextModelImpl &&
+            other is _$TextsModelImpl &&
             (identical(other.arab, arab) || other.arab == arab) &&
             (identical(other.transliteration, transliteration) ||
                 other.transliteration == transliteration));
@@ -1386,25 +1387,25 @@ class _$TextModelImpl implements _TextModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TextModelImplCopyWith<_$TextModelImpl> get copyWith =>
-      __$$TextModelImplCopyWithImpl<_$TextModelImpl>(this, _$identity);
+  _$$TextsModelImplCopyWith<_$TextsModelImpl> get copyWith =>
+      __$$TextsModelImplCopyWithImpl<_$TextsModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TextModelImplToJson(
+    return _$$TextsModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _TextModel implements TextModel {
-  const factory _TextModel(
+abstract class _TextsModel implements TextsModel {
+  const factory _TextsModel(
       {@JsonKey(name: "arab") final String? arab,
       @JsonKey(name: "transliteration")
-      final TransliterationModel? transliteration}) = _$TextModelImpl;
+      final TransliterationModel? transliteration}) = _$TextsModelImpl;
 
-  factory _TextModel.fromJson(Map<String, dynamic> json) =
-      _$TextModelImpl.fromJson;
+  factory _TextsModel.fromJson(Map<String, dynamic> json) =
+      _$TextsModelImpl.fromJson;
 
   @override
   @JsonKey(name: "arab")
@@ -1414,7 +1415,7 @@ abstract class _TextModel implements TextModel {
   TransliterationModel? get transliteration;
   @override
   @JsonKey(ignore: true)
-  _$$TextModelImplCopyWith<_$TextModelImpl> get copyWith =>
+  _$$TextsModelImplCopyWith<_$TextsModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1902,7 +1903,7 @@ mixin _$VerseModel {
   @JsonKey(name: "meta")
   MetaModel? get meta => throw _privateConstructorUsedError;
   @JsonKey(name: "text")
-  TextModel? get text => throw _privateConstructorUsedError;
+  TextsModel? get text => throw _privateConstructorUsedError;
   @JsonKey(name: "translation")
   TranslationModel? get translation => throw _privateConstructorUsedError;
   @JsonKey(name: "audio")
@@ -1925,14 +1926,14 @@ abstract class $VerseModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "number") NumberModel? number,
       @JsonKey(name: "meta") MetaModel? meta,
-      @JsonKey(name: "text") TextModel? text,
+      @JsonKey(name: "text") TextsModel? text,
       @JsonKey(name: "translation") TranslationModel? translation,
       @JsonKey(name: "audio") AudioModel? audio,
       @JsonKey(name: "tafsir") VerseTafsirModel? tafsir});
 
   $NumberModelCopyWith<$Res>? get number;
   $MetaModelCopyWith<$Res>? get meta;
-  $TextModelCopyWith<$Res>? get text;
+  $TextsModelCopyWith<$Res>? get text;
   $TranslationModelCopyWith<$Res>? get translation;
   $AudioModelCopyWith<$Res>? get audio;
   $VerseTafsirModelCopyWith<$Res>? get tafsir;
@@ -1970,7 +1971,7 @@ class _$VerseModelCopyWithImpl<$Res, $Val extends VerseModel>
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as TextModel?,
+              as TextsModel?,
       translation: freezed == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
@@ -2012,12 +2013,12 @@ class _$VerseModelCopyWithImpl<$Res, $Val extends VerseModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $TextModelCopyWith<$Res>? get text {
+  $TextsModelCopyWith<$Res>? get text {
     if (_value.text == null) {
       return null;
     }
 
-    return $TextModelCopyWith<$Res>(_value.text!, (value) {
+    return $TextsModelCopyWith<$Res>(_value.text!, (value) {
       return _then(_value.copyWith(text: value) as $Val);
     });
   }
@@ -2070,7 +2071,7 @@ abstract class _$$VerseModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "number") NumberModel? number,
       @JsonKey(name: "meta") MetaModel? meta,
-      @JsonKey(name: "text") TextModel? text,
+      @JsonKey(name: "text") TextsModel? text,
       @JsonKey(name: "translation") TranslationModel? translation,
       @JsonKey(name: "audio") AudioModel? audio,
       @JsonKey(name: "tafsir") VerseTafsirModel? tafsir});
@@ -2080,7 +2081,7 @@ abstract class _$$VerseModelImplCopyWith<$Res>
   @override
   $MetaModelCopyWith<$Res>? get meta;
   @override
-  $TextModelCopyWith<$Res>? get text;
+  $TextsModelCopyWith<$Res>? get text;
   @override
   $TranslationModelCopyWith<$Res>? get translation;
   @override
@@ -2119,7 +2120,7 @@ class __$$VerseModelImplCopyWithImpl<$Res>
       text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as TextModel?,
+              as TextsModel?,
       translation: freezed == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
@@ -2159,7 +2160,7 @@ class _$VerseModelImpl implements _VerseModel {
   final MetaModel? meta;
   @override
   @JsonKey(name: "text")
-  final TextModel? text;
+  final TextsModel? text;
   @override
   @JsonKey(name: "translation")
   final TranslationModel? translation;
@@ -2212,7 +2213,7 @@ abstract class _VerseModel implements VerseModel {
   const factory _VerseModel(
           {@JsonKey(name: "number") final NumberModel? number,
           @JsonKey(name: "meta") final MetaModel? meta,
-          @JsonKey(name: "text") final TextModel? text,
+          @JsonKey(name: "text") final TextsModel? text,
           @JsonKey(name: "translation") final TranslationModel? translation,
           @JsonKey(name: "audio") final AudioModel? audio,
           @JsonKey(name: "tafsir") final VerseTafsirModel? tafsir}) =
@@ -2229,7 +2230,7 @@ abstract class _VerseModel implements VerseModel {
   MetaModel? get meta;
   @override
   @JsonKey(name: "text")
-  TextModel? get text;
+  TextsModel? get text;
   @override
   @JsonKey(name: "translation")
   TranslationModel? get translation;
