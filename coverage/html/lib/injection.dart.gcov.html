@@ -93,8 +93,8 @@
 <a name="31"><span class="lineNum">      31 </span><span class="lineNoCov">          0 :   get.registerFactory&lt;DioClient&gt;(() =&gt; DioClientImpl(dio: get&lt;Dio&gt;()));</span></a>
 <a name="32"><span class="lineNum">      32 </span>            : </a>
 <a name="33"><span class="lineNum">      33 </span>            :   /* -----------------&gt; Data &lt;-----------------*/</a>
-<a name="34"><span class="lineNum">      34 </span><span class="lineNoCov">          0 :   get.registerLazySingleton&lt;RemoteDataSource&gt;(</span></a>
-<a name="35"><span class="lineNum">      35 </span><span class="lineNoCov">          0 :     () =&gt; RemoteDataSourceImpl(dioClient: get&lt;DioClient&gt;()),</span></a>
+<a name="34"><span class="lineNum">      34 </span><span class="lineNoCov">          0 :   get.registerLazySingleton&lt;SurahRemoteDataSource&gt;(</span></a>
+<a name="35"><span class="lineNum">      35 </span><span class="lineNoCov">          0 :     () =&gt; SurahRemoteDataSourceImpl(dioClient: get&lt;DioClient&gt;()),</span></a>
 <a name="36"><span class="lineNum">      36 </span>            :   );</a>
 <a name="37"><span class="lineNum">      37 </span>            : }</a>
 </pre>
