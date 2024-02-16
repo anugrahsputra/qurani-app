@@ -9,11 +9,12 @@ import '../../helper/mock.dart';
 
 void main() {
   late BaseSurahRepository repository;
-  late MockRemoteDataSource mockRemoteDataSource;
+  late MockSurahRemoteDataSource mockSurahRemoteDataSource;
 
   setUp(() {
-    mockRemoteDataSource = MockRemoteDataSource();
-    repository = SurahRepositoryImpl(remoteDataSource: mockRemoteDataSource);
+    mockSurahRemoteDataSource = MockSurahRemoteDataSource();
+    repository =
+        SurahRepositoryImpl(remoteDataSource: mockSurahRemoteDataSource);
   });
 
   group('getSurahs', () {
@@ -27,11 +28,12 @@ void main() {
     test(
         'should return SurahResEntity when the call to remote data source is successful',
         () async {
-      when(mockRemoteDataSource.getSurahs()).thenAnswer((_) async => tSurahRes);
+      when(mockSurahRemoteDataSource.getSurahs())
+          .thenAnswer((_) async => tSurahRes);
 
       final result = await repository.getSurahs();
 
-      verify(mockRemoteDataSource.getSurahs());
+      verify(mockSurahRemoteDataSource.getSurahs());
       final resultData = result.getOrElse(() => tSurahRes.toEntity());
       expect(resultData, tSurahRes.toEntity());
     });
@@ -39,45 +41,46 @@ void main() {
     test(
         'should return ServerFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockRemoteDataSource.getSurahs()).thenThrow(ServerException());
+      when(mockSurahRemoteDataSource.getSurahs()).thenThrow(ServerException());
 
       final result = await repository.getSurahs();
 
       expect(result, const Left(ServerFailure(message: 'server failure')));
-      verify(mockRemoteDataSource.getSurahs());
+      verify(mockSurahRemoteDataSource.getSurahs());
     });
 
     test(
         'should return RequestFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockRemoteDataSource.getSurahs()).thenThrow(BadRequestException());
+      when(mockSurahRemoteDataSource.getSurahs())
+          .thenThrow(BadRequestException());
 
       final result = await repository.getSurahs();
 
       expect(result, const Left(RequestFailure(message: 'bad request')));
-      verify(mockRemoteDataSource.getSurahs());
+      verify(mockSurahRemoteDataSource.getSurahs());
     });
 
     test(
         'should return NetworkFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockRemoteDataSource.getSurahs()).thenThrow(NetworkException());
+      when(mockSurahRemoteDataSource.getSurahs()).thenThrow(NetworkException());
 
       final result = await repository.getSurahs();
 
       expect(result, const Left(NetworkFailure(message: 'network failure')));
-      verify(mockRemoteDataSource.getSurahs());
+      verify(mockSurahRemoteDataSource.getSurahs());
     });
 
     test(
         'should return UnknownFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockRemoteDataSource.getSurahs()).thenThrow(UnknownException());
+      when(mockSurahRemoteDataSource.getSurahs()).thenThrow(UnknownException());
 
       final result = await repository.getSurahs();
 
       expect(result, const Left(UnknownFailure(message: 'unknown failure')));
-      verify(mockRemoteDataSource.getSurahs());
+      verify(mockSurahRemoteDataSource.getSurahs());
     });
   });
 }

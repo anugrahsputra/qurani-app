@@ -46,7 +46,42 @@ void main() {
           secondary: [],
         ),
       ),
-      verses: [],
+      verses: [
+        VerseModel(
+          number: NumberModel(
+            inQuran: 1,
+            inSurah: 1,
+          ),
+          meta: MetaModel(
+            hizbQuarter: 1,
+            sajda: SajdaModel(recommended: false, obligatory: false),
+            juz: 1,
+            ruku: 1,
+            manzil: 1,
+            page: 1,
+          ),
+          text: TextsModel(
+            arab: "",
+            transliteration: TransliterationModel(
+              en: "",
+            ),
+          ),
+          translation: TranslationModel(
+            en: "",
+            id: "",
+          ),
+          audio: AudioModel(
+            primary: "",
+            secondary: [],
+          ),
+          tafsir: VerseTafsirModel(
+            id: IdModel(
+              short: "",
+              long: "",
+            ),
+          ),
+        ),
+      ],
     ),
   );
   const tSurahDetailRes = SurahDetailRes(
@@ -93,7 +128,42 @@ void main() {
           secondary: [],
         ),
       ),
-      verses: [],
+      verses: [
+        Verse(
+          number: Number(
+            inQuran: 1,
+            inSurah: 1,
+          ),
+          meta: Meta(
+            hizbQuarter: 1,
+            sajda: Sajda(recommended: false, obligatory: false),
+            juz: 1,
+            ruku: 1,
+            manzil: 1,
+            page: 1,
+          ),
+          text: Texts(
+            arab: "",
+            transliteration: Transliteration(
+              en: "",
+            ),
+          ),
+          translation: Translation(
+            en: "",
+            id: "",
+          ),
+          audio: Audio(
+            primary: "",
+            secondary: [],
+          ),
+          tafsir: VerseTafsir(
+            id: Id(
+              short: "",
+              long: "",
+            ),
+          ),
+        ),
+      ],
     ),
   );
 
@@ -109,23 +179,47 @@ void main() {
         "status": "",
         "message": "",
         "data": {
-          "number": 1,
+          'number': 1,
+          'sequence': 1,
+          'numberOfVerses': 1,
           "name": {
             "short": "",
             "long": "",
             "transliteration": {"en": "", "id": ""},
             "translation": {"en": "", "id": ""}
           },
-          "revelation": {"en": "", "id": ""},
+          "revelation": {"arab": "", "en": "", "id": ""},
           "tafsir": {"id": ""},
           "preBismillah": {
             "text": {
+              "arab": "",
               "transliteration": {"en": ""}
             },
             "translation": {"en": "", "id": ""},
             "audio": {"primary": "", "secondary": []}
           },
-          "verses": []
+          "verses": [
+            {
+              "number": {"inQuran": 1, "inSurah": 1},
+              "meta": {
+                "hizbQuarter": 1,
+                "sajda": {"recommended": false, "obligatory": false},
+                "juz": 1,
+                "ruku": 1,
+                "manzil": 1,
+                "page": 1
+              },
+              "text": {
+                "arab": "",
+                "transliteration": {"en": ""}
+              },
+              "translation": {"en": "", "id": ""},
+              "audio": {"primary": "", "secondary": []},
+              "tafsir": {
+                "id": {"short": "", "long": ""}
+              }
+            }
+          ]
         },
       };
 
@@ -159,7 +253,28 @@ void main() {
             'translation': {'en': '', 'id': ''},
             'audio': {'primary': '', 'secondary': []}
           },
-          'verses': []
+          'verses': [
+            {
+              'number': {'inQuran': 1, 'inSurah': 1},
+              'meta': {
+                'hizbQuarter': 1,
+                'sajda': {'recommended': false, 'obligatory': false},
+                'juz': 1,
+                'ruku': 1,
+                'manzil': 1,
+                'page': 1
+              },
+              'text': {
+                'arab': '',
+                'transliteration': {'en': ''}
+              },
+              'translation': {'en': '', 'id': ''},
+              'audio': {'primary': '', 'secondary': []},
+              'tafsir': {
+                'id': {'short': '', 'long': ''}
+              }
+            }
+          ]
         }
       };
       expect(result, expectedJson);
