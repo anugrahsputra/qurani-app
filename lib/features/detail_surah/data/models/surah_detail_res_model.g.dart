@@ -9,12 +9,10 @@ part of 'surah_detail_res_model.dart';
 _$SurahDetailResModelImpl _$$SurahDetailResModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SurahDetailResModelImpl(
-      code: json['code'] as int?,
-      status: json['status'] as String?,
-      message: json['message'] as String?,
-      data: json['data'] == null
-          ? null
-          : SurahDetailModel.fromJson(json['data'] as Map<String, dynamic>),
+      code: json['code'] as int,
+      status: json['status'] as String,
+      message: json['message'] as String,
+      data: SurahDetailModel.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SurahDetailResModelImplToJson(
@@ -23,5 +21,5 @@ Map<String, dynamic> _$$SurahDetailResModelImplToJson(
       'code': instance.code,
       'status': instance.status,
       'message': instance.message,
-      'data': instance.data?.toJson(),
+      'data': instance.data.toJson(),
     };

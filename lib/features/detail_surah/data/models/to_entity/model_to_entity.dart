@@ -7,7 +7,7 @@ extension SurahDetailResModelX on SurahDetailResModel {
       code: code,
       status: status,
       message: message,
-      data: data?.toEntity(),
+      data: data.toEntity(),
     );
   }
 }
@@ -105,9 +105,50 @@ extension VerseModelX on VerseModel {
   Verse toEntity() {
     return Verse(
       number: number?.toEntity(),
+      meta: meta?.toEntity(),
       text: text?.toEntity(),
       translation: translation?.toEntity(),
       audio: audio?.toEntity(),
+      tafsir: tafsir?.toEntity(),
+    );
+  }
+}
+
+extension MetaX on MetaModel {
+  Meta toEntity() {
+    return Meta(
+      hizbQuarter: hizbQuarter,
+      sajda: sajda?.toEntity(),
+      juz: juz,
+      ruku: ruku,
+      manzil: manzil,
+      page: page,
+    );
+  }
+}
+
+extension SajdaModelX on SajdaModel {
+  Sajda toEntity() {
+    return Sajda(
+      recommended: recommended,
+      obligatory: obligatory,
+    );
+  }
+}
+
+extension VerseTafsirModelX on VerseTafsirModel {
+  VerseTafsir toEntity() {
+    return VerseTafsir(
+      id: id?.toEntity(),
+    );
+  }
+}
+
+extension IdX on IdModel {
+  Id toEntity() {
+    return Id(
+      short: short,
+      long: long,
     );
   }
 }

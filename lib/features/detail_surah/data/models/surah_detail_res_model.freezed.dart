@@ -21,13 +21,13 @@ SurahDetailResModel _$SurahDetailResModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SurahDetailResModel {
   @JsonKey(name: "code")
-  int? get code => throw _privateConstructorUsedError;
+  int get code => throw _privateConstructorUsedError;
   @JsonKey(name: "status")
-  String? get status => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
   @JsonKey(name: "message")
-  String? get message => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
   @JsonKey(name: "data")
-  SurahDetailModel? get data => throw _privateConstructorUsedError;
+  SurahDetailModel get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,12 +42,12 @@ abstract class $SurahDetailResModelCopyWith<$Res> {
       _$SurahDetailResModelCopyWithImpl<$Res, SurahDetailResModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "code") int? code,
-      @JsonKey(name: "status") String? status,
-      @JsonKey(name: "message") String? message,
-      @JsonKey(name: "data") SurahDetailModel? data});
+      {@JsonKey(name: "code") int code,
+      @JsonKey(name: "status") String status,
+      @JsonKey(name: "message") String message,
+      @JsonKey(name: "data") SurahDetailModel data});
 
-  $SurahDetailModelCopyWith<$Res>? get data;
+  $SurahDetailModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -63,39 +63,35 @@ class _$SurahDetailResModelCopyWithImpl<$Res, $Val extends SurahDetailResModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = freezed,
-    Object? status = freezed,
-    Object? message = freezed,
-    Object? data = freezed,
+    Object? code = null,
+    Object? status = null,
+    Object? message = null,
+    Object? data = null,
   }) {
     return _then(_value.copyWith(
-      code: freezed == code
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as int?,
-      status: freezed == status
+              as int,
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      message: freezed == message
+              as String,
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-      data: freezed == data
+              as String,
+      data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as SurahDetailModel?,
+              as SurahDetailModel,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $SurahDetailModelCopyWith<$Res>? get data {
-    if (_value.data == null) {
-      return null;
-    }
-
-    return $SurahDetailModelCopyWith<$Res>(_value.data!, (value) {
+  $SurahDetailModelCopyWith<$Res> get data {
+    return $SurahDetailModelCopyWith<$Res>(_value.data, (value) {
       return _then(_value.copyWith(data: value) as $Val);
     });
   }
@@ -110,13 +106,13 @@ abstract class _$$SurahDetailResModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "code") int? code,
-      @JsonKey(name: "status") String? status,
-      @JsonKey(name: "message") String? message,
-      @JsonKey(name: "data") SurahDetailModel? data});
+      {@JsonKey(name: "code") int code,
+      @JsonKey(name: "status") String status,
+      @JsonKey(name: "message") String message,
+      @JsonKey(name: "data") SurahDetailModel data});
 
   @override
-  $SurahDetailModelCopyWith<$Res>? get data;
+  $SurahDetailModelCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -130,28 +126,28 @@ class __$$SurahDetailResModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? code = freezed,
-    Object? status = freezed,
-    Object? message = freezed,
-    Object? data = freezed,
+    Object? code = null,
+    Object? status = null,
+    Object? message = null,
+    Object? data = null,
   }) {
     return _then(_$SurahDetailResModelImpl(
-      code: freezed == code
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
-              as int?,
-      status: freezed == status
+              as int,
+      status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as String?,
-      message: freezed == message
+              as String,
+      message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String?,
-      data: freezed == data
+              as String,
+      data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as SurahDetailModel?,
+              as SurahDetailModel,
     ));
   }
 }
@@ -171,16 +167,16 @@ class _$SurahDetailResModelImpl implements _SurahDetailResModel {
 
   @override
   @JsonKey(name: "code")
-  final int? code;
+  final int code;
   @override
   @JsonKey(name: "status")
-  final String? status;
+  final String status;
   @override
   @JsonKey(name: "message")
-  final String? message;
+  final String message;
   @override
   @JsonKey(name: "data")
-  final SurahDetailModel? data;
+  final SurahDetailModel data;
 
   @override
   String toString() {
@@ -219,10 +215,10 @@ class _$SurahDetailResModelImpl implements _SurahDetailResModel {
 
 abstract class _SurahDetailResModel implements SurahDetailResModel {
   const factory _SurahDetailResModel(
-          {@JsonKey(name: "code") required final int? code,
-          @JsonKey(name: "status") required final String? status,
-          @JsonKey(name: "message") required final String? message,
-          @JsonKey(name: "data") required final SurahDetailModel? data}) =
+          {@JsonKey(name: "code") required final int code,
+          @JsonKey(name: "status") required final String status,
+          @JsonKey(name: "message") required final String message,
+          @JsonKey(name: "data") required final SurahDetailModel data}) =
       _$SurahDetailResModelImpl;
 
   factory _SurahDetailResModel.fromJson(Map<String, dynamic> json) =
@@ -230,16 +226,16 @@ abstract class _SurahDetailResModel implements SurahDetailResModel {
 
   @override
   @JsonKey(name: "code")
-  int? get code;
+  int get code;
   @override
   @JsonKey(name: "status")
-  String? get status;
+  String get status;
   @override
   @JsonKey(name: "message")
-  String? get message;
+  String get message;
   @override
   @JsonKey(name: "data")
-  SurahDetailModel? get data;
+  SurahDetailModel get data;
   @override
   @JsonKey(ignore: true)
   _$$SurahDetailResModelImplCopyWith<_$SurahDetailResModelImpl> get copyWith =>
