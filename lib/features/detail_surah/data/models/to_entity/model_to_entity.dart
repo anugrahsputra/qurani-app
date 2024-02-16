@@ -66,9 +66,9 @@ extension AudioModelX on AudioModel {
   }
 }
 
-extension TextModelX on TextModel {
-  Text toEntity() {
-    return Text(
+extension TextsModelX on TextsModel {
+  Texts toEntity() {
+    return Texts(
       arab: arab,
       transliteration: transliteration?.toEntity(),
     );
@@ -88,6 +88,7 @@ extension RevelationModelX on RevelationModel {
     return Revelation(
       arab: arab,
       en: en,
+      id: id,
     );
   }
 }
