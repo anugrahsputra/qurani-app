@@ -61,7 +61,7 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
         return handler.reject(err);
       }
     } else {
-      UnknownException();
+      ServerException();
       return handler.reject(err);
     }
   }
