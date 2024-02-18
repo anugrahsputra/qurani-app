@@ -15,8 +15,11 @@ export 'mock.mocks.dart';
   /* Data */
   MockSpec<SurahRemoteDataSource>(),
   MockSpec<DetailSurahRemoteDataSource>(),
-  /* Domain */
+  /* Domain/Repository */
   MockSpec<BaseSurahRepository>(),
+  MockSpec<SurahDetailRepository>(),
+  /* Domain/Usecase */
+  MockSpec<GetSurahDetailUseCase>(),
   MockSpec<GetSurahsUseCase>(),
   /* Bloc */
   MockSpec<SurahBloc>(),
