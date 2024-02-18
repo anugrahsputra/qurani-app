@@ -1,7 +1,9 @@
 part of 'homepage.dart';
 
 class SurahCards extends StatelessWidget {
-  const SurahCards({super.key});
+  SurahCards({super.key});
+
+  final AppNavigator appNavigator = sl<AppNavigator>();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,13 @@ class SurahCards extends StatelessWidget {
               itemCount: surahs.length,
               itemBuilder: (context, index) {
                 final surah = state.listSurah[index];
-                return CardView(surah: surah);
+                return InkWell(
+                  onTap: () => appNavigator.goToDetail(
+                    context,
+                    surahNumber: surah.number,
+                  ),
+                  child: CardView(surah: surah),
+                );
               },
             ),
           );
