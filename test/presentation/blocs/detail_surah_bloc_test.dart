@@ -37,15 +37,15 @@ void main() {
   blocTest<DetailSurahBloc, DetailSurahState>(
     'emits [DetailSurahLoading, DetailSurahError] when OnGetSurah is added.',
     build: () {
-      when(mockGetSurahDetailUseCase.execute(1))
-          .thenAnswer((_) async => const Left(ServerFailure(message: "error")));
+      when(mockGetSurahDetailUseCase.execute(1)).thenAnswer(
+          (_) async => const Left(ServerFailure(message: "Server Error")));
 
       return detailSurahBloc;
     },
     act: (bloc) => bloc.add(const OnGetDetail(1)),
     expect: () => <DetailSurahState>[
       const DetailSurahLoading(),
-      const DetailSurahError("error"),
+      const DetailSurahError("Server Error"),
     ],
   );
 }
