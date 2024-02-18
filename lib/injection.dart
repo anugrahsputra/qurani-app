@@ -45,11 +45,19 @@ Future<void> setup() async {
     () => SurahRepositoryImpl(remoteDataSource: sl<SurahRemoteDataSource>()),
   );
 
+  sl.registerLazySingleton<SurahDetailRepository>(
+    () => ISurahDetailRepository(
+        remoteDataSource: sl<DetailSurahRemoteDataSource>()),
+  );
+
   /* -----------------> UseCase <-----------------*/
   sl.registerLazySingleton<GetSurahsUseCase>(
     () => GetSurahsUseCase(sl<BaseSurahRepository>()),
   );
 
+  sl.registerLazySingleton<GetSurahDetailUseCase>(() => GetSurahDetailUseCase(
+        repository: sl<SurahDetailRepository>(),
+      ));
   /* -----------------> Bloc <-----------------*/
   sl.registerFactory<SurahBloc>(
     () => SurahBloc(getSurahsUseCase: sl<GetSurahsUseCase>()),
