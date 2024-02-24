@@ -9,6 +9,7 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
   final Logger log = Logger("Dio Interceptor");
   Dio dio = sl<Dio>(instanceName: "interceptor");
   late final RequestRetrier requestRetrier;
+  final _cache = <Uri, Response>{};
 
   CustomInterceptor() {
     requestRetrier = RequestRetrier(
@@ -22,34 +23,35 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
 
   @override
   void onRequest(options, handler) {
-    log.info("Request: ${options.path}");
-    log.info("Request Headers: ${options.headers}");
-    handler.next(options);
+    final response = _cache[options.uri];
+    if (options.extra["refresh"] == true) {
+      log.info("${options.uri}: force refresh, ignore cache! \n");
+      return handler.next(options);
+    } else if (response != null) {
+      log.fine("${options.uri}: cache hit! \n");
+      return handler.resolve(response);
+    }
+    super.onRequest(options, handler);
   }
 
   @override
   void onResponse(response, handler) {
-    log.info("Response: ${response.statusMessage}");
-    log.info("Response Headers: ${response.headers}");
-
-    handler.next(response);
+    _cache[response.requestOptions.uri] = response;
+    log.fine("${response.requestOptions.uri}: cache saved! \n");
+    super.onResponse(response, handler);
   }
 
   @override
   void onError(err, handler) async {
     log.warning("Error: ${err.requestOptions.uri}");
     if (isBadRequest(err)) {
-      BadRequestException();
-      return handler.reject(err);
+      throw BadRequestException();
     } else if (isUnauthorized(err)) {
-      UnauthorizedException();
-      return handler.reject(err);
+      throw UnauthorizedException();
     } else if (isForbidden(err)) {
-      ForbiddenException();
-      return handler.reject(err);
+      throw ForbiddenException();
     } else if (isNotFound(err)) {
-      NotFoundException();
-      return handler.reject(err);
+      throw NotFoundException();
     } else if (isConnectionError(err)) {
       try {
         log.warning("Connection Error: ${err.requestOptions.uri}");
@@ -57,12 +59,9 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
         return handler.resolve(response);
       } catch (e) {
         log.severe("Connection Error: ${err.requestOptions.uri}");
-        NetworkException();
-        return handler.reject(err);
+        throw NetworkException();
       }
-    } else {
-      ServerException();
-      return handler.reject(err);
     }
+    super.onError(err, handler);
   }
 }
