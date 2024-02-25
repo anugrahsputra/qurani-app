@@ -88,6 +88,10 @@ class CardView extends StatelessWidget {
             children: [
               Text(
                 surah.name.transliteration.id,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
               ),
               const Gap(5),
               Text(
@@ -98,9 +102,9 @@ class CardView extends StatelessWidget {
           const Spacer(),
           Text(
             translation,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+            style: GoogleFonts.notoSansArabic(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],
