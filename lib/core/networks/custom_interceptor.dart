@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logging/logging.dart';
@@ -19,6 +21,10 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
         checkTimeout: const Duration(seconds: 5),
       ),
     );
+    Timer.periodic(const Duration(days: 5), (timer) {
+      log.info("Clearing cache");
+      clearCache();
+    });
   }
 
   @override
@@ -59,9 +65,14 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
         return handler.resolve(response);
       } catch (e) {
         log.severe("Connection Error: ${err.requestOptions.uri}");
+        handler.reject(err);
         throw NetworkException();
       }
     }
     super.onError(err, handler);
+  }
+
+  void clearCache() {
+    _cache.clear();
   }
 }
