@@ -8,21 +8,21 @@
             "name": "qurani",
             "request": "launch",
             "type": "dart",
-            "args": ["--enable-impeller"]
+            
         },
         {
             "name": "qurani (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",
-            "args": ["--enable-impeller"]
+            
         },
         {
             "name": "qurani (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release",
-            "args": ["--enable-impeller"]
+            
         }
     ]
 }
