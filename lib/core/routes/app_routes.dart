@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../features/detail_surah/detail_surah.dart';
 import '../../features/surah/surah.dart';
 import '../core.dart';
 
@@ -10,5 +11,11 @@ abstract class AppRoutes {
   static final Map<String, Widget Function(BuildContext context)> routes = {
     AppPages.home: (context) => const Homepage(),
     // AppPages.splash: (context) => const SplashPage(),
+    AppPages.detail: (context) {
+      Map<String, dynamic> args =
+          ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+      int surahNumber = args['surahNumber'];
+      return DetailSurahPage(surahNumber: surahNumber);
+    }
   };
 }

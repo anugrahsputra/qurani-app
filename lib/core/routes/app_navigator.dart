@@ -53,4 +53,12 @@ class AppNavigator {
 
     pushNamedAndRemoveUntil(context, AppPages.home);
   }
+
+  void goToDetail(BuildContext context, {required int surahNumber}) {
+    if (!canNavigate(context)) return;
+
+    pushNamed(context, AppPages.detail, arguments: {
+      "surahNumber": surahNumber,
+    });
+  }
 }

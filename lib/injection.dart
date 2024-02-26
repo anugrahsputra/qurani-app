@@ -31,6 +31,7 @@ Future<void> setup() async {
     )..interceptors.add(CustomInterceptor()),
   );
   sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
+  sl.registerFactory<AppNavigator>(() => AppNavigator());
 
   /* -----------------> Data <-----------------*/
   sl.registerLazySingleton<SurahRemoteDataSource>(
@@ -61,5 +62,8 @@ Future<void> setup() async {
   /* -----------------> Bloc <-----------------*/
   sl.registerFactory<SurahBloc>(
     () => SurahBloc(getSurahsUseCase: sl<GetSurahsUseCase>()),
+  );
+  sl.registerFactory<DetailSurahBloc>(
+    () => DetailSurahBloc(getSurahDetailUsecase: sl<GetSurahDetailUseCase>()),
   );
 }

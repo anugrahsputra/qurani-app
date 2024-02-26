@@ -1,7 +1,9 @@
 part of 'homepage.dart';
 
 class SurahCards extends StatelessWidget {
-  const SurahCards({super.key});
+  SurahCards({super.key});
+
+  final AppNavigator appNavigator = sl<AppNavigator>();
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,13 @@ class SurahCards extends StatelessWidget {
               itemCount: surahs.length,
               itemBuilder: (context, index) {
                 final surah = state.listSurah[index];
-                return CardView(surah: surah);
+                return InkWell(
+                  onTap: () => appNavigator.goToDetail(
+                    context,
+                    surahNumber: surah.number,
+                  ),
+                  child: CardView(surah: surah),
+                );
               },
             ),
           );
@@ -80,6 +88,10 @@ class CardView extends StatelessWidget {
             children: [
               Text(
                 surah.name.transliteration.id,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
               ),
               const Gap(5),
               Text(
@@ -90,9 +102,9 @@ class CardView extends StatelessWidget {
           const Spacer(),
           Text(
             translation,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
+            style: GoogleFonts.notoSansArabic(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

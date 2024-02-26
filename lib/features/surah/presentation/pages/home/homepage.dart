@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../core/core.dart';
 import '../../../../../injection.dart';
 import '../../../domain/domain.dart';
 import '../../logic/logic.dart';
@@ -32,7 +34,7 @@ class _HomepageState extends State<Homepage> {
         appBar: AppBar(
           title: const Text('Qurani'),
         ),
-        body: const Column(
+        body: Column(
           children: [
             SurahCards(),
           ],
