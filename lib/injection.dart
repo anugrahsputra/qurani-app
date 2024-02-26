@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -30,8 +31,13 @@ Future<void> setup() async {
       ),
     )..interceptors.add(CustomInterceptor()),
   );
+  /* -----------------> External <-----------------*/
+  sl.registerFactory<AudioPlayer>(() => AudioPlayer());
+  /* -----------------> Core <-----------------*/
   sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
   sl.registerFactory<AppNavigator>(() => AppNavigator());
+  sl.registerFactory<AudioPlayerManager>(
+      () => AudioPlayerManagerImpl(audioPlayers: {}));
 
   /* -----------------> Data <-----------------*/
   sl.registerLazySingleton<SurahRemoteDataSource>(
