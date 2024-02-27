@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:logging/logging.dart';
 
 abstract class AudioPlayerManager {
   AudioPlayer verseAudio(String? verseNumber);
@@ -9,12 +10,15 @@ abstract class AudioPlayerManager {
 class AudioPlayerManagerImpl implements AudioPlayerManager {
   final Map<String?, AudioPlayer> audioPlayers;
 
+  final Logger log = Logger('AudioPlayerManager');
+
   AudioPlayerManagerImpl({required this.audioPlayers});
 
   @override
   void stopAll() {
     audioPlayers.forEach((key, player) {
       player.stop();
+      log.info('Stopping audio player for verse $key');
     });
   }
 
@@ -23,6 +27,7 @@ class AudioPlayerManagerImpl implements AudioPlayerManager {
     audioPlayers.forEach((key, player) {
       if (key != verseNumber) {
         player.stop();
+        log.info('Stopping audio player for verse $key');
       }
     });
   }
