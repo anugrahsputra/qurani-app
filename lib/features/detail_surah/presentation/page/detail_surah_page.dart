@@ -22,18 +22,32 @@ class DetailSurahPage extends StatefulWidget {
 
 class _DetailSurahPageState extends State<DetailSurahPage> {
   final DetailSurahBloc detailSurahBloc = sl<DetailSurahBloc>();
+  final VerseAudioCubit verseAudioCubit = sl<VerseAudioCubit>();
   int get surahNumber => widget.surahNumber;
 
   @override
   void initState() {
     detailSurahBloc.add(OnGetDetail(surahNumber));
+
     super.initState();
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => detailSurahBloc,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => detailSurahBloc,
+        ),
+        BlocProvider(
+          create: (context) => verseAudioCubit,
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           titleSpacing: 0.0,
