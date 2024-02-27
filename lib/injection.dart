@@ -72,4 +72,11 @@ Future<void> setup() async {
   sl.registerFactory<DetailSurahBloc>(
     () => DetailSurahBloc(getSurahDetailUsecase: sl<GetSurahDetailUseCase>()),
   );
+  /* -----------------> Cubit <-----------------*/
+  sl.registerFactory<VerseAudioCubit>(
+    () => VerseAudioCubit(
+      audioPlayerManager: sl<AudioPlayerManager>(),
+      player: sl<AudioPlayer>(),
+    ),
+  );
 }
