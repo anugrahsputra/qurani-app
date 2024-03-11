@@ -75,5 +75,30 @@ void main() {
       expect(result, isA<SurahDetailResModel>());
       verify(mockDioClient.get(any, options: anyNamed('options')));
     });
+
+    test('surah audio - get full recitation', () async {
+      final mockResponse = Response(
+        data: {
+          "audio_file": {
+            "id": 1,
+            "chapter_id": 1,
+            "file_size": 1,
+            "format": "format",
+            "audio_url": "audioUrl",
+          }
+        },
+        requestOptions: RequestOptions(path: ''),
+        statusCode: 200,
+      );
+
+      when(mockDioClient.get(any, options: anyNamed('options'))).thenAnswer(
+        (_) => Future.value(mockResponse),
+      );
+
+      final result = await detailSurahRemoteDataSource.getFullAudio(1);
+
+      expect(result, isA<AudioFileModel>());
+      verify(mockDioClient.get(any, options: anyNamed('options')));
+    });
   });
 }

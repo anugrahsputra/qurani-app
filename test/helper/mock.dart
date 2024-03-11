@@ -25,6 +25,7 @@ export 'mock.mocks.dart';
   /* Domain/Usecase */
   MockSpec<GetSurahDetailUseCase>(),
   MockSpec<GetSurahsUseCase>(),
+  MockSpec<GetSurahAudioUsecase>(),
   /* Bloc */
   MockSpec<SurahBloc>(),
 ])
