@@ -13,7 +13,6 @@ Future<void> setup() async {
   sl.registerFactory<Dio>(
     () => Dio(
       BaseOptions(
-        baseUrl: Endpoint.baseUrl,
         connectTimeout: const Duration(seconds: 35),
         receiveTimeout: const Duration(seconds: 35),
         sendTimeout: const Duration(seconds: 35),
@@ -24,7 +23,6 @@ Future<void> setup() async {
   sl.registerFactory<Dio>(
     () => Dio(
       BaseOptions(
-        baseUrl: Endpoint.baseUrl,
         connectTimeout: const Duration(seconds: 35),
         receiveTimeout: const Duration(seconds: 35),
         sendTimeout: const Duration(seconds: 35),
@@ -62,9 +60,14 @@ Future<void> setup() async {
     () => GetSurahsUseCase(sl<BaseSurahRepository>()),
   );
 
-  sl.registerLazySingleton<GetSurahDetailUseCase>(() => GetSurahDetailUseCase(
-        repository: sl<SurahDetailRepository>(),
-      ));
+  sl.registerLazySingleton<GetSurahDetailUseCase>(
+    () => GetSurahDetailUseCase(
+      repository: sl<SurahDetailRepository>(),
+    ),
+  );
+  sl.registerLazySingleton<GetSurahAudioUsecase>(
+    () => GetSurahAudioUsecase(sl<SurahDetailRepository>()),
+  );
   /* -----------------> Bloc <-----------------*/
   sl.registerFactory<SurahBloc>(
     () => SurahBloc(getSurahsUseCase: sl<GetSurahsUseCase>()),
@@ -77,6 +80,7 @@ Future<void> setup() async {
     () => VerseAudioCubit(
       audioPlayerManager: sl<AudioPlayerManager>(),
       player: sl<AudioPlayer>(),
+      getSurahAudioUsecase: sl<GetSurahAudioUsecase>(),
     ),
   );
 }
