@@ -2,6 +2,11 @@ import 'dart:developer';
 
 import 'package:logging/logging.dart';
 
+const _fineColor = '\x1B[32m'; // Green
+const _infoColor = '\x1B[33m'; // Yellow
+const _severeColor = '\x1B[31m'; // Red
+const _resetColor = '\x1B[0m'; // Reset color
+
 abstract class CustomLog {
   static bool isInitialize = false;
 
@@ -13,20 +18,35 @@ abstract class CustomLog {
         final level = record.level;
         final name = record.loggerName;
         final message = record.message;
-        final strackTrace = record.stackTrace;
+        final stackTrace = record.stackTrace;
         final error = record.error;
 
-        if (level == Level.FINE ||
-            level == Level.FINER ||
-            level == Level.FINEST) {
-          log('✅ ${level.name} "$name" : $message');
-        } else if (level == Level.SEVERE ||
-            level == Level.SHOUT ||
-            level == Level.WARNING) {
-          log('⛔ ${level.name} "$name" : $message${error != null ? '\nError : $error' : ''}${strackTrace != null ? '\n$strackTrace' : ''}');
-        } else if (level == Level.INFO || level == Level.CONFIG) {
-          log('ℹ️ ${level.name} "$name" : $message');
+        String levelColor;
+        switch (level) {
+          case Level.FINE:
+          case Level.FINER:
+          case Level.FINEST:
+            levelColor = _fineColor;
+            break;
+          case Level.SEVERE:
+          case Level.SHOUT:
+          case Level.WARNING:
+            levelColor = _severeColor;
+            break;
+          case Level.INFO:
+          case Level.CONFIG:
+            levelColor = _infoColor;
+            break;
+          default:
+            levelColor = '';
         }
+
+        final formattedMessage = '$levelColor[${level.name}] : $message';
+
+        final errorString = error != null ? '\nError : $error' : '';
+        final stackTraceString = stackTrace != null ? '\n$stackTrace' : '';
+
+        log(formattedMessage + errorString + stackTraceString, name: name);
       });
 
       CustomLog.isInitialize = true;

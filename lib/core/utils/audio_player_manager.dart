@@ -27,7 +27,7 @@ class AudioPlayerManagerImpl implements AudioPlayerManager {
     audioPlayers.forEach((key, player) {
       if (key != verseNumber) {
         player.stop();
-        log.info('Stopping audio player for verse $key');
+        log.info('Stopping all audio except for verse $key');
       }
     });
   }

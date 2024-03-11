@@ -21,6 +21,7 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
         checkTimeout: const Duration(seconds: 5),
       ),
     );
+
     Timer.periodic(const Duration(days: 5), (timer) {
       log.info("Clearing cache");
       clearCache();
