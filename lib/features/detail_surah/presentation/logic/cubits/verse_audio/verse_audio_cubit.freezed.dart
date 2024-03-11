@@ -21,6 +21,7 @@ mixin _$VerseAudioState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String verseNumber) playing,
+    required TResult Function(String surahNumber) playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) =>
@@ -30,6 +31,7 @@ mixin _$VerseAudioState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String verseNumber)? playing,
+    TResult? Function(String surahNumber)? playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) =>
@@ -39,6 +41,7 @@ mixin _$VerseAudioState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String verseNumber)? playing,
+    TResult Function(String surahNumber)? playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
@@ -49,6 +52,7 @@ mixin _$VerseAudioState {
     required TResult Function(VerseInitial value) initial,
     required TResult Function(VerseLoading value) loading,
     required TResult Function(VersePlaying value) playing,
+    required TResult Function(VersePlayingAll value) playingAll,
     required TResult Function(VerseStopped value) stopped,
     required TResult Function(VersePaused value) paused,
   }) =>
@@ -58,6 +62,7 @@ mixin _$VerseAudioState {
     TResult? Function(VerseInitial value)? initial,
     TResult? Function(VerseLoading value)? loading,
     TResult? Function(VersePlaying value)? playing,
+    TResult? Function(VersePlayingAll value)? playingAll,
     TResult? Function(VerseStopped value)? stopped,
     TResult? Function(VersePaused value)? paused,
   }) =>
@@ -67,6 +72,7 @@ mixin _$VerseAudioState {
     TResult Function(VerseInitial value)? initial,
     TResult Function(VerseLoading value)? loading,
     TResult Function(VersePlaying value)? playing,
+    TResult Function(VersePlayingAll value)? playingAll,
     TResult Function(VerseStopped value)? stopped,
     TResult Function(VersePaused value)? paused,
     required TResult orElse(),
@@ -133,6 +139,7 @@ class _$VerseInitialImpl implements VerseInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String verseNumber) playing,
+    required TResult Function(String surahNumber) playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
@@ -145,6 +152,7 @@ class _$VerseInitialImpl implements VerseInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String verseNumber)? playing,
+    TResult? Function(String surahNumber)? playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
@@ -157,6 +165,7 @@ class _$VerseInitialImpl implements VerseInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String verseNumber)? playing,
+    TResult Function(String surahNumber)? playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
@@ -173,6 +182,7 @@ class _$VerseInitialImpl implements VerseInitial {
     required TResult Function(VerseInitial value) initial,
     required TResult Function(VerseLoading value) loading,
     required TResult Function(VersePlaying value) playing,
+    required TResult Function(VersePlayingAll value) playingAll,
     required TResult Function(VerseStopped value) stopped,
     required TResult Function(VersePaused value) paused,
   }) {
@@ -185,6 +195,7 @@ class _$VerseInitialImpl implements VerseInitial {
     TResult? Function(VerseInitial value)? initial,
     TResult? Function(VerseLoading value)? loading,
     TResult? Function(VersePlaying value)? playing,
+    TResult? Function(VersePlayingAll value)? playingAll,
     TResult? Function(VerseStopped value)? stopped,
     TResult? Function(VersePaused value)? paused,
   }) {
@@ -197,6 +208,7 @@ class _$VerseInitialImpl implements VerseInitial {
     TResult Function(VerseInitial value)? initial,
     TResult Function(VerseLoading value)? loading,
     TResult Function(VersePlaying value)? playing,
+    TResult Function(VersePlayingAll value)? playingAll,
     TResult Function(VerseStopped value)? stopped,
     TResult Function(VersePaused value)? paused,
     required TResult orElse(),
@@ -253,6 +265,7 @@ class _$VerseLoadingImpl implements VerseLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String verseNumber) playing,
+    required TResult Function(String surahNumber) playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
@@ -265,6 +278,7 @@ class _$VerseLoadingImpl implements VerseLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String verseNumber)? playing,
+    TResult? Function(String surahNumber)? playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
@@ -277,6 +291,7 @@ class _$VerseLoadingImpl implements VerseLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String verseNumber)? playing,
+    TResult Function(String surahNumber)? playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
@@ -293,6 +308,7 @@ class _$VerseLoadingImpl implements VerseLoading {
     required TResult Function(VerseInitial value) initial,
     required TResult Function(VerseLoading value) loading,
     required TResult Function(VersePlaying value) playing,
+    required TResult Function(VersePlayingAll value) playingAll,
     required TResult Function(VerseStopped value) stopped,
     required TResult Function(VersePaused value) paused,
   }) {
@@ -305,6 +321,7 @@ class _$VerseLoadingImpl implements VerseLoading {
     TResult? Function(VerseInitial value)? initial,
     TResult? Function(VerseLoading value)? loading,
     TResult? Function(VersePlaying value)? playing,
+    TResult? Function(VersePlayingAll value)? playingAll,
     TResult? Function(VerseStopped value)? stopped,
     TResult? Function(VersePaused value)? paused,
   }) {
@@ -317,6 +334,7 @@ class _$VerseLoadingImpl implements VerseLoading {
     TResult Function(VerseInitial value)? initial,
     TResult Function(VerseLoading value)? loading,
     TResult Function(VersePlaying value)? playing,
+    TResult Function(VersePlayingAll value)? playingAll,
     TResult Function(VerseStopped value)? stopped,
     TResult Function(VersePaused value)? paused,
     required TResult orElse(),
@@ -400,6 +418,7 @@ class _$VersePlayingImpl implements VersePlaying {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String verseNumber) playing,
+    required TResult Function(String surahNumber) playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
@@ -412,6 +431,7 @@ class _$VersePlayingImpl implements VersePlaying {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String verseNumber)? playing,
+    TResult? Function(String surahNumber)? playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
@@ -424,6 +444,7 @@ class _$VersePlayingImpl implements VersePlaying {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String verseNumber)? playing,
+    TResult Function(String surahNumber)? playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
@@ -440,6 +461,7 @@ class _$VersePlayingImpl implements VersePlaying {
     required TResult Function(VerseInitial value) initial,
     required TResult Function(VerseLoading value) loading,
     required TResult Function(VersePlaying value) playing,
+    required TResult Function(VersePlayingAll value) playingAll,
     required TResult Function(VerseStopped value) stopped,
     required TResult Function(VersePaused value) paused,
   }) {
@@ -452,6 +474,7 @@ class _$VersePlayingImpl implements VersePlaying {
     TResult? Function(VerseInitial value)? initial,
     TResult? Function(VerseLoading value)? loading,
     TResult? Function(VersePlaying value)? playing,
+    TResult? Function(VersePlayingAll value)? playingAll,
     TResult? Function(VerseStopped value)? stopped,
     TResult? Function(VersePaused value)? paused,
   }) {
@@ -464,6 +487,7 @@ class _$VersePlayingImpl implements VersePlaying {
     TResult Function(VerseInitial value)? initial,
     TResult Function(VerseLoading value)? loading,
     TResult Function(VersePlaying value)? playing,
+    TResult Function(VersePlayingAll value)? playingAll,
     TResult Function(VerseStopped value)? stopped,
     TResult Function(VersePaused value)? paused,
     required TResult orElse(),
@@ -481,6 +505,166 @@ abstract class VersePlaying implements VerseAudioState {
   String get verseNumber;
   @JsonKey(ignore: true)
   _$$VersePlayingImplCopyWith<_$VersePlayingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$VersePlayingAllImplCopyWith<$Res> {
+  factory _$$VersePlayingAllImplCopyWith(_$VersePlayingAllImpl value,
+          $Res Function(_$VersePlayingAllImpl) then) =
+      __$$VersePlayingAllImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String surahNumber});
+}
+
+/// @nodoc
+class __$$VersePlayingAllImplCopyWithImpl<$Res>
+    extends _$VerseAudioStateCopyWithImpl<$Res, _$VersePlayingAllImpl>
+    implements _$$VersePlayingAllImplCopyWith<$Res> {
+  __$$VersePlayingAllImplCopyWithImpl(
+      _$VersePlayingAllImpl _value, $Res Function(_$VersePlayingAllImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? surahNumber = null,
+  }) {
+    return _then(_$VersePlayingAllImpl(
+      null == surahNumber
+          ? _value.surahNumber
+          : surahNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$VersePlayingAllImpl implements VersePlayingAll {
+  const _$VersePlayingAllImpl(this.surahNumber);
+
+  @override
+  final String surahNumber;
+
+  @override
+  String toString() {
+    return 'VerseAudioState.playingAll(surahNumber: $surahNumber)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$VersePlayingAllImpl &&
+            (identical(other.surahNumber, surahNumber) ||
+                other.surahNumber == surahNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, surahNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$VersePlayingAllImplCopyWith<_$VersePlayingAllImpl> get copyWith =>
+      __$$VersePlayingAllImplCopyWithImpl<_$VersePlayingAllImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String verseNumber) playing,
+    required TResult Function(String surahNumber) playingAll,
+    required TResult Function() stopped,
+    required TResult Function() paused,
+  }) {
+    return playingAll(surahNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String verseNumber)? playing,
+    TResult? Function(String surahNumber)? playingAll,
+    TResult? Function()? stopped,
+    TResult? Function()? paused,
+  }) {
+    return playingAll?.call(surahNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String verseNumber)? playing,
+    TResult Function(String surahNumber)? playingAll,
+    TResult Function()? stopped,
+    TResult Function()? paused,
+    required TResult orElse(),
+  }) {
+    if (playingAll != null) {
+      return playingAll(surahNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(VerseInitial value) initial,
+    required TResult Function(VerseLoading value) loading,
+    required TResult Function(VersePlaying value) playing,
+    required TResult Function(VersePlayingAll value) playingAll,
+    required TResult Function(VerseStopped value) stopped,
+    required TResult Function(VersePaused value) paused,
+  }) {
+    return playingAll(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(VerseInitial value)? initial,
+    TResult? Function(VerseLoading value)? loading,
+    TResult? Function(VersePlaying value)? playing,
+    TResult? Function(VersePlayingAll value)? playingAll,
+    TResult? Function(VerseStopped value)? stopped,
+    TResult? Function(VersePaused value)? paused,
+  }) {
+    return playingAll?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(VerseInitial value)? initial,
+    TResult Function(VerseLoading value)? loading,
+    TResult Function(VersePlaying value)? playing,
+    TResult Function(VersePlayingAll value)? playingAll,
+    TResult Function(VerseStopped value)? stopped,
+    TResult Function(VersePaused value)? paused,
+    required TResult orElse(),
+  }) {
+    if (playingAll != null) {
+      return playingAll(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class VersePlayingAll implements VerseAudioState {
+  const factory VersePlayingAll(final String surahNumber) =
+      _$VersePlayingAllImpl;
+
+  String get surahNumber;
+  @JsonKey(ignore: true)
+  _$$VersePlayingAllImplCopyWith<_$VersePlayingAllImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -525,6 +709,7 @@ class _$VerseStoppedImpl implements VerseStopped {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String verseNumber) playing,
+    required TResult Function(String surahNumber) playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
@@ -537,6 +722,7 @@ class _$VerseStoppedImpl implements VerseStopped {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String verseNumber)? playing,
+    TResult? Function(String surahNumber)? playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
@@ -549,6 +735,7 @@ class _$VerseStoppedImpl implements VerseStopped {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String verseNumber)? playing,
+    TResult Function(String surahNumber)? playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
@@ -565,6 +752,7 @@ class _$VerseStoppedImpl implements VerseStopped {
     required TResult Function(VerseInitial value) initial,
     required TResult Function(VerseLoading value) loading,
     required TResult Function(VersePlaying value) playing,
+    required TResult Function(VersePlayingAll value) playingAll,
     required TResult Function(VerseStopped value) stopped,
     required TResult Function(VersePaused value) paused,
   }) {
@@ -577,6 +765,7 @@ class _$VerseStoppedImpl implements VerseStopped {
     TResult? Function(VerseInitial value)? initial,
     TResult? Function(VerseLoading value)? loading,
     TResult? Function(VersePlaying value)? playing,
+    TResult? Function(VersePlayingAll value)? playingAll,
     TResult? Function(VerseStopped value)? stopped,
     TResult? Function(VersePaused value)? paused,
   }) {
@@ -589,6 +778,7 @@ class _$VerseStoppedImpl implements VerseStopped {
     TResult Function(VerseInitial value)? initial,
     TResult Function(VerseLoading value)? loading,
     TResult Function(VersePlaying value)? playing,
+    TResult Function(VersePlayingAll value)? playingAll,
     TResult Function(VerseStopped value)? stopped,
     TResult Function(VersePaused value)? paused,
     required TResult orElse(),
@@ -645,6 +835,7 @@ class _$VersePausedImpl implements VersePaused {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String verseNumber) playing,
+    required TResult Function(String surahNumber) playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
@@ -657,6 +848,7 @@ class _$VersePausedImpl implements VersePaused {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String verseNumber)? playing,
+    TResult? Function(String surahNumber)? playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
@@ -669,6 +861,7 @@ class _$VersePausedImpl implements VersePaused {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String verseNumber)? playing,
+    TResult Function(String surahNumber)? playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
@@ -685,6 +878,7 @@ class _$VersePausedImpl implements VersePaused {
     required TResult Function(VerseInitial value) initial,
     required TResult Function(VerseLoading value) loading,
     required TResult Function(VersePlaying value) playing,
+    required TResult Function(VersePlayingAll value) playingAll,
     required TResult Function(VerseStopped value) stopped,
     required TResult Function(VersePaused value) paused,
   }) {
@@ -697,6 +891,7 @@ class _$VersePausedImpl implements VersePaused {
     TResult? Function(VerseInitial value)? initial,
     TResult? Function(VerseLoading value)? loading,
     TResult? Function(VersePlaying value)? playing,
+    TResult? Function(VersePlayingAll value)? playingAll,
     TResult? Function(VerseStopped value)? stopped,
     TResult? Function(VersePaused value)? paused,
   }) {
@@ -709,6 +904,7 @@ class _$VersePausedImpl implements VersePaused {
     TResult Function(VerseInitial value)? initial,
     TResult Function(VerseLoading value)? loading,
     TResult Function(VersePlaying value)? playing,
+    TResult Function(VersePlayingAll value)? playingAll,
     TResult Function(VerseStopped value)? stopped,
     TResult Function(VersePaused value)? paused,
     required TResult orElse(),

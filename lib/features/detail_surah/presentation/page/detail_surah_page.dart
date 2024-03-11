@@ -35,6 +35,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
   @override
   void dispose() {
     super.dispose();
+    verseAudioCubit.resetVerse();
   }
 
   @override
@@ -51,31 +52,11 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
       child: Scaffold(
         appBar: AppBar(
           titleSpacing: 0.0,
-          title: BlocBuilder<DetailSurahBloc, DetailSurahState>(
-            builder: (context, state) {
-              if (state is DetailSurahLoaded) {
-                SurahDetail surahDetail = state.detailSurah;
-                return Row(
-                  children: [
-                    Text(
-                      '${surahDetail.number}. ',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Text(
-                      surahDetail.name!.transliteration!.id ?? 'Error',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                return const Text('Detail Surah');
-              }
-            },
-          ),
+          title: const DetailTitle(),
+          actions: [
+            PlayAllButton(
+                verseAudioCubit: verseAudioCubit, surahNumber: surahNumber)
+          ],
         ),
         body: BlocBuilder<DetailSurahBloc, DetailSurahState>(
           builder: (context, state) {

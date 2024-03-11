@@ -233,12 +233,6 @@ class _PlayButtonState extends State<PlayButton> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    cubit.audioPlayerManager.stopAll();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final cubit = context.read<VerseAudioCubit>();
     return BlocBuilder<VerseAudioCubit, VerseAudioState>(
@@ -265,6 +259,82 @@ class _PlayButtonState extends State<PlayButton> {
               size: 25,
             ),
           );
+        }
+      },
+    );
+  }
+}
+
+class PlayAllButton extends StatelessWidget {
+  const PlayAllButton({
+    super.key,
+    required this.verseAudioCubit,
+    required this.surahNumber,
+  });
+
+  final VerseAudioCubit verseAudioCubit;
+  final int surahNumber;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<VerseAudioCubit, VerseAudioState>(
+      builder: (context, state) {
+        if (state is VersePlayingAll) {
+          return IconButton(
+            onPressed: () {
+              verseAudioCubit.stopVerse();
+            },
+            icon: const Icon(Icons.stop),
+          );
+        } else if (state is VerseStopped) {
+          return IconButton(
+            onPressed: () {
+              verseAudioCubit.playAllVerse(surahNumber);
+            },
+            icon: const Icon(Icons.play_arrow),
+          );
+        } else {
+          return IconButton(
+            onPressed: () {
+              verseAudioCubit.playAllVerse(surahNumber);
+            },
+            icon: const Icon(Icons.play_arrow),
+          );
+        }
+      },
+    );
+  }
+}
+
+class DetailTitle extends StatelessWidget {
+  const DetailTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DetailSurahBloc, DetailSurahState>(
+      builder: (context, state) {
+        if (state is DetailSurahLoaded) {
+          SurahDetail surahDetail = state.detailSurah;
+          return Row(
+            children: [
+              Text(
+                '${surahDetail.number}. ',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                surahDetail.name!.transliteration!.id ?? 'Error',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          );
+        } else {
+          return const Text('Detail Surah');
         }
       },
     );
