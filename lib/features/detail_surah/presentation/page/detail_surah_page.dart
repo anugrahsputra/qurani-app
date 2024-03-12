@@ -22,46 +22,41 @@ class DetailSurahPage extends StatefulWidget {
 
 class _DetailSurahPageState extends State<DetailSurahPage> {
   final DetailSurahBloc detailSurahBloc = sl<DetailSurahBloc>();
+  final VerseAudioCubit verseAudioCubit = sl<VerseAudioCubit>();
   int get surahNumber => widget.surahNumber;
 
   @override
   void initState() {
     detailSurahBloc.add(OnGetDetail(surahNumber));
+
     super.initState();
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    verseAudioCubit.resetVerse();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => detailSurahBloc,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => detailSurahBloc,
+        ),
+        BlocProvider(
+          create: (context) => verseAudioCubit,
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           titleSpacing: 0.0,
-          title: BlocBuilder<DetailSurahBloc, DetailSurahState>(
-            builder: (context, state) {
-              if (state is DetailSurahLoaded) {
-                SurahDetail surahDetail = state.detailSurah;
-                return Row(
-                  children: [
-                    Text(
-                      '${surahDetail.number}. ',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Text(
-                      surahDetail.name!.transliteration!.id ?? 'Error',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                return const Text('Detail Surah');
-              }
-            },
-          ),
+          title: const DetailTitle(),
+          actions: [
+            PlayAllButton(
+                verseAudioCubit: verseAudioCubit, surahNumber: surahNumber)
+          ],
         ),
         body: BlocBuilder<DetailSurahBloc, DetailSurahState>(
           builder: (context, state) {

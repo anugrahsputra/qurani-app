@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:mockito/annotations.dart';
 import 'package:qurani/core/core.dart';
@@ -7,8 +8,11 @@ import 'package:qurani/features/surah/surah.dart';
 export 'mock.mocks.dart';
 
 @GenerateNiceMocks([
-  /* Network */
+  /* External */
   MockSpec<Dio>(),
+  MockSpec<AudioPlayer>(),
+  /* Core */
+  MockSpec<AudioPlayerManager>(),
   MockSpec<DioClient>(),
   MockSpec<CustomInterceptor>(),
   MockSpec<RequestRetrier>(),
@@ -21,6 +25,7 @@ export 'mock.mocks.dart';
   /* Domain/Usecase */
   MockSpec<GetSurahDetailUseCase>(),
   MockSpec<GetSurahsUseCase>(),
+  MockSpec<GetSurahAudioUsecase>(),
   /* Bloc */
   MockSpec<SurahBloc>(),
 ])

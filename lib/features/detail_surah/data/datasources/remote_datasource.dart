@@ -3,6 +3,7 @@ import '../models/models.dart';
 
 abstract class DetailSurahRemoteDataSource {
   Future<SurahDetailResModel> getDetailSurah(int surahNumber);
+  Future<AudioFileModel> getFullAudio(int surahNumber);
 }
 
 class DetailSurahRemoteDataSourceImpl implements DetailSurahRemoteDataSource {
@@ -16,5 +17,15 @@ class DetailSurahRemoteDataSourceImpl implements DetailSurahRemoteDataSource {
     final parsedData =
         response.data is String ? Parser.getMap(response.data) : response.data;
     return SurahDetailResModel.fromJson(parsedData);
+  }
+
+  @override
+  Future<AudioFileModel> getFullAudio(int surahNumber) async {
+    final response =
+        await dioClient.get('${Endpoint.recitalSurah}$surahNumber');
+    final parsedData = response.data['audio_file'] is String
+        ? Parser.getMap(response.data['audio_file'])
+        : response.data['audio_file'];
+    return AudioFileModel.fromJson(parsedData);
   }
 }

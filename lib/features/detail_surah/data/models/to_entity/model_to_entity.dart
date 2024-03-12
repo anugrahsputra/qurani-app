@@ -161,3 +161,15 @@ extension NumberModelX on NumberModel {
     );
   }
 }
+
+extension AudioFileModelX on AudioFileModel {
+  AudioFile toEntity() {
+    return AudioFile(
+      id: id,
+      chapterId: chapterId,
+      fileSize: fileSize,
+      format: format,
+      audioUrl: audioUrl,
+    );
+  }
+}

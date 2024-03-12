@@ -26,6 +26,10 @@ class _HomepageState extends State<Homepage> {
     surahBloc.add(const OnGetSurah());
   }
 
+  Future<void> pullToRefresh() async {
+    surahBloc.add(const OnGetSurah());
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -34,10 +38,13 @@ class _HomepageState extends State<Homepage> {
         appBar: AppBar(
           title: const Text('Qurani'),
         ),
-        body: Column(
-          children: [
-            SurahCards(),
-          ],
+        body: RefreshIndicator(
+          onRefresh: pullToRefresh,
+          child: Column(
+            children: [
+              SurahCards(),
+            ],
+          ),
         ),
       ),
     );

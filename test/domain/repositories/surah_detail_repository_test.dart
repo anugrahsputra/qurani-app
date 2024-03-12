@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:qurani/core/core.dart';
 import 'package:qurani/features/detail_surah/detail_surah.dart';
 
+import '../../dummy_data/audio_file_dummy.dart';
 import '../../dummy_data/surah_detaiLdummy.dart';
 import '../../helper/mock.dart';
 
@@ -80,6 +81,70 @@ void main() {
 
       expect(result, const Left(UnknownFailure(message: 'Unknown Error')));
       verify(detailSurahRemoteDataSource.getDetailSurah(1));
+    });
+  });
+
+  group('getFullAudio', () {
+    test(
+        'should return SurahAudioResEntity when the call to remote data source is successful',
+        () async {
+      when(detailSurahRemoteDataSource.getFullAudio(any))
+          .thenAnswer((_) async => tAudioFileModel);
+
+      final result = await surahDetailRepository.getFullAudio(1);
+
+      verify(detailSurahRemoteDataSource.getFullAudio(1));
+      final resultData = result.getOrElse(() => tAudioFileModel.toEntity());
+      expect(resultData, tAudioFileModel.toEntity());
+    });
+
+    test(
+        'should return ServerFailure when the call to remote data source is unsuccessful',
+        () async {
+      when(detailSurahRemoteDataSource.getFullAudio(any))
+          .thenThrow(ServerException());
+
+      final result = await surahDetailRepository.getFullAudio(1);
+
+      expect(result, const Left(ServerFailure(message: 'server failure')));
+      verify(detailSurahRemoteDataSource.getFullAudio(1));
+    });
+
+    test(
+        'should return NetworkFailure when the call to remote data source is unsuccessful',
+        () async {
+      when(detailSurahRemoteDataSource.getFullAudio(any))
+          .thenThrow(NetworkException());
+
+      final result = await surahDetailRepository.getFullAudio(1);
+
+      expect(result,
+          const Left(NetworkFailure(message: 'No Internet Connection')));
+      verify(detailSurahRemoteDataSource.getFullAudio(1));
+    });
+
+    test(
+        'should return RequestFailure when the call to remote data source is unsuccessful',
+        () async {
+      when(detailSurahRemoteDataSource.getFullAudio(any))
+          .thenThrow(NotFoundException());
+
+      final result = await surahDetailRepository.getFullAudio(1);
+
+      expect(result, const Left(RequestFailure(message: 'Not Found')));
+      verify(detailSurahRemoteDataSource.getFullAudio(1));
+    });
+
+    test(
+        'should return UnknownFailure when the call to remote data source is unsuccessfull',
+        () async {
+      when(detailSurahRemoteDataSource.getFullAudio(any))
+          .thenThrow(UnknownException());
+
+      final result = await surahDetailRepository.getFullAudio(1);
+
+      expect(result, const Left(UnknownFailure(message: 'Unknown Error')));
+      verify(detailSurahRemoteDataSource.getFullAudio(1));
     });
   });
 }

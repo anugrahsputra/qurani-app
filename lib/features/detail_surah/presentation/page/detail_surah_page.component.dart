@@ -114,7 +114,7 @@ class Verses extends StatelessWidget {
   }
 }
 
-class SurahContent extends StatelessWidget {
+class SurahContent extends StatefulWidget {
   const SurahContent({
     super.key,
     required this.verse,
@@ -122,6 +122,11 @@ class SurahContent extends StatelessWidget {
 
   final Verse verse;
 
+  @override
+  State<SurahContent> createState() => _SurahContentState();
+}
+
+class _SurahContentState extends State<SurahContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -143,7 +148,7 @@ class SurahContent extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  '${verse.number!.inSurah}.',
+                  '${widget.verse.number!.inSurah}.',
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -151,13 +156,9 @@ class SurahContent extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.play_arrow,
-                    color: Colors.black,
-                    size: 25,
-                  ),
+                PlayButton(
+                  verseNumber: widget.verse.number!.inQuran.toString(),
+                  audioSource: widget.verse.audio!.primary!,
                 ),
                 IconButton(
                   onPressed: () {},
@@ -182,7 +183,7 @@ class SurahContent extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              verse.text!.arab ?? 'Error',
+              widget.verse.text!.arab ?? 'Error',
               style: GoogleFonts.amiri(
                 height: 2.5,
                 fontWeight: FontWeight.bold,
@@ -195,7 +196,7 @@ class SurahContent extends StatelessWidget {
           ),
           const Gap(10),
           Text(
-            verse.translation!.id ?? 'Error',
+            widget.verse.translation!.id ?? 'Error',
             style: const TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 15,
@@ -205,6 +206,137 @@ class SurahContent extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class PlayButton extends StatefulWidget {
+  const PlayButton({
+    super.key,
+    required this.verseNumber,
+    required this.audioSource,
+  });
+
+  final String verseNumber;
+  final String audioSource;
+
+  @override
+  State<PlayButton> createState() => _PlayButtonState();
+}
+
+class _PlayButtonState extends State<PlayButton> {
+  final cubit = sl<VerseAudioCubit>();
+  @override
+  void initState() {
+    cubit.audioPlayerManager.verseAudio(widget.verseNumber);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<VerseAudioCubit>();
+    return BlocBuilder<VerseAudioCubit, VerseAudioState>(
+      builder: (context, state) {
+        if (state is VersePlaying && state.verseNumber == widget.verseNumber) {
+          return IconButton(
+            onPressed: () {
+              cubit.stopVerse();
+            },
+            icon: const Icon(
+              Icons.stop,
+              color: Colors.black,
+              size: 25,
+            ),
+          );
+        } else {
+          return IconButton(
+            onPressed: () {
+              cubit.playVerse(widget.verseNumber, widget.audioSource);
+            },
+            icon: const Icon(
+              Icons.play_arrow,
+              color: Colors.black,
+              size: 25,
+            ),
+          );
+        }
+      },
+    );
+  }
+}
+
+class PlayAllButton extends StatelessWidget {
+  const PlayAllButton({
+    super.key,
+    required this.verseAudioCubit,
+    required this.surahNumber,
+  });
+
+  final VerseAudioCubit verseAudioCubit;
+  final int surahNumber;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<VerseAudioCubit, VerseAudioState>(
+      builder: (context, state) {
+        if (state is VersePlayingAll) {
+          return IconButton(
+            onPressed: () {
+              verseAudioCubit.stopVerse();
+            },
+            icon: const Icon(Icons.stop),
+          );
+        } else if (state is VerseStopped) {
+          return IconButton(
+            onPressed: () {
+              verseAudioCubit.playAllVerse(surahNumber);
+            },
+            icon: const Icon(Icons.play_arrow),
+          );
+        } else {
+          return IconButton(
+            onPressed: () {
+              verseAudioCubit.playAllVerse(surahNumber);
+            },
+            icon: const Icon(Icons.play_arrow),
+          );
+        }
+      },
+    );
+  }
+}
+
+class DetailTitle extends StatelessWidget {
+  const DetailTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DetailSurahBloc, DetailSurahState>(
+      builder: (context, state) {
+        if (state is DetailSurahLoaded) {
+          SurahDetail surahDetail = state.detailSurah;
+          return Row(
+            children: [
+              Text(
+                '${surahDetail.number}. ',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                surahDetail.name!.transliteration!.id ?? 'Error',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          );
+        } else {
+          return const Text('Detail Surah');
+        }
+      },
     );
   }
 }

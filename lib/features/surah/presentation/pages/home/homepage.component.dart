@@ -33,7 +33,7 @@ class SurahCards extends StatelessWidget {
           );
         } else {
           return const Center(
-            child: Text('bruh'),
+            child: Text('Something went wrong, try again'),
           );
         }
       },

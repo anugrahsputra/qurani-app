@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -12,7 +13,6 @@ Future<void> setup() async {
   sl.registerFactory<Dio>(
     () => Dio(
       BaseOptions(
-        baseUrl: Endpoint.baseUrl,
         connectTimeout: const Duration(seconds: 35),
         receiveTimeout: const Duration(seconds: 35),
         sendTimeout: const Duration(seconds: 35),
@@ -23,15 +23,19 @@ Future<void> setup() async {
   sl.registerFactory<Dio>(
     () => Dio(
       BaseOptions(
-        baseUrl: Endpoint.baseUrl,
         connectTimeout: const Duration(seconds: 35),
         receiveTimeout: const Duration(seconds: 35),
         sendTimeout: const Duration(seconds: 35),
       ),
     )..interceptors.add(CustomInterceptor()),
   );
+  /* -----------------> External <-----------------*/
+  sl.registerFactory<AudioPlayer>(() => AudioPlayer());
+  /* -----------------> Core <-----------------*/
   sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
   sl.registerFactory<AppNavigator>(() => AppNavigator());
+  sl.registerFactory<AudioPlayerManager>(
+      () => AudioPlayerManagerImpl(audioPlayers: {}));
 
   /* -----------------> Data <-----------------*/
   sl.registerLazySingleton<SurahRemoteDataSource>(
@@ -56,14 +60,27 @@ Future<void> setup() async {
     () => GetSurahsUseCase(sl<BaseSurahRepository>()),
   );
 
-  sl.registerLazySingleton<GetSurahDetailUseCase>(() => GetSurahDetailUseCase(
-        repository: sl<SurahDetailRepository>(),
-      ));
+  sl.registerLazySingleton<GetSurahDetailUseCase>(
+    () => GetSurahDetailUseCase(
+      repository: sl<SurahDetailRepository>(),
+    ),
+  );
+  sl.registerLazySingleton<GetSurahAudioUsecase>(
+    () => GetSurahAudioUsecase(sl<SurahDetailRepository>()),
+  );
   /* -----------------> Bloc <-----------------*/
   sl.registerFactory<SurahBloc>(
     () => SurahBloc(getSurahsUseCase: sl<GetSurahsUseCase>()),
   );
   sl.registerFactory<DetailSurahBloc>(
     () => DetailSurahBloc(getSurahDetailUsecase: sl<GetSurahDetailUseCase>()),
+  );
+  /* -----------------> Cubit <-----------------*/
+  sl.registerFactory<VerseAudioCubit>(
+    () => VerseAudioCubit(
+      audioPlayerManager: sl<AudioPlayerManager>(),
+      player: sl<AudioPlayer>(),
+      getSurahAudioUsecase: sl<GetSurahAudioUsecase>(),
+    ),
   );
 }
