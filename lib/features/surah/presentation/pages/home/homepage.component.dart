@@ -51,6 +51,7 @@ class CardView extends StatelessWidget {
     String translation = surah.name.short;
     String numberOfVerses = surah.numberOfVerses.toString();
     String revelationType = surah.revelation.id;
+    String surahNumber = surah.number.toArabicDigits();
 
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -64,21 +65,23 @@ class CardView extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 40,
+          SizedBox(
             height: 40,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.deepPurple,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
+            // decoration: BoxDecoration(
+            //   border: Border.all(
+            //     color: Colors.deepPurple,
+            //   ),
+            //   borderRadius: BorderRadius.circular(10),
+            // ),
             child: Center(
               child: Text(
-                surah.number.toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
+                '﴾$surahNumber﴿',
+                style: GoogleFonts.amiriQuran(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                  color: Colors.black,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),
