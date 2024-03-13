@@ -53,10 +53,6 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
         appBar: AppBar(
           titleSpacing: 0.0,
           title: const DetailTitle(),
-          actions: [
-            PlayAllButton(
-                verseAudioCubit: verseAudioCubit, surahNumber: surahNumber)
-          ],
         ),
         body: BlocBuilder<DetailSurahBloc, DetailSurahState>(
           builder: (context, state) {
@@ -64,11 +60,16 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
               SurahDetail surahDetail = state.detailSurah;
               List<Verse> verses = surahDetail.verses!;
               return SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    DetailHeader(surahDetail: surahDetail),
+                    DetailHeader(
+                      surahDetail: surahDetail,
+                      verseAudioCubit: verseAudioCubit,
+                    ),
                     OpeningBismillah(surahDetail: surahDetail),
                     Verses(verses: verses),
+                    const Gap(20),
                   ],
                 ),
               );
