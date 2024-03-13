@@ -1,9 +1,11 @@
 part of 'detail_surah_page.dart';
 
 class DetailHeader extends StatelessWidget {
-  const DetailHeader({super.key, required this.surahDetail});
+  const DetailHeader(
+      {super.key, required this.surahDetail, required this.verseAudioCubit});
 
   final SurahDetail surahDetail;
+  final VerseAudioCubit verseAudioCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -11,16 +13,17 @@ class DetailHeader extends StatelessWidget {
       width: double.infinity,
       height: 120,
       margin: const EdgeInsets.symmetric(
-        horizontal: 10,
+        horizontal: 5,
         vertical: 5,
       ),
       padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
       decoration: BoxDecoration(
-        color: Colors.deepPurple[100],
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,6 +62,21 @@ class DetailHeader extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          const Spacer(),
+          Container(
+            width: 120,
+            height: 120,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(PngPath.ornaments),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: PlayAllButton(
+              verseAudioCubit: verseAudioCubit,
+              surahNumber: surahDetail.number!.toInt(),
+            ),
           ),
         ],
       ),
@@ -129,6 +147,10 @@ class SurahContent extends StatefulWidget {
 class _SurahContentState extends State<SurahContent> {
   @override
   Widget build(BuildContext context) {
+    String numberInSurah = '${widget.verse.number!.inSurah?.toArabicDigits()}';
+    String verseText = widget.verse.text!.arab ?? 'Error';
+    String translation = widget.verse.translation!.id ?? 'Error';
+    String ayah = '$verseText ﴿$numberInSurah﴾';
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 10,
@@ -140,9 +162,8 @@ class _SurahContentState extends State<SurahContent> {
         children: [
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
-              color: Colors.deepPurple[100],
+              // color: Colors.deepPurple[100],
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -180,23 +201,32 @@ class _SurahContentState extends State<SurahContent> {
             ),
           ),
           const Gap(10),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              widget.verse.text!.arab ?? 'Error',
-              style: GoogleFonts.amiri(
-                height: 2.5,
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: Colors.black,
-              ),
-              textDirection: TextDirection.rtl,
-              textAlign: TextAlign.start,
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    ayah,
+                    style: GoogleFonts.amiri(
+                      height: 2.5,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: Colors.black,
+                    ),
+                    textDirection: TextDirection.rtl,
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+              ],
             ),
           ),
           const Gap(10),
           Text(
-            widget.verse.translation!.id ?? 'Error',
+            translation,
             style: const TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 15,
@@ -284,21 +314,21 @@ class PlayAllButton extends StatelessWidget {
             onPressed: () {
               verseAudioCubit.stopVerse();
             },
-            icon: const Icon(Icons.stop),
+            icon: const Icon(Icons.stop_circle_rounded, size: 50),
           );
         } else if (state is VerseStopped) {
           return IconButton(
             onPressed: () {
               verseAudioCubit.playAllVerse(surahNumber);
             },
-            icon: const Icon(Icons.play_arrow),
+            icon: const Icon(Icons.play_circle_rounded, size: 50),
           );
         } else {
           return IconButton(
             onPressed: () {
               verseAudioCubit.playAllVerse(surahNumber);
             },
-            icon: const Icon(Icons.play_arrow),
+            icon: const Icon(Icons.play_circle_rounded, size: 50),
           );
         }
       },
