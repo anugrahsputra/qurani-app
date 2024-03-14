@@ -1939,15 +1939,6 @@ class MockCustomInterceptor extends _i1.Mock implements _i11.CustomInterceptor {
       );
 
   @override
-  void clearCache() => super.noSuchMethod(
-        Invocation.method(
-          #clearCache,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
   bool isBadRequest(_i10.DioException? err) => (super.noSuchMethod(
         Invocation.method(
           #isBadRequest,
