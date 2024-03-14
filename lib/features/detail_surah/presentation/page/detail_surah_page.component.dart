@@ -107,7 +107,7 @@ class OpeningBismillah extends StatelessWidget {
               ),
             ),
           )
-        : const SizedBox();
+        : const SizedBox.shrink();
   }
 }
 
@@ -176,9 +176,15 @@ class _SurahContentState extends State<SurahContent> {
                     color: Colors.black,
                   ),
                 ),
-                const Spacer(),
+                const Gap(15),
+                Expanded(
+                  child: AudioSlider(
+                    verseNumber: widget.verse.number!.inSurah.toString(),
+                    audioSource: widget.verse.audio!.primary!,
+                  ),
+                ),
                 PlayButton(
-                  verseNumber: widget.verse.number!.inQuran.toString(),
+                  verseNumber: widget.verse.number!.inSurah.toString(),
                   audioSource: widget.verse.audio!.primary!,
                 ),
                 IconButton(
@@ -365,6 +371,74 @@ class DetailTitle extends StatelessWidget {
           );
         } else {
           return const Text('Detail Surah');
+        }
+      },
+    );
+  }
+}
+
+class AudioSlider extends StatefulWidget {
+  final String verseNumber;
+  final String audioSource;
+
+  const AudioSlider(
+      {super.key, required this.verseNumber, required this.audioSource});
+
+  @override
+  State<AudioSlider> createState() => _AudioSliderState();
+}
+
+class _AudioSliderState extends State<AudioSlider> {
+  final cubit = sl<VerseAudioCubit>();
+
+  @override
+  void initState() {
+    cubit.audioPlayerManager.verseAudio(widget.verseNumber);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<VerseAudioCubit, VerseAudioState>(
+      builder: (context, state) {
+        if (state is VersePlaying && state.verseNumber == widget.verseNumber) {
+          final position = state.position.inSeconds.toDouble();
+          final duration = state.duration.inSeconds.toDouble();
+          final value = position / duration;
+
+          return Container(
+            height: 2,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2.5),
+              color: AppColors.primary,
+            ),
+            child: LinearProgressIndicator(
+              value: value,
+              backgroundColor: AppColors.primaryContainer,
+              borderRadius: BorderRadius.circular(2.5),
+            ),
+          );
+        } else if (state is VerseLoading &&
+            state.verseNumber == widget.verseNumber) {
+          return Container(
+            height: 2,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2.5),
+              color: AppColors.primary,
+            ),
+            child: LinearProgressIndicator(
+              backgroundColor: AppColors.primaryContainer,
+              borderRadius: BorderRadius.circular(2.5),
+            ),
+          );
+        } else {
+          return Container(
+            height: 2,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2.5),
+              color: AppColors.primary,
+            ),
+          );
         }
       },
     );

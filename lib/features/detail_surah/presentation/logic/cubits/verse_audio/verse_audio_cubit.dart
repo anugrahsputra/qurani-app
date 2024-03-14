@@ -25,24 +25,35 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
     required this.audioPlayerManager,
     required this.player,
     required this.getSurahAudioUsecase,
-  }) : super(const VerseInitial()) {
-    player?.onPlayerComplete.listen((event) {
-      stopVerse();
-    });
-  }
+  }) : super(const VerseInitial());
 
   Future<void> playVerse(
     String verseNumber,
     String audioSource,
   ) async {
     try {
-      emit(const VerseLoading());
-      log.info('before stopAllExcept');
+      emit(VerseLoading(verseNumber));
       audioPlayerManager.stopAllExcept(verseNumber);
-      log.info('after stopAllExcept');
-      emit(VersePlaying(verseNumber));
+      emit(VersePlaying(verseNumber, Duration.zero, Duration.zero));
+      Duration? duration;
+      player?.onDurationChanged.listen((newDuration) {
+        duration = newDuration;
+        emit(VersePlaying(
+          verseNumber,
+          Duration.zero,
+          duration!,
+        ));
+      });
+      player?.onPositionChanged.listen((position) {
+        if (duration != null) {
+          emit(VersePlaying(verseNumber, position, duration!));
+        }
+      });
       await player?.play(UrlSource(audioSource));
       player?.state = PlayerState.playing;
+      player?.onPlayerComplete.listen((event) {
+        stopVerse();
+      });
     } catch (e) {
       emit(const VerseStopped());
       stopVerse();
@@ -52,17 +63,38 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
   Future<void> playAllVerse(
     int surahNumber,
   ) async {
-    emit(const VerseLoading());
+    emit(VerseLoading(surahNumber.toString()));
     final result = await getSurahAudioUsecase(surahNumber);
     result.fold((l) {
       emit(const VerseStopped());
       stopVerse();
     }, (r) {
       audioPlayerManager.stopAllExcept(surahNumber.toString());
-      log.info('after stopAllExcept');
-      emit(VersePlayingAll(r.chapterId.toString()));
-      player?.play(UrlSource(r.audioUrl));
+
+      emit(VersePlayingAll(
+        surahNumber.toString(),
+        Duration.zero,
+        Duration.zero,
+      ));
+      Duration? duration;
+      player?.onDurationChanged.listen((newDuration) {
+        duration = newDuration;
+        emit(VersePlayingAll(
+          surahNumber.toString(),
+          Duration.zero,
+          duration!,
+        ));
+      });
+      player?.onPositionChanged.listen((position) {
+        if (duration != null) {
+          emit(VersePlayingAll(surahNumber.toString(), position, duration!));
+        }
+      });
+      player?.play(UrlSource(r.audioUrl), position: Duration.zero);
       player?.state = PlayerState.playing;
+      player?.onPlayerComplete.listen((event) {
+        stopVerse();
+      });
     });
   }
 

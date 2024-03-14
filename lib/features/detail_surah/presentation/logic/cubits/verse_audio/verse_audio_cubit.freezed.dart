@@ -19,9 +19,13 @@ mixin _$VerseAudioState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String verseNumber) playing,
-    required TResult Function(String surahNumber) playingAll,
+    required TResult Function(String verseNumber) loading,
+    required TResult Function(
+            String verseNumber, Duration position, Duration duration)
+        playing,
+    required TResult Function(
+            String surahNumber, Duration position, Duration duration)
+        playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) =>
@@ -29,9 +33,11 @@ mixin _$VerseAudioState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String verseNumber)? playing,
-    TResult? Function(String surahNumber)? playingAll,
+    TResult? Function(String verseNumber)? loading,
+    TResult? Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult? Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) =>
@@ -39,9 +45,11 @@ mixin _$VerseAudioState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String verseNumber)? playing,
-    TResult Function(String surahNumber)? playingAll,
+    TResult Function(String verseNumber)? loading,
+    TResult Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
@@ -137,9 +145,13 @@ class _$VerseInitialImpl implements VerseInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String verseNumber) playing,
-    required TResult Function(String surahNumber) playingAll,
+    required TResult Function(String verseNumber) loading,
+    required TResult Function(
+            String verseNumber, Duration position, Duration duration)
+        playing,
+    required TResult Function(
+            String surahNumber, Duration position, Duration duration)
+        playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
@@ -150,9 +162,11 @@ class _$VerseInitialImpl implements VerseInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String verseNumber)? playing,
-    TResult? Function(String surahNumber)? playingAll,
+    TResult? Function(String verseNumber)? loading,
+    TResult? Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult? Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
@@ -163,9 +177,11 @@ class _$VerseInitialImpl implements VerseInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String verseNumber)? playing,
-    TResult Function(String surahNumber)? playingAll,
+    TResult Function(String verseNumber)? loading,
+    TResult Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
@@ -229,6 +245,8 @@ abstract class _$$VerseLoadingImplCopyWith<$Res> {
   factory _$$VerseLoadingImplCopyWith(
           _$VerseLoadingImpl value, $Res Function(_$VerseLoadingImpl) then) =
       __$$VerseLoadingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String verseNumber});
 }
 
 /// @nodoc
@@ -238,66 +256,99 @@ class __$$VerseLoadingImplCopyWithImpl<$Res>
   __$$VerseLoadingImplCopyWithImpl(
       _$VerseLoadingImpl _value, $Res Function(_$VerseLoadingImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? verseNumber = null,
+  }) {
+    return _then(_$VerseLoadingImpl(
+      null == verseNumber
+          ? _value.verseNumber
+          : verseNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$VerseLoadingImpl implements VerseLoading {
-  const _$VerseLoadingImpl();
+  const _$VerseLoadingImpl(this.verseNumber);
+
+  @override
+  final String verseNumber;
 
   @override
   String toString() {
-    return 'VerseAudioState.loading()';
+    return 'VerseAudioState.loading(verseNumber: $verseNumber)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$VerseLoadingImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$VerseLoadingImpl &&
+            (identical(other.verseNumber, verseNumber) ||
+                other.verseNumber == verseNumber));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, verseNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$VerseLoadingImplCopyWith<_$VerseLoadingImpl> get copyWith =>
+      __$$VerseLoadingImplCopyWithImpl<_$VerseLoadingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String verseNumber) playing,
-    required TResult Function(String surahNumber) playingAll,
+    required TResult Function(String verseNumber) loading,
+    required TResult Function(
+            String verseNumber, Duration position, Duration duration)
+        playing,
+    required TResult Function(
+            String surahNumber, Duration position, Duration duration)
+        playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
-    return loading();
+    return loading(verseNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String verseNumber)? playing,
-    TResult? Function(String surahNumber)? playingAll,
+    TResult? Function(String verseNumber)? loading,
+    TResult? Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult? Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
-    return loading?.call();
+    return loading?.call(verseNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String verseNumber)? playing,
-    TResult Function(String surahNumber)? playingAll,
+    TResult Function(String verseNumber)? loading,
+    TResult Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(verseNumber);
     }
     return orElse();
   }
@@ -347,7 +398,12 @@ class _$VerseLoadingImpl implements VerseLoading {
 }
 
 abstract class VerseLoading implements VerseAudioState {
-  const factory VerseLoading() = _$VerseLoadingImpl;
+  const factory VerseLoading(final String verseNumber) = _$VerseLoadingImpl;
+
+  String get verseNumber;
+  @JsonKey(ignore: true)
+  _$$VerseLoadingImplCopyWith<_$VerseLoadingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -356,7 +412,7 @@ abstract class _$$VersePlayingImplCopyWith<$Res> {
           _$VersePlayingImpl value, $Res Function(_$VersePlayingImpl) then) =
       __$$VersePlayingImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String verseNumber});
+  $Res call({String verseNumber, Duration position, Duration duration});
 }
 
 /// @nodoc
@@ -371,12 +427,22 @@ class __$$VersePlayingImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? verseNumber = null,
+    Object? position = null,
+    Object? duration = null,
   }) {
     return _then(_$VersePlayingImpl(
       null == verseNumber
           ? _value.verseNumber
           : verseNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
     ));
   }
 }
@@ -384,14 +450,18 @@ class __$$VersePlayingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$VersePlayingImpl implements VersePlaying {
-  const _$VersePlayingImpl(this.verseNumber);
+  const _$VersePlayingImpl(this.verseNumber, this.position, this.duration);
 
   @override
   final String verseNumber;
+  @override
+  final Duration position;
+  @override
+  final Duration duration;
 
   @override
   String toString() {
-    return 'VerseAudioState.playing(verseNumber: $verseNumber)';
+    return 'VerseAudioState.playing(verseNumber: $verseNumber, position: $position, duration: $duration)';
   }
 
   @override
@@ -400,11 +470,15 @@ class _$VersePlayingImpl implements VersePlaying {
         (other.runtimeType == runtimeType &&
             other is _$VersePlayingImpl &&
             (identical(other.verseNumber, verseNumber) ||
-                other.verseNumber == verseNumber));
+                other.verseNumber == verseNumber) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, verseNumber);
+  int get hashCode => Object.hash(runtimeType, verseNumber, position, duration);
 
   @JsonKey(ignore: true)
   @override
@@ -416,41 +490,49 @@ class _$VersePlayingImpl implements VersePlaying {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String verseNumber) playing,
-    required TResult Function(String surahNumber) playingAll,
+    required TResult Function(String verseNumber) loading,
+    required TResult Function(
+            String verseNumber, Duration position, Duration duration)
+        playing,
+    required TResult Function(
+            String surahNumber, Duration position, Duration duration)
+        playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
-    return playing(verseNumber);
+    return playing(verseNumber, position, duration);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String verseNumber)? playing,
-    TResult? Function(String surahNumber)? playingAll,
+    TResult? Function(String verseNumber)? loading,
+    TResult? Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult? Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
-    return playing?.call(verseNumber);
+    return playing?.call(verseNumber, position, duration);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String verseNumber)? playing,
-    TResult Function(String surahNumber)? playingAll,
+    TResult Function(String verseNumber)? loading,
+    TResult Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
   }) {
     if (playing != null) {
-      return playing(verseNumber);
+      return playing(verseNumber, position, duration);
     }
     return orElse();
   }
@@ -500,9 +582,12 @@ class _$VersePlayingImpl implements VersePlaying {
 }
 
 abstract class VersePlaying implements VerseAudioState {
-  const factory VersePlaying(final String verseNumber) = _$VersePlayingImpl;
+  const factory VersePlaying(final String verseNumber, final Duration position,
+      final Duration duration) = _$VersePlayingImpl;
 
   String get verseNumber;
+  Duration get position;
+  Duration get duration;
   @JsonKey(ignore: true)
   _$$VersePlayingImplCopyWith<_$VersePlayingImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -514,7 +599,7 @@ abstract class _$$VersePlayingAllImplCopyWith<$Res> {
           $Res Function(_$VersePlayingAllImpl) then) =
       __$$VersePlayingAllImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String surahNumber});
+  $Res call({String surahNumber, Duration position, Duration duration});
 }
 
 /// @nodoc
@@ -529,12 +614,22 @@ class __$$VersePlayingAllImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? surahNumber = null,
+    Object? position = null,
+    Object? duration = null,
   }) {
     return _then(_$VersePlayingAllImpl(
       null == surahNumber
           ? _value.surahNumber
           : surahNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      null == position
+          ? _value.position
+          : position // ignore: cast_nullable_to_non_nullable
+              as Duration,
+      null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
     ));
   }
 }
@@ -542,14 +637,18 @@ class __$$VersePlayingAllImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$VersePlayingAllImpl implements VersePlayingAll {
-  const _$VersePlayingAllImpl(this.surahNumber);
+  const _$VersePlayingAllImpl(this.surahNumber, this.position, this.duration);
 
   @override
   final String surahNumber;
+  @override
+  final Duration position;
+  @override
+  final Duration duration;
 
   @override
   String toString() {
-    return 'VerseAudioState.playingAll(surahNumber: $surahNumber)';
+    return 'VerseAudioState.playingAll(surahNumber: $surahNumber, position: $position, duration: $duration)';
   }
 
   @override
@@ -558,11 +657,15 @@ class _$VersePlayingAllImpl implements VersePlayingAll {
         (other.runtimeType == runtimeType &&
             other is _$VersePlayingAllImpl &&
             (identical(other.surahNumber, surahNumber) ||
-                other.surahNumber == surahNumber));
+                other.surahNumber == surahNumber) &&
+            (identical(other.position, position) ||
+                other.position == position) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, surahNumber);
+  int get hashCode => Object.hash(runtimeType, surahNumber, position, duration);
 
   @JsonKey(ignore: true)
   @override
@@ -575,41 +678,49 @@ class _$VersePlayingAllImpl implements VersePlayingAll {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String verseNumber) playing,
-    required TResult Function(String surahNumber) playingAll,
+    required TResult Function(String verseNumber) loading,
+    required TResult Function(
+            String verseNumber, Duration position, Duration duration)
+        playing,
+    required TResult Function(
+            String surahNumber, Duration position, Duration duration)
+        playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
-    return playingAll(surahNumber);
+    return playingAll(surahNumber, position, duration);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String verseNumber)? playing,
-    TResult? Function(String surahNumber)? playingAll,
+    TResult? Function(String verseNumber)? loading,
+    TResult? Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult? Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
-    return playingAll?.call(surahNumber);
+    return playingAll?.call(surahNumber, position, duration);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String verseNumber)? playing,
-    TResult Function(String surahNumber)? playingAll,
+    TResult Function(String verseNumber)? loading,
+    TResult Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
   }) {
     if (playingAll != null) {
-      return playingAll(surahNumber);
+      return playingAll(surahNumber, position, duration);
     }
     return orElse();
   }
@@ -659,10 +770,12 @@ class _$VersePlayingAllImpl implements VersePlayingAll {
 }
 
 abstract class VersePlayingAll implements VerseAudioState {
-  const factory VersePlayingAll(final String surahNumber) =
-      _$VersePlayingAllImpl;
+  const factory VersePlayingAll(final String surahNumber,
+      final Duration position, final Duration duration) = _$VersePlayingAllImpl;
 
   String get surahNumber;
+  Duration get position;
+  Duration get duration;
   @JsonKey(ignore: true)
   _$$VersePlayingAllImplCopyWith<_$VersePlayingAllImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -707,9 +820,13 @@ class _$VerseStoppedImpl implements VerseStopped {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String verseNumber) playing,
-    required TResult Function(String surahNumber) playingAll,
+    required TResult Function(String verseNumber) loading,
+    required TResult Function(
+            String verseNumber, Duration position, Duration duration)
+        playing,
+    required TResult Function(
+            String surahNumber, Duration position, Duration duration)
+        playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
@@ -720,9 +837,11 @@ class _$VerseStoppedImpl implements VerseStopped {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String verseNumber)? playing,
-    TResult? Function(String surahNumber)? playingAll,
+    TResult? Function(String verseNumber)? loading,
+    TResult? Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult? Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
@@ -733,9 +852,11 @@ class _$VerseStoppedImpl implements VerseStopped {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String verseNumber)? playing,
-    TResult Function(String surahNumber)? playingAll,
+    TResult Function(String verseNumber)? loading,
+    TResult Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),
@@ -833,9 +954,13 @@ class _$VersePausedImpl implements VersePaused {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String verseNumber) playing,
-    required TResult Function(String surahNumber) playingAll,
+    required TResult Function(String verseNumber) loading,
+    required TResult Function(
+            String verseNumber, Duration position, Duration duration)
+        playing,
+    required TResult Function(
+            String surahNumber, Duration position, Duration duration)
+        playingAll,
     required TResult Function() stopped,
     required TResult Function() paused,
   }) {
@@ -846,9 +971,11 @@ class _$VersePausedImpl implements VersePaused {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String verseNumber)? playing,
-    TResult? Function(String surahNumber)? playingAll,
+    TResult? Function(String verseNumber)? loading,
+    TResult? Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult? Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult? Function()? stopped,
     TResult? Function()? paused,
   }) {
@@ -859,9 +986,11 @@ class _$VersePausedImpl implements VersePaused {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String verseNumber)? playing,
-    TResult Function(String surahNumber)? playingAll,
+    TResult Function(String verseNumber)? loading,
+    TResult Function(String verseNumber, Duration position, Duration duration)?
+        playing,
+    TResult Function(String surahNumber, Duration position, Duration duration)?
+        playingAll,
     TResult Function()? stopped,
     TResult Function()? paused,
     required TResult orElse(),

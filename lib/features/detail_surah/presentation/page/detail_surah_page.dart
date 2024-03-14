@@ -28,7 +28,6 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
   @override
   void initState() {
     detailSurahBloc.add(OnGetDetail(surahNumber));
-
     super.initState();
   }
 
@@ -46,6 +45,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
           create: (context) => detailSurahBloc,
         ),
         BlocProvider(
+          lazy: false,
           create: (context) => verseAudioCubit,
         ),
       ],
