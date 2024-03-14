@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/core.dart';
@@ -27,7 +28,20 @@ Future<void> setup() async {
         receiveTimeout: const Duration(seconds: 35),
         sendTimeout: const Duration(seconds: 35),
       ),
-    )..interceptors.add(CustomInterceptor()),
+    )..interceptors.addAll([
+        CustomInterceptor(),
+        DioCacheInterceptor(
+          options: CacheOptions(
+            store: MemCacheStore(
+              maxSize: 1024 * 1024 * 100, // 100MB
+              maxEntrySize: 1024 * 1024 * 10, // 10MB
+            ),
+            policy: CachePolicy.request,
+            maxStale: const Duration(days: 7),
+            hitCacheOnErrorExcept: [500, 404],
+          ),
+        ),
+      ]),
   );
   /* -----------------> External <-----------------*/
   sl.registerFactory<AudioPlayer>(() => AudioPlayer());
