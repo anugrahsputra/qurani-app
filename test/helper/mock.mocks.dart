@@ -28,7 +28,7 @@ import 'package:qurani/features/detail_surah/data/models/models.dart' as _i14;
 import 'package:qurani/features/detail_surah/domain/domain.dart' as _i16;
 import 'package:qurani/features/surah/data/data.dart' as _i13;
 import 'package:qurani/features/surah/domain/domain.dart' as _i17;
-import 'package:qurani/features/surah/presentation/logic/blocs/surahs/surah_bloc.dart'
+import 'package:qurani/features/surah/logic/blocs/surahs/surah_bloc.dart'
     as _i18;
 
 // ignore_for_file: type=lint
