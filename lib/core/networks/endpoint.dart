@@ -5,4 +5,5 @@ abstract class Endpoint {
   static String get recitalSurah => "${_audioBaseUrl}chapter_recitations/7/";
 
   static String get surah => "${_quranBaseUrl}surah";
+  static String get ayah => "${_quranBaseUrl}surah";
 }
