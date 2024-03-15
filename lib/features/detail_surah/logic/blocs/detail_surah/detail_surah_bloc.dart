@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../domain/domain.dart';
+import '../../../domain/domain.dart';
 
 part 'detail_surah_bloc.freezed.dart';
 part 'detail_surah_event.dart';

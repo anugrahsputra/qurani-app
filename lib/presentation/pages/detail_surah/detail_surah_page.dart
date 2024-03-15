@@ -6,8 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/core.dart';
 import '../../../../injection.dart';
-import '../../domain/domain.dart';
-import '../presentation.dart';
+import '../../../features/detail_surah/detail_surah.dart';
 
 part 'detail_surah_page.component.dart';
 

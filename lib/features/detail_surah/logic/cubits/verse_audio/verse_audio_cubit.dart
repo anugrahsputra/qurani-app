@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
 
 import '../../../../../../core/core.dart';
-import '../../../../domain/domain.dart';
+import '../../../domain/domain.dart';
 
 part 'verse_audio_cubit.freezed.dart';
 part 'verse_audio_state.dart';
