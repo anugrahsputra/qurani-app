@@ -79,7 +79,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
               );
             } else {
               return const Center(
-                child: Text('bruh'),
+                child: Text('Something went wrong'),
               );
             }
           },

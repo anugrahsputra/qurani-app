@@ -67,12 +67,6 @@ class CardView extends StatelessWidget {
         children: [
           SizedBox(
             height: 40,
-            // decoration: BoxDecoration(
-            //   border: Border.all(
-            //     color: Colors.deepPurple,
-            //   ),
-            //   borderRadius: BorderRadius.circular(10),
-            // ),
             child: Center(
               child: Text(
                 '﴾$surahNumber﴿',

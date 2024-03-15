@@ -34,16 +34,28 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => surahBloc,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Qurani'),
-        ),
-        body: RefreshIndicator(
-          onRefresh: pullToRefresh,
-          child: Column(
-            children: [
-              SurahCards(),
-            ],
+      child: BlocListener<SurahBloc, SurahState>(
+        listener: (context, state) {
+          if (state is SurahError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Something went wrong, try again'),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Qurani'),
+          ),
+          body: RefreshIndicator(
+            onRefresh: pullToRefresh,
+            child: Column(
+              children: [
+                SurahCards(),
+              ],
+            ),
           ),
         ),
       ),
