@@ -1,8 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:get_it/get_it.dart';
 
 import 'core/core.dart';
+import 'features/ayah/ayah.dart';
 import 'features/detail_surah/detail_surah.dart';
 import 'features/surah/surah.dart';
 
@@ -27,7 +29,20 @@ Future<void> setup() async {
         receiveTimeout: const Duration(seconds: 35),
         sendTimeout: const Duration(seconds: 35),
       ),
-    )..interceptors.add(CustomInterceptor()),
+    )..interceptors.addAll([
+        CustomInterceptor(),
+        DioCacheInterceptor(
+          options: CacheOptions(
+            store: MemCacheStore(
+              maxSize: 1024 * 1024 * 100, // 100MB
+              maxEntrySize: 1024 * 1024 * 10, // 10MB
+            ),
+            policy: CachePolicy.request,
+            maxStale: const Duration(days: 7),
+            hitCacheOnErrorExcept: [500, 404],
+          ),
+        ),
+      ]),
   );
   /* -----------------> External <-----------------*/
   sl.registerFactory<AudioPlayer>(() => AudioPlayer());
@@ -45,6 +60,10 @@ Future<void> setup() async {
   sl.registerLazySingleton<DetailSurahRemoteDataSource>(
     () => DetailSurahRemoteDataSourceImpl(dioClient: sl<DioClient>()),
   );
+
+  sl.registerLazySingleton<AyahRemoteDatasource>(
+    () => IAyahRemoteDatasource(dioClient: sl<DioClient>()),
+  );
   /* -----------------> Repository <-----------------*/
   sl.registerLazySingleton<BaseSurahRepository>(
     () => SurahRepositoryImpl(remoteDataSource: sl<SurahRemoteDataSource>()),
@@ -53,6 +72,10 @@ Future<void> setup() async {
   sl.registerLazySingleton<SurahDetailRepository>(
     () => ISurahDetailRepository(
         remoteDataSource: sl<DetailSurahRemoteDataSource>()),
+  );
+
+  sl.registerLazySingleton<AyahRepository>(
+    () => IAyahRepository(remoteDatasource: sl<AyahRemoteDatasource>()),
   );
 
   /* -----------------> UseCase <-----------------*/
@@ -67,6 +90,14 @@ Future<void> setup() async {
   );
   sl.registerLazySingleton<GetSurahAudioUsecase>(
     () => GetSurahAudioUsecase(sl<SurahDetailRepository>()),
+  );
+
+  sl.registerLazySingleton<GetAyahUsecase>(
+    () => GetAyahUsecase(repository: sl<AyahRepository>()),
+  );
+
+  sl.registerLazySingleton<GetRandomAyahUsecase>(
+    () => GetRandomAyahUsecase(repository: sl<AyahRepository>()),
   );
   /* -----------------> Bloc <-----------------*/
   sl.registerFactory<SurahBloc>(

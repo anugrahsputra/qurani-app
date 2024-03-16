@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:qurani/core/core.dart';
-import 'package:qurani/features/detail_surah/presentation/logic/logic.dart';
+import 'package:qurani/features/detail_surah/detail_surah.dart';
 
 import '../../dummy_data/surah_detaiLdummy.dart';
 import '../../helper/mock.dart';

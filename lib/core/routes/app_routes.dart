@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../features/detail_surah/detail_surah.dart';
-import '../../features/surah/surah.dart';
+import '../../presentation/presentation.dart';
 import '../core.dart';
 
 abstract class AppRoutes {
