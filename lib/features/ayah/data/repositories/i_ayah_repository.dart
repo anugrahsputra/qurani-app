@@ -18,6 +18,12 @@ class IAyahRepository implements AyahRepository {
       return Right(result.toEntity());
     } on ServerException {
       return const Left(ServerFailure(message: 'Server Failure'));
+    } on NetworkException {
+      return const Left(NetworkFailure(message: "No Internet Connection"));
+    } on NotFoundException {
+      return const Left(RequestFailure(message: "Not Found"));
+    } on UnknownException {
+      return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
 
@@ -28,6 +34,12 @@ class IAyahRepository implements AyahRepository {
       return Right(result.toEntity());
     } on ServerException {
       return const Left(ServerFailure(message: 'Server Failure'));
+    } on NetworkException {
+      return const Left(NetworkFailure(message: "No Internet Connection"));
+    } on NotFoundException {
+      return const Left(RequestFailure(message: "Not Found"));
+    } on UnknownException {
+      return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
 }
