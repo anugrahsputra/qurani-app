@@ -37,20 +37,17 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
 
   @override
   void onError(err, handler) async {
+    log.severe("Error: ${err.requestOptions.uri}");
     if (err.response?.statusCode == 304) {
       log.shout("Cache hit: ${err.requestOptions.uri}");
     }
     if (isBadRequest(err)) {
-      handler.next(err);
       throw BadRequestException();
     } else if (isUnauthorized(err)) {
-      handler.next(err);
       throw UnauthorizedException();
     } else if (isForbidden(err)) {
-      handler.next(err);
       throw ForbiddenException();
     } else if (isNotFound(err)) {
-      handler.next(err);
       throw NotFoundException();
     } else if (isConnectionError(err)) {
       try {
