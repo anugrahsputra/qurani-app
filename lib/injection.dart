@@ -106,6 +106,12 @@ Future<void> setup() async {
   sl.registerFactory<DetailSurahBloc>(
     () => DetailSurahBloc(getSurahDetailUsecase: sl<GetSurahDetailUseCase>()),
   );
+  sl.registerFactory<AyahsBloc>(
+    () => AyahsBloc(
+      getAyahUsecase: sl<GetAyahUsecase>(),
+      getRandomAyahUsecase: sl<GetRandomAyahUsecase>(),
+    ),
+  );
   /* -----------------> Cubit <-----------------*/
   sl.registerFactory<VerseAudioCubit>(
     () => VerseAudioCubit(
