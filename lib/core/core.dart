@@ -1,4 +1,5 @@
 export 'errors/errors.dart';
+export 'helper/helper.dart';
 export 'logging/logging.dart';
 export 'mixins/mixins.dart';
 export 'networks/networks.dart';
