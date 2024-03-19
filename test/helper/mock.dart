@@ -1,5 +1,7 @@
+import 'package:adhan/adhan.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
+import 'package:location/location.dart';
 import 'package:mockito/annotations.dart';
 import 'package:qurani/core/core.dart';
 import 'package:qurani/features/ayah/ayah.dart';
@@ -12,11 +14,14 @@ export 'mock.mocks.dart';
   /* External */
   MockSpec<Dio>(),
   MockSpec<AudioPlayer>(),
+  MockSpec<Location>(),
+  MockSpec<PrayerTimes>(),
   /* Core */
   MockSpec<AudioPlayerManager>(),
   MockSpec<DioClient>(),
   MockSpec<CustomInterceptor>(),
   MockSpec<RequestRetrier>(),
+  MockSpec<UserLocation>(),
   /* Data */
   MockSpec<SurahRemoteDataSource>(),
   MockSpec<DetailSurahRemoteDataSource>(),

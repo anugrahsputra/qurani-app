@@ -4,36 +4,40 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i8;
-import 'dart:typed_data' as _i23;
+import 'dart:typed_data' as _i24;
+import 'dart:ui' as _i26;
 
 import 'package:audioplayers/audioplayers.dart' as _i7;
-import 'package:bloc/bloc.dart' as _i26;
-import 'package:dartz/dartz.dart' as _i16;
-import 'package:dio/dio.dart' as _i10;
+import 'package:bloc/bloc.dart' as _i29;
+import 'package:dartz/dartz.dart' as _i17;
+import 'package:dio/dio.dart' as _i11;
 import 'package:dio/src/adapter.dart' as _i3;
-import 'package:dio/src/cancel_token.dart' as _i21;
+import 'package:dio/src/cancel_token.dart' as _i22;
 import 'package:dio/src/dio_mixin.dart' as _i5;
 import 'package:dio/src/options.dart' as _i2;
 import 'package:dio/src/response.dart' as _i6;
 import 'package:dio/src/transformer.dart' as _i4;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
-    as _i12;
-import 'package:logging/logging.dart' as _i9;
+    as _i13;
+import 'package:location/location.dart' as _i25;
+import 'package:location_platform_interface/location_platform_interface.dart'
+    as _i9;
+import 'package:logging/logging.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i22;
-import 'package:qurani/core/core.dart' as _i11;
+import 'package:mockito/src/dummies.dart' as _i23;
+import 'package:qurani/core/core.dart' as _i12;
 import 'package:qurani/features/ayah/data/datasource/remote_datasource.dart'
-    as _i25;
-import 'package:qurani/features/ayah/data/models/models.dart' as _i15;
-import 'package:qurani/features/ayah/domain/domain.dart' as _i19;
+    as _i28;
+import 'package:qurani/features/ayah/data/models/models.dart' as _i16;
+import 'package:qurani/features/ayah/domain/domain.dart' as _i20;
 import 'package:qurani/features/detail_surah/data/datasources/remote_datasource.dart'
-    as _i24;
-import 'package:qurani/features/detail_surah/data/models/models.dart' as _i14;
-import 'package:qurani/features/detail_surah/domain/domain.dart' as _i17;
-import 'package:qurani/features/surah/data/data.dart' as _i13;
-import 'package:qurani/features/surah/domain/domain.dart' as _i18;
+    as _i27;
+import 'package:qurani/features/detail_surah/data/models/models.dart' as _i15;
+import 'package:qurani/features/detail_surah/domain/domain.dart' as _i18;
+import 'package:qurani/features/surah/data/data.dart' as _i14;
+import 'package:qurani/features/surah/domain/domain.dart' as _i19;
 import 'package:qurani/features/surah/logic/blocs/surahs/surah_bloc.dart'
-    as _i20;
+    as _i21;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -119,8 +123,8 @@ class _FakeCompleter_6<T> extends _i1.SmartFake implements _i8.Completer<T> {
         );
 }
 
-class _FakeAudioPlayer_7 extends _i1.SmartFake implements _i7.AudioPlayer {
-  _FakeAudioPlayer_7(
+class _FakeLocationData_7 extends _i1.SmartFake implements _i9.LocationData {
+  _FakeLocationData_7(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -129,8 +133,8 @@ class _FakeAudioPlayer_7 extends _i1.SmartFake implements _i7.AudioPlayer {
         );
 }
 
-class _FakeLogger_8 extends _i1.SmartFake implements _i9.Logger {
-  _FakeLogger_8(
+class _FakeAudioPlayer_8 extends _i1.SmartFake implements _i7.AudioPlayer {
+  _FakeAudioPlayer_8(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -139,8 +143,8 @@ class _FakeLogger_8 extends _i1.SmartFake implements _i9.Logger {
         );
 }
 
-class _FakeDio_9 extends _i1.SmartFake implements _i10.Dio {
-  _FakeDio_9(
+class _FakeLogger_9 extends _i1.SmartFake implements _i10.Logger {
+  _FakeLogger_9(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -149,9 +153,8 @@ class _FakeDio_9 extends _i1.SmartFake implements _i10.Dio {
         );
 }
 
-class _FakeRequestRetrier_10 extends _i1.SmartFake
-    implements _i11.RequestRetrier {
-  _FakeRequestRetrier_10(
+class _FakeDio_10 extends _i1.SmartFake implements _i11.Dio {
+  _FakeDio_10(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -160,9 +163,9 @@ class _FakeRequestRetrier_10 extends _i1.SmartFake
         );
 }
 
-class _FakeInternetConnectionChecker_11 extends _i1.SmartFake
-    implements _i12.InternetConnectionChecker {
-  _FakeInternetConnectionChecker_11(
+class _FakeRequestRetrier_11 extends _i1.SmartFake
+    implements _i12.RequestRetrier {
+  _FakeRequestRetrier_11(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -171,8 +174,9 @@ class _FakeInternetConnectionChecker_11 extends _i1.SmartFake
         );
 }
 
-class _FakeSurahRes_12 extends _i1.SmartFake implements _i13.SurahRes {
-  _FakeSurahRes_12(
+class _FakeInternetConnectionChecker_12 extends _i1.SmartFake
+    implements _i13.InternetConnectionChecker {
+  _FakeInternetConnectionChecker_12(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -181,9 +185,8 @@ class _FakeSurahRes_12 extends _i1.SmartFake implements _i13.SurahRes {
         );
 }
 
-class _FakeSurahDetailResModel_13 extends _i1.SmartFake
-    implements _i14.SurahDetailResModel {
-  _FakeSurahDetailResModel_13(
+class _FakeSurahRes_13 extends _i1.SmartFake implements _i14.SurahRes {
+  _FakeSurahRes_13(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -192,9 +195,9 @@ class _FakeSurahDetailResModel_13 extends _i1.SmartFake
         );
 }
 
-class _FakeAudioFileModel_14 extends _i1.SmartFake
-    implements _i14.AudioFileModel {
-  _FakeAudioFileModel_14(
+class _FakeSurahDetailResModel_14 extends _i1.SmartFake
+    implements _i15.SurahDetailResModel {
+  _FakeSurahDetailResModel_14(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -203,8 +206,9 @@ class _FakeAudioFileModel_14 extends _i1.SmartFake
         );
 }
 
-class _FakeAyahResModel_15 extends _i1.SmartFake implements _i15.AyahResModel {
-  _FakeAyahResModel_15(
+class _FakeAudioFileModel_15 extends _i1.SmartFake
+    implements _i15.AudioFileModel {
+  _FakeAudioFileModel_15(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -213,8 +217,8 @@ class _FakeAyahResModel_15 extends _i1.SmartFake implements _i15.AyahResModel {
         );
 }
 
-class _FakeEither_16<L, R> extends _i1.SmartFake implements _i16.Either<L, R> {
-  _FakeEither_16(
+class _FakeAyahResModel_16 extends _i1.SmartFake implements _i16.AyahResModel {
+  _FakeAyahResModel_16(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -223,9 +227,8 @@ class _FakeEither_16<L, R> extends _i1.SmartFake implements _i16.Either<L, R> {
         );
 }
 
-class _FakeSurahDetailRepository_17 extends _i1.SmartFake
-    implements _i17.SurahDetailRepository {
-  _FakeSurahDetailRepository_17(
+class _FakeEither_17<L, R> extends _i1.SmartFake implements _i17.Either<L, R> {
+  _FakeEither_17(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -234,9 +237,9 @@ class _FakeSurahDetailRepository_17 extends _i1.SmartFake
         );
 }
 
-class _FakeBaseSurahRepository_18 extends _i1.SmartFake
-    implements _i18.BaseSurahRepository {
-  _FakeBaseSurahRepository_18(
+class _FakeSurahDetailRepository_18 extends _i1.SmartFake
+    implements _i18.SurahDetailRepository {
+  _FakeSurahDetailRepository_18(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -245,9 +248,9 @@ class _FakeBaseSurahRepository_18 extends _i1.SmartFake
         );
 }
 
-class _FakeAyahRepository_19 extends _i1.SmartFake
-    implements _i19.AyahRepository {
-  _FakeAyahRepository_19(
+class _FakeBaseSurahRepository_19 extends _i1.SmartFake
+    implements _i19.BaseSurahRepository {
+  _FakeBaseSurahRepository_19(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -256,9 +259,9 @@ class _FakeAyahRepository_19 extends _i1.SmartFake
         );
 }
 
-class _FakeGetSurahsUseCase_20 extends _i1.SmartFake
-    implements _i18.GetSurahsUseCase {
-  _FakeGetSurahsUseCase_20(
+class _FakeAyahRepository_20 extends _i1.SmartFake
+    implements _i20.AyahRepository {
+  _FakeAyahRepository_20(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -267,8 +270,19 @@ class _FakeGetSurahsUseCase_20 extends _i1.SmartFake
         );
 }
 
-class _FakeSurahState_21 extends _i1.SmartFake implements _i20.SurahState {
-  _FakeSurahState_21(
+class _FakeGetSurahsUseCase_21 extends _i1.SmartFake
+    implements _i19.GetSurahsUseCase {
+  _FakeGetSurahsUseCase_21(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeSurahState_22 extends _i1.SmartFake implements _i21.SurahState {
+  _FakeSurahState_22(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -280,7 +294,7 @@ class _FakeSurahState_21 extends _i1.SmartFake implements _i20.SurahState {
 /// A class which mocks [Dio].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDio extends _i1.Mock implements _i10.Dio {
+class MockDio extends _i1.Mock implements _i11.Dio {
   @override
   _i2.BaseOptions get options => (super.noSuchMethod(
         Invocation.getter(#options),
@@ -377,7 +391,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Object? data,
     Map<String, dynamic>? queryParameters,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -424,7 +438,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Uri? uri, {
     Object? data,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -469,7 +483,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Object? data,
     Map<String, dynamic>? queryParameters,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.ProgressCallback? onReceiveProgress,
   }) =>
       (super.noSuchMethod(
@@ -520,7 +534,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Uri? uri, {
     Object? data,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.ProgressCallback? onReceiveProgress,
   }) =>
       (super.noSuchMethod(
@@ -569,7 +583,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Object? data,
     Map<String, dynamic>? queryParameters,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.ProgressCallback? onSendProgress,
     _i2.ProgressCallback? onReceiveProgress,
   }) =>
@@ -624,7 +638,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Uri? uri, {
     Object? data,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.ProgressCallback? onSendProgress,
     _i2.ProgressCallback? onReceiveProgress,
   }) =>
@@ -677,7 +691,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Object? data,
     Map<String, dynamic>? queryParameters,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.ProgressCallback? onSendProgress,
     _i2.ProgressCallback? onReceiveProgress,
   }) =>
@@ -732,7 +746,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Uri? uri, {
     Object? data,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.ProgressCallback? onSendProgress,
     _i2.ProgressCallback? onReceiveProgress,
   }) =>
@@ -785,7 +799,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Object? data,
     Map<String, dynamic>? queryParameters,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.ProgressCallback? onSendProgress,
     _i2.ProgressCallback? onReceiveProgress,
   }) =>
@@ -840,7 +854,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Uri? uri, {
     Object? data,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.ProgressCallback? onSendProgress,
     _i2.ProgressCallback? onReceiveProgress,
   }) =>
@@ -893,7 +907,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Object? data,
     Map<String, dynamic>? queryParameters,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -940,7 +954,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Uri? uri, {
     Object? data,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -985,7 +999,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     dynamic savePath, {
     _i2.ProgressCallback? onReceiveProgress,
     Map<String, dynamic>? queryParameters,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     bool? deleteOnError = true,
     String? lengthHeader = r'content-length',
     Object? data,
@@ -1055,7 +1069,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     Uri? uri,
     dynamic savePath, {
     _i2.ProgressCallback? onReceiveProgress,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     bool? deleteOnError = true,
     String? lengthHeader = r'content-length',
     Object? data,
@@ -1122,7 +1136,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
     String? url, {
     Object? data,
     Map<String, dynamic>? queryParameters,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.Options? options,
     _i2.ProgressCallback? onSendProgress,
     _i2.ProgressCallback? onReceiveProgress,
@@ -1177,7 +1191,7 @@ class MockDio extends _i1.Mock implements _i10.Dio {
   _i8.Future<_i6.Response<T>> requestUri<T>(
     Uri? uri, {
     Object? data,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.Options? options,
     _i2.ProgressCallback? onSendProgress,
     _i2.ProgressCallback? onReceiveProgress,
@@ -1279,11 +1293,11 @@ class MockAudioPlayer extends _i1.Mock implements _i7.AudioPlayer {
   @override
   String get playerId => (super.noSuchMethod(
         Invocation.getter(#playerId),
-        returnValue: _i22.dummyValue<String>(
+        returnValue: _i23.dummyValue<String>(
           this,
           Invocation.getter(#playerId),
         ),
-        returnValueForMissingStub: _i22.dummyValue<String>(
+        returnValueForMissingStub: _i23.dummyValue<String>(
           this,
           Invocation.getter(#playerId),
         ),
@@ -1580,7 +1594,7 @@ class MockAudioPlayer extends _i1.Mock implements _i7.AudioPlayer {
       ) as _i8.Future<void>);
 
   @override
-  _i8.Future<void> setSourceBytes(_i23.Uint8List? bytes) => (super.noSuchMethod(
+  _i8.Future<void> setSourceBytes(_i24.Uint8List? bytes) => (super.noSuchMethod(
         Invocation.method(
           #setSourceBytes,
           [bytes],
@@ -1620,25 +1634,175 @@ class MockAudioPlayer extends _i1.Mock implements _i7.AudioPlayer {
       ) as _i8.Future<void>);
 }
 
+/// A class which mocks [Location].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockLocation extends _i1.Mock implements _i25.Location {
+  @override
+  _i8.Stream<_i9.LocationData> get onLocationChanged => (super.noSuchMethod(
+        Invocation.getter(#onLocationChanged),
+        returnValue: _i8.Stream<_i9.LocationData>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i9.LocationData>.empty(),
+      ) as _i8.Stream<_i9.LocationData>);
+
+  @override
+  _i8.Future<bool> changeSettings({
+    _i9.LocationAccuracy? accuracy = _i9.LocationAccuracy.high,
+    int? interval = 1000,
+    double? distanceFilter = 0.0,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #changeSettings,
+          [],
+          {
+            #accuracy: accuracy,
+            #interval: interval,
+            #distanceFilter: distanceFilter,
+          },
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<bool> isBackgroundModeEnabled() => (super.noSuchMethod(
+        Invocation.method(
+          #isBackgroundModeEnabled,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<bool> enableBackgroundMode({bool? enable = true}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #enableBackgroundMode,
+          [],
+          {#enable: enable},
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<_i9.LocationData> getLocation() => (super.noSuchMethod(
+        Invocation.method(
+          #getLocation,
+          [],
+        ),
+        returnValue: _i8.Future<_i9.LocationData>.value(_FakeLocationData_7(
+          this,
+          Invocation.method(
+            #getLocation,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i9.LocationData>.value(_FakeLocationData_7(
+          this,
+          Invocation.method(
+            #getLocation,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i9.LocationData>);
+
+  @override
+  _i8.Future<_i9.PermissionStatus> hasPermission() => (super.noSuchMethod(
+        Invocation.method(
+          #hasPermission,
+          [],
+        ),
+        returnValue: _i8.Future<_i9.PermissionStatus>.value(
+            _i9.PermissionStatus.granted),
+        returnValueForMissingStub: _i8.Future<_i9.PermissionStatus>.value(
+            _i9.PermissionStatus.granted),
+      ) as _i8.Future<_i9.PermissionStatus>);
+
+  @override
+  _i8.Future<_i9.PermissionStatus> requestPermission() => (super.noSuchMethod(
+        Invocation.method(
+          #requestPermission,
+          [],
+        ),
+        returnValue: _i8.Future<_i9.PermissionStatus>.value(
+            _i9.PermissionStatus.granted),
+        returnValueForMissingStub: _i8.Future<_i9.PermissionStatus>.value(
+            _i9.PermissionStatus.granted),
+      ) as _i8.Future<_i9.PermissionStatus>);
+
+  @override
+  _i8.Future<bool> serviceEnabled() => (super.noSuchMethod(
+        Invocation.method(
+          #serviceEnabled,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<bool> requestService() => (super.noSuchMethod(
+        Invocation.method(
+          #requestService,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<_i9.AndroidNotificationData?> changeNotificationOptions({
+    String? channelName,
+    String? title,
+    String? iconName,
+    String? subtitle,
+    String? description,
+    _i26.Color? color,
+    bool? onTapBringToFront,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #changeNotificationOptions,
+          [],
+          {
+            #channelName: channelName,
+            #title: title,
+            #iconName: iconName,
+            #subtitle: subtitle,
+            #description: description,
+            #color: color,
+            #onTapBringToFront: onTapBringToFront,
+          },
+        ),
+        returnValue: _i8.Future<_i9.AndroidNotificationData?>.value(),
+        returnValueForMissingStub:
+            _i8.Future<_i9.AndroidNotificationData?>.value(),
+      ) as _i8.Future<_i9.AndroidNotificationData?>);
+}
+
 /// A class which mocks [AudioPlayerManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAudioPlayerManager extends _i1.Mock
-    implements _i11.AudioPlayerManager {
+    implements _i12.AudioPlayerManager {
   @override
   _i7.AudioPlayer verseAudio(String? verseNumber) => (super.noSuchMethod(
         Invocation.method(
           #verseAudio,
           [verseNumber],
         ),
-        returnValue: _FakeAudioPlayer_7(
+        returnValue: _FakeAudioPlayer_8(
           this,
           Invocation.method(
             #verseAudio,
             [verseNumber],
           ),
         ),
-        returnValueForMissingStub: _FakeAudioPlayer_7(
+        returnValueForMissingStub: _FakeAudioPlayer_8(
           this,
           Invocation.method(
             #verseAudio,
@@ -1669,13 +1833,13 @@ class MockAudioPlayerManager extends _i1.Mock
 /// A class which mocks [DioClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDioClient extends _i1.Mock implements _i11.DioClient {
+class MockDioClient extends _i1.Mock implements _i12.DioClient {
   @override
   _i8.Future<_i6.Response<dynamic>> get(
     String? url, {
     Map<String, dynamic>? queryParameters,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.ProgressCallback? onReceiveProgress,
     _i2.ProgressCallback? onSendProgress,
   }) =>
@@ -1729,7 +1893,7 @@ class MockDioClient extends _i1.Mock implements _i11.DioClient {
     Map<String, dynamic>? queryParameters,
     dynamic data,
     _i2.Options? options,
-    _i21.CancelToken? cancelToken,
+    _i22.CancelToken? cancelToken,
     _i2.ProgressCallback? onReceiveProgress,
     _i2.ProgressCallback? onSendProgress,
   }) =>
@@ -1856,35 +2020,35 @@ class MockDioClient extends _i1.Mock implements _i11.DioClient {
 /// A class which mocks [CustomInterceptor].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCustomInterceptor extends _i1.Mock implements _i11.CustomInterceptor {
+class MockCustomInterceptor extends _i1.Mock implements _i12.CustomInterceptor {
   @override
-  _i9.Logger get log => (super.noSuchMethod(
+  _i10.Logger get log => (super.noSuchMethod(
         Invocation.getter(#log),
-        returnValue: _FakeLogger_8(
+        returnValue: _FakeLogger_9(
           this,
           Invocation.getter(#log),
         ),
-        returnValueForMissingStub: _FakeLogger_8(
+        returnValueForMissingStub: _FakeLogger_9(
           this,
           Invocation.getter(#log),
         ),
-      ) as _i9.Logger);
+      ) as _i10.Logger);
 
   @override
-  _i10.Dio get dio => (super.noSuchMethod(
+  _i11.Dio get dio => (super.noSuchMethod(
         Invocation.getter(#dio),
-        returnValue: _FakeDio_9(
+        returnValue: _FakeDio_10(
           this,
           Invocation.getter(#dio),
         ),
-        returnValueForMissingStub: _FakeDio_9(
+        returnValueForMissingStub: _FakeDio_10(
           this,
           Invocation.getter(#dio),
         ),
-      ) as _i10.Dio);
+      ) as _i11.Dio);
 
   @override
-  set dio(_i10.Dio? _dio) => super.noSuchMethod(
+  set dio(_i11.Dio? _dio) => super.noSuchMethod(
         Invocation.setter(
           #dio,
           _dio,
@@ -1893,20 +2057,20 @@ class MockCustomInterceptor extends _i1.Mock implements _i11.CustomInterceptor {
       );
 
   @override
-  _i11.RequestRetrier get requestRetrier => (super.noSuchMethod(
+  _i12.RequestRetrier get requestRetrier => (super.noSuchMethod(
         Invocation.getter(#requestRetrier),
-        returnValue: _FakeRequestRetrier_10(
+        returnValue: _FakeRequestRetrier_11(
           this,
           Invocation.getter(#requestRetrier),
         ),
-        returnValueForMissingStub: _FakeRequestRetrier_10(
+        returnValueForMissingStub: _FakeRequestRetrier_11(
           this,
           Invocation.getter(#requestRetrier),
         ),
-      ) as _i11.RequestRetrier);
+      ) as _i12.RequestRetrier);
 
   @override
-  set requestRetrier(_i11.RequestRetrier? _requestRetrier) =>
+  set requestRetrier(_i12.RequestRetrier? _requestRetrier) =>
       super.noSuchMethod(
         Invocation.setter(
           #requestRetrier,
@@ -1949,7 +2113,7 @@ class MockCustomInterceptor extends _i1.Mock implements _i11.CustomInterceptor {
 
   @override
   void onError(
-    _i10.DioException? err,
+    _i11.DioException? err,
     _i5.ErrorInterceptorHandler? handler,
   ) =>
       super.noSuchMethod(
@@ -1964,7 +2128,7 @@ class MockCustomInterceptor extends _i1.Mock implements _i11.CustomInterceptor {
       );
 
   @override
-  bool isBadRequest(_i10.DioException? err) => (super.noSuchMethod(
+  bool isBadRequest(_i11.DioException? err) => (super.noSuchMethod(
         Invocation.method(
           #isBadRequest,
           [err],
@@ -1974,7 +2138,7 @@ class MockCustomInterceptor extends _i1.Mock implements _i11.CustomInterceptor {
       ) as bool);
 
   @override
-  bool isUnauthorized(_i10.DioException? err) => (super.noSuchMethod(
+  bool isUnauthorized(_i11.DioException? err) => (super.noSuchMethod(
         Invocation.method(
           #isUnauthorized,
           [err],
@@ -1984,7 +2148,7 @@ class MockCustomInterceptor extends _i1.Mock implements _i11.CustomInterceptor {
       ) as bool);
 
   @override
-  bool isForbidden(_i10.DioException? err) => (super.noSuchMethod(
+  bool isForbidden(_i11.DioException? err) => (super.noSuchMethod(
         Invocation.method(
           #isForbidden,
           [err],
@@ -1994,7 +2158,7 @@ class MockCustomInterceptor extends _i1.Mock implements _i11.CustomInterceptor {
       ) as bool);
 
   @override
-  bool isNotFound(_i10.DioException? err) => (super.noSuchMethod(
+  bool isNotFound(_i11.DioException? err) => (super.noSuchMethod(
         Invocation.method(
           #isNotFound,
           [err],
@@ -2004,7 +2168,7 @@ class MockCustomInterceptor extends _i1.Mock implements _i11.CustomInterceptor {
       ) as bool);
 
   @override
-  bool isConnectionError(_i10.DioException? err) => (super.noSuchMethod(
+  bool isConnectionError(_i11.DioException? err) => (super.noSuchMethod(
         Invocation.method(
           #isConnectionError,
           [err],
@@ -2017,33 +2181,33 @@ class MockCustomInterceptor extends _i1.Mock implements _i11.CustomInterceptor {
 /// A class which mocks [RequestRetrier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRequestRetrier extends _i1.Mock implements _i11.RequestRetrier {
+class MockRequestRetrier extends _i1.Mock implements _i12.RequestRetrier {
   @override
-  _i10.Dio get dio => (super.noSuchMethod(
+  _i11.Dio get dio => (super.noSuchMethod(
         Invocation.getter(#dio),
-        returnValue: _FakeDio_9(
+        returnValue: _FakeDio_10(
           this,
           Invocation.getter(#dio),
         ),
-        returnValueForMissingStub: _FakeDio_9(
+        returnValueForMissingStub: _FakeDio_10(
           this,
           Invocation.getter(#dio),
         ),
-      ) as _i10.Dio);
+      ) as _i11.Dio);
 
   @override
-  _i12.InternetConnectionChecker get internetConnectionChecker =>
+  _i13.InternetConnectionChecker get internetConnectionChecker =>
       (super.noSuchMethod(
         Invocation.getter(#internetConnectionChecker),
-        returnValue: _FakeInternetConnectionChecker_11(
+        returnValue: _FakeInternetConnectionChecker_12(
           this,
           Invocation.getter(#internetConnectionChecker),
         ),
-        returnValueForMissingStub: _FakeInternetConnectionChecker_11(
+        returnValueForMissingStub: _FakeInternetConnectionChecker_12(
           this,
           Invocation.getter(#internetConnectionChecker),
         ),
-      ) as _i12.InternetConnectionChecker);
+      ) as _i13.InternetConnectionChecker);
 
   @override
   _i8.Future<_i6.Response<dynamic>> retryRequest(
@@ -2072,18 +2236,90 @@ class MockRequestRetrier extends _i1.Mock implements _i11.RequestRetrier {
       ) as _i8.Future<_i6.Response<dynamic>>);
 }
 
+/// A class which mocks [UserLocation].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserLocation extends _i1.Mock implements _i12.UserLocation {
+  @override
+  _i8.Future<_i9.PermissionStatus> requestPermission() => (super.noSuchMethod(
+        Invocation.method(
+          #requestPermission,
+          [],
+        ),
+        returnValue: _i8.Future<_i9.PermissionStatus>.value(
+            _i9.PermissionStatus.granted),
+        returnValueForMissingStub: _i8.Future<_i9.PermissionStatus>.value(
+            _i9.PermissionStatus.granted),
+      ) as _i8.Future<_i9.PermissionStatus>);
+
+  @override
+  _i8.Future<bool> requestService() => (super.noSuchMethod(
+        Invocation.method(
+          #requestService,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+
+  @override
+  _i8.Future<_i9.PermissionStatus> hasPermission() => (super.noSuchMethod(
+        Invocation.method(
+          #hasPermission,
+          [],
+        ),
+        returnValue: _i8.Future<_i9.PermissionStatus>.value(
+            _i9.PermissionStatus.granted),
+        returnValueForMissingStub: _i8.Future<_i9.PermissionStatus>.value(
+            _i9.PermissionStatus.granted),
+      ) as _i8.Future<_i9.PermissionStatus>);
+
+  @override
+  _i8.Future<_i9.LocationData> getLocation() => (super.noSuchMethod(
+        Invocation.method(
+          #getLocation,
+          [],
+        ),
+        returnValue: _i8.Future<_i9.LocationData>.value(_FakeLocationData_7(
+          this,
+          Invocation.method(
+            #getLocation,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i9.LocationData>.value(_FakeLocationData_7(
+          this,
+          Invocation.method(
+            #getLocation,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i9.LocationData>);
+
+  @override
+  _i8.Future<bool> serviceEnabled() => (super.noSuchMethod(
+        Invocation.method(
+          #serviceEnabled,
+          [],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+        returnValueForMissingStub: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+}
+
 /// A class which mocks [SurahRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSurahRemoteDataSource extends _i1.Mock
-    implements _i13.SurahRemoteDataSource {
+    implements _i14.SurahRemoteDataSource {
   @override
-  _i8.Future<_i13.SurahRes> getSurahs() => (super.noSuchMethod(
+  _i8.Future<_i14.SurahRes> getSurahs() => (super.noSuchMethod(
         Invocation.method(
           #getSurahs,
           [],
         ),
-        returnValue: _i8.Future<_i13.SurahRes>.value(_FakeSurahRes_12(
+        returnValue: _i8.Future<_i14.SurahRes>.value(_FakeSurahRes_13(
           this,
           Invocation.method(
             #getSurahs,
@@ -2091,55 +2327,55 @@ class MockSurahRemoteDataSource extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i13.SurahRes>.value(_FakeSurahRes_12(
+            _i8.Future<_i14.SurahRes>.value(_FakeSurahRes_13(
           this,
           Invocation.method(
             #getSurahs,
             [],
           ),
         )),
-      ) as _i8.Future<_i13.SurahRes>);
+      ) as _i8.Future<_i14.SurahRes>);
 }
 
 /// A class which mocks [DetailSurahRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockDetailSurahRemoteDataSource extends _i1.Mock
-    implements _i24.DetailSurahRemoteDataSource {
+    implements _i27.DetailSurahRemoteDataSource {
   @override
-  _i8.Future<_i14.SurahDetailResModel> getDetailSurah(int? surahNumber) =>
+  _i8.Future<_i15.SurahDetailResModel> getDetailSurah(int? surahNumber) =>
       (super.noSuchMethod(
         Invocation.method(
           #getDetailSurah,
           [surahNumber],
         ),
-        returnValue: _i8.Future<_i14.SurahDetailResModel>.value(
-            _FakeSurahDetailResModel_13(
+        returnValue: _i8.Future<_i15.SurahDetailResModel>.value(
+            _FakeSurahDetailResModel_14(
           this,
           Invocation.method(
             #getDetailSurah,
             [surahNumber],
           ),
         )),
-        returnValueForMissingStub: _i8.Future<_i14.SurahDetailResModel>.value(
-            _FakeSurahDetailResModel_13(
+        returnValueForMissingStub: _i8.Future<_i15.SurahDetailResModel>.value(
+            _FakeSurahDetailResModel_14(
           this,
           Invocation.method(
             #getDetailSurah,
             [surahNumber],
           ),
         )),
-      ) as _i8.Future<_i14.SurahDetailResModel>);
+      ) as _i8.Future<_i15.SurahDetailResModel>);
 
   @override
-  _i8.Future<_i14.AudioFileModel> getFullAudio(int? surahNumber) =>
+  _i8.Future<_i15.AudioFileModel> getFullAudio(int? surahNumber) =>
       (super.noSuchMethod(
         Invocation.method(
           #getFullAudio,
           [surahNumber],
         ),
         returnValue:
-            _i8.Future<_i14.AudioFileModel>.value(_FakeAudioFileModel_14(
+            _i8.Future<_i15.AudioFileModel>.value(_FakeAudioFileModel_15(
           this,
           Invocation.method(
             #getFullAudio,
@@ -2147,23 +2383,23 @@ class MockDetailSurahRemoteDataSource extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i14.AudioFileModel>.value(_FakeAudioFileModel_14(
+            _i8.Future<_i15.AudioFileModel>.value(_FakeAudioFileModel_15(
           this,
           Invocation.method(
             #getFullAudio,
             [surahNumber],
           ),
         )),
-      ) as _i8.Future<_i14.AudioFileModel>);
+      ) as _i8.Future<_i15.AudioFileModel>);
 }
 
 /// A class which mocks [AyahRemoteDatasource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAyahRemoteDatasource extends _i1.Mock
-    implements _i25.AyahRemoteDatasource {
+    implements _i28.AyahRemoteDatasource {
   @override
-  _i8.Future<_i15.AyahResModel> getAyah(
+  _i8.Future<_i16.AyahResModel> getAyah(
     int? surahNumber,
     int? ayahNumber,
   ) =>
@@ -2175,7 +2411,7 @@ class MockAyahRemoteDatasource extends _i1.Mock
             ayahNumber,
           ],
         ),
-        returnValue: _i8.Future<_i15.AyahResModel>.value(_FakeAyahResModel_15(
+        returnValue: _i8.Future<_i16.AyahResModel>.value(_FakeAyahResModel_16(
           this,
           Invocation.method(
             #getAyah,
@@ -2186,7 +2422,7 @@ class MockAyahRemoteDatasource extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i15.AyahResModel>.value(_FakeAyahResModel_15(
+            _i8.Future<_i16.AyahResModel>.value(_FakeAyahResModel_16(
           this,
           Invocation.method(
             #getAyah,
@@ -2196,15 +2432,15 @@ class MockAyahRemoteDatasource extends _i1.Mock
             ],
           ),
         )),
-      ) as _i8.Future<_i15.AyahResModel>);
+      ) as _i8.Future<_i16.AyahResModel>);
 
   @override
-  _i8.Future<_i15.AyahResModel> getRandomAyah() => (super.noSuchMethod(
+  _i8.Future<_i16.AyahResModel> getRandomAyah() => (super.noSuchMethod(
         Invocation.method(
           #getRandomAyah,
           [],
         ),
-        returnValue: _i8.Future<_i15.AyahResModel>.value(_FakeAyahResModel_15(
+        returnValue: _i8.Future<_i16.AyahResModel>.value(_FakeAyahResModel_16(
           this,
           Invocation.method(
             #getRandomAyah,
@@ -2212,31 +2448,31 @@ class MockAyahRemoteDatasource extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i15.AyahResModel>.value(_FakeAyahResModel_15(
+            _i8.Future<_i16.AyahResModel>.value(_FakeAyahResModel_16(
           this,
           Invocation.method(
             #getRandomAyah,
             [],
           ),
         )),
-      ) as _i8.Future<_i15.AyahResModel>);
+      ) as _i8.Future<_i16.AyahResModel>);
 }
 
 /// A class which mocks [BaseSurahRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockBaseSurahRepository extends _i1.Mock
-    implements _i18.BaseSurahRepository {
+    implements _i19.BaseSurahRepository {
   @override
-  _i8.Future<_i16.Either<_i11.Failure, _i18.SurahResEntity>> getSurahs() =>
+  _i8.Future<_i17.Either<_i12.Failure, _i19.SurahResEntity>> getSurahs() =>
       (super.noSuchMethod(
         Invocation.method(
           #getSurahs,
           [],
         ),
         returnValue:
-            _i8.Future<_i16.Either<_i11.Failure, _i18.SurahResEntity>>.value(
-                _FakeEither_16<_i11.Failure, _i18.SurahResEntity>(
+            _i8.Future<_i17.Either<_i12.Failure, _i19.SurahResEntity>>.value(
+                _FakeEither_17<_i12.Failure, _i19.SurahResEntity>(
           this,
           Invocation.method(
             #getSurahs,
@@ -2244,24 +2480,24 @@ class MockBaseSurahRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i16.Either<_i11.Failure, _i18.SurahResEntity>>.value(
-                _FakeEither_16<_i11.Failure, _i18.SurahResEntity>(
+            _i8.Future<_i17.Either<_i12.Failure, _i19.SurahResEntity>>.value(
+                _FakeEither_17<_i12.Failure, _i19.SurahResEntity>(
           this,
           Invocation.method(
             #getSurahs,
             [],
           ),
         )),
-      ) as _i8.Future<_i16.Either<_i11.Failure, _i18.SurahResEntity>>);
+      ) as _i8.Future<_i17.Either<_i12.Failure, _i19.SurahResEntity>>);
 }
 
 /// A class which mocks [SurahDetailRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSurahDetailRepository extends _i1.Mock
-    implements _i17.SurahDetailRepository {
+    implements _i18.SurahDetailRepository {
   @override
-  _i8.Future<_i16.Either<_i11.Failure, _i17.SurahDetailRes>> getDetailSurah(
+  _i8.Future<_i17.Either<_i12.Failure, _i18.SurahDetailRes>> getDetailSurah(
           int? surahNumber) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2269,8 +2505,8 @@ class MockSurahDetailRepository extends _i1.Mock
           [surahNumber],
         ),
         returnValue:
-            _i8.Future<_i16.Either<_i11.Failure, _i17.SurahDetailRes>>.value(
-                _FakeEither_16<_i11.Failure, _i17.SurahDetailRes>(
+            _i8.Future<_i17.Either<_i12.Failure, _i18.SurahDetailRes>>.value(
+                _FakeEither_17<_i12.Failure, _i18.SurahDetailRes>(
           this,
           Invocation.method(
             #getDetailSurah,
@@ -2278,18 +2514,18 @@ class MockSurahDetailRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i16.Either<_i11.Failure, _i17.SurahDetailRes>>.value(
-                _FakeEither_16<_i11.Failure, _i17.SurahDetailRes>(
+            _i8.Future<_i17.Either<_i12.Failure, _i18.SurahDetailRes>>.value(
+                _FakeEither_17<_i12.Failure, _i18.SurahDetailRes>(
           this,
           Invocation.method(
             #getDetailSurah,
             [surahNumber],
           ),
         )),
-      ) as _i8.Future<_i16.Either<_i11.Failure, _i17.SurahDetailRes>>);
+      ) as _i8.Future<_i17.Either<_i12.Failure, _i18.SurahDetailRes>>);
 
   @override
-  _i8.Future<_i16.Either<_i11.Failure, _i17.AudioFile>> getFullAudio(
+  _i8.Future<_i17.Either<_i12.Failure, _i18.AudioFile>> getFullAudio(
           int? surahNumber) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2297,8 +2533,8 @@ class MockSurahDetailRepository extends _i1.Mock
           [surahNumber],
         ),
         returnValue:
-            _i8.Future<_i16.Either<_i11.Failure, _i17.AudioFile>>.value(
-                _FakeEither_16<_i11.Failure, _i17.AudioFile>(
+            _i8.Future<_i17.Either<_i12.Failure, _i18.AudioFile>>.value(
+                _FakeEither_17<_i12.Failure, _i18.AudioFile>(
           this,
           Invocation.method(
             #getFullAudio,
@@ -2306,23 +2542,23 @@ class MockSurahDetailRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i16.Either<_i11.Failure, _i17.AudioFile>>.value(
-                _FakeEither_16<_i11.Failure, _i17.AudioFile>(
+            _i8.Future<_i17.Either<_i12.Failure, _i18.AudioFile>>.value(
+                _FakeEither_17<_i12.Failure, _i18.AudioFile>(
           this,
           Invocation.method(
             #getFullAudio,
             [surahNumber],
           ),
         )),
-      ) as _i8.Future<_i16.Either<_i11.Failure, _i17.AudioFile>>);
+      ) as _i8.Future<_i17.Either<_i12.Failure, _i18.AudioFile>>);
 }
 
 /// A class which mocks [AyahRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAyahRepository extends _i1.Mock implements _i19.AyahRepository {
+class MockAyahRepository extends _i1.Mock implements _i20.AyahRepository {
   @override
-  _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>> getAyah(
+  _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>> getAyah(
     int? surahNumber,
     int? ayahNumber,
   ) =>
@@ -2334,8 +2570,8 @@ class MockAyahRepository extends _i1.Mock implements _i19.AyahRepository {
             ayahNumber,
           ],
         ),
-        returnValue: _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>.value(
-            _FakeEither_16<_i11.Failure, _i19.AyahRes>(
+        returnValue: _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>.value(
+            _FakeEither_17<_i12.Failure, _i20.AyahRes>(
           this,
           Invocation.method(
             #getAyah,
@@ -2346,8 +2582,8 @@ class MockAyahRepository extends _i1.Mock implements _i19.AyahRepository {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>.value(
-                _FakeEither_16<_i11.Failure, _i19.AyahRes>(
+            _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>.value(
+                _FakeEither_17<_i12.Failure, _i20.AyahRes>(
           this,
           Invocation.method(
             #getAyah,
@@ -2357,17 +2593,17 @@ class MockAyahRepository extends _i1.Mock implements _i19.AyahRepository {
             ],
           ),
         )),
-      ) as _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>);
+      ) as _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>);
 
   @override
-  _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>> getRandomAyah() =>
+  _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>> getRandomAyah() =>
       (super.noSuchMethod(
         Invocation.method(
           #getRandomAyah,
           [],
         ),
-        returnValue: _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>.value(
-            _FakeEither_16<_i11.Failure, _i19.AyahRes>(
+        returnValue: _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>.value(
+            _FakeEither_17<_i12.Failure, _i20.AyahRes>(
           this,
           Invocation.method(
             #getRandomAyah,
@@ -2375,37 +2611,37 @@ class MockAyahRepository extends _i1.Mock implements _i19.AyahRepository {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>.value(
-                _FakeEither_16<_i11.Failure, _i19.AyahRes>(
+            _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>.value(
+                _FakeEither_17<_i12.Failure, _i20.AyahRes>(
           this,
           Invocation.method(
             #getRandomAyah,
             [],
           ),
         )),
-      ) as _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>);
+      ) as _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>);
 }
 
 /// A class which mocks [GetSurahDetailUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetSurahDetailUseCase extends _i1.Mock
-    implements _i17.GetSurahDetailUseCase {
+    implements _i18.GetSurahDetailUseCase {
   @override
-  _i17.SurahDetailRepository get repository => (super.noSuchMethod(
+  _i18.SurahDetailRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
-        returnValue: _FakeSurahDetailRepository_17(
+        returnValue: _FakeSurahDetailRepository_18(
           this,
           Invocation.getter(#repository),
         ),
-        returnValueForMissingStub: _FakeSurahDetailRepository_17(
+        returnValueForMissingStub: _FakeSurahDetailRepository_18(
           this,
           Invocation.getter(#repository),
         ),
-      ) as _i17.SurahDetailRepository);
+      ) as _i18.SurahDetailRepository);
 
   @override
-  _i8.Future<_i16.Either<_i11.Failure, _i17.SurahDetailRes>> execute(
+  _i8.Future<_i17.Either<_i12.Failure, _i18.SurahDetailRes>> execute(
           int? surahNumber) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2413,8 +2649,8 @@ class MockGetSurahDetailUseCase extends _i1.Mock
           [surahNumber],
         ),
         returnValue:
-            _i8.Future<_i16.Either<_i11.Failure, _i17.SurahDetailRes>>.value(
-                _FakeEither_16<_i11.Failure, _i17.SurahDetailRes>(
+            _i8.Future<_i17.Either<_i12.Failure, _i18.SurahDetailRes>>.value(
+                _FakeEither_17<_i12.Failure, _i18.SurahDetailRes>(
           this,
           Invocation.method(
             #execute,
@@ -2422,44 +2658,44 @@ class MockGetSurahDetailUseCase extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i16.Either<_i11.Failure, _i17.SurahDetailRes>>.value(
-                _FakeEither_16<_i11.Failure, _i17.SurahDetailRes>(
+            _i8.Future<_i17.Either<_i12.Failure, _i18.SurahDetailRes>>.value(
+                _FakeEither_17<_i12.Failure, _i18.SurahDetailRes>(
           this,
           Invocation.method(
             #execute,
             [surahNumber],
           ),
         )),
-      ) as _i8.Future<_i16.Either<_i11.Failure, _i17.SurahDetailRes>>);
+      ) as _i8.Future<_i17.Either<_i12.Failure, _i18.SurahDetailRes>>);
 }
 
 /// A class which mocks [GetSurahsUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetSurahsUseCase extends _i1.Mock implements _i18.GetSurahsUseCase {
+class MockGetSurahsUseCase extends _i1.Mock implements _i19.GetSurahsUseCase {
   @override
-  _i18.BaseSurahRepository get repository => (super.noSuchMethod(
+  _i19.BaseSurahRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
-        returnValue: _FakeBaseSurahRepository_18(
+        returnValue: _FakeBaseSurahRepository_19(
           this,
           Invocation.getter(#repository),
         ),
-        returnValueForMissingStub: _FakeBaseSurahRepository_18(
+        returnValueForMissingStub: _FakeBaseSurahRepository_19(
           this,
           Invocation.getter(#repository),
         ),
-      ) as _i18.BaseSurahRepository);
+      ) as _i19.BaseSurahRepository);
 
   @override
-  _i8.Future<_i16.Either<_i11.Failure, _i18.SurahResEntity>> call() =>
+  _i8.Future<_i17.Either<_i12.Failure, _i19.SurahResEntity>> call() =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
         ),
         returnValue:
-            _i8.Future<_i16.Either<_i11.Failure, _i18.SurahResEntity>>.value(
-                _FakeEither_16<_i11.Failure, _i18.SurahResEntity>(
+            _i8.Future<_i17.Either<_i12.Failure, _i19.SurahResEntity>>.value(
+                _FakeEither_17<_i12.Failure, _i19.SurahResEntity>(
           this,
           Invocation.method(
             #call,
@@ -2467,37 +2703,37 @@ class MockGetSurahsUseCase extends _i1.Mock implements _i18.GetSurahsUseCase {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i16.Either<_i11.Failure, _i18.SurahResEntity>>.value(
-                _FakeEither_16<_i11.Failure, _i18.SurahResEntity>(
+            _i8.Future<_i17.Either<_i12.Failure, _i19.SurahResEntity>>.value(
+                _FakeEither_17<_i12.Failure, _i19.SurahResEntity>(
           this,
           Invocation.method(
             #call,
             [],
           ),
         )),
-      ) as _i8.Future<_i16.Either<_i11.Failure, _i18.SurahResEntity>>);
+      ) as _i8.Future<_i17.Either<_i12.Failure, _i19.SurahResEntity>>);
 }
 
 /// A class which mocks [GetSurahAudioUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetSurahAudioUsecase extends _i1.Mock
-    implements _i17.GetSurahAudioUsecase {
+    implements _i18.GetSurahAudioUsecase {
   @override
-  _i17.SurahDetailRepository get surahRepository => (super.noSuchMethod(
+  _i18.SurahDetailRepository get surahRepository => (super.noSuchMethod(
         Invocation.getter(#surahRepository),
-        returnValue: _FakeSurahDetailRepository_17(
+        returnValue: _FakeSurahDetailRepository_18(
           this,
           Invocation.getter(#surahRepository),
         ),
-        returnValueForMissingStub: _FakeSurahDetailRepository_17(
+        returnValueForMissingStub: _FakeSurahDetailRepository_18(
           this,
           Invocation.getter(#surahRepository),
         ),
-      ) as _i17.SurahDetailRepository);
+      ) as _i18.SurahDetailRepository);
 
   @override
-  _i8.Future<_i16.Either<_i11.Failure, _i17.AudioFile>> call(
+  _i8.Future<_i17.Either<_i12.Failure, _i18.AudioFile>> call(
           int? surahNumber) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -2505,8 +2741,8 @@ class MockGetSurahAudioUsecase extends _i1.Mock
           [surahNumber],
         ),
         returnValue:
-            _i8.Future<_i16.Either<_i11.Failure, _i17.AudioFile>>.value(
-                _FakeEither_16<_i11.Failure, _i17.AudioFile>(
+            _i8.Future<_i17.Either<_i12.Failure, _i18.AudioFile>>.value(
+                _FakeEither_17<_i12.Failure, _i18.AudioFile>(
           this,
           Invocation.method(
             #call,
@@ -2514,36 +2750,36 @@ class MockGetSurahAudioUsecase extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i16.Either<_i11.Failure, _i17.AudioFile>>.value(
-                _FakeEither_16<_i11.Failure, _i17.AudioFile>(
+            _i8.Future<_i17.Either<_i12.Failure, _i18.AudioFile>>.value(
+                _FakeEither_17<_i12.Failure, _i18.AudioFile>(
           this,
           Invocation.method(
             #call,
             [surahNumber],
           ),
         )),
-      ) as _i8.Future<_i16.Either<_i11.Failure, _i17.AudioFile>>);
+      ) as _i8.Future<_i17.Either<_i12.Failure, _i18.AudioFile>>);
 }
 
 /// A class which mocks [GetAyahUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetAyahUsecase extends _i1.Mock implements _i19.GetAyahUsecase {
+class MockGetAyahUsecase extends _i1.Mock implements _i20.GetAyahUsecase {
   @override
-  _i19.AyahRepository get repository => (super.noSuchMethod(
+  _i20.AyahRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
-        returnValue: _FakeAyahRepository_19(
+        returnValue: _FakeAyahRepository_20(
           this,
           Invocation.getter(#repository),
         ),
-        returnValueForMissingStub: _FakeAyahRepository_19(
+        returnValueForMissingStub: _FakeAyahRepository_20(
           this,
           Invocation.getter(#repository),
         ),
-      ) as _i19.AyahRepository);
+      ) as _i20.AyahRepository);
 
   @override
-  _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>> call(
+  _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>> call(
     int? surahNumber,
     int? ayahNumber,
   ) =>
@@ -2555,8 +2791,8 @@ class MockGetAyahUsecase extends _i1.Mock implements _i19.GetAyahUsecase {
             ayahNumber,
           ],
         ),
-        returnValue: _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>.value(
-            _FakeEither_16<_i11.Failure, _i19.AyahRes>(
+        returnValue: _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>.value(
+            _FakeEither_17<_i12.Failure, _i20.AyahRes>(
           this,
           Invocation.method(
             #call,
@@ -2567,8 +2803,8 @@ class MockGetAyahUsecase extends _i1.Mock implements _i19.GetAyahUsecase {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>.value(
-                _FakeEither_16<_i11.Failure, _i19.AyahRes>(
+            _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>.value(
+                _FakeEither_17<_i12.Failure, _i20.AyahRes>(
           this,
           Invocation.method(
             #call,
@@ -2578,36 +2814,36 @@ class MockGetAyahUsecase extends _i1.Mock implements _i19.GetAyahUsecase {
             ],
           ),
         )),
-      ) as _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>);
+      ) as _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>);
 }
 
 /// A class which mocks [GetRandomAyahUsecase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetRandomAyahUsecase extends _i1.Mock
-    implements _i19.GetRandomAyahUsecase {
+    implements _i20.GetRandomAyahUsecase {
   @override
-  _i19.AyahRepository get repository => (super.noSuchMethod(
+  _i20.AyahRepository get repository => (super.noSuchMethod(
         Invocation.getter(#repository),
-        returnValue: _FakeAyahRepository_19(
+        returnValue: _FakeAyahRepository_20(
           this,
           Invocation.getter(#repository),
         ),
-        returnValueForMissingStub: _FakeAyahRepository_19(
+        returnValueForMissingStub: _FakeAyahRepository_20(
           this,
           Invocation.getter(#repository),
         ),
-      ) as _i19.AyahRepository);
+      ) as _i20.AyahRepository);
 
   @override
-  _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>> call() =>
+  _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>> call() =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
         ),
-        returnValue: _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>.value(
-            _FakeEither_16<_i11.Failure, _i19.AyahRes>(
+        returnValue: _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>.value(
+            _FakeEither_17<_i12.Failure, _i20.AyahRes>(
           this,
           Invocation.method(
             #call,
@@ -2615,53 +2851,53 @@ class MockGetRandomAyahUsecase extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>.value(
-                _FakeEither_16<_i11.Failure, _i19.AyahRes>(
+            _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>.value(
+                _FakeEither_17<_i12.Failure, _i20.AyahRes>(
           this,
           Invocation.method(
             #call,
             [],
           ),
         )),
-      ) as _i8.Future<_i16.Either<_i11.Failure, _i19.AyahRes>>);
+      ) as _i8.Future<_i17.Either<_i12.Failure, _i20.AyahRes>>);
 }
 
 /// A class which mocks [SurahBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSurahBloc extends _i1.Mock implements _i20.SurahBloc {
+class MockSurahBloc extends _i1.Mock implements _i21.SurahBloc {
   @override
-  _i18.GetSurahsUseCase get getSurahsUseCase => (super.noSuchMethod(
+  _i19.GetSurahsUseCase get getSurahsUseCase => (super.noSuchMethod(
         Invocation.getter(#getSurahsUseCase),
-        returnValue: _FakeGetSurahsUseCase_20(
+        returnValue: _FakeGetSurahsUseCase_21(
           this,
           Invocation.getter(#getSurahsUseCase),
         ),
-        returnValueForMissingStub: _FakeGetSurahsUseCase_20(
+        returnValueForMissingStub: _FakeGetSurahsUseCase_21(
           this,
           Invocation.getter(#getSurahsUseCase),
         ),
-      ) as _i18.GetSurahsUseCase);
+      ) as _i19.GetSurahsUseCase);
 
   @override
-  _i20.SurahState get state => (super.noSuchMethod(
+  _i21.SurahState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeSurahState_21(
+        returnValue: _FakeSurahState_22(
           this,
           Invocation.getter(#state),
         ),
-        returnValueForMissingStub: _FakeSurahState_21(
+        returnValueForMissingStub: _FakeSurahState_22(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i20.SurahState);
+      ) as _i21.SurahState);
 
   @override
-  _i8.Stream<_i20.SurahState> get stream => (super.noSuchMethod(
+  _i8.Stream<_i21.SurahState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i8.Stream<_i20.SurahState>.empty(),
-        returnValueForMissingStub: _i8.Stream<_i20.SurahState>.empty(),
-      ) as _i8.Stream<_i20.SurahState>);
+        returnValue: _i8.Stream<_i21.SurahState>.empty(),
+        returnValueForMissingStub: _i8.Stream<_i21.SurahState>.empty(),
+      ) as _i8.Stream<_i21.SurahState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -2671,7 +2907,7 @@ class MockSurahBloc extends _i1.Mock implements _i20.SurahBloc {
       ) as bool);
 
   @override
-  void add(_i20.SurahEvent? event) => super.noSuchMethod(
+  void add(_i21.SurahEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
           [event],
@@ -2680,7 +2916,7 @@ class MockSurahBloc extends _i1.Mock implements _i20.SurahBloc {
       );
 
   @override
-  void onEvent(_i20.SurahEvent? event) => super.noSuchMethod(
+  void onEvent(_i21.SurahEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onEvent,
           [event],
@@ -2689,7 +2925,7 @@ class MockSurahBloc extends _i1.Mock implements _i20.SurahBloc {
       );
 
   @override
-  void emit(_i20.SurahState? state) => super.noSuchMethod(
+  void emit(_i21.SurahState? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -2698,9 +2934,9 @@ class MockSurahBloc extends _i1.Mock implements _i20.SurahBloc {
       );
 
   @override
-  void on<E extends _i20.SurahEvent>(
-    _i26.EventHandler<E, _i20.SurahState>? handler, {
-    _i26.EventTransformer<E>? transformer,
+  void on<E extends _i21.SurahEvent>(
+    _i29.EventHandler<E, _i21.SurahState>? handler, {
+    _i29.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -2713,7 +2949,7 @@ class MockSurahBloc extends _i1.Mock implements _i20.SurahBloc {
 
   @override
   void onTransition(
-          _i26.Transition<_i20.SurahEvent, _i20.SurahState>? transition) =>
+          _i29.Transition<_i21.SurahEvent, _i21.SurahState>? transition) =>
       super.noSuchMethod(
         Invocation.method(
           #onTransition,
@@ -2733,7 +2969,7 @@ class MockSurahBloc extends _i1.Mock implements _i20.SurahBloc {
       ) as _i8.Future<void>);
 
   @override
-  void onChange(_i26.Change<_i20.SurahState>? change) => super.noSuchMethod(
+  void onChange(_i29.Change<_i21.SurahState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
