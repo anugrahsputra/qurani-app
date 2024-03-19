@@ -5,7 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:qurani/core/core.dart';
 import 'package:qurani/features/detail_surah/detail_surah.dart';
 
-import '../../dummy_data/surah_detaiLdummy.dart';
+import '../../dummy_data/surah_detail_dummy.dart';
 import '../../helper/mock.dart';
 import '../../helper/mock.mocks.dart';
 
