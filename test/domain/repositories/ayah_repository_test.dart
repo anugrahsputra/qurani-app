@@ -40,6 +40,38 @@ void main() {
 
       expect(result, const Left(ServerFailure(message: 'Server Failure')));
     });
+
+    test(
+        'should return NetworkFailure when the call to remote data source is unsuccessful',
+        () async {
+      when(mockAyahRemoteDatasource.getAyah(any, any))
+          .thenThrow(NetworkException());
+
+      final result = await ayahRepository.getAyah(1, 1);
+
+      expect(result,
+          const Left(NetworkFailure(message: 'No Internet Connection')));
+    });
+    test(
+        'should return NotFoundFailure when the call to remote data source is unsuccessful',
+        () async {
+      when(mockAyahRemoteDatasource.getAyah(any, any))
+          .thenThrow(NotFoundException());
+
+      final result = await ayahRepository.getAyah(1, 1);
+
+      expect(result, const Left(RequestFailure(message: 'Not Found')));
+    });
+    test(
+        'should return UnknownFailure when the call to remote data source is unsuccessful',
+        () async {
+      when(mockAyahRemoteDatasource.getAyah(any, any))
+          .thenThrow(UnknownException());
+
+      final result = await ayahRepository.getAyah(1, 1);
+
+      expect(result, const Left(UnknownFailure(message: 'Unknown Error')));
+    });
   });
   group('get random ayah', () {
     test('should get random ayah from repository', () async {
@@ -61,6 +93,37 @@ void main() {
       final result = await ayahRepository.getRandomAyah();
 
       expect(result, const Left(ServerFailure(message: 'Server Failure')));
+    });
+    test(
+        'should return NetworkFailure when the call to remote data source is unsuccessful',
+        () async {
+      when(mockAyahRemoteDatasource.getRandomAyah())
+          .thenThrow(NetworkException());
+
+      final result = await ayahRepository.getRandomAyah();
+
+      expect(result,
+          const Left(NetworkFailure(message: 'No Internet Connection')));
+    });
+    test(
+        'should return NotFoundFailure when the call to remote data source is unsuccessful',
+        () async {
+      when(mockAyahRemoteDatasource.getRandomAyah())
+          .thenThrow(NotFoundException());
+
+      final result = await ayahRepository.getRandomAyah();
+
+      expect(result, const Left(RequestFailure(message: 'Not Found')));
+    });
+    test(
+        'should return UnknownFailure when the call to remote data source is unsuccessful',
+        () async {
+      when(mockAyahRemoteDatasource.getRandomAyah())
+          .thenThrow(UnknownException());
+
+      final result = await ayahRepository.getRandomAyah();
+
+      expect(result, const Left(UnknownFailure(message: 'Unknown Error')));
     });
   });
 }
