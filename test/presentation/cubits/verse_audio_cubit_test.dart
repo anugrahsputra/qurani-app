@@ -53,6 +53,20 @@ void main() {
     ],
   );
 
+  blocTest<VerseAudioCubit, VerseAudioState>(
+    'emits [VerseStopped] when an exception is thrown in playVerse',
+    build: () {
+      when(mockAudioPlayer.play(any)).thenThrow(Exception('Failed to play'));
+      return verseAudioCubit;
+    },
+    act: (cubit) => cubit.playVerse('1', 'audioSource'),
+    expect: () => [
+      const VerseLoading('1'),
+      const VersePlaying('1', Duration.zero, Duration.zero),
+      const VerseStopped(),
+    ],
+  );
+
   blocTest(
     'should emit [VerseStopped] when called',
     build: () {
