@@ -3,11 +3,14 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:location/location.dart';
 
+import '../../../../../core/core.dart';
+
 part 'prayer_time_cubit.freezed.dart';
 part 'prayer_time_state.dart';
 
 class PrayerTimeCubit extends Cubit<PrayerTimeState> {
-  final Location location;
+  final UserLocation location;
+
   PrayerTimeCubit({required this.location})
       : super(const PrayerTimeState.initial());
 
