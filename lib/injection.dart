@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:get_it/get_it.dart';
+import 'package:location/location.dart';
 
 import 'core/core.dart';
 import 'features/ayah/ayah.dart';
@@ -46,9 +47,12 @@ Future<void> setup() async {
   );
   /* -----------------> External <-----------------*/
   sl.registerFactory<AudioPlayer>(() => AudioPlayer());
+  sl.registerFactory<Location>(() => Location());
   /* -----------------> Core <-----------------*/
   sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
   sl.registerFactory<AppNavigator>(() => AppNavigator());
+  sl.registerFactory<UserLocation>(
+      () => IUserLocation(location: sl<Location>()));
   sl.registerFactory<AudioPlayerManager>(
       () => AudioPlayerManagerImpl(audioPlayers: {}));
 
@@ -120,4 +124,6 @@ Future<void> setup() async {
       getSurahAudioUsecase: sl<GetSurahAudioUsecase>(),
     ),
   );
+  sl.registerFactory<PrayerTimeCubit>(
+      () => PrayerTimeCubit(location: sl<UserLocation>()));
 }
