@@ -146,7 +146,7 @@ class BuildAyahOTD extends StatelessWidget {
   }
 }
 
-class BuildClock extends StatelessWidget {
+class BuildClock extends StatelessWidget with PrayerTimeMixin {
   const BuildClock({
     super.key,
   });
