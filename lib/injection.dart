@@ -2,7 +2,9 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:location/location.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 import 'core/core.dart';
 import 'features/ayah/ayah.dart';
@@ -12,6 +14,8 @@ import 'features/surah/surah.dart';
 final sl = GetIt.instance;
 
 Future<void> setup() async {
+  initializeDateFormatting();
+  tz.initializeTimeZones();
   /* -----------------> Network <-----------------*/
   sl.registerFactory<Dio>(
     () => Dio(
