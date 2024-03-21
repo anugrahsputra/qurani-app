@@ -1,16 +1,24 @@
 String formatDuration(Duration duration) {
-  String formattedDuration = '';
-  String twoDigits(int n) => n.toString().padLeft(2, '0');
-
-  final hours = twoDigits(duration.inHours.remainder(24));
-  final minutes = twoDigits(duration.inMinutes.remainder(60));
+  final hours = getFormattedHours(duration);
+  final minutes = getFormattedMinutes(duration);
 
   if (hours == '00') {
-    formattedDuration = '$minutes menit';
+    return '$minutes menit';
   } else if (minutes == '00') {
-    formattedDuration = '$hours jam';
+    return '$hours jam';
   } else {
-    formattedDuration = '$hours jam $minutes menit';
+    return '$hours jam $minutes menit';
   }
-  return formattedDuration;
+}
+
+String getFormattedHours(Duration duration) {
+  return twoDigits(duration.inHours.remainder(24));
+}
+
+String getFormattedMinutes(Duration duration) {
+  return twoDigits(duration.inMinutes.remainder(60));
+}
+
+String twoDigits(int n) {
+  return n.toString().padLeft(2, '0');
 }
