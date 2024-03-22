@@ -46,23 +46,17 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
     final permissionGranted = await location.hasPermission();
     if (permissionGranted == PermissionStatus.granted) {
       final currentLocation = await location.getLocation();
-      placemarks.addAll(
-        await placemarkFromCoordinates(
-          currentLocation.latitude!,
-          currentLocation.longitude!,
-        ),
-      );
       final params = CalculationMethod.other.getParameters();
       params.madhab = Madhab.shafi;
       params.highLatitudeRule = HighLatitudeRule.middle_of_the_night;
       params.fajrAngle = 20.0;
       params.ishaAngle = 18.0;
-      params.adjustments.dhuhr = -3;
+      params.adjustments.dhuhr = -2;
       params.adjustments.asr = -3;
       params.adjustments.maghrib = -3;
-      params.adjustments.isha = -3;
-      params.adjustments.fajr = -3;
-      params.adjustments.sunrise = -3;
+      params.adjustments.isha = -2;
+      params.adjustments.fajr = 5;
+      params.adjustments.sunrise = -4;
       final timezone = tz.getLocation('Asia/Jakarta');
       final now = tz.TZDateTime.now(timezone);
 
@@ -81,8 +75,14 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
 
   Future<String> getAddressFromCoordinates(double lat, double long) async {
     List<Placemark> placemarks = await placemarkFromCoordinates(lat, long);
-    Placemark place = placemarks[0];
-    String address = "${place.locality}, ${place.administrativeArea}";
-    return address;
+    if (placemarks.isNotEmpty) {
+      Placemark place = placemarks[0];
+      String locality = place.locality ?? 'Unknown';
+      String administrativeArea = place.administrativeArea ?? 'Unknown';
+      String address = "$locality, $administrativeArea";
+      return address;
+    } else {
+      return 'Unknown Location';
+    }
   }
 }
