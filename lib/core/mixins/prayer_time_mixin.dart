@@ -1,4 +1,7 @@
 import 'package:adhan/adhan.dart';
+import 'package:flutter/material.dart';
+
+import '../core.dart';
 
 mixin PrayerTimeMixin {
   Map<String, dynamic> getCurrentPrayerTimeMap(
@@ -7,39 +10,101 @@ mixin PrayerTimeMixin {
   ) {
     String currentPrayerTime = '';
     String nextPrayerTime = '';
+    DateTime time;
     Duration remainingTime;
 
-    if (current.isBefore(prayerTimes.sunrise)) {
+    if (current.isBefore(prayerTimes.dhuhr)) {
       currentPrayerTime = 'Subuh';
-      nextPrayerTime = '☀️ Terbit';
-      remainingTime = prayerTimes.sunrise.difference(current);
-    } else if (current.isBefore(prayerTimes.dhuhr)) {
-      currentPrayerTime = '☀️ Terbit';
       nextPrayerTime = 'Dzuhur';
-      remainingTime = prayerTimes.dhuhr.difference(current);
+      time = prayerTimes.dhuhr;
+      remainingTime = time.difference(current);
     } else if (current.isBefore(prayerTimes.asr)) {
       currentPrayerTime = 'Dzuhur';
       nextPrayerTime = 'Ashar';
-      remainingTime = prayerTimes.asr.difference(current);
+      time = prayerTimes.asr;
+      remainingTime = time.difference(current);
     } else if (current.isBefore(prayerTimes.maghrib)) {
       currentPrayerTime = 'Ashar';
       nextPrayerTime = 'Magrib';
-      remainingTime = prayerTimes.maghrib.difference(current);
+      time = prayerTimes.maghrib;
+      remainingTime = time.difference(current);
     } else if (current.isBefore(prayerTimes.isha)) {
       currentPrayerTime = 'Magrib';
       nextPrayerTime = 'Isya';
-      remainingTime = prayerTimes.isha.difference(current);
+      time = prayerTimes.isha;
+      remainingTime = time.difference(current);
     } else {
       currentPrayerTime = 'Isya';
       nextPrayerTime = 'Subuh';
-      remainingTime =
-          prayerTimes.fajr.add(const Duration(days: 1)).difference(current);
+      time = prayerTimes.fajr;
+      remainingTime = time.add(const Duration(days: 1)).difference(current);
     }
 
     return {
       'current': currentPrayerTime,
       'next': nextPrayerTime,
-      'remaining': remainingTime
+      'time': time,
+      'remainingTime': remainingTime,
     };
+  }
+
+  Map<String, dynamic> getPrayerSchedule(PrayerTimes prayerTimes) {
+    final prayerTime = {
+      'Subuh': prayerTimes.fajr,
+      // 'Matahari Terbit': prayerTimes.sunrise,
+      'Dzuhur': prayerTimes.dhuhr,
+      'Ashar': prayerTimes.asr,
+      'Magrib': prayerTimes.maghrib,
+      'Isya': prayerTimes.isha,
+    };
+
+    return prayerTime;
+  }
+
+  Map<String, dynamic> getPrayerIcon(PrayerTimes prayerTimes) {
+    final prayerTime = {
+      'Subuh': 'assets/icons/subuh.png',
+      // 'Matahari Terbit': 'assets/icons/sunrise.png',
+      'Dzuhur': 'assets/icons/dhuhr.png',
+      'Ashar': 'assets/icons/asr.png',
+      'Magrib': 'assets/icons/maghrib.png',
+      'Isya': 'assets/icons/isha.png',
+    };
+
+    return prayerTime;
+  }
+
+  String getImagePath(String currentPrayerTime) {
+    switch (currentPrayerTime) {
+      case 'Subuh':
+        return BgPaths.fajr;
+      case 'Dzuhur':
+        return BgPaths.dhuhr;
+      case 'Ashar':
+        return BgPaths.asr;
+      case 'Magrib':
+        return BgPaths.maghrib;
+      case 'Isya':
+        return BgPaths.isha;
+      default:
+        return BgPaths.isha;
+    }
+  }
+
+  Color getTextColor(String currentPrayerTime) {
+    switch (currentPrayerTime) {
+      case 'Subuh':
+        return Colors.white;
+      case 'Dzuhur':
+        return Colors.black;
+      case 'Ashar':
+        return Colors.white;
+      case 'Magrib':
+        return Colors.white;
+      case 'Isya':
+        return Colors.white;
+      default:
+        return Colors.white;
+    }
   }
 }
