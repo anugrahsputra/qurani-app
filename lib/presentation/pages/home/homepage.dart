@@ -35,7 +35,6 @@ class _HomepageState extends State<Homepage> {
     Future.microtask(() {
       surahBloc.add(const OnGetSurah());
       ayahsBloc.add(const OnGetRandomAyah());
-      prayerTimeCubit.getLocation();
     });
   }
 
@@ -80,12 +79,13 @@ class _HomepageState extends State<Homepage> {
         ],
         child: AppScaffold(
           appBar: AppBar(
-            title: const BuildLocation(),
+            title: Text('Qurani', style: GoogleFonts.poppins()),
           ),
           body: const Column(
             children: [
-              BannerContainer(),
-              Gap(20),
+              Banner(),
+              Gap(10),
+              PrayerSchedule(),
             ],
           ),
         ),
