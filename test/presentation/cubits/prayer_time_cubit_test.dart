@@ -1,92 +1,117 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mockito/mockito.dart';
+import 'package:qurani/core/core.dart';
 import 'package:qurani/features/surah/logic/cubits/prayer_time/prayer_time_cubit.dart';
+import 'package:qurani/features/surah/surah.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
+import '../../helper/injection.dart';
 import '../../helper/mock.dart';
 
 void main() {
   late PrayerTimeCubit prayerTimeCubit;
-  late MockUserLocation mockUserLocation;
-
+  late UserLocation mockUserLocation;
   setUp(() {
-    mockUserLocation = MockUserLocation();
+    registerSl();
+    mockUserLocation = getMockUserLocation();
     prayerTimeCubit = PrayerTimeCubit(location: mockUserLocation);
   });
 
+  tearDown(() => unregisterSl());
+
   group('prayerTimeCubit', () {
-    blocTest<PrayerTimeCubit, PrayerTimeState>(
-      'emits [LocationPermissionDenied] when location service is disabled and user denies request',
-      setUp: () {
-        when(mockUserLocation.serviceEnabled())
-            .thenAnswer((_) => Future.value(false));
-        when(mockUserLocation.requestService())
-            .thenAnswer((_) => Future.value(false));
-      },
+    blocTest(
+      'should emit [LocationLoaded] when location data fetched',
       build: () => prayerTimeCubit,
-      act: (cubit) => cubit.requestPermission(),
-      expect: () => [const LocationPermissionDenied()],
-    );
-
-    blocTest<PrayerTimeCubit, PrayerTimeState>(
-      'emits [LocationPermissionGranted] when location service is enabled and user grant permission',
-      setUp: () {
-        when(mockUserLocation.serviceEnabled())
-            .thenAnswer((_) => Future.value(true));
-        when(mockUserLocation.hasPermission())
-            .thenAnswer((_) => Future.value(PermissionStatus.granted));
-        when(mockUserLocation.requestPermission())
-            .thenAnswer((_) => Future.value(PermissionStatus.granted));
-      },
-      build: () => prayerTimeCubit,
-      act: (cubit) => cubit.requestPermission(),
-      expect: () => [const LocationPermissionGranted()],
-    );
-
-    blocTest<PrayerTimeCubit, PrayerTimeState>(
-      'emits [LocationPermissionDenied] when location service is enabled and user denies permission',
-      setUp: () {
-        when(mockUserLocation.serviceEnabled())
-            .thenAnswer((_) => Future.value(true));
-        when(mockUserLocation.hasPermission())
-            .thenAnswer((_) => Future.value(PermissionStatus.denied));
-        when(mockUserLocation.requestPermission())
-            .thenAnswer((_) => Future.value(PermissionStatus.denied));
-      },
-      build: () => prayerTimeCubit,
-      act: (cubit) => cubit.requestPermission(),
-      expect: () => [const LocationPermissionDenied()],
-    );
-
-    blocTest<PrayerTimeCubit, PrayerTimeState>(
-      'emits [LocationLoaded] when location service is enabled and user grant permission',
       setUp: () {
         tz.initializeTimeZones();
-        when(mockUserLocation.hasPermission())
-            .thenAnswer((_) => Future.value(PermissionStatus.granted));
-        when(mockUserLocation.getLocation()).thenAnswer(
-          (_) => Future.value(
-            LocationData.fromMap({
-              'latitude': 37.4219983,
-              'longitude': -122.084,
-            }),
-          ),
-        );
+
+        when(mockUserLocation.isLocationServiceEnabled())
+            .thenAnswer((_) async => true);
+        when(mockUserLocation.checkPermission())
+            .thenAnswer((_) async => LocationPermission.always);
+        when(mockUserLocation.requestPermission())
+            .thenAnswer((_) async => LocationPermission.always);
+        when(mockUserLocation.getCurrentPosition())
+            .thenAnswer((_) async => MockPosition());
       },
-      build: () => prayerTimeCubit,
-      act: (cubit) => cubit.getLocation(),
-      expect: () => [isA<LocationLoaded>()],
+      act: (cubit) => cubit.getLoc(),
+      expect: () => [
+        const PrayerTimeLoading(),
+        isA<LocationLoaded>(),
+      ],
+      verify: (bloc) {
+        verifyInOrder([
+          mockUserLocation.isLocationServiceEnabled(),
+          mockUserLocation.checkPermission(),
+          mockUserLocation.getCurrentPosition(),
+        ]);
+      },
     );
 
-    blocTest<PrayerTimeCubit, PrayerTimeState>(
-      'emits [LocationPermissionDenied] when location service is enabled and user denies permission',
-      setUp: () => when(mockUserLocation.hasPermission())
-          .thenAnswer((_) => Future.value(PermissionStatus.denied)),
+    blocTest(
+      'should emit [LocationPermissionDenied] when location service is disabled',
       build: () => prayerTimeCubit,
-      act: (cubit) => cubit.getLocation(),
-      expect: () => [const LocationPermissionDenied()],
+      setUp: () {
+        when(mockUserLocation.isLocationServiceEnabled())
+            .thenAnswer((_) async => false);
+      },
+      act: (cubit) => cubit.getLoc(),
+      expect: () => [
+        const PrayerTimeLoading(),
+        const LocationPermissionDenied(),
+      ],
+      verify: (bloc) {
+        verify(mockUserLocation.isLocationServiceEnabled());
+      },
+    );
+
+    blocTest(
+      'should emit [LocationPermissionDenied] when location permission is denied',
+      build: () => prayerTimeCubit,
+      setUp: () {
+        when(mockUserLocation.isLocationServiceEnabled())
+            .thenAnswer((_) async => true);
+        when(mockUserLocation.checkPermission())
+            .thenAnswer((_) async => LocationPermission.denied);
+      },
+      act: (cubit) => cubit.getLoc(),
+      expect: () => [
+        const PrayerTimeLoading(),
+        const LocationPermissionDenied(),
+      ],
+      verify: (bloc) {
+        verifyInOrder([
+          mockUserLocation.isLocationServiceEnabled(),
+          mockUserLocation.checkPermission(),
+        ]);
+      },
+    );
+
+    blocTest(
+      'should emit [LocationPermissionDenied] when failed to get location',
+      build: () => prayerTimeCubit,
+      setUp: () {
+        when(mockUserLocation.isLocationServiceEnabled())
+            .thenAnswer((_) async => true);
+        when(mockUserLocation.checkPermission())
+            .thenAnswer((_) async => LocationPermission.always);
+        when(mockUserLocation.getCurrentPosition()).thenThrow(Exception());
+      },
+      act: (cubit) => cubit.getLoc(),
+      expect: () => [
+        const PrayerTimeLoading(),
+        const LocationPermissionDenied(),
+      ],
+      verify: (bloc) {
+        verifyInOrder([
+          mockUserLocation.isLocationServiceEnabled(),
+          mockUserLocation.checkPermission(),
+          mockUserLocation.getCurrentPosition(),
+        ]);
+      },
     );
   });
 }

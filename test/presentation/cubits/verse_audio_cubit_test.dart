@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,23 +7,29 @@ import 'package:qurani/core/core.dart';
 import 'package:qurani/features/detail_surah/detail_surah.dart';
 
 import '../../dummy_data/audio_file_dummy.dart';
+import '../../helper/injection.dart';
 import '../../helper/mock.dart';
 
 void main() {
   late VerseAudioCubit verseAudioCubit;
   late MockAudioPlayer mockAudioPlayer;
-  late MockAudioPlayerManager mockAudioPlayerManager;
-  late MockGetSurahAudioUsecase mockGetSurahAudioUsecase;
+  late AudioPlayerManager mockAudioPlayerManager;
+  late GetSurahAudioUsecase mockGetSurahAudioUsecase;
 
   setUp(() {
-    mockAudioPlayer = MockAudioPlayer();
-    mockAudioPlayerManager = MockAudioPlayerManager();
-    mockGetSurahAudioUsecase = MockGetSurahAudioUsecase();
+    registerSl();
+    mockAudioPlayer = getMockAudioPlayer();
+    mockAudioPlayerManager = getMockAudioPlayerManager();
+    mockGetSurahAudioUsecase = getMockGetSurahAudioUsecase();
     verseAudioCubit = VerseAudioCubit(
       getSurahAudioUsecase: mockGetSurahAudioUsecase,
       audioPlayerManager: mockAudioPlayerManager,
       player: mockAudioPlayer,
     );
+  });
+
+  tearDown(() {
+    unregisterSl();
   });
 
   test('initial state is VerseInitial', () {
@@ -43,7 +50,8 @@ void main() {
   blocTest(
     'should emit [VerseLoading, VersePlaying, VerseStopped] when called',
     build: () {
-      when(mockAudioPlayer.play(any)).thenAnswer((_) => Future.value());
+      var source = UrlSource('audiosource');
+      when(mockAudioPlayer.play(source)).thenAnswer((_) => Future.value());
       return verseAudioCubit;
     },
     act: (cubit) => cubit.playVerse('1', 'audioSource'),
@@ -80,7 +88,7 @@ void main() {
   blocTest(
     'should emit [VerseLoading, VerseStopped] when getSurahAudioUsecase returns an error',
     build: () {
-      when(mockGetSurahAudioUsecase(any)).thenAnswer(
+      when(mockGetSurahAudioUsecase(1)).thenAnswer(
           (_) => Future.value(const Left(ServerFailure(message: ''))));
       return verseAudioCubit;
     },
@@ -94,7 +102,7 @@ void main() {
   blocTest(
     'should emit [VerseLoading, VersePlayingAll, PlayerState.playing] when getSurahAudioUsecase returns success',
     build: () {
-      when(mockGetSurahAudioUsecase(any))
+      when(mockGetSurahAudioUsecase(1))
           .thenAnswer((_) => Future.value(const Right(tAudioFile)));
       return verseAudioCubit;
     },
