@@ -8,13 +8,13 @@ class VerseAudioState with _$VerseAudioState {
   ) = VerseLoading;
   const factory VerseAudioState.playing(
     String verseNumber,
-    Duration position,
-    Duration duration,
+    Duration? position,
+    Duration? duration,
   ) = VersePlaying;
   const factory VerseAudioState.playingAll(
     String surahNumber,
-    Duration position,
-    Duration duration,
+    Duration? position,
+    Duration? duration,
   ) = VersePlayingAll;
   const factory VerseAudioState.stopped() = VerseStopped;
   const factory VerseAudioState.paused() = VersePaused;
