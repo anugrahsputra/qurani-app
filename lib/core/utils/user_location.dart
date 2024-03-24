@@ -1,31 +1,26 @@
-import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
 
 abstract class UserLocation {
-  Future<PermissionStatus> requestPermission();
-  Future<bool> requestService();
-  Future<PermissionStatus> hasPermission();
-  Future<LocationData> getLocation();
-  Future<bool> serviceEnabled();
+  Future<bool> isLocationServiceEnabled();
+  Future<LocationPermission> checkPermission();
+  Future<LocationPermission> requestPermission();
+  Future<Position> getCurrentPosition();
 }
 
 class IUserLocation implements UserLocation {
-  final Location location;
-
-  IUserLocation({required this.location});
   @override
-  Future<LocationData> getLocation() async => await location.getLocation();
+  Future<LocationPermission> checkPermission() => Geolocator.checkPermission();
 
   @override
-  Future<PermissionStatus> hasPermission() async =>
-      await location.hasPermission();
+  Future<Position> getCurrentPosition() => Geolocator.getCurrentPosition(
+        forceAndroidLocationManager: false,
+      );
 
   @override
-  Future<PermissionStatus> requestPermission() async =>
-      location.requestPermission();
+  Future<bool> isLocationServiceEnabled() =>
+      Geolocator.isLocationServiceEnabled();
 
   @override
-  Future<bool> serviceEnabled() async => await location.serviceEnabled();
-
-  @override
-  Future<bool> requestService() async => await location.requestService();
+  Future<LocationPermission> requestPermission() =>
+      Geolocator.requestPermission();
 }
