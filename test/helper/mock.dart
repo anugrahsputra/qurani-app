@@ -1,7 +1,7 @@
 import 'package:adhan/adhan.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
-import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:mockito/annotations.dart';
 import 'package:qurani/core/core.dart';
 import 'package:qurani/features/ayah/ayah.dart';
@@ -14,8 +14,9 @@ export 'mock.mocks.dart';
   /* External */
   MockSpec<Dio>(),
   MockSpec<AudioPlayer>(),
-  MockSpec<Location>(),
   MockSpec<PrayerTimes>(),
+  MockSpec<Position>(),
+  MockSpec<Geolocator>(),
   /* Core */
   MockSpec<AudioPlayerManager>(),
   MockSpec<DioClient>(),
@@ -38,5 +39,10 @@ export 'mock.mocks.dart';
   MockSpec<GetRandomAyahUsecase>(),
   /* Bloc */
   MockSpec<SurahBloc>(),
+  MockSpec<DetailSurahBloc>(),
+  MockSpec<AyahsBloc>(),
+  /* Cubit */
+  MockSpec<PrayerTimeCubit>(),
+  MockSpec<VerseAudioCubit>(),
 ])
 void main(List<String> args) {}
