@@ -2,7 +2,8 @@ import 'package:adhan/adhan.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:logging/logging.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../../../../core/core.dart';
@@ -13,39 +14,36 @@ part 'prayer_time_state.dart';
 class PrayerTimeCubit extends Cubit<PrayerTimeState> {
   final UserLocation location;
 
+  final Logger _log = Logger('PrayerTimeCubit');
+
   PrayerTimeCubit({required this.location})
       : super(const PrayerTimeState.initial());
-  List<Placemark> get placemarks => [];
 
-  Future<void> requestPermission() async {
-    bool serviceEnabled;
-    PermissionStatus permissionGranted;
+  Future<void> getLoc() async {
+    emit(const PrayerTimeLoading());
+    _log.info('Getting location...');
 
-    serviceEnabled = await location.serviceEnabled();
+    bool serviceEnabled = await location.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
-      if (!serviceEnabled) {
+      _log.warning('Failed to get location: Location service is disabled');
+      emit(const LocationPermissionDenied());
+      return;
+    }
+
+    LocationPermission permission = await location.checkPermission();
+    if (permission != LocationPermission.always &&
+        permission != LocationPermission.whileInUse) {
+      permission = await location.requestPermission();
+      if (permission != LocationPermission.always &&
+          permission != LocationPermission.whileInUse) {
+        _log.warning('Failed to get location: Location permission denied');
         emit(const LocationPermissionDenied());
         return;
       }
     }
 
-    permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.denied) {
-      permissionGranted = await location.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
-        emit(const LocationPermissionDenied());
-        return;
-      }
-    }
-
-    emit(const LocationPermissionGranted());
-  }
-
-  Future<void> getLocation() async {
-    final permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.granted) {
-      final currentLocation = await location.getLocation();
+    try {
+      Position position = await location.getCurrentPosition();
       final params = CalculationMethod.other.getParameters();
       params.madhab = Madhab.shafi;
       params.highLatitudeRule = HighLatitudeRule.middle_of_the_night;
@@ -60,15 +58,20 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
       final timezone = tz.getLocation('Asia/Jakarta');
       final now = tz.TZDateTime.now(timezone);
 
-      final coordinates =
-          Coordinates(currentLocation.latitude!, currentLocation.longitude!);
+      final coordinates = Coordinates(
+        position.latitude,
+        position.longitude,
+      );
       final times = PrayerTimes(
         coordinates,
         DateComponents.from(now),
         params,
       );
-      emit(LocationLoaded(currentLocation, times));
-    } else {
+
+      _log.fine('Location loaded');
+      emit(LocationLoaded(position, times));
+    } catch (_) {
+      _log.warning('Failed to get location');
       emit(const LocationPermissionDenied());
     }
   }
@@ -80,8 +83,11 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
       String locality = place.locality ?? 'Unknown';
       String administrativeArea = place.administrativeArea ?? 'Unknown';
       String address = "$locality, $administrativeArea";
+
+      super.close();
       return address;
     } else {
+      super.close();
       return 'Unknown Location';
     }
   }
