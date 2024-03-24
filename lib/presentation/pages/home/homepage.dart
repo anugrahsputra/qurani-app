@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart' as hijri;
 import 'package:intl/intl.dart' as dt;
+import 'package:redacted/redacted.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../../../../core/core.dart';
@@ -33,6 +34,7 @@ class _HomepageState extends State<Homepage> {
   void initState() {
     super.initState();
     Future.microtask(() {
+      prayerTimeCubit.getLoc();
       surahBloc.add(const OnGetSurah());
       ayahsBloc.add(const OnGetRandomAyah());
     });
@@ -68,9 +70,6 @@ class _HomepageState extends State<Homepage> {
           BlocListener<PrayerTimeCubit, PrayerTimeState>(
             listener: (context, state) {
               if (state is LocationInitial) {
-                prayerTimeCubit.requestPermission();
-              } else if (state is LocationPermissionGranted) {
-                prayerTimeCubit.getLocation();
               } else if (state is LocationPermissionDenied) {
                 AppSnackbar.showError(context, 'Location permission denied');
               }
@@ -81,12 +80,17 @@ class _HomepageState extends State<Homepage> {
           appBar: AppBar(
             title: Text('Qurani', style: GoogleFonts.poppins()),
           ),
-          body: const Column(
-            children: [
-              Banner(),
-              Gap(10),
-              PrayerSchedule(),
-            ],
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: [
+                const Banner(),
+                const Gap(10),
+                const PrayerSchedule(),
+                const Gap(10),
+                SurahCards(),
+              ],
+            ),
           ),
         ),
       ),
