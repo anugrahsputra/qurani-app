@@ -10,7 +10,6 @@ abstract class AyahRemoteDatasource {
 
 class IAyahRemoteDatasource implements AyahRemoteDatasource {
   final DioClient dioClient;
-
   IAyahRemoteDatasource({required this.dioClient});
 
   @override
@@ -26,13 +25,16 @@ class IAyahRemoteDatasource implements AyahRemoteDatasource {
 
   @override
   Future<AyahResModel> getRandomAyah() async {
-    int randomAyah = Random().nextInt(286) + 1;
-    int randomSurah = Random().nextInt(114) + 1;
+    final randomSurahIndex = Random().nextInt(surahsWithAyahs.length) + 1;
+    final randomSurah = surahsWithAyahs[randomSurahIndex];
+
+    final maxAyah = surahAyahCount[randomSurah];
+
+    final randomAyah = Random().nextInt(maxAyah!) + 1;
 
     final response = await dioClient.get(
       '${Endpoint.ayah}/$randomSurah/$randomAyah',
     );
-
     final parsedData =
         response.data is String ? Parser.getMap(response.data) : response.data;
 

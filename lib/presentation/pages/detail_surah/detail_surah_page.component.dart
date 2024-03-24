@@ -75,7 +75,7 @@ class DetailHeader extends StatelessWidget {
             ),
             child: PlayAllButton(
               verseAudioCubit: verseAudioCubit,
-              surahNumber: surahDetail.number!.toInt(),
+              surahNumber: surahDetail.number ?? 0,
             ),
           ),
         ],
@@ -402,18 +402,20 @@ class _AudioSliderState extends State<AudioSlider> {
     return BlocBuilder<VerseAudioCubit, VerseAudioState>(
       builder: (context, state) {
         if (state is VersePlaying && state.verseNumber == widget.verseNumber) {
-          final position = state.position.inSeconds.toDouble();
-          final duration = state.duration.inSeconds.toDouble();
-          final value = position / duration;
-
+          final position = state.position ?? Duration.zero;
+          final duration = state.duration ?? Duration.zero;
+          double? value = duration.inMilliseconds > 0
+              ? position.inMicroseconds / duration.inMicroseconds
+              : 0;
           return Container(
             height: 2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2.5),
-              color: AppColors.primary,
+              color: AppColors.primaryContainer,
             ),
             child: LinearProgressIndicator(
               value: value,
+              color: AppColors.primary,
               backgroundColor: AppColors.primaryContainer,
               borderRadius: BorderRadius.circular(2.5),
             ),
@@ -424,11 +426,7 @@ class _AudioSliderState extends State<AudioSlider> {
             height: 2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2.5),
-              color: AppColors.primary,
-            ),
-            child: LinearProgressIndicator(
-              backgroundColor: AppColors.primaryContainer,
-              borderRadius: BorderRadius.circular(2.5),
+              color: AppColors.primaryContainer,
             ),
           );
         } else {
@@ -436,7 +434,7 @@ class _AudioSliderState extends State<AudioSlider> {
             height: 2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2.5),
-              color: AppColors.primary,
+              color: AppColors.primaryContainer,
             ),
           );
         }

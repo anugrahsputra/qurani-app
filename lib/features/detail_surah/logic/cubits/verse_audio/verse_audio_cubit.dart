@@ -41,7 +41,7 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
         emit(VersePlaying(
           verseNumber,
           Duration.zero,
-          duration!,
+          duration ?? Duration.zero,
         ));
       });
       player?.onPositionChanged.listen((position) {
@@ -82,12 +82,13 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
         emit(VersePlayingAll(
           surahNumber.toString(),
           Duration.zero,
-          duration!,
+          duration ?? Duration.zero,
         ));
       });
       player?.onPositionChanged.listen((position) {
         if (duration != null) {
-          emit(VersePlayingAll(surahNumber.toString(), position, duration!));
+          emit(VersePlayingAll(
+              surahNumber.toString(), position, duration ?? Duration.zero));
         }
       });
       player?.play(UrlSource(r.audioUrl), position: Duration.zero);
