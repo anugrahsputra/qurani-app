@@ -29,18 +29,15 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
   @override
   void onResponse(response, handler) {
     log.fine("Response: ${response.requestOptions.uri}");
-    // if (response.statusCode == 200) {
-    //   _cache[response.requestOptions.uri] = response;
-    // }
+    if (response.statusCode == 304) {
+      log.shout("cache hit: ${response.requestOptions.uri}");
+    }
     super.onResponse(response, handler);
   }
 
   @override
   void onError(err, handler) async {
     log.severe("Error: ${err.requestOptions.uri}");
-    if (err.response?.statusCode == 304) {
-      log.shout("Cache hit: ${err.requestOptions.uri}");
-    }
     if (isBadRequest(err)) {
       throw BadRequestException();
     } else if (isUnauthorized(err)) {
