@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:location/location.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 import 'core/core.dart';
@@ -51,12 +50,10 @@ Future<void> setup() async {
   );
   /* -----------------> External <-----------------*/
   sl.registerFactory<AudioPlayer>(() => AudioPlayer());
-  sl.registerFactory<Location>(() => Location());
   /* -----------------> Core <-----------------*/
   sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
   sl.registerFactory<AppNavigator>(() => AppNavigator());
-  sl.registerFactory<UserLocation>(
-      () => IUserLocation(location: sl<Location>()));
+  sl.registerFactory<UserLocation>(() => IUserLocation());
   sl.registerFactory<AudioPlayerManager>(
       () => AudioPlayerManagerImpl(audioPlayers: {}));
 
