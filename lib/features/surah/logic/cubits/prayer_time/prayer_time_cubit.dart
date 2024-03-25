@@ -84,10 +84,8 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
       String administrativeArea = place.administrativeArea ?? 'Unknown';
       String address = "$locality, $administrativeArea";
 
-      super.close();
       return address;
     } else {
-      super.close();
       return 'Unknown Location';
     }
   }
