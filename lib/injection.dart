@@ -7,6 +7,7 @@ import 'package:timezone/data/latest.dart' as tz;
 
 import 'core/core.dart';
 import 'features/ayah/ayah.dart';
+import 'features/bookmark/bookmark.dart';
 import 'features/detail_surah/detail_surah.dart';
 import 'features/surah/surah.dart';
 
@@ -54,8 +55,10 @@ Future<void> setup() async {
   sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
   sl.registerFactory<AppNavigator>(() => AppNavigator());
   sl.registerFactory<UserLocation>(() => IUserLocation());
+  sl.registerFactory<DatabaseHelper>(() => DatabaseHelper());
   sl.registerFactory<AudioPlayerManager>(
-      () => AudioPlayerManagerImpl(audioPlayers: {}));
+    () => AudioPlayerManagerImpl(audioPlayers: {}),
+  );
 
   /* -----------------> Data <-----------------*/
   sl.registerLazySingleton<SurahRemoteDataSource>(
@@ -69,6 +72,11 @@ Future<void> setup() async {
   sl.registerLazySingleton<AyahRemoteDatasource>(
     () => IAyahRemoteDatasource(dioClient: sl<DioClient>()),
   );
+
+  sl.registerLazySingleton<BookmarkLocalDataSource>(
+    () => BookmarkLocalDataSourceImpl(databaseHelper: sl<DatabaseHelper>()),
+  );
+
   /* -----------------> Repository <-----------------*/
   sl.registerLazySingleton<BaseSurahRepository>(
     () => SurahRepositoryImpl(remoteDataSource: sl<SurahRemoteDataSource>()),
@@ -83,6 +91,11 @@ Future<void> setup() async {
     () => IAyahRepository(remoteDatasource: sl<AyahRemoteDatasource>()),
   );
 
+  sl.registerLazySingleton<BookmarkRepository>(
+    () => IBookmarkRepository(
+      datasource: sl<BookmarkLocalDataSource>(),
+    ),
+  );
   /* -----------------> UseCase <-----------------*/
   sl.registerLazySingleton<GetSurahsUseCase>(
     () => GetSurahsUseCase(sl<BaseSurahRepository>()),
@@ -103,6 +116,18 @@ Future<void> setup() async {
 
   sl.registerLazySingleton<GetRandomAyahUsecase>(
     () => GetRandomAyahUsecase(repository: sl<AyahRepository>()),
+  );
+
+  sl.registerLazySingleton<GetBookmarksUsecase>(
+    () => GetBookmarksUsecase(
+      repository: sl<BookmarkRepository>(),
+    ),
+  );
+
+  sl.registerLazySingleton<InsertBookmarkUsecase>(
+    () => InsertBookmarkUsecase(
+      repository: sl<BookmarkRepository>(),
+    ),
   );
   /* -----------------> Bloc <-----------------*/
   sl.registerFactory<SurahBloc>(
