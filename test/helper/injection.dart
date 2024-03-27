@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:qurani/core/core.dart';
 import 'package:qurani/features/ayah/ayah.dart';
+import 'package:qurani/features/bookmark/bookmark.dart';
 import 'package:qurani/features/detail_surah/detail_surah.dart';
 import 'package:qurani/features/surah/surah.dart';
 
@@ -69,6 +70,13 @@ MockRequestRetrier getMockRequestRetrier() {
   return mock;
 }
 
+MockDatabaseHelper getMockDatabaseHelper() {
+  MockDatabaseHelper mock = MockDatabaseHelper();
+  _removeRegistrationIfExists<DatabaseHelper>();
+  sl.registerSingleton<DatabaseHelper>(mock);
+  return mock;
+}
+
 /* Data */
 MockSurahRemoteDataSource getMockSurahRemoteDataSource() {
   MockSurahRemoteDataSource mock = MockSurahRemoteDataSource();
@@ -91,6 +99,13 @@ MockAyahRemoteDatasource getMockAyahRemoteDatasource() {
   return mock;
 }
 
+MockBookmarkLocalDataSource getMockBookmarkLocalDataSource() {
+  MockBookmarkLocalDataSource mock = MockBookmarkLocalDataSource();
+  _removeRegistrationIfExists<BookmarkLocalDataSource>();
+  sl.registerSingleton<BookmarkLocalDataSource>(mock);
+  return mock;
+}
+
 /* Domain/Repository */
 MockBaseSurahRepository getMockBaseSurahRepository() {
   MockBaseSurahRepository mock = MockBaseSurahRepository();
@@ -110,6 +125,13 @@ MockAyahRepository getMockAyahRepository() {
   MockAyahRepository mock = MockAyahRepository();
   _removeRegistrationIfExists<AyahRepository>();
   sl.registerSingleton<AyahRepository>(mock);
+  return mock;
+}
+
+MockBookmarkRepository getMockBookmarkRepository() {
+  MockBookmarkRepository mock = MockBookmarkRepository();
+  _removeRegistrationIfExists<BookmarkRepository>();
+  sl.registerSingleton<BookmarkRepository>(mock);
   return mock;
 }
 
@@ -146,6 +168,20 @@ MockGetRandomAyahUsecase getMockGetRandomAyahUsecase() {
   MockGetRandomAyahUsecase mock = MockGetRandomAyahUsecase();
   _removeRegistrationIfExists<GetRandomAyahUsecase>();
   sl.registerSingleton<GetRandomAyahUsecase>(mock);
+  return mock;
+}
+
+MockInsertBookmarkUsecase getMockInsertBookmarkUsecase() {
+  MockInsertBookmarkUsecase mock = MockInsertBookmarkUsecase();
+  _removeRegistrationIfExists<InsertBookmarkUsecase>();
+  sl.registerSingleton<InsertBookmarkUsecase>(mock);
+  return mock;
+}
+
+MockGetBookmarksUsecase getMockGetBookmarksUsecase() {
+  MockGetBookmarksUsecase mock = MockGetBookmarksUsecase();
+  _removeRegistrationIfExists<GetBookmarksUsecase>();
+  sl.registerSingleton<GetBookmarksUsecase>(mock);
   return mock;
 }
 
