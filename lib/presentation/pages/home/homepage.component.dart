@@ -56,14 +56,14 @@ class _BannerState extends State<Banner> with PrayerTimeMixin {
               currentTimeString: currentTimeString,
               currentPrayerTime: '...',
               address: '...',
-            ).redacted(context: context, redact: true);
+            );
           },
           loading: () {
             return BannerWidget(
               currentTimeString: currentTimeString,
               currentPrayerTime: 'Mencari...',
               address: 'Mencari...',
-            ).redacted(context: context, redact: true);
+            );
           },
           permissionDenied: () {
             return BannerWidget(
@@ -88,6 +88,7 @@ class _BannerState extends State<Banner> with PrayerTimeMixin {
               currentPrayerTime: currentPrayerTime,
               address: address,
               textColor: getTextColor(currentPrayerTime),
+              opacity: 1,
             );
           },
         );
@@ -104,6 +105,7 @@ class BannerWidget extends StatelessWidget {
     required this.currentPrayerTime,
     required this.address,
     this.textColor,
+    this.opacity,
   });
 
   final String? imagePath;
@@ -111,6 +113,7 @@ class BannerWidget extends StatelessWidget {
   final String currentPrayerTime;
   final String address;
   final Color? textColor;
+  final double? opacity;
 
   @override
   Widget build(BuildContext context) {
@@ -125,6 +128,7 @@ class BannerWidget extends StatelessWidget {
             image: DecorationImage(
               image: AssetImage(imagePath ?? BgPaths.sunrise),
               fit: BoxFit.cover,
+              opacity: opacity ?? 0,
             ),
           ),
           child: Column(
@@ -465,6 +469,9 @@ class SurahCards extends StatelessWidget {
             child: ListView.builder(
               shrinkWrap: true,
               itemCount: surahs.length,
+              prototypeItem: CardView(
+                surah: surahs.first,
+              ),
               itemBuilder: (context, index) {
                 final surah = state.listSurah[index];
                 return InkWell(
@@ -483,7 +490,18 @@ class SurahCards extends StatelessWidget {
               shrinkWrap: true,
               itemCount: 10,
               itemBuilder: (context, index) {
-                return const CardView().redacted(
+                return Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 10,
+                  ),
+                  height: 75,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ).redacted(
                   context: context,
                   redact: true,
                 );
@@ -518,7 +536,6 @@ class CardView extends StatelessWidget {
         horizontal: 10,
         vertical: 10,
       ),
-      height: 60,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,

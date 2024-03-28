@@ -29,12 +29,12 @@ class _HomepageState extends State<Homepage> {
   final SurahBloc surahBloc = sl<SurahBloc>();
   final AyahsBloc ayahsBloc = sl<AyahsBloc>();
   final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
+  final AppNavigator appNavigator = sl<AppNavigator>();
 
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-      prayerTimeCubit.getLoc();
       surahBloc.add(const OnGetSurah());
       ayahsBloc.add(const OnGetRandomAyah());
     });
@@ -55,7 +55,7 @@ class _HomepageState extends State<Homepage> {
           create: (context) => ayahsBloc,
         ),
         BlocProvider(
-          create: (context) => prayerTimeCubit,
+          create: (context) => prayerTimeCubit..getLoc(),
         ),
       ],
       child: MultiBlocListener(
@@ -69,8 +69,7 @@ class _HomepageState extends State<Homepage> {
           ),
           BlocListener<PrayerTimeCubit, PrayerTimeState>(
             listener: (context, state) {
-              if (state is LocationInitial) {
-              } else if (state is LocationPermissionDenied) {
+              if (state is LocationPermissionDenied) {
                 AppSnackbar.showError(context, 'Location permission denied');
               }
             },
@@ -79,6 +78,35 @@ class _HomepageState extends State<Homepage> {
         child: AppScaffold(
           appBar: AppBar(
             title: Text('Qurani', style: GoogleFonts.poppins()),
+          ),
+          drawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: AppColors.primary,
+                  ),
+                  child: Text(
+                    'Qurani',
+                    style: GoogleFonts.poppins(
+                      color: AppColors.onPrimary,
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: const Text('Bookmarks'),
+                  onTap: () {
+                    appNavigator.goToBookmarks(context);
+                  },
+                ),
+                ListTile(
+                  title: const Text('Settings'),
+                  onTap: () {},
+                ),
+              ],
+            ),
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
