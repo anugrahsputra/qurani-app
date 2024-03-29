@@ -115,10 +115,11 @@ class Verses extends StatelessWidget {
   const Verses({
     super.key,
     required this.verses,
+    required this.surah,
   });
 
   final List<Verse> verses;
-
+  final SurahDetail surah;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -126,7 +127,10 @@ class Verses extends StatelessWidget {
       shrinkWrap: true,
       itemCount: verses.length,
       itemBuilder: (ctx, i) {
-        return SurahContent(verse: verses[i]);
+        return SurahContent(
+          verse: verses[i],
+          surah: surah,
+        );
       },
     );
   }
@@ -136,21 +140,48 @@ class SurahContent extends StatefulWidget {
   const SurahContent({
     super.key,
     required this.verse,
+    required this.surah,
   });
 
   final Verse verse;
+  final SurahDetail surah;
 
   @override
   State<SurahContent> createState() => _SurahContentState();
 }
 
 class _SurahContentState extends State<SurahContent> {
+  bool isBookmark = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await context
+          .read<BookmarkOpCubit>()
+          .getBookmarkById(widget.verse.number!.inQuran!);
+      if (mounted) {
+        if (context.read<BookmarkOpCubit>().state.isBookmarked) {
+          setState(() {
+            isBookmark = true;
+          });
+        } else {
+          setState(() {
+            isBookmark = false;
+          });
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    String surahName = widget.surah.name!.transliteration!.id!;
     String numberInSurah = '${widget.verse.number!.inSurah?.toArabicDigits()}';
     String verseText = widget.verse.text!.arab ?? 'Error';
     String translation = widget.verse.translation!.id ?? 'Error';
     String ayah = '$verseText ﴿$numberInSurah﴾';
+
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 10,
@@ -187,13 +218,45 @@ class _SurahContentState extends State<SurahContent> {
                   verseNumber: widget.verse.number!.inSurah.toString(),
                   audioSource: widget.verse.audio!.primary!,
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.bookmark_border,
-                    color: Colors.black,
-                    size: 25,
-                  ),
+                BlocBuilder<BookmarkOpCubit, BookmarkOpState>(
+                  builder: (context, state) {
+                    return state.when(
+                      isBookmarked: (isBookmarked, message) {
+                        return IconButton(
+                          onPressed: () async {
+                            if (isBookmarked) {
+                              AppSnackbar.showError(
+                                context,
+                                '$surahName ayat ${widget.verse.number!.inSurah} berhasil dihapus dari bookmark',
+                              );
+                              await context
+                                  .read<BookmarkOpCubit>()
+                                  .removeBookmarkUsecase(
+                                      widget.verse, surahName);
+                            } else {
+                              AppSnackbar.showSnackBar(context,
+                                  message:
+                                      '$surahName ayat ${widget.verse.number!.inSurah} berhasil ditambahkan ke bookmark',
+                                  snackbarColor: Colors.green);
+                              await context
+                                  .read<BookmarkOpCubit>()
+                                  .addBookmarkUsecase(widget.verse, surahName);
+                            }
+
+                            setState(() {
+                              isBookmark = !isBookmarked;
+                              log('${widget.verse.number!.inQuran!} isBookmarked = $isBookmark');
+                            });
+                          },
+                          icon: Icon(
+                            isBookmark ? Icons.bookmark : Icons.bookmark_border,
+                            color: Colors.black,
+                            size: 25,
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
                 IconButton(
                   onPressed: () {},
@@ -218,9 +281,9 @@ class _SurahContentState extends State<SurahContent> {
                   child: Text(
                     ayah,
                     style: GoogleFonts.amiri(
-                      height: 2.5,
+                      height: 2,
                       fontWeight: FontWeight.bold,
-                      fontSize: 25,
+                      fontSize: 24,
                       color: Colors.black,
                     ),
                     textDirection: TextDirection.rtl,

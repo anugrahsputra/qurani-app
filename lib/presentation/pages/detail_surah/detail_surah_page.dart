@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,7 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/core.dart';
 import '../../../../injection.dart';
+import '../../../features/bookmark/bookmark.dart';
 import '../../../features/detail_surah/detail_surah.dart';
+import '../../presentation.dart';
 
 part 'detail_surah_page.component.dart';
 
@@ -47,6 +51,9 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
           lazy: false,
           create: (context) => verseAudioCubit,
         ),
+        BlocProvider(
+          create: (context) => sl<BookmarkOpCubit>(),
+        )
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -67,7 +74,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
                       verseAudioCubit: verseAudioCubit,
                     ),
                     OpeningBismillah(surahDetail: surahDetail),
-                    Verses(verses: verses),
+                    Verses(surah: surahDetail, verses: verses),
                     const Gap(20),
                   ],
                 ),
