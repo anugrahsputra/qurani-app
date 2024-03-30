@@ -60,7 +60,6 @@ void main() {
       },
       act: (cubit) => cubit.getLoc(),
       expect: () => [
-        const PrayerTimeLoading(),
         const LocationPermissionDenied(),
       ],
       verify: (bloc) {
@@ -79,7 +78,6 @@ void main() {
       },
       act: (cubit) => cubit.getLoc(),
       expect: () => [
-        const PrayerTimeLoading(),
         const LocationPermissionDenied(),
       ],
       verify: (bloc) {

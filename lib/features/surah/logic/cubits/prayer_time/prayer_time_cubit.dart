@@ -19,14 +19,23 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
   PrayerTimeCubit({required this.location})
       : super(const PrayerTimeState.initial());
 
-  bool _hasPermission = false;
-
   Future<void> getLoc() async {
-    if (!_hasPermission) {
-      _hasPermission = await _checkLocationPermission();
-      if (_hasPermission) {
+    bool serviceEnabled = await location.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      _log.warning('Failed to get location: Location service is disabled');
+      emit(const LocationPermissionDenied());
+      return;
+    }
+
+    LocationPermission permission = await location.checkPermission();
+    if (permission != LocationPermission.always &&
+        permission != LocationPermission.whileInUse) {
+      permission = await location.requestPermission();
+      if (permission != LocationPermission.always &&
+          permission != LocationPermission.whileInUse) {
         _log.warning('Failed to get location: Location permission denied');
         emit(const LocationPermissionDenied());
+        return;
       }
     }
 
@@ -65,26 +74,6 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
       _log.warning('Failed to get location');
       emit(const LocationPermissionDenied());
     }
-  }
-
-  Future<bool> _checkLocationPermission() async {
-    bool serviceEnabled = await location.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      _log.warning('Failed to get location: Location service is disabled');
-      emit(const LocationPermissionDenied());
-      return false;
-    }
-
-    LocationPermission permission = await location.checkPermission();
-    if (permission != LocationPermission.always &&
-        permission != LocationPermission.whileInUse) {
-      permission = await location.requestPermission();
-      if (permission != LocationPermission.always &&
-          permission != LocationPermission.whileInUse) {
-        return false;
-      }
-    }
-    return true;
   }
 
   Future<String> getAddressFromCoordinates(double lat, double long) async {
