@@ -4,6 +4,7 @@ import 'package:qurani/core/core.dart';
 
 import 'injection.dart';
 import 'observer.dart';
+import 'presentation/presentation.dart';
 
 Future<void> main() async {
   CustomLog.initialize(showLog: true);
@@ -23,11 +24,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Qurani',
-      theme: AppThemes.light,
-      initialRoute: AppRoutes.initial,
-      routes: AppRoutes.routes,
+    return BlocProvider(
+      create: (context) => sl<AppbarBloc>(),
+      child: MaterialApp(
+        title: 'Qurani',
+        theme: AppThemes.light,
+        initialRoute: AppRoutes.initial,
+        routes: AppRoutes.routes,
+      ),
     );
   }
 }

@@ -12,6 +12,7 @@ import 'features/ayah/ayah.dart';
 import 'features/bookmark/bookmark.dart';
 import 'features/detail_surah/detail_surah.dart';
 import 'features/surah/surah.dart';
+import 'presentation/presentation.dart';
 
 final sl = GetIt.instance;
 
@@ -143,7 +144,15 @@ Future<void> setup() async {
     ),
   );
   sl.registerFactory<BookmarkBloc>(
-    () => BookmarkBloc(usecase: sl<GetBookmarksUsecase>()),
+    () => BookmarkBloc(
+      usecase: sl<GetBookmarksUsecase>(),
+      addBookmarkUsecase: sl<AddBookmarkUsecase>(),
+      removeBookmarkUsecase: sl<RemoveBookmarkUsecase>(),
+      isBookmarkUsecase: sl<IsBookmarkUsecase>(),
+    ),
+  );
+  sl.registerFactory<AppbarBloc>(
+    () => AppbarBloc(),
   );
   /* -----------------> Cubit <-----------------*/
   sl.registerFactory<VerseAudioCubit>(

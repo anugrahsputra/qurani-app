@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,19 +28,46 @@ class _HomepageState extends State<Homepage> {
   final SurahBloc surahBloc = sl<SurahBloc>();
   final AyahsBloc ayahsBloc = sl<AyahsBloc>();
   final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
+  final AppbarBloc appbarBloc = sl<AppbarBloc>();
   final AppNavigator appNavigator = sl<AppNavigator>();
+  final ScrollController controller = ScrollController();
 
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
+      prayerTimeCubit.getLoc();
       surahBloc.add(const OnGetSurah());
       ayahsBloc.add(const OnGetRandomAyah());
+    });
+    controller.addListener(() {
+      if (BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
+          controller.offset < 200) {
+        BlocProvider.of<AppbarBloc>(context).add(
+          const ToggleDisplay(),
+        );
+      } else if (!BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
+          controller.offset > 200) {
+        BlocProvider.of<AppbarBloc>(context).add(
+          const ToggleDisplay(),
+        );
+      }
     });
   }
 
   Future<void> pullToRefresh() async {
     surahBloc.add(const OnGetSurah());
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -55,7 +81,7 @@ class _HomepageState extends State<Homepage> {
           create: (context) => ayahsBloc,
         ),
         BlocProvider(
-          create: (context) => prayerTimeCubit..getLoc(),
+          create: (context) => prayerTimeCubit,
         ),
       ],
       child: MultiBlocListener(
@@ -76,49 +102,12 @@ class _HomepageState extends State<Homepage> {
           ),
         ],
         child: AppScaffold(
-          appBar: AppBar(
-            title: Text('Qurani', style: GoogleFonts.poppins()),
-          ),
-          drawer: Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                  ),
-                  child: Text(
-                    'Qurani',
-                    style: GoogleFonts.poppins(
-                      color: AppColors.onPrimary,
-                      fontSize: 24,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  title: const Text('Bookmarks'),
-                  onTap: () {
-                    appNavigator.goToBookmarks(context);
-                  },
-                ),
-                ListTile(
-                  title: const Text('Settings'),
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: [
-                const Banner(),
-                const Gap(10),
-                const PrayerSchedule(),
-                const Gap(10),
-                SurahCards(),
-              ],
-            ),
+          body: CustomScrollView(
+            controller: controller,
+            slivers: [
+              const HomeAppbar(),
+              SurahCards(),
+            ],
           ),
         ),
       ),
