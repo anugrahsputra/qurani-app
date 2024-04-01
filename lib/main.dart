@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
     return BlocProvider(
       create: (context) => sl<AppbarBloc>(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Qurani',
         theme: AppThemes.light,
         initialRoute: AppRoutes.initial,
