@@ -5,8 +5,9 @@ class PrayerTimeState with _$PrayerTimeState {
   const factory PrayerTimeState.initial() = LocationInitial;
   const factory PrayerTimeState.loading() = PrayerTimeLoading;
   const factory PrayerTimeState.permissionDenied() = LocationPermissionDenied;
-  const factory PrayerTimeState.locationLoaded(
+  const factory PrayerTimeState.prayerTimesLoaded(
     Position location,
     PrayerTimes prayerTime,
   ) = LocationLoaded;
+  const factory PrayerTimeState.error(String message) = LocationError;
 }

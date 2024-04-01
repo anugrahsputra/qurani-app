@@ -1,12 +1,15 @@
 import 'dart:async';
-import 'dart:developer';
 
+import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart' as hijri;
 import 'package:intl/intl.dart' as dt;
+import 'package:logging/logging.dart';
 import 'package:redacted/redacted.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -17,6 +20,7 @@ import '../../../features/surah/surah.dart';
 import '../../presentation.dart';
 
 part 'homepage.component.dart';
+part 'homepage.widget.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -29,6 +33,9 @@ class _HomepageState extends State<Homepage> {
   final SurahBloc surahBloc = sl<SurahBloc>();
   final AyahsBloc ayahsBloc = sl<AyahsBloc>();
   final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
+  final AppbarBloc appbarBloc = sl<AppbarBloc>();
+  final AppNavigator appNavigator = sl<AppNavigator>();
+  final ScrollController controller = ScrollController();
 
   @override
   void initState() {
@@ -38,10 +45,35 @@ class _HomepageState extends State<Homepage> {
       surahBloc.add(const OnGetSurah());
       ayahsBloc.add(const OnGetRandomAyah());
     });
+    controller.addListener(() {
+      if (BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
+          controller.offset < 200) {
+        BlocProvider.of<AppbarBloc>(context).add(
+          const ToggleDisplay(),
+        );
+      } else if (!BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
+          controller.offset > 200) {
+        BlocProvider.of<AppbarBloc>(context).add(
+          const ToggleDisplay(),
+        );
+      }
+    });
   }
 
   Future<void> pullToRefresh() async {
+    prayerTimeCubit.getLoc();
     surahBloc.add(const OnGetSurah());
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -69,25 +101,22 @@ class _HomepageState extends State<Homepage> {
           ),
           BlocListener<PrayerTimeCubit, PrayerTimeState>(
             listener: (context, state) {
-              if (state is LocationInitial) {
-              } else if (state is LocationPermissionDenied) {
+              if (state is LocationPermissionDenied) {
                 AppSnackbar.showError(context, 'Location permission denied');
+              }
+              if (state is LocationError) {
+                AppSnackbar.showError(context, state.message);
               }
             },
           ),
         ],
         child: AppScaffold(
-          appBar: AppBar(
-            title: Text('Qurani', style: GoogleFonts.poppins()),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Column(
-              children: [
-                const Banner(),
-                const Gap(10),
-                const PrayerSchedule(),
-                const Gap(10),
+          body: RefreshIndicator(
+            onRefresh: pullToRefresh,
+            child: CustomScrollView(
+              controller: controller,
+              slivers: [
+                const HomeAppbar(),
                 SurahCards(),
               ],
             ),

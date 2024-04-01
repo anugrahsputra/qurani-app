@@ -164,3 +164,38 @@ const tSurahDetailRes = SurahDetailRes(
     ],
   ),
 );
+
+const tVerse = Verse(
+  number: Number(
+    inQuran: 1,
+    inSurah: 1,
+  ),
+  meta: Meta(
+    hizbQuarter: 1,
+    sajda: Sajda(recommended: false, obligatory: false),
+    juz: 1,
+    ruku: 1,
+    manzil: 1,
+    page: 1,
+  ),
+  text: Texts(
+    arab: "",
+    transliteration: Transliteration(
+      en: "",
+    ),
+  ),
+  translation: Translation(
+    en: "",
+    id: "",
+  ),
+  audio: Audio(
+    primary: "",
+    secondary: [],
+  ),
+  tafsir: VerseTafsir(
+    id: Id(
+      short: "",
+      long: "",
+    ),
+  ),
+);

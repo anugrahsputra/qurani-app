@@ -15,6 +15,7 @@ abstract class AppRoutes {
           ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
       int surahNumber = args['surahNumber'];
       return DetailSurahPage(surahNumber: surahNumber);
-    }
+    },
+    AppPages.bookmark: (context) => const BookmarksPage(),
   };
 }

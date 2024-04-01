@@ -61,4 +61,10 @@ class AppNavigator {
       "surahNumber": surahNumber,
     });
   }
+
+  void goToBookmarks(BuildContext context) {
+    if (!canNavigate(context)) return;
+
+    pushNamed(context, AppPages.bookmark);
+  }
 }

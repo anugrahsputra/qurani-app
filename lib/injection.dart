@@ -1,20 +1,26 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
+import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 import 'core/core.dart';
 import 'features/ayah/ayah.dart';
+import 'features/bookmark/bookmark.dart';
 import 'features/detail_surah/detail_surah.dart';
 import 'features/surah/surah.dart';
+import 'presentation/presentation.dart';
 
 final sl = GetIt.instance;
 
 Future<void> setup() async {
   initializeDateFormatting();
   tz.initializeTimeZones();
+
+  var dir = await getTemporaryDirectory();
   /* -----------------> Network <-----------------*/
   sl.registerFactory<Dio>(
     () => Dio(
@@ -37,13 +43,11 @@ Future<void> setup() async {
         CustomInterceptor(),
         DioCacheInterceptor(
           options: CacheOptions(
-            store: MemCacheStore(
-              maxSize: 1024 * 1024 * 100, // 100MB
-              maxEntrySize: 1024 * 1024 * 10, // 10MB
-            ),
-            policy: CachePolicy.request,
+            store: HiveCacheStore(dir.path, hiveBoxName: 'qurani'),
+            priority: CachePriority.high,
+            policy: CachePolicy.forceCache,
             maxStale: const Duration(days: 7),
-            hitCacheOnErrorExcept: [500, 404],
+            hitCacheOnErrorExcept: [],
           ),
         ),
       ]),
@@ -54,8 +58,11 @@ Future<void> setup() async {
   sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
   sl.registerFactory<AppNavigator>(() => AppNavigator());
   sl.registerFactory<UserLocation>(() => IUserLocation());
+  sl.registerFactory<DatabaseHelper>(() => DatabaseHelper());
+  sl.registerFactory<TimeStream>(() => TimeStream());
   sl.registerFactory<AudioPlayerManager>(
-      () => AudioPlayerManagerImpl(audioPlayers: {}));
+    () => AudioPlayerManagerImpl(audioPlayers: {}),
+  );
 
   /* -----------------> Data <-----------------*/
   sl.registerLazySingleton<SurahRemoteDataSource>(
@@ -68,6 +75,12 @@ Future<void> setup() async {
 
   sl.registerLazySingleton<AyahRemoteDatasource>(
     () => IAyahRemoteDatasource(dioClient: sl<DioClient>()),
+  );
+
+  sl.registerLazySingleton<BookmarkLocalDatasource>(
+    () => IBookmarkLocalDatasource(
+      databaseHelper: sl<DatabaseHelper>(),
+    ),
   );
   /* -----------------> Repository <-----------------*/
   sl.registerLazySingleton<BaseSurahRepository>(
@@ -83,6 +96,9 @@ Future<void> setup() async {
     () => IAyahRepository(remoteDatasource: sl<AyahRemoteDatasource>()),
   );
 
+  sl.registerLazySingleton<BookmarkRepository>(
+    () => IBookmarkRepository(datasource: sl<BookmarkLocalDatasource>()),
+  );
   /* -----------------> UseCase <-----------------*/
   sl.registerLazySingleton<GetSurahsUseCase>(
     () => GetSurahsUseCase(sl<BaseSurahRepository>()),
@@ -104,6 +120,17 @@ Future<void> setup() async {
   sl.registerLazySingleton<GetRandomAyahUsecase>(
     () => GetRandomAyahUsecase(repository: sl<AyahRepository>()),
   );
+  sl.registerLazySingleton<GetBookmarksUsecase>(
+    () => GetBookmarksUsecase(repository: sl<BookmarkRepository>()),
+  );
+  sl.registerLazySingleton<AddBookmarkUsecase>(
+    () => AddBookmarkUsecase(repository: sl<BookmarkRepository>()),
+  );
+  sl.registerLazySingleton<RemoveBookmarkUsecase>(
+    () => RemoveBookmarkUsecase(repository: sl<BookmarkRepository>()),
+  );
+  sl.registerLazySingleton<IsBookmarkUsecase>(
+      () => IsBookmarkUsecase(repository: sl<BookmarkRepository>()));
   /* -----------------> Bloc <-----------------*/
   sl.registerFactory<SurahBloc>(
     () => SurahBloc(getSurahsUseCase: sl<GetSurahsUseCase>()),
@@ -117,6 +144,17 @@ Future<void> setup() async {
       getRandomAyahUsecase: sl<GetRandomAyahUsecase>(),
     ),
   );
+  sl.registerFactory<BookmarkBloc>(
+    () => BookmarkBloc(
+      usecase: sl<GetBookmarksUsecase>(),
+      addBookmarkUsecase: sl<AddBookmarkUsecase>(),
+      removeBookmarkUsecase: sl<RemoveBookmarkUsecase>(),
+      isBookmarkUsecase: sl<IsBookmarkUsecase>(),
+    ),
+  );
+  sl.registerFactory<AppbarBloc>(
+    () => AppbarBloc(),
+  );
   /* -----------------> Cubit <-----------------*/
   sl.registerFactory<VerseAudioCubit>(
     () => VerseAudioCubit(
@@ -126,5 +164,13 @@ Future<void> setup() async {
     ),
   );
   sl.registerFactory<PrayerTimeCubit>(
-      () => PrayerTimeCubit(location: sl<UserLocation>()));
+    () => PrayerTimeCubit(location: sl<UserLocation>()),
+  );
+  sl.registerFactory<BookmarkOpCubit>(
+    () => BookmarkOpCubit(
+      addBookmarkUsecase: sl<AddBookmarkUsecase>(),
+      removeBookmarkUsecase: sl<RemoveBookmarkUsecase>(),
+      isBookmarkUsecase: sl<IsBookmarkUsecase>(),
+    ),
+  );
 }
