@@ -50,7 +50,7 @@ abstract class AppThemes with WidgetsBindingObserver {
       ),
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       useMaterial3: true,
-      fontFamily: GoogleFonts.notoSans().fontFamily,
+      fontFamily: GoogleFonts.poppins().fontFamily,
     );
   }
 
@@ -103,7 +103,7 @@ abstract class AppThemes with WidgetsBindingObserver {
       ),
       visualDensity: FlexColorScheme.comfortablePlatformDensity,
       useMaterial3: true,
-      fontFamily: GoogleFonts.notoSans().fontFamily,
+      fontFamily: GoogleFonts.poppins().fontFamily,
     );
   }
 }
