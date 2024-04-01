@@ -50,12 +50,6 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
       params.highLatitudeRule = HighLatitudeRule.middle_of_the_night;
       params.fajrAngle = 20.0;
       params.ishaAngle = 18.0;
-      params.adjustments.dhuhr = -2;
-      params.adjustments.asr = -3;
-      params.adjustments.maghrib = -3;
-      params.adjustments.isha = -2;
-      params.adjustments.fajr = 5;
-      params.adjustments.sunrise = -4;
       final timezone = tz.getLocation('Asia/Jakarta');
       final now = tz.TZDateTime.now(timezone);
 
