@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -18,6 +20,7 @@ import '../../../features/surah/surah.dart';
 import '../../presentation.dart';
 
 part 'homepage.component.dart';
+part 'homepage.widget.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -58,6 +61,7 @@ class _HomepageState extends State<Homepage> {
   }
 
   Future<void> pullToRefresh() async {
+    prayerTimeCubit.getLoc();
     surahBloc.add(const OnGetSurah());
   }
 
@@ -100,16 +104,22 @@ class _HomepageState extends State<Homepage> {
               if (state is LocationPermissionDenied) {
                 AppSnackbar.showError(context, 'Location permission denied');
               }
+              if (state is LocationError) {
+                AppSnackbar.showError(context, state.message);
+              }
             },
           ),
         ],
         child: AppScaffold(
-          body: CustomScrollView(
-            controller: controller,
-            slivers: [
-              const HomeAppbar(),
-              SurahCards(),
-            ],
+          body: RefreshIndicator(
+            onRefresh: pullToRefresh,
+            child: CustomScrollView(
+              controller: controller,
+              slivers: [
+                const HomeAppbar(),
+                SurahCards(),
+              ],
+            ),
           ),
         ),
       ),
