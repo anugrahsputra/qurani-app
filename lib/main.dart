@@ -1,5 +1,8 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qurani/core/core.dart';
 
 import 'injection.dart';
@@ -11,7 +14,10 @@ Future<void> main() async {
   Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
-  runApp(const MyApp());
+  runApp(DevicePreview(
+    enabled: !kDebugMode,
+    builder: (context) => const MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -26,12 +32,17 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<AppbarBloc>(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Qurani',
-        theme: AppThemes.light,
-        initialRoute: AppRoutes.initial,
-        routes: AppRoutes.routes,
+      child: ScreenUtilInit(
+        designSize: const Size(412.0, 916.0),
+        builder: (context, child) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Qurani',
+            theme: AppThemes.light,
+            initialRoute: AppRoutes.initial,
+            routes: AppRoutes.routes,
+          );
+        },
       ),
     );
   }
