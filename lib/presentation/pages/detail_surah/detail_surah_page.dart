@@ -1,10 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:qurani/features/bookmark/logics/blocs/blocs.dart';
+import 'package:qurani/features/bookmark/logics/blocs/bookmark/bookmark_bloc.dart';
+import 'package:qurani/features/bookmark/logics/logics.dart';
 
 import '../../../../core/core.dart';
 import '../../../../injection.dart';
@@ -52,7 +53,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
           create: (context) => verseAudioCubit,
         ),
         BlocProvider(
-          create: (context) => sl<BookmarkOpCubit>(),
+          create: (context) => sl<BookmarkBloc>(),
         )
       ],
       child: Scaffold(
@@ -65,6 +66,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
             if (state is DetailSurahLoaded) {
               SurahDetail surahDetail = state.detailSurah;
               List<Verse> verses = surahDetail.verses!;
+
               return SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
@@ -74,7 +76,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
                       verseAudioCubit: verseAudioCubit,
                     ),
                     OpeningBismillah(surahDetail: surahDetail),
-                    Verses(surah: surahDetail, verses: verses),
+                    Verses(verses: verses, surah: surahDetail),
                     const Gap(20),
                   ],
                 ),

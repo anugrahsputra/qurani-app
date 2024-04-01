@@ -32,7 +32,7 @@ class DatabaseHelper {
       onCreate: (db, version) {
         db.execute('''
           CREATE TABLE $_verseTableName(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY,
             inSurah INTEGER,
             surahName TEXT,
             textArab TEXT,
@@ -47,7 +47,11 @@ class DatabaseHelper {
 
   Future<int> insertBookmark(BookmarkTable bookmarkTable) async {
     final db = await database;
-    return db!.insert(_verseTableName, bookmarkTable.toJson());
+    return db!.insert(
+      _verseTableName,
+      bookmarkTable.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   Future<int> removeBookmark(BookmarkTable bookmark) async {

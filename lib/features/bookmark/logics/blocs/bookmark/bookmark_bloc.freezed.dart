@@ -19,32 +19,50 @@ mixin _$BookmarkEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
+    required TResult Function(int id) statusBookmark,
+    required TResult Function(Verse verse, String surah) addBookmark,
+    required TResult Function(Verse verse, String surah) removeBookmark,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
+    TResult? Function(int id)? statusBookmark,
+    TResult? Function(Verse verse, String surah)? addBookmark,
+    TResult? Function(Verse verse, String surah)? removeBookmark,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
+    TResult Function(int id)? statusBookmark,
+    TResult Function(Verse verse, String surah)? addBookmark,
+    TResult Function(Verse verse, String surah)? removeBookmark,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(OnFetchBookmark value) fetch,
+    required TResult Function(OnBookmarkStatus value) statusBookmark,
+    required TResult Function(OnAddBookmark value) addBookmark,
+    required TResult Function(OnRemoveBookmark value) removeBookmark,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(OnFetchBookmark value)? fetch,
+    TResult? Function(OnBookmarkStatus value)? statusBookmark,
+    TResult? Function(OnAddBookmark value)? addBookmark,
+    TResult? Function(OnRemoveBookmark value)? removeBookmark,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OnFetchBookmark value)? fetch,
+    TResult Function(OnBookmarkStatus value)? statusBookmark,
+    TResult Function(OnAddBookmark value)? addBookmark,
+    TResult Function(OnRemoveBookmark value)? removeBookmark,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +125,9 @@ class _$OnFetchBookmarkImpl implements OnFetchBookmark {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
+    required TResult Function(int id) statusBookmark,
+    required TResult Function(Verse verse, String surah) addBookmark,
+    required TResult Function(Verse verse, String surah) removeBookmark,
   }) {
     return fetch();
   }
@@ -115,6 +136,9 @@ class _$OnFetchBookmarkImpl implements OnFetchBookmark {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
+    TResult? Function(int id)? statusBookmark,
+    TResult? Function(Verse verse, String surah)? addBookmark,
+    TResult? Function(Verse verse, String surah)? removeBookmark,
   }) {
     return fetch?.call();
   }
@@ -123,6 +147,9 @@ class _$OnFetchBookmarkImpl implements OnFetchBookmark {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
+    TResult Function(int id)? statusBookmark,
+    TResult Function(Verse verse, String surah)? addBookmark,
+    TResult Function(Verse verse, String surah)? removeBookmark,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -135,6 +162,9 @@ class _$OnFetchBookmarkImpl implements OnFetchBookmark {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(OnFetchBookmark value) fetch,
+    required TResult Function(OnBookmarkStatus value) statusBookmark,
+    required TResult Function(OnAddBookmark value) addBookmark,
+    required TResult Function(OnRemoveBookmark value) removeBookmark,
   }) {
     return fetch(this);
   }
@@ -143,6 +173,9 @@ class _$OnFetchBookmarkImpl implements OnFetchBookmark {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(OnFetchBookmark value)? fetch,
+    TResult? Function(OnBookmarkStatus value)? statusBookmark,
+    TResult? Function(OnAddBookmark value)? addBookmark,
+    TResult? Function(OnRemoveBookmark value)? removeBookmark,
   }) {
     return fetch?.call(this);
   }
@@ -151,6 +184,9 @@ class _$OnFetchBookmarkImpl implements OnFetchBookmark {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OnFetchBookmark value)? fetch,
+    TResult Function(OnBookmarkStatus value)? statusBookmark,
+    TResult Function(OnAddBookmark value)? addBookmark,
+    TResult Function(OnRemoveBookmark value)? removeBookmark,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -165,12 +201,491 @@ abstract class OnFetchBookmark implements BookmarkEvent {
 }
 
 /// @nodoc
+abstract class _$$OnBookmarkStatusImplCopyWith<$Res> {
+  factory _$$OnBookmarkStatusImplCopyWith(_$OnBookmarkStatusImpl value,
+          $Res Function(_$OnBookmarkStatusImpl) then) =
+      __$$OnBookmarkStatusImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id});
+}
+
+/// @nodoc
+class __$$OnBookmarkStatusImplCopyWithImpl<$Res>
+    extends _$BookmarkEventCopyWithImpl<$Res, _$OnBookmarkStatusImpl>
+    implements _$$OnBookmarkStatusImplCopyWith<$Res> {
+  __$$OnBookmarkStatusImplCopyWithImpl(_$OnBookmarkStatusImpl _value,
+      $Res Function(_$OnBookmarkStatusImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$OnBookmarkStatusImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnBookmarkStatusImpl implements OnBookmarkStatus {
+  const _$OnBookmarkStatusImpl(this.id);
+
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'BookmarkEvent.statusBookmark(id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnBookmarkStatusImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnBookmarkStatusImplCopyWith<_$OnBookmarkStatusImpl> get copyWith =>
+      __$$OnBookmarkStatusImplCopyWithImpl<_$OnBookmarkStatusImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetch,
+    required TResult Function(int id) statusBookmark,
+    required TResult Function(Verse verse, String surah) addBookmark,
+    required TResult Function(Verse verse, String surah) removeBookmark,
+  }) {
+    return statusBookmark(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? fetch,
+    TResult? Function(int id)? statusBookmark,
+    TResult? Function(Verse verse, String surah)? addBookmark,
+    TResult? Function(Verse verse, String surah)? removeBookmark,
+  }) {
+    return statusBookmark?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetch,
+    TResult Function(int id)? statusBookmark,
+    TResult Function(Verse verse, String surah)? addBookmark,
+    TResult Function(Verse verse, String surah)? removeBookmark,
+    required TResult orElse(),
+  }) {
+    if (statusBookmark != null) {
+      return statusBookmark(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OnFetchBookmark value) fetch,
+    required TResult Function(OnBookmarkStatus value) statusBookmark,
+    required TResult Function(OnAddBookmark value) addBookmark,
+    required TResult Function(OnRemoveBookmark value) removeBookmark,
+  }) {
+    return statusBookmark(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OnFetchBookmark value)? fetch,
+    TResult? Function(OnBookmarkStatus value)? statusBookmark,
+    TResult? Function(OnAddBookmark value)? addBookmark,
+    TResult? Function(OnRemoveBookmark value)? removeBookmark,
+  }) {
+    return statusBookmark?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OnFetchBookmark value)? fetch,
+    TResult Function(OnBookmarkStatus value)? statusBookmark,
+    TResult Function(OnAddBookmark value)? addBookmark,
+    TResult Function(OnRemoveBookmark value)? removeBookmark,
+    required TResult orElse(),
+  }) {
+    if (statusBookmark != null) {
+      return statusBookmark(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnBookmarkStatus implements BookmarkEvent {
+  const factory OnBookmarkStatus(final int id) = _$OnBookmarkStatusImpl;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$OnBookmarkStatusImplCopyWith<_$OnBookmarkStatusImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnAddBookmarkImplCopyWith<$Res> {
+  factory _$$OnAddBookmarkImplCopyWith(
+          _$OnAddBookmarkImpl value, $Res Function(_$OnAddBookmarkImpl) then) =
+      __$$OnAddBookmarkImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Verse verse, String surah});
+
+  $VerseCopyWith<$Res> get verse;
+}
+
+/// @nodoc
+class __$$OnAddBookmarkImplCopyWithImpl<$Res>
+    extends _$BookmarkEventCopyWithImpl<$Res, _$OnAddBookmarkImpl>
+    implements _$$OnAddBookmarkImplCopyWith<$Res> {
+  __$$OnAddBookmarkImplCopyWithImpl(
+      _$OnAddBookmarkImpl _value, $Res Function(_$OnAddBookmarkImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? verse = null,
+    Object? surah = null,
+  }) {
+    return _then(_$OnAddBookmarkImpl(
+      null == verse
+          ? _value.verse
+          : verse // ignore: cast_nullable_to_non_nullable
+              as Verse,
+      null == surah
+          ? _value.surah
+          : surah // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $VerseCopyWith<$Res> get verse {
+    return $VerseCopyWith<$Res>(_value.verse, (value) {
+      return _then(_value.copyWith(verse: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$OnAddBookmarkImpl implements OnAddBookmark {
+  const _$OnAddBookmarkImpl(this.verse, this.surah);
+
+  @override
+  final Verse verse;
+  @override
+  final String surah;
+
+  @override
+  String toString() {
+    return 'BookmarkEvent.addBookmark(verse: $verse, surah: $surah)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnAddBookmarkImpl &&
+            (identical(other.verse, verse) || other.verse == verse) &&
+            (identical(other.surah, surah) || other.surah == surah));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, verse, surah);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnAddBookmarkImplCopyWith<_$OnAddBookmarkImpl> get copyWith =>
+      __$$OnAddBookmarkImplCopyWithImpl<_$OnAddBookmarkImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetch,
+    required TResult Function(int id) statusBookmark,
+    required TResult Function(Verse verse, String surah) addBookmark,
+    required TResult Function(Verse verse, String surah) removeBookmark,
+  }) {
+    return addBookmark(verse, surah);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? fetch,
+    TResult? Function(int id)? statusBookmark,
+    TResult? Function(Verse verse, String surah)? addBookmark,
+    TResult? Function(Verse verse, String surah)? removeBookmark,
+  }) {
+    return addBookmark?.call(verse, surah);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetch,
+    TResult Function(int id)? statusBookmark,
+    TResult Function(Verse verse, String surah)? addBookmark,
+    TResult Function(Verse verse, String surah)? removeBookmark,
+    required TResult orElse(),
+  }) {
+    if (addBookmark != null) {
+      return addBookmark(verse, surah);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OnFetchBookmark value) fetch,
+    required TResult Function(OnBookmarkStatus value) statusBookmark,
+    required TResult Function(OnAddBookmark value) addBookmark,
+    required TResult Function(OnRemoveBookmark value) removeBookmark,
+  }) {
+    return addBookmark(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OnFetchBookmark value)? fetch,
+    TResult? Function(OnBookmarkStatus value)? statusBookmark,
+    TResult? Function(OnAddBookmark value)? addBookmark,
+    TResult? Function(OnRemoveBookmark value)? removeBookmark,
+  }) {
+    return addBookmark?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OnFetchBookmark value)? fetch,
+    TResult Function(OnBookmarkStatus value)? statusBookmark,
+    TResult Function(OnAddBookmark value)? addBookmark,
+    TResult Function(OnRemoveBookmark value)? removeBookmark,
+    required TResult orElse(),
+  }) {
+    if (addBookmark != null) {
+      return addBookmark(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnAddBookmark implements BookmarkEvent {
+  const factory OnAddBookmark(final Verse verse, final String surah) =
+      _$OnAddBookmarkImpl;
+
+  Verse get verse;
+  String get surah;
+  @JsonKey(ignore: true)
+  _$$OnAddBookmarkImplCopyWith<_$OnAddBookmarkImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnRemoveBookmarkImplCopyWith<$Res> {
+  factory _$$OnRemoveBookmarkImplCopyWith(_$OnRemoveBookmarkImpl value,
+          $Res Function(_$OnRemoveBookmarkImpl) then) =
+      __$$OnRemoveBookmarkImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Verse verse, String surah});
+
+  $VerseCopyWith<$Res> get verse;
+}
+
+/// @nodoc
+class __$$OnRemoveBookmarkImplCopyWithImpl<$Res>
+    extends _$BookmarkEventCopyWithImpl<$Res, _$OnRemoveBookmarkImpl>
+    implements _$$OnRemoveBookmarkImplCopyWith<$Res> {
+  __$$OnRemoveBookmarkImplCopyWithImpl(_$OnRemoveBookmarkImpl _value,
+      $Res Function(_$OnRemoveBookmarkImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? verse = null,
+    Object? surah = null,
+  }) {
+    return _then(_$OnRemoveBookmarkImpl(
+      null == verse
+          ? _value.verse
+          : verse // ignore: cast_nullable_to_non_nullable
+              as Verse,
+      null == surah
+          ? _value.surah
+          : surah // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $VerseCopyWith<$Res> get verse {
+    return $VerseCopyWith<$Res>(_value.verse, (value) {
+      return _then(_value.copyWith(verse: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$OnRemoveBookmarkImpl implements OnRemoveBookmark {
+  const _$OnRemoveBookmarkImpl(this.verse, this.surah);
+
+  @override
+  final Verse verse;
+  @override
+  final String surah;
+
+  @override
+  String toString() {
+    return 'BookmarkEvent.removeBookmark(verse: $verse, surah: $surah)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnRemoveBookmarkImpl &&
+            (identical(other.verse, verse) || other.verse == verse) &&
+            (identical(other.surah, surah) || other.surah == surah));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, verse, surah);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnRemoveBookmarkImplCopyWith<_$OnRemoveBookmarkImpl> get copyWith =>
+      __$$OnRemoveBookmarkImplCopyWithImpl<_$OnRemoveBookmarkImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetch,
+    required TResult Function(int id) statusBookmark,
+    required TResult Function(Verse verse, String surah) addBookmark,
+    required TResult Function(Verse verse, String surah) removeBookmark,
+  }) {
+    return removeBookmark(verse, surah);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? fetch,
+    TResult? Function(int id)? statusBookmark,
+    TResult? Function(Verse verse, String surah)? addBookmark,
+    TResult? Function(Verse verse, String surah)? removeBookmark,
+  }) {
+    return removeBookmark?.call(verse, surah);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetch,
+    TResult Function(int id)? statusBookmark,
+    TResult Function(Verse verse, String surah)? addBookmark,
+    TResult Function(Verse verse, String surah)? removeBookmark,
+    required TResult orElse(),
+  }) {
+    if (removeBookmark != null) {
+      return removeBookmark(verse, surah);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OnFetchBookmark value) fetch,
+    required TResult Function(OnBookmarkStatus value) statusBookmark,
+    required TResult Function(OnAddBookmark value) addBookmark,
+    required TResult Function(OnRemoveBookmark value) removeBookmark,
+  }) {
+    return removeBookmark(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OnFetchBookmark value)? fetch,
+    TResult? Function(OnBookmarkStatus value)? statusBookmark,
+    TResult? Function(OnAddBookmark value)? addBookmark,
+    TResult? Function(OnRemoveBookmark value)? removeBookmark,
+  }) {
+    return removeBookmark?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OnFetchBookmark value)? fetch,
+    TResult Function(OnBookmarkStatus value)? statusBookmark,
+    TResult Function(OnAddBookmark value)? addBookmark,
+    TResult Function(OnRemoveBookmark value)? removeBookmark,
+    required TResult orElse(),
+  }) {
+    if (removeBookmark != null) {
+      return removeBookmark(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnRemoveBookmark implements BookmarkEvent {
+  const factory OnRemoveBookmark(final Verse verse, final String surah) =
+      _$OnRemoveBookmarkImpl;
+
+  Verse get verse;
+  String get surah;
+  @JsonKey(ignore: true)
+  _$$OnRemoveBookmarkImplCopyWith<_$OnRemoveBookmarkImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$BookmarkState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(bool isBookmarked) checkBookmark,
     required TResult Function(List<Bookmark> bookmarks) loaded,
+    required TResult Function(String message) message,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -178,7 +693,9 @@ mixin _$BookmarkState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(bool isBookmarked)? checkBookmark,
     TResult? Function(List<Bookmark> bookmarks)? loaded,
+    TResult? Function(String message)? message,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -186,7 +703,9 @@ mixin _$BookmarkState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(bool isBookmarked)? checkBookmark,
     TResult Function(List<Bookmark> bookmarks)? loaded,
+    TResult Function(String message)? message,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -195,7 +714,9 @@ mixin _$BookmarkState {
   TResult map<TResult extends Object?>({
     required TResult Function(BookmarkInitial value) initial,
     required TResult Function(BookmarkLoading value) loading,
+    required TResult Function(BookmarkCheck value) checkBookmark,
     required TResult Function(BookmarkLoaded value) loaded,
+    required TResult Function(BookmarkMessage value) message,
     required TResult Function(BookmarkError value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -203,7 +724,9 @@ mixin _$BookmarkState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BookmarkInitial value)? initial,
     TResult? Function(BookmarkLoading value)? loading,
+    TResult? Function(BookmarkCheck value)? checkBookmark,
     TResult? Function(BookmarkLoaded value)? loaded,
+    TResult? Function(BookmarkMessage value)? message,
     TResult? Function(BookmarkError value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -211,7 +734,9 @@ mixin _$BookmarkState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BookmarkInitial value)? initial,
     TResult Function(BookmarkLoading value)? loading,
+    TResult Function(BookmarkCheck value)? checkBookmark,
     TResult Function(BookmarkLoaded value)? loaded,
+    TResult Function(BookmarkMessage value)? message,
     TResult Function(BookmarkError value)? error,
     required TResult orElse(),
   }) =>
@@ -276,7 +801,9 @@ class _$BookmarkInitialImpl implements BookmarkInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(bool isBookmarked) checkBookmark,
     required TResult Function(List<Bookmark> bookmarks) loaded,
+    required TResult Function(String message) message,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -287,7 +814,9 @@ class _$BookmarkInitialImpl implements BookmarkInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(bool isBookmarked)? checkBookmark,
     TResult? Function(List<Bookmark> bookmarks)? loaded,
+    TResult? Function(String message)? message,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -298,7 +827,9 @@ class _$BookmarkInitialImpl implements BookmarkInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(bool isBookmarked)? checkBookmark,
     TResult Function(List<Bookmark> bookmarks)? loaded,
+    TResult Function(String message)? message,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -313,7 +844,9 @@ class _$BookmarkInitialImpl implements BookmarkInitial {
   TResult map<TResult extends Object?>({
     required TResult Function(BookmarkInitial value) initial,
     required TResult Function(BookmarkLoading value) loading,
+    required TResult Function(BookmarkCheck value) checkBookmark,
     required TResult Function(BookmarkLoaded value) loaded,
+    required TResult Function(BookmarkMessage value) message,
     required TResult Function(BookmarkError value) error,
   }) {
     return initial(this);
@@ -324,7 +857,9 @@ class _$BookmarkInitialImpl implements BookmarkInitial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BookmarkInitial value)? initial,
     TResult? Function(BookmarkLoading value)? loading,
+    TResult? Function(BookmarkCheck value)? checkBookmark,
     TResult? Function(BookmarkLoaded value)? loaded,
+    TResult? Function(BookmarkMessage value)? message,
     TResult? Function(BookmarkError value)? error,
   }) {
     return initial?.call(this);
@@ -335,7 +870,9 @@ class _$BookmarkInitialImpl implements BookmarkInitial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BookmarkInitial value)? initial,
     TResult Function(BookmarkLoading value)? loading,
+    TResult Function(BookmarkCheck value)? checkBookmark,
     TResult Function(BookmarkLoaded value)? loaded,
+    TResult Function(BookmarkMessage value)? message,
     TResult Function(BookmarkError value)? error,
     required TResult orElse(),
   }) {
@@ -390,7 +927,9 @@ class _$BookmarkLoadingImpl implements BookmarkLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(bool isBookmarked) checkBookmark,
     required TResult Function(List<Bookmark> bookmarks) loaded,
+    required TResult Function(String message) message,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -401,7 +940,9 @@ class _$BookmarkLoadingImpl implements BookmarkLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(bool isBookmarked)? checkBookmark,
     TResult? Function(List<Bookmark> bookmarks)? loaded,
+    TResult? Function(String message)? message,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -412,7 +953,9 @@ class _$BookmarkLoadingImpl implements BookmarkLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(bool isBookmarked)? checkBookmark,
     TResult Function(List<Bookmark> bookmarks)? loaded,
+    TResult Function(String message)? message,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -427,7 +970,9 @@ class _$BookmarkLoadingImpl implements BookmarkLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(BookmarkInitial value) initial,
     required TResult Function(BookmarkLoading value) loading,
+    required TResult Function(BookmarkCheck value) checkBookmark,
     required TResult Function(BookmarkLoaded value) loaded,
+    required TResult Function(BookmarkMessage value) message,
     required TResult Function(BookmarkError value) error,
   }) {
     return loading(this);
@@ -438,7 +983,9 @@ class _$BookmarkLoadingImpl implements BookmarkLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BookmarkInitial value)? initial,
     TResult? Function(BookmarkLoading value)? loading,
+    TResult? Function(BookmarkCheck value)? checkBookmark,
     TResult? Function(BookmarkLoaded value)? loaded,
+    TResult? Function(BookmarkMessage value)? message,
     TResult? Function(BookmarkError value)? error,
   }) {
     return loading?.call(this);
@@ -449,7 +996,9 @@ class _$BookmarkLoadingImpl implements BookmarkLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BookmarkInitial value)? initial,
     TResult Function(BookmarkLoading value)? loading,
+    TResult Function(BookmarkCheck value)? checkBookmark,
     TResult Function(BookmarkLoaded value)? loaded,
+    TResult Function(BookmarkMessage value)? message,
     TResult Function(BookmarkError value)? error,
     required TResult orElse(),
   }) {
@@ -462,6 +1011,164 @@ class _$BookmarkLoadingImpl implements BookmarkLoading {
 
 abstract class BookmarkLoading implements BookmarkState {
   const factory BookmarkLoading() = _$BookmarkLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$BookmarkCheckImplCopyWith<$Res> {
+  factory _$$BookmarkCheckImplCopyWith(
+          _$BookmarkCheckImpl value, $Res Function(_$BookmarkCheckImpl) then) =
+      __$$BookmarkCheckImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isBookmarked});
+}
+
+/// @nodoc
+class __$$BookmarkCheckImplCopyWithImpl<$Res>
+    extends _$BookmarkStateCopyWithImpl<$Res, _$BookmarkCheckImpl>
+    implements _$$BookmarkCheckImplCopyWith<$Res> {
+  __$$BookmarkCheckImplCopyWithImpl(
+      _$BookmarkCheckImpl _value, $Res Function(_$BookmarkCheckImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isBookmarked = null,
+  }) {
+    return _then(_$BookmarkCheckImpl(
+      null == isBookmarked
+          ? _value.isBookmarked
+          : isBookmarked // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BookmarkCheckImpl implements BookmarkCheck {
+  const _$BookmarkCheckImpl(this.isBookmarked);
+
+  @override
+  final bool isBookmarked;
+
+  @override
+  String toString() {
+    return 'BookmarkState.checkBookmark(isBookmarked: $isBookmarked)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BookmarkCheckImpl &&
+            (identical(other.isBookmarked, isBookmarked) ||
+                other.isBookmarked == isBookmarked));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isBookmarked);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BookmarkCheckImplCopyWith<_$BookmarkCheckImpl> get copyWith =>
+      __$$BookmarkCheckImplCopyWithImpl<_$BookmarkCheckImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(bool isBookmarked) checkBookmark,
+    required TResult Function(List<Bookmark> bookmarks) loaded,
+    required TResult Function(String message) message,
+    required TResult Function(String message) error,
+  }) {
+    return checkBookmark(isBookmarked);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(bool isBookmarked)? checkBookmark,
+    TResult? Function(List<Bookmark> bookmarks)? loaded,
+    TResult? Function(String message)? message,
+    TResult? Function(String message)? error,
+  }) {
+    return checkBookmark?.call(isBookmarked);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(bool isBookmarked)? checkBookmark,
+    TResult Function(List<Bookmark> bookmarks)? loaded,
+    TResult Function(String message)? message,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (checkBookmark != null) {
+      return checkBookmark(isBookmarked);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BookmarkInitial value) initial,
+    required TResult Function(BookmarkLoading value) loading,
+    required TResult Function(BookmarkCheck value) checkBookmark,
+    required TResult Function(BookmarkLoaded value) loaded,
+    required TResult Function(BookmarkMessage value) message,
+    required TResult Function(BookmarkError value) error,
+  }) {
+    return checkBookmark(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BookmarkInitial value)? initial,
+    TResult? Function(BookmarkLoading value)? loading,
+    TResult? Function(BookmarkCheck value)? checkBookmark,
+    TResult? Function(BookmarkLoaded value)? loaded,
+    TResult? Function(BookmarkMessage value)? message,
+    TResult? Function(BookmarkError value)? error,
+  }) {
+    return checkBookmark?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BookmarkInitial value)? initial,
+    TResult Function(BookmarkLoading value)? loading,
+    TResult Function(BookmarkCheck value)? checkBookmark,
+    TResult Function(BookmarkLoaded value)? loaded,
+    TResult Function(BookmarkMessage value)? message,
+    TResult Function(BookmarkError value)? error,
+    required TResult orElse(),
+  }) {
+    if (checkBookmark != null) {
+      return checkBookmark(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BookmarkCheck implements BookmarkState {
+  const factory BookmarkCheck(final bool isBookmarked) = _$BookmarkCheckImpl;
+
+  bool get isBookmarked;
+  @JsonKey(ignore: true)
+  _$$BookmarkCheckImplCopyWith<_$BookmarkCheckImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -539,7 +1246,9 @@ class _$BookmarkLoadedImpl implements BookmarkLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(bool isBookmarked) checkBookmark,
     required TResult Function(List<Bookmark> bookmarks) loaded,
+    required TResult Function(String message) message,
     required TResult Function(String message) error,
   }) {
     return loaded(bookmarks);
@@ -550,7 +1259,9 @@ class _$BookmarkLoadedImpl implements BookmarkLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(bool isBookmarked)? checkBookmark,
     TResult? Function(List<Bookmark> bookmarks)? loaded,
+    TResult? Function(String message)? message,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(bookmarks);
@@ -561,7 +1272,9 @@ class _$BookmarkLoadedImpl implements BookmarkLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(bool isBookmarked)? checkBookmark,
     TResult Function(List<Bookmark> bookmarks)? loaded,
+    TResult Function(String message)? message,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -576,7 +1289,9 @@ class _$BookmarkLoadedImpl implements BookmarkLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(BookmarkInitial value) initial,
     required TResult Function(BookmarkLoading value) loading,
+    required TResult Function(BookmarkCheck value) checkBookmark,
     required TResult Function(BookmarkLoaded value) loaded,
+    required TResult Function(BookmarkMessage value) message,
     required TResult Function(BookmarkError value) error,
   }) {
     return loaded(this);
@@ -587,7 +1302,9 @@ class _$BookmarkLoadedImpl implements BookmarkLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BookmarkInitial value)? initial,
     TResult? Function(BookmarkLoading value)? loading,
+    TResult? Function(BookmarkCheck value)? checkBookmark,
     TResult? Function(BookmarkLoaded value)? loaded,
+    TResult? Function(BookmarkMessage value)? message,
     TResult? Function(BookmarkError value)? error,
   }) {
     return loaded?.call(this);
@@ -598,7 +1315,9 @@ class _$BookmarkLoadedImpl implements BookmarkLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BookmarkInitial value)? initial,
     TResult Function(BookmarkLoading value)? loading,
+    TResult Function(BookmarkCheck value)? checkBookmark,
     TResult Function(BookmarkLoaded value)? loaded,
+    TResult Function(BookmarkMessage value)? message,
     TResult Function(BookmarkError value)? error,
     required TResult orElse(),
   }) {
@@ -616,6 +1335,164 @@ abstract class BookmarkLoaded implements BookmarkState {
   List<Bookmark> get bookmarks;
   @JsonKey(ignore: true)
   _$$BookmarkLoadedImplCopyWith<_$BookmarkLoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BookmarkMessageImplCopyWith<$Res> {
+  factory _$$BookmarkMessageImplCopyWith(_$BookmarkMessageImpl value,
+          $Res Function(_$BookmarkMessageImpl) then) =
+      __$$BookmarkMessageImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$BookmarkMessageImplCopyWithImpl<$Res>
+    extends _$BookmarkStateCopyWithImpl<$Res, _$BookmarkMessageImpl>
+    implements _$$BookmarkMessageImplCopyWith<$Res> {
+  __$$BookmarkMessageImplCopyWithImpl(
+      _$BookmarkMessageImpl _value, $Res Function(_$BookmarkMessageImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$BookmarkMessageImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BookmarkMessageImpl implements BookmarkMessage {
+  const _$BookmarkMessageImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'BookmarkState.message(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BookmarkMessageImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BookmarkMessageImplCopyWith<_$BookmarkMessageImpl> get copyWith =>
+      __$$BookmarkMessageImplCopyWithImpl<_$BookmarkMessageImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(bool isBookmarked) checkBookmark,
+    required TResult Function(List<Bookmark> bookmarks) loaded,
+    required TResult Function(String message) message,
+    required TResult Function(String message) error,
+  }) {
+    return message(this.message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(bool isBookmarked)? checkBookmark,
+    TResult? Function(List<Bookmark> bookmarks)? loaded,
+    TResult? Function(String message)? message,
+    TResult? Function(String message)? error,
+  }) {
+    return message?.call(this.message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(bool isBookmarked)? checkBookmark,
+    TResult Function(List<Bookmark> bookmarks)? loaded,
+    TResult Function(String message)? message,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (message != null) {
+      return message(this.message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BookmarkInitial value) initial,
+    required TResult Function(BookmarkLoading value) loading,
+    required TResult Function(BookmarkCheck value) checkBookmark,
+    required TResult Function(BookmarkLoaded value) loaded,
+    required TResult Function(BookmarkMessage value) message,
+    required TResult Function(BookmarkError value) error,
+  }) {
+    return message(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BookmarkInitial value)? initial,
+    TResult? Function(BookmarkLoading value)? loading,
+    TResult? Function(BookmarkCheck value)? checkBookmark,
+    TResult? Function(BookmarkLoaded value)? loaded,
+    TResult? Function(BookmarkMessage value)? message,
+    TResult? Function(BookmarkError value)? error,
+  }) {
+    return message?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BookmarkInitial value)? initial,
+    TResult Function(BookmarkLoading value)? loading,
+    TResult Function(BookmarkCheck value)? checkBookmark,
+    TResult Function(BookmarkLoaded value)? loaded,
+    TResult Function(BookmarkMessage value)? message,
+    TResult Function(BookmarkError value)? error,
+    required TResult orElse(),
+  }) {
+    if (message != null) {
+      return message(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BookmarkMessage implements BookmarkState {
+  const factory BookmarkMessage(final String message) = _$BookmarkMessageImpl;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$BookmarkMessageImplCopyWith<_$BookmarkMessageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -685,10 +1562,12 @@ class _$BookmarkErrorImpl implements BookmarkError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function(bool isBookmarked) checkBookmark,
     required TResult Function(List<Bookmark> bookmarks) loaded,
+    required TResult Function(String message) message,
     required TResult Function(String message) error,
   }) {
-    return error(message);
+    return error(this.message);
   }
 
   @override
@@ -696,10 +1575,12 @@ class _$BookmarkErrorImpl implements BookmarkError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function(bool isBookmarked)? checkBookmark,
     TResult? Function(List<Bookmark> bookmarks)? loaded,
+    TResult? Function(String message)? message,
     TResult? Function(String message)? error,
   }) {
-    return error?.call(message);
+    return error?.call(this.message);
   }
 
   @override
@@ -707,12 +1588,14 @@ class _$BookmarkErrorImpl implements BookmarkError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function(bool isBookmarked)? checkBookmark,
     TResult Function(List<Bookmark> bookmarks)? loaded,
+    TResult Function(String message)? message,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message);
+      return error(this.message);
     }
     return orElse();
   }
@@ -722,7 +1605,9 @@ class _$BookmarkErrorImpl implements BookmarkError {
   TResult map<TResult extends Object?>({
     required TResult Function(BookmarkInitial value) initial,
     required TResult Function(BookmarkLoading value) loading,
+    required TResult Function(BookmarkCheck value) checkBookmark,
     required TResult Function(BookmarkLoaded value) loaded,
+    required TResult Function(BookmarkMessage value) message,
     required TResult Function(BookmarkError value) error,
   }) {
     return error(this);
@@ -733,7 +1618,9 @@ class _$BookmarkErrorImpl implements BookmarkError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BookmarkInitial value)? initial,
     TResult? Function(BookmarkLoading value)? loading,
+    TResult? Function(BookmarkCheck value)? checkBookmark,
     TResult? Function(BookmarkLoaded value)? loaded,
+    TResult? Function(BookmarkMessage value)? message,
     TResult? Function(BookmarkError value)? error,
   }) {
     return error?.call(this);
@@ -744,7 +1631,9 @@ class _$BookmarkErrorImpl implements BookmarkError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BookmarkInitial value)? initial,
     TResult Function(BookmarkLoading value)? loading,
+    TResult Function(BookmarkCheck value)? checkBookmark,
     TResult Function(BookmarkLoaded value)? loaded,
+    TResult Function(BookmarkMessage value)? message,
     TResult Function(BookmarkError value)? error,
     required TResult orElse(),
   }) {
