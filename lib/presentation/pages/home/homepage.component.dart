@@ -82,9 +82,26 @@ class DisplayBanner extends StatefulWidget {
 
 class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
   final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
+  final TimeStream _timeStream = sl<TimeStream>();
+
   final Logger _log = Logger('DisplayBanner');
 
   String address = '';
+  String _currentTimeString = '';
+  late tz.TZDateTime _currentTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _timeStream.stream.listen((time) {
+      final timezone = tz.getLocation('Asia/Jakarta');
+      final currentTime = tz.TZDateTime.from(time, timezone);
+      setState(() {
+        _currentTime = currentTime;
+        _currentTimeString = dt.DateFormat('HH:mm').format(_currentTime);
+      });
+    });
+  }
 
   Future<String> getAddress(double lat, double lng) async {
     try {
@@ -97,7 +114,7 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
       if (e.code == 'IO_ERROR' && e.message == 'Service not Available') {
         _log.warning(
             'Failed to get address: Location services are not available or disabled.');
-        return 'Tidak dapat mengakses lokasi. Pastikan layanan lokasi diaktifkan.';
+        return 'Terjadi Kesalahan';
       } else {
         _log.warning('Failed to get address: ${e.message}');
         return 'Gagal mendapatkan lokasi';
@@ -106,6 +123,12 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
       _log.warning('Failed to get address: $e');
       return 'Gagal mendapatkan lokasi';
     }
+  }
+
+  @override
+  void dispose() {
+    _timeStream.dispose();
+    super.dispose();
   }
 
   @override
@@ -118,9 +141,7 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
           return const SizedBox.shrink();
         } else if (state is LocationLoaded) {
           PrayerTimes prayerTime = state.prayerTime;
-          prayerTimeCubit
-              .getAddressFromCoordinates(
-                  state.location.latitude, state.location.longitude)
+          getAddress(state.location.latitude, state.location.longitude)
               .then((value) => setState(() {
                     address = value;
                   }));
@@ -137,10 +158,7 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
     PrayerTimes prayerTime,
     String? address,
   ) {
-    var timezone = tz.getLocation('Asia/Jakarta');
-    var currentTime = tz.TZDateTime.now(timezone);
-    String currentTimeString = dt.DateFormat('HH:mm:ss').format(currentTime);
-    final time = getCurrentPrayerTimeMap(currentTime, prayerTime);
+    final time = getCurrentPrayerTimeMap(_currentTime, prayerTime);
     final currentPrayerTime = time['current'];
     final imagePath = getImagePath(currentPrayerTime);
     return Stack(
@@ -164,12 +182,12 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
           child: Column(
             children: [
               BannerWidget(
-                currentTimeString: currentTimeString,
+                currentTimeString: _currentTimeString,
                 currentPrayerTime: currentPrayerTime,
                 address: address!,
               ),
               const Gap(20),
-              const PrayerSchedule(),
+              PrayerSchedule(currentTime: _currentTimeString),
             ],
           ),
         ),
@@ -185,19 +203,19 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
           width: double.infinity,
           height: double.infinity,
         ),
-        const Positioned(
+        Positioned(
           top: 40,
           left: 15,
           right: 15,
           child: Column(
             children: [
               BannerWidget(
-                currentTimeString: 'Loading...',
+                currentTimeString: _currentTimeString,
                 currentPrayerTime: 'Loading...',
                 address: 'Loading...',
               ),
-              Gap(20),
-              PrayerSchedule(),
+              const Gap(20),
+              PrayerSchedule(currentTime: _currentTimeString),
             ],
           ),
         ),
@@ -252,35 +270,13 @@ class BuildDates extends StatelessWidget with PrayerTimeMixin {
   }
 }
 
-class PrayerSchedule extends StatefulWidget {
-  const PrayerSchedule({super.key});
+class PrayerSchedule extends StatelessWidget with PrayerTimeMixin {
+  const PrayerSchedule({
+    super.key,
+    required this.currentTime,
+  });
 
-  @override
-  State<PrayerSchedule> createState() => _PrayerScheduleState();
-}
-
-class _PrayerScheduleState extends State<PrayerSchedule> with PrayerTimeMixin {
-  final _timeStream = sl<TimeStream>();
-  String _currentTime = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _timeStream.stream.listen((time) {
-      final timezone = tz.getLocation('Asia/Jakarta');
-      final currentTime = tz.TZDateTime.from(time, timezone);
-      setState(() {
-        _currentTime = dt.DateFormat('HH:mm').format(currentTime);
-      });
-    });
-    // _startTimer();
-  }
-
-  @override
-  void dispose() {
-    _timeStream.dispose();
-    super.dispose();
-  }
+  final String currentTime;
 
   @override
   Widget build(BuildContext context) {
@@ -319,7 +315,7 @@ class _PrayerScheduleState extends State<PrayerSchedule> with PrayerTimeMixin {
             );
             String next = highlightedPrayerTime['next'];
             final timeRemaining = highlightedPrayerTime['remainingTime'];
-            Color titleColor = getTextColor(_currentTime);
+            Color titleColor = getTextColor(currentTime);
             final prayerTimes = getPrayerSchedule(prayerTime);
             final prayerTimeIcon = getPrayerIcon(prayerTime);
 

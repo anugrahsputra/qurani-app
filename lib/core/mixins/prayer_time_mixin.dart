@@ -5,51 +5,61 @@ import '../core.dart';
 
 mixin PrayerTimeMixin {
   Map<String, dynamic> getCurrentPrayerTimeMap(
-    DateTime current,
-    PrayerTimes prayerTimes,
-  ) {
-    String currentPrayerTime = '';
-    String nextPrayerTime = '';
-    DateTime time;
-    Duration remainingTime;
-    String icon = '';
+      DateTime current, PrayerTimes prayerTimes) {
+    List<Map<String, dynamic>> prayerTimeList = [
+      {
+        'time': prayerTimes.fajr,
+        'current': 'Subuh',
+        'next': 'Dzuhur',
+        'icon': SvgPath.fajr
+      },
+      {
+        'time': prayerTimes.dhuhr,
+        'current': 'Dzuhur',
+        'next': 'Ashar',
+        'icon': SvgPath.dzuhr
+      },
+      {
+        'time': prayerTimes.asr,
+        'current': 'Ashar',
+        'next': 'Magrib',
+        'icon': SvgPath.asr
+      },
+      {
+        'time': prayerTimes.maghrib,
+        'current': 'Magrib',
+        'next': 'Isya',
+        'icon': SvgPath.maghrib
+      },
+      {
+        'time': prayerTimes.isha,
+        'current': 'Isya',
+        'next': 'Subuh',
+        'icon': SvgPath.isha
+      },
+    ];
 
-    if (current.isBefore(prayerTimes.dhuhr)) {
-      icon = SvgPath.fajr;
-      currentPrayerTime = 'Subuh';
-      nextPrayerTime = 'Dzuhur';
-      time = prayerTimes.dhuhr;
-      remainingTime = time.difference(current);
-    } else if (current.isBefore(prayerTimes.asr)) {
-      icon = SvgPath.dzuhr;
-      currentPrayerTime = 'Dzuhur';
-      nextPrayerTime = 'Ashar';
-      time = prayerTimes.asr;
-      remainingTime = time.difference(current);
-    } else if (current.isBefore(prayerTimes.maghrib)) {
-      icon = SvgPath.asr;
-      currentPrayerTime = 'Ashar';
-      nextPrayerTime = 'Magrib';
-      time = prayerTimes.maghrib;
-      remainingTime = time.difference(current);
-    } else if (current.isBefore(prayerTimes.isha)) {
-      icon = SvgPath.maghrib;
-      currentPrayerTime = 'Magrib';
-      nextPrayerTime = 'Isya';
-      time = prayerTimes.isha;
-      remainingTime = time.difference(current);
-    } else {
-      icon = SvgPath.isha;
-      currentPrayerTime = 'Isya';
-      nextPrayerTime = 'Subuh';
-      time = prayerTimes.fajr;
-      remainingTime = time.add(const Duration(days: 1)).difference(current);
+    for (int i = 0; i < prayerTimeList.length; i++) {
+      if (current.isBefore(prayerTimeList[i]['time'])) {
+        DateTime time = prayerTimeList[i]['time'];
+        Duration remainingTime = time.difference(current);
+        return {
+          'icon': prayerTimeList[i]['icon'],
+          'current': prayerTimeList[i]['current'],
+          'next': prayerTimeList[i]['next'],
+          'time': time,
+          'remainingTime': remainingTime,
+        };
+      }
     }
 
+    DateTime time = prayerTimes.fajr;
+    Duration remainingTime =
+        time.add(const Duration(days: 1)).difference(current);
     return {
-      'icon': icon,
-      'current': currentPrayerTime,
-      'next': nextPrayerTime,
+      'icon': SvgPath.isha,
+      'current': 'Isya',
+      'next': 'Subuh',
       'time': time,
       'remainingTime': remainingTime,
     };
