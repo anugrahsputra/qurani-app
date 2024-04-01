@@ -33,11 +33,11 @@ class BannerWidget extends StatelessWidget {
             ),
           ],
         ),
-        const Gap(25),
+        Gap(30.h),
         Text(
           currentTimeString,
           style: TextStyle(
-            fontSize: 40,
+            fontSize: 50.sp,
             color: textColor ?? AppColors.onPrimary,
             fontWeight: FontWeight.w600,
           ),
@@ -46,7 +46,7 @@ class BannerWidget extends StatelessWidget {
           currentPrayerTime,
           style: TextStyle(
             color: textColor ?? AppColors.onPrimary,
-            fontSize: 18,
+            fontSize: 18.sp,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -72,15 +72,15 @@ class CurrentLocWidget extends StatelessWidget with PrayerTimeMixin {
       children: [
         Icon(
           Icons.location_on,
-          size: 15,
+          size: 15.sp,
           color: color,
         ),
         const Gap(5),
         Text(
           currentLoc!,
-          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           style: GoogleFonts.poppins(
-            fontSize: 12,
+            fontSize: 12.sp,
             color: color,
             fontWeight: FontWeight.w500,
           ),
@@ -105,7 +105,7 @@ class PrayerWidget extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: FontWeight.w500,
       ),
     );
@@ -133,15 +133,7 @@ class PrayerScheduleWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          text ?? '',
-          style: TextStyle(
-            fontSize: 14,
-            color: color ?? AppColors.onBackground,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const Gap(10),
+        Gap(0.01.sh),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: prayerTimes?.entries.map((e) {
@@ -155,15 +147,29 @@ class PrayerScheduleWidget extends StatelessWidget {
                     : AppColors.onPrimary;
 
                 return Container(
-                  width: 60,
-                  padding: const EdgeInsets.all(10),
+                  width: 0.16.sw,
+                  padding: EdgeInsets.all(5.w),
+                  decoration: BoxDecoration(
+                    color: isHighlighted
+                        ? AppColors.background.withOpacity(0.5)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(10.r),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.shadow.withOpacity(0.15),
+                        offset: const Offset(8, 8),
+                        blurRadius: 14.r,
+                        spreadRadius: -8,
+                      )
+                    ],
+                  ),
                   child: Column(
                     children: [
                       Text(
                         e.key,
                         style: TextStyle(
                           color: textColor,
-                          fontSize: 12,
+                          fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -176,7 +182,7 @@ class PrayerScheduleWidget extends StatelessWidget {
                         dt.DateFormat('HH:mm').format(e.value),
                         style: TextStyle(
                           color: textColor,
-                          fontSize: 10,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -199,14 +205,7 @@ class PrayerScheduleLoading extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'shalat dzuhur 00 jam 00 menit',
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const Gap(10),
+        Gap(10.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(

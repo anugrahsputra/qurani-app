@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -47,12 +49,12 @@ class _HomepageState extends State<Homepage> {
     });
     controller.addListener(() {
       if (BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
-          controller.offset < 200) {
+          controller.offset < 0.2.sh) {
         BlocProvider.of<AppbarBloc>(context).add(
           const ToggleDisplay(),
         );
       } else if (!BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
-          controller.offset > 200) {
+          controller.offset > 0.2.sh) {
         BlocProvider.of<AppbarBloc>(context).add(
           const ToggleDisplay(),
         );

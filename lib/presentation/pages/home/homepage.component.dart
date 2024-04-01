@@ -21,7 +21,7 @@ class HomeAppbar extends StatelessWidget {
                     'Quranee',
                     style: TextStyle(
                       color: AppColors.onPrimary,
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   )
@@ -29,31 +29,31 @@ class HomeAppbar extends StatelessWidget {
           ),
           toolbarHeight: 50,
           collapsedHeight: 50,
-          expandedHeight: 300,
+          expandedHeight: 0.364.sh,
           elevation: 0,
           pinned: true,
           floating: false,
           snap: false,
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(24),
+            preferredSize: Size.fromHeight(28.h),
             child: Container(
-              width: double.infinity,
+              width: double.infinity.w,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(30.r),
                 ),
                 color: AppColors.background,
               ),
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: EdgeInsets.symmetric(vertical: 15.h),
                     child: Container(
-                      width: 40,
-                      height: 4,
+                      width: 0.2.sw,
+                      height: 4.h,
                       decoration: BoxDecoration(
                         color: Colors.black,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(10.r),
                       ),
                     ),
                   ),
@@ -112,8 +112,11 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
       return address;
     } on PlatformException catch (e) {
       if (e.code == 'IO_ERROR' && e.message == 'Service not Available') {
-        _log.warning(
-            'Failed to get address: Location services are not available or disabled.');
+        /// commented out because it's so f-ing finicky
+        // _log.warning(
+        //     'Failed to get address: Location services are not available or disabled.');
+
+        /// Terjadi kesalahan my a**. This is a workaround for the finicky
         return 'Terjadi Kesalahan';
       } else {
         _log.warning('Failed to get address: ${e.message}');
@@ -168,23 +171,34 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
           switchInCurve: Curves.easeInOut,
           switchOutCurve: Curves.easeInOut,
           reverseDuration: Duration.zero,
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: AppColors.primaryContainer.withOpacity(0.8),
+              ),
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
+                width: double.infinity.w,
+                height: double.infinity.h,
+              ),
+            ),
           ),
         ),
         Positioned(
-          top: 40,
-          left: 15,
-          right: 15,
+          top: 0.05.sh,
+          left: 0.015.sh,
+          right: 0.015.sh,
           child: Column(
             children: [
               BannerWidget(
                 currentTimeString: _currentTimeString,
                 currentPrayerTime: currentPrayerTime,
                 address: address!,
+                textColor: getTextColor(currentPrayerTime),
               ),
               const Gap(20),
               PrayerSchedule(currentTime: _currentTimeString),
@@ -204,9 +218,9 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
           height: double.infinity,
         ),
         Positioned(
-          top: 40,
-          left: 15,
-          right: 15,
+          top: 0.04.sh,
+          left: 0.015.sh,
+          right: 0.015.sh,
           child: Column(
             children: [
               BannerWidget(
@@ -238,7 +252,12 @@ class BuildDates extends StatelessWidget with PrayerTimeMixin {
     final now = tz.TZDateTime.now(location);
 
     final textColor = getTextColor(prayerTimes);
-    var hijriCalendar = hijri.HijriCalendar.fromDate(now);
+
+    /// Subtract 1 day from the current date
+    final adjustedNow = now.subtract(const Duration(days: 1));
+
+    /// The Hijri calendar is offset by 1 day, so we need to subtract 1 day
+    var hijriCalendar = hijri.HijriCalendar.fromDate(adjustedNow);
     String formattedHijriDate =
         '${hijriCalendar.hDay} ${hijriCalendar.longMonthName} ${hijriCalendar.hYear} AH';
 
@@ -252,7 +271,7 @@ class BuildDates extends StatelessWidget with PrayerTimeMixin {
         Text(
           formattedGregorianDate,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 16.sp,
             color: textColor,
             fontWeight: FontWeight.w600,
           ),
@@ -260,7 +279,7 @@ class BuildDates extends StatelessWidget with PrayerTimeMixin {
         Text(
           formattedHijriDate,
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 14.sp,
             color: textColor,
             fontWeight: FontWeight.w400,
           ),
@@ -364,11 +383,11 @@ class SurahCards extends StatelessWidget {
             itemCount: 10,
             itemBuilder: (context, index) {
               return Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 10,
+                margin: EdgeInsets.symmetric(
+                  horizontal: 1.sw,
+                  vertical: 1.sh,
                 ),
-                height: 75,
+                height: 75.sh,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -405,9 +424,9 @@ class CardView extends StatelessWidget {
     String name = surah?.name.transliteration.id ?? 'unknown';
 
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 10,
+      margin: EdgeInsets.symmetric(
+        horizontal: 10.w,
+        vertical: 10.h,
       ),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -426,13 +445,13 @@ class CardView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: 40,
+            height: 40.h,
             child: Center(
               child: Text(
                 '﴾$surahNumber﴿',
                 style: GoogleFonts.amiriQuran(
                   fontWeight: FontWeight.w500,
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   color: Colors.black,
                 ),
                 textAlign: TextAlign.center,
@@ -445,14 +464,18 @@ class CardView extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                 ),
               ),
-              const Gap(5),
+              Gap(5.h),
               Text(
                 '$revelationType - $numberOfVerses ayat',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Colors.grey,
+                ),
               )
             ],
           ),
@@ -460,7 +483,7 @@ class CardView extends StatelessWidget {
           Text(
             translation,
             style: GoogleFonts.notoSansArabic(
-              fontSize: 16,
+              fontSize: 16.sp,
               fontWeight: FontWeight.w500,
             ),
           ),
