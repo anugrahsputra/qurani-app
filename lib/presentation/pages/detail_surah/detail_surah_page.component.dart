@@ -11,15 +11,15 @@ class DetailHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 120,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 5,
-        vertical: 5,
+      height: 138.h,
+      margin: EdgeInsets.symmetric(
+        horizontal: 5.w,
+        vertical: 5.h,
       ),
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      padding: EdgeInsets.fromLTRB(15.w, 15.h, 0.w, 15.h),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,34 +30,34 @@ class DetailHeader extends StatelessWidget {
             children: [
               Text(
                 surahDetail.name!.transliteration!.id ?? 'Error',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 16,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               Text(
                 surahDetail.name!.translation!.id ?? 'Error',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 18,
+                  fontSize: 16.sp,
                   color: Colors.black,
                 ),
               ),
-              const Gap(10),
+              Gap(10.h),
               Text(
                 '${surahDetail.numberOfVerses} ayat',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   color: Colors.black,
                 ),
               ),
               Text(
                 surahDetail.revelation!.id ?? 'Error',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   color: Colors.black,
                 ),
               ),
@@ -65,8 +65,8 @@ class DetailHeader extends StatelessWidget {
           ),
           const Spacer(),
           Container(
-            width: 120,
-            height: 120,
+            width: 120.w,
+            height: 120.h,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(PngPath.ornaments),
@@ -93,10 +93,10 @@ class OpeningBismillah extends StatelessWidget {
   Widget build(BuildContext context) {
     return surahDetail.preBismillah != null
         ? Container(
-            width: double.infinity,
-            margin: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 5,
+            width: double.infinity.w,
+            margin: EdgeInsets.symmetric(
+              horizontal: 10.w,
+              vertical: 5.h,
             ),
             child: SvgPicture.asset(
               SvgPath.bismillah,
@@ -177,31 +177,30 @@ class _SurahContentState extends State<SurahContent> {
       return result is BookmarkCheck ? result.isBookmarked : false;
     });
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
+      margin: EdgeInsets.symmetric(
+        horizontal: 10.w,
+        vertical: 5.h,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            width: double.infinity,
+            width: double.infinity.w,
             decoration: BoxDecoration(
-              // color: Colors.deepPurple[100],
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.r),
             ),
             child: Row(
               children: [
                 Text(
                   '${widget.verse.number!.inSurah}.',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 16,
+                    fontSize: 16.r,
                     color: Colors.black,
                   ),
                 ),
-                const Gap(15),
+                Gap(15.w),
                 Expanded(
                   child: AudioSlider(
                     verseNumber: widget.verse.number!.inSurah.toString(),
@@ -244,27 +243,27 @@ class _SurahContentState extends State<SurahContent> {
                           });
                     }
                   },
-                  child: const Icon(
+                  child: Icon(
                     Icons.bookmark_border,
                     color: Colors.black,
-                    size: 20,
+                    size: 20.dm,
                   ),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.share,
                     color: Colors.black,
-                    size: 20,
+                    size: 20.dm,
                   ),
                 ),
               ],
             ),
           ),
-          const Gap(10),
+          Gap(10.h),
           Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            width: double.infinity.w,
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -275,7 +274,7 @@ class _SurahContentState extends State<SurahContent> {
                     style: GoogleFonts.amiri(
                       height: 2,
                       fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       color: Colors.black,
                     ),
                     textDirection: TextDirection.rtl,
@@ -285,22 +284,22 @@ class _SurahContentState extends State<SurahContent> {
               ],
             ),
           ),
-          const Gap(10),
+          Gap(10.h),
           Text(
             transliteration,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 14,
+              fontSize: 14.sp,
               color: Colors.black,
             ),
             textAlign: TextAlign.justify,
           ),
-          const Gap(5),
+          Gap(5.h),
           Text(
             translation,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w400,
-              fontSize: 14,
+              fontSize: 14.sp,
               color: Colors.black,
             ),
             textAlign: TextAlign.justify,
@@ -345,27 +344,27 @@ class _PlayButtonState extends State<PlayButton> {
             onPressed: () {
               cubit.stopVerse();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.stop,
               color: Colors.black,
-              size: 25,
+              size: 25.dm,
             ),
           );
         } else if (state is VerseLoading) {
-          return const Icon(
+          return Icon(
             Icons.circle,
             color: Colors.black,
-            size: 25,
+            size: 25.dm,
           );
         } else {
           return IconButton(
             onPressed: () {
               cubit.playVerse(widget.verseNumber, widget.audioSource);
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.play_arrow,
               color: Colors.black,
-              size: 25,
+              size: 25.dm,
             ),
           );
         }
@@ -393,21 +392,21 @@ class PlayAllButton extends StatelessWidget {
             onPressed: () {
               verseAudioCubit.stopVerse();
             },
-            icon: const Icon(Icons.stop_circle_rounded, size: 50),
+            icon: Icon(Icons.stop_circle_rounded, size: 50.dm),
           );
         } else if (state is VerseStopped) {
           return IconButton(
             onPressed: () {
               verseAudioCubit.playAllVerse(surahNumber);
             },
-            icon: const Icon(Icons.play_circle_rounded, size: 50),
+            icon: Icon(Icons.play_circle_rounded, size: 50.dm),
           );
         } else {
           return IconButton(
             onPressed: () {
               verseAudioCubit.playAllVerse(surahNumber);
             },
-            icon: const Icon(Icons.play_circle_rounded, size: 50),
+            icon: Icon(Icons.play_circle_rounded, size: 50.dm),
           );
         }
       },
@@ -430,14 +429,16 @@ class DetailTitle extends StatelessWidget {
             children: [
               Text(
                 '${surahDetail.number}. ',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
                 ),
               ),
               Text(
                 surahDetail.name!.transliteration!.id ?? 'Error',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
                 ),
               ),
             ],
@@ -481,32 +482,32 @@ class _AudioSliderState extends State<AudioSlider> {
               ? position.inMicroseconds / duration.inMicroseconds
               : 0;
           return Container(
-            height: 2,
+            height: 2.h,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.5),
+              borderRadius: BorderRadius.circular(2.5.r),
               color: AppColors.primaryContainer,
             ),
             child: LinearProgressIndicator(
               value: value,
               color: AppColors.primary,
               backgroundColor: AppColors.primaryContainer,
-              borderRadius: BorderRadius.circular(2.5),
+              borderRadius: BorderRadius.circular(2.5.r),
             ),
           );
         } else if (state is VerseLoading &&
             state.verseNumber == widget.verseNumber) {
           return Container(
-            height: 2,
+            height: 2.h,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.5),
+              borderRadius: BorderRadius.circular(2.5.r),
               color: AppColors.primaryContainer,
             ),
           );
         } else {
           return Container(
-            height: 2,
+            height: 2.h,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.5),
+              borderRadius: BorderRadius.circular(2.5.r),
               color: AppColors.primaryContainer,
             ),
           );
