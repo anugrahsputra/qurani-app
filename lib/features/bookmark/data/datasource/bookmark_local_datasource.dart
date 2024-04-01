@@ -41,15 +41,11 @@ class IBookmarkLocalDatasource implements BookmarkLocalDatasource {
 
   @override
   Future<BookmarkTable?> getBookmarkById(int id) async {
-    try {
-      final result = await databaseHelper.getBookmarkById(id);
-      if (result != null) {
-        return BookmarkTable.fromJson(result);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      rethrow;
+    final result = await databaseHelper.getBookmarkById(id);
+    if (result != null) {
+      return BookmarkTable.fromJson(result);
+    } else {
+      return null;
     }
   }
 }

@@ -4,8 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:qurani/core/core.dart';
 import 'package:qurani/features/ayah/ayah.dart';
+import 'package:qurani/features/bookmark/bookmark.dart';
 import 'package:qurani/features/detail_surah/detail_surah.dart';
 import 'package:qurani/features/surah/surah.dart';
+import 'package:qurani/presentation/presentation.dart';
 
 import 'mock.mocks.dart';
 
@@ -69,6 +71,13 @@ MockRequestRetrier getMockRequestRetrier() {
   return mock;
 }
 
+MockDatabaseHelper getMockDatabaseHelper() {
+  MockDatabaseHelper mock = MockDatabaseHelper();
+  _removeRegistrationIfExists<DatabaseHelper>();
+  sl.registerSingleton<DatabaseHelper>(mock);
+  return mock;
+}
+
 /* Data */
 MockSurahRemoteDataSource getMockSurahRemoteDataSource() {
   MockSurahRemoteDataSource mock = MockSurahRemoteDataSource();
@@ -91,6 +100,13 @@ MockAyahRemoteDatasource getMockAyahRemoteDatasource() {
   return mock;
 }
 
+MockBookmarkLocalDatasource getMockBookmarkLocalDatasource() {
+  MockBookmarkLocalDatasource mock = MockBookmarkLocalDatasource();
+  _removeRegistrationIfExists<BookmarkLocalDatasource>();
+  sl.registerSingleton<BookmarkLocalDatasource>(mock);
+  return mock;
+}
+
 /* Domain/Repository */
 MockBaseSurahRepository getMockBaseSurahRepository() {
   MockBaseSurahRepository mock = MockBaseSurahRepository();
@@ -110,6 +126,13 @@ MockAyahRepository getMockAyahRepository() {
   MockAyahRepository mock = MockAyahRepository();
   _removeRegistrationIfExists<AyahRepository>();
   sl.registerSingleton<AyahRepository>(mock);
+  return mock;
+}
+
+MockBookmarkRepository getMockBookmarkRepository() {
+  MockBookmarkRepository mock = MockBookmarkRepository();
+  _removeRegistrationIfExists<BookmarkRepository>();
+  sl.registerSingleton<BookmarkRepository>(mock);
   return mock;
 }
 
@@ -149,6 +172,34 @@ MockGetRandomAyahUsecase getMockGetRandomAyahUsecase() {
   return mock;
 }
 
+MockAddBookmarkUsecase getMockAddBookmarkUsecase() {
+  MockAddBookmarkUsecase mock = MockAddBookmarkUsecase();
+  _removeRegistrationIfExists<AddBookmarkUsecase>();
+  sl.registerSingleton<AddBookmarkUsecase>(mock);
+  return mock;
+}
+
+MockRemoveBookmarkUsecase getMockRemoveBookmarkUsecase() {
+  MockRemoveBookmarkUsecase mock = MockRemoveBookmarkUsecase();
+  _removeRegistrationIfExists<RemoveBookmarkUsecase>();
+  sl.registerSingleton<RemoveBookmarkUsecase>(mock);
+  return mock;
+}
+
+MockIsBookmarkUsecase getMockIsBookmarkUsecase() {
+  MockIsBookmarkUsecase mock = MockIsBookmarkUsecase();
+  _removeRegistrationIfExists<IsBookmarkUsecase>();
+  sl.registerSingleton<IsBookmarkUsecase>(mock);
+  return mock;
+}
+
+MockGetBookmarksUsecase getMockGetBookmarksUsecase() {
+  MockGetBookmarksUsecase mock = MockGetBookmarksUsecase();
+  _removeRegistrationIfExists<GetBookmarksUsecase>();
+  sl.registerSingleton<GetBookmarksUsecase>(mock);
+  return mock;
+}
+
 /* Bloc */
 MockSurahBloc getMockSurahBloc() {
   MockSurahBloc mock = MockSurahBloc();
@@ -168,6 +219,20 @@ MockAyahsBloc getMockAyahBloc() {
   MockAyahsBloc mock = MockAyahsBloc();
   _removeRegistrationIfExists<AyahsBloc>();
   sl.registerSingleton<AyahsBloc>(mock);
+  return mock;
+}
+
+MockBookmarkBloc getMockBookmarkBloc() {
+  MockBookmarkBloc mock = MockBookmarkBloc();
+  _removeRegistrationIfExists<BookmarkBloc>();
+  sl.registerSingleton<BookmarkBloc>(mock);
+  return mock;
+}
+
+MockAppbarBloc getMockAppbarBloc() {
+  MockAppbarBloc mock = MockAppbarBloc();
+  _removeRegistrationIfExists<AppbarBloc>();
+  sl.registerSingleton<AppbarBloc>(mock);
   return mock;
 }
 
@@ -197,24 +262,33 @@ void registerSl() {
   getMockUserLocation();
   getMockCustomInterceptor();
   getMockRequestRetrier();
+  getMockDatabaseHelper();
   /* Data */
   getMockSurahRemoteDataSource();
   getMockDetailSurahRemoteDataSource();
   getMockAyahRemoteDatasource();
+  getMockBookmarkLocalDatasource();
   /* Domain/Repository */
   getMockBaseSurahRepository();
   getMockSurahDetailRepository();
   getMockAyahRepository();
+  getMockBookmarkRepository();
   /* Domain/Usecase */
   getMockGetSurahDetailUseCase();
   getMockGetSurahsUseCase();
   getMockGetSurahAudioUsecase();
   getMockGetAyahUsecase();
   getMockGetRandomAyahUsecase();
+  getMockAddBookmarkUsecase();
+  getMockRemoveBookmarkUsecase();
+  getMockIsBookmarkUsecase();
+  getMockGetBookmarksUsecase();
   /* Bloc */
   getMockSurahBloc();
   getMockDetailSurahBloc();
   getMockAyahBloc();
+  getMockBookmarkBloc();
+  getMockAppbarBloc();
   /* Cubit */
   getMockPrayerTimeCubit();
   getMockVerseAudioCubit();
@@ -231,24 +305,33 @@ void unregisterSl() {
   sl.unregister<UserLocation>();
   sl.unregister<CustomInterceptor>();
   sl.unregister<RequestRetrier>();
+  sl.unregister<DatabaseHelper>();
   /* Data */
   sl.unregister<SurahRemoteDataSource>();
   sl.unregister<DetailSurahRemoteDataSource>();
   sl.unregister<AyahRemoteDatasource>();
+  sl.unregister<BookmarkLocalDatasource>();
   /* Domain/Repository */
   sl.unregister<BaseSurahRepository>();
   sl.unregister<SurahDetailRepository>();
   sl.unregister<AyahRepository>();
+  sl.unregister<BookmarkRepository>();
   /* Domain/Usecase */
   sl.unregister<GetSurahDetailUseCase>();
   sl.unregister<GetSurahsUseCase>();
   sl.unregister<GetSurahAudioUsecase>();
   sl.unregister<GetAyahUsecase>();
   sl.unregister<GetRandomAyahUsecase>();
+  sl.unregister<AddBookmarkUsecase>();
+  sl.unregister<RemoveBookmarkUsecase>();
+  sl.unregister<IsBookmarkUsecase>();
+  sl.unregister<GetBookmarksUsecase>();
   /* Bloc */
   sl.unregister<SurahBloc>();
   sl.unregister<DetailSurahBloc>();
   sl.unregister<AyahsBloc>();
+  sl.unregister<BookmarkBloc>();
+  sl.unregister<AppbarBloc>();
   /* Cubit */
   sl.unregister<PrayerTimeCubit>();
   sl.unregister<VerseAudioCubit>();
