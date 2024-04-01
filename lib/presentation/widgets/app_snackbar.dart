@@ -16,7 +16,7 @@ class AppSnackbar {
     showSnackBar(
       context,
       message: message,
-      snackbarColor: AppColors.onPrimary,
+      snackbarColor: Colors.green,
     );
   }
 
