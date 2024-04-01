@@ -12,28 +12,34 @@ mixin PrayerTimeMixin {
     String nextPrayerTime = '';
     DateTime time;
     Duration remainingTime;
+    String icon = '';
 
     if (current.isBefore(prayerTimes.dhuhr)) {
+      icon = SvgPath.fajr;
       currentPrayerTime = 'Subuh';
       nextPrayerTime = 'Dzuhur';
       time = prayerTimes.dhuhr;
       remainingTime = time.difference(current);
     } else if (current.isBefore(prayerTimes.asr)) {
+      icon = SvgPath.dzuhr;
       currentPrayerTime = 'Dzuhur';
       nextPrayerTime = 'Ashar';
       time = prayerTimes.asr;
       remainingTime = time.difference(current);
     } else if (current.isBefore(prayerTimes.maghrib)) {
+      icon = SvgPath.asr;
       currentPrayerTime = 'Ashar';
       nextPrayerTime = 'Magrib';
       time = prayerTimes.maghrib;
       remainingTime = time.difference(current);
     } else if (current.isBefore(prayerTimes.isha)) {
+      icon = SvgPath.maghrib;
       currentPrayerTime = 'Magrib';
       nextPrayerTime = 'Isya';
       time = prayerTimes.isha;
       remainingTime = time.difference(current);
     } else {
+      icon = SvgPath.isha;
       currentPrayerTime = 'Isya';
       nextPrayerTime = 'Subuh';
       time = prayerTimes.fajr;
@@ -41,6 +47,7 @@ mixin PrayerTimeMixin {
     }
 
     return {
+      'icon': icon,
       'current': currentPrayerTime,
       'next': nextPrayerTime,
       'time': time,
@@ -62,16 +69,13 @@ mixin PrayerTimeMixin {
   }
 
   Map<String, dynamic> getPrayerIcon(PrayerTimes prayerTimes) {
-    final prayerTime = {
-      'Subuh': 'assets/icons/subuh.png',
-      // 'Matahari Terbit': 'assets/icons/sunrise.png',
-      'Dzuhur': 'assets/icons/dhuhr.png',
-      'Ashar': 'assets/icons/asr.png',
-      'Magrib': 'assets/icons/maghrib.png',
-      'Isya': 'assets/icons/isha.png',
+    return {
+      'Subuh': SvgPath.fajr,
+      'Dzuhur': SvgPath.dzuhr,
+      'Ashar': SvgPath.asr,
+      'Magrib': SvgPath.maghrib,
+      'Isya': SvgPath.isha,
     };
-
-    return prayerTime;
   }
 
   String getImagePath(String currentPrayerTime) {
