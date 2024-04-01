@@ -12,15 +12,16 @@ class HomeAppbar extends StatelessWidget {
           systemOverlayStyle: Theme.of(context).appBarTheme.systemOverlayStyle,
           centerTitle: false,
           title: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            switchInCurve: Curves.easeIn,
+            duration: const Duration(milliseconds: 500),
+            switchInCurve: Curves.easeInOut,
+            switchOutCurve: Curves.easeInOut,
             reverseDuration: Duration.zero,
             child: state.displayAppbar
                 ? Text(
-                    'Al-Qur\'an',
-                    style: GoogleFonts.poppins(
+                    'Quranee',
+                    style: TextStyle(
                       color: AppColors.onPrimary,
-                      fontSize: 24.0,
+                      fontSize: 24,
                       fontWeight: FontWeight.w600,
                     ),
                   )
@@ -28,11 +29,38 @@ class HomeAppbar extends StatelessWidget {
           ),
           toolbarHeight: 50,
           collapsedHeight: 50,
-          expandedHeight: 280,
+          expandedHeight: 300,
           elevation: 0,
           pinned: true,
           floating: false,
           snap: false,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(24),
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+                color: AppColors.background,
+              ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Container(
+                      width: 40,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           flexibleSpace: const FlexibleSpaceBar(
             collapseMode: CollapseMode.parallax,
             background: DisplayBanner(),
@@ -54,6 +82,8 @@ class DisplayBanner extends StatefulWidget {
 
 class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
   final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
+  final Logger _log = Logger('DisplayBanner');
+
   String address = '';
   Timer? _timer;
   @override
@@ -82,7 +112,8 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
       );
       return address;
     } catch (e) {
-      return 'Mencari...';
+      _log.warning('Failed to get address: $e');
+      return 'Gagal mendapatkan lokasi';
     }
   }
 
@@ -93,48 +124,76 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
     String currentTimeString = dt.DateFormat('HH:mm').format(currentTime);
     return BlocBuilder<PrayerTimeCubit, PrayerTimeState>(
       builder: (context, state) {
-        return state.when(
-          initial: () => const SizedBox.shrink(),
-          loading: () => const SizedBox.shrink(),
-          permissionDenied: () => const SizedBox.shrink(),
-          locationLoaded: (location, prayerTime) {
-            final time = getCurrentPrayerTimeMap(currentTime, prayerTime);
-            final currentPrayerTime = time['current'];
-            final imagePath = getImagePath(currentPrayerTime);
-            getAddress(location.latitude, location.longitude).then((value) {
-              setState(() {
-                address = value;
-              });
+        if (state is LocationInitial) {
+          return banner(null, currentTimeString, '', '...');
+        } else if (state is PrayerTimeLoading) {
+          return banner(null, currentTimeString, '', 'Mencari lokasi...');
+        } else if (state is LocationPermissionDenied) {
+          return const SizedBox.shrink();
+        } else if (state is LocationLoaded) {
+          final time = getCurrentPrayerTimeMap(currentTime, state.prayerTime);
+          final currentPrayerTime = time['current'];
+          final imagePath = getImagePath(currentPrayerTime);
+          getAddress(state.location.latitude, state.location.longitude)
+              .then((value) {
+            setState(() {
+              address = value;
             });
-            return Stack(
-              children: [
-                Image.asset(
+          });
+          return banner(
+              imagePath, currentTimeString, currentPrayerTime, address);
+        } else {
+          state as LocationError;
+          return banner(
+              null, currentTimeString, '', 'Gagal mendapatkan lokasi');
+        }
+      },
+    );
+  }
+
+  Widget banner(
+    dynamic imagePath,
+    String currentTimeString,
+    currentPrayerTime,
+    String address,
+  ) {
+    return Stack(
+      children: [
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          switchInCurve: Curves.easeInOut,
+          switchOutCurve: Curves.easeInOut,
+          reverseDuration: Duration.zero,
+          child: imagePath != null
+              ? Image.asset(
                   imagePath,
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: double.infinity,
+                )
+              : Container(
+                  color: AppColors.primaryContainer,
+                  width: double.infinity,
+                  height: double.infinity,
                 ),
-                Positioned(
-                  top: 50,
-                  left: 10,
-                  right: 10,
-                  child: Column(
-                    children: [
-                      BannerWidget(
-                        currentTimeString: currentTimeString,
-                        currentPrayerTime: currentPrayerTime,
-                        address: address,
-                      ),
-                      const Gap(20),
-                      const PrayerSchedule(),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          },
-        );
-      },
+        ),
+        Positioned(
+          top: 40,
+          left: 15,
+          right: 15,
+          child: Column(
+            children: [
+              BannerWidget(
+                currentTimeString: currentTimeString,
+                currentPrayerTime: currentPrayerTime,
+                address: address,
+              ),
+              const Gap(20),
+              const PrayerSchedule(),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -172,7 +231,7 @@ class BannerWidget extends StatelessWidget {
             ),
           ],
         ),
-        const Gap(20),
+        const Gap(25),
         Text(
           currentTimeString,
           style: TextStyle(
@@ -350,7 +409,13 @@ class _PrayerScheduleState extends State<PrayerSchedule> with PrayerTimeMixin {
               redact: true,
             );
           },
-          locationLoaded: (location, prayerTime) {
+          error: (message) {
+            return const PrayerScheduleLoading().redacted(
+              context: context,
+              redact: true,
+            );
+          },
+          prayerTimesLoaded: (location, prayerTime) {
             final now = DateTime.now();
             final highlightedPrayerTime = getCurrentPrayerTimeMap(
               now,
@@ -360,12 +425,15 @@ class _PrayerScheduleState extends State<PrayerSchedule> with PrayerTimeMixin {
             final timeRemaining = highlightedPrayerTime['remainingTime'];
             Color titleColor = getTextColor(currentTimeString);
             final prayerTimes = getPrayerSchedule(prayerTime);
+            final prayerTimeIcon = getPrayerIcon(prayerTime);
+
             String text = 'Shalat $next ${formatDuration(timeRemaining)}';
 
             return PrayerScheduleWidget(
               text: text,
               color: titleColor,
               prayerTimes: prayerTimes,
+              prayerTimeIcon: prayerTimeIcon,
               highlightedPrayerTime: highlightedPrayerTime,
             );
           },
@@ -382,12 +450,14 @@ class PrayerScheduleWidget extends StatelessWidget {
     required this.prayerTimes,
     required this.highlightedPrayerTime,
     this.color,
+    required this.prayerTimeIcon,
   });
 
   final String text;
   final Color? color;
   final Map<String, dynamic> prayerTimes;
   final Map<String, dynamic> highlightedPrayerTime;
+  final Map<String, dynamic> prayerTimeIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -408,42 +478,52 @@ class PrayerScheduleWidget extends StatelessWidget {
           children: prayerTimes.entries
               .map(
                 (e) => Container(
+                  width: 60,
                   padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: e.key == highlightedPrayerTime['next']
-                        ? AppColors.primaryContainer
-                        : e.key == highlightedPrayerTime['current']
-                            ? AppColors.primary
-                            : Colors.transparent,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: e.key == highlightedPrayerTime['next']
-                            ? AppColors.shadow.withOpacity(0.15)
-                            : Colors.transparent,
-                        offset: const Offset(8, 8),
-                        blurRadius: 14,
-                        spreadRadius: -8,
-                      )
-                    ],
-                  ),
+                  // decoration: BoxDecoration(
+                  //   color: e.key == highlightedPrayerTime['next']
+                  //       ? AppColors.primaryContainer
+                  //       : e.key == highlightedPrayerTime['current']
+                  //           ? AppColors.primary
+                  //           : Colors.transparent,
+                  //   borderRadius: BorderRadius.circular(10),
+                  //   boxShadow: [
+                  //     BoxShadow(
+                  //       color: e.key == highlightedPrayerTime['next']
+                  //           ? AppColors.shadow.withOpacity(0.15)
+                  //           : Colors.transparent,
+                  //       offset: const Offset(8, 8),
+                  //       blurRadius: 14,
+                  //       spreadRadius: -8,
+                  //     )
+                  //   ],
+                  // ),
                   child: Column(
                     children: [
                       Text(
                         e.key,
                         style: TextStyle(
-                          color: e.key == highlightedPrayerTime['next']
-                              ? AppColors.onBackground
+                          color: e.key == highlightedPrayerTime['current']
+                              ? AppColors.primaryContainer
                               : AppColors.onPrimary,
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                      SvgPicture.asset(
+                        prayerTimeIcon[e.key] ?? SvgPath.fajr,
+                        colorFilter: ColorFilter.mode(
+                          e.key == highlightedPrayerTime['current']
+                              ? AppColors.primaryContainer
+                              : AppColors.onPrimary,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                       Text(
                         dt.DateFormat('HH:mm').format(e.value),
                         style: TextStyle(
-                          color: e.key == highlightedPrayerTime['next']
-                              ? AppColors.onBackground
+                          color: e.key == highlightedPrayerTime['current']
+                              ? AppColors.primaryContainer
                               : AppColors.onPrimary,
                           fontSize: 10,
                           fontWeight: FontWeight.w500,
