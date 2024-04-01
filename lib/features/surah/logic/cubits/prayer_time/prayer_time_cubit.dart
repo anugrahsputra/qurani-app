@@ -86,7 +86,8 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
 
       return address;
     } else {
-      return 'Unknown Location';
+      emit(const LocationError('Gagal mendapatkan lokasi'));
+      return 'Gagal mendapatkan lokasi';
     }
   }
 }
