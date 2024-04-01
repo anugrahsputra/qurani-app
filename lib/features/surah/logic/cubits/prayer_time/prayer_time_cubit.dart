@@ -1,5 +1,6 @@
 import 'package:adhan/adhan.dart';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -78,16 +79,29 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
 
   Future<String> getAddressFromCoordinates(double lat, double long) async {
     List<Placemark> placemarks = await placemarkFromCoordinates(lat, long);
-    if (placemarks.isNotEmpty) {
-      Placemark place = placemarks[0];
-      String locality = place.locality ?? 'Unknown';
-      String administrativeArea = place.administrativeArea ?? 'Unknown';
-      String address = "$locality, $administrativeArea";
+    try {
+      if (placemarks.isNotEmpty) {
+        Placemark place = placemarks[0];
+        String locality = place.locality ?? 'Unknown';
+        String administrativeArea = place.administrativeArea ?? 'Unknown';
+        String address = "$locality, $administrativeArea";
 
-      return address;
-    } else {
-      emit(const LocationError('Gagal mendapatkan lokasi'));
-      return 'Gagal mendapatkan lokasi';
+        return address;
+      } else {
+        emit(const LocationError('Gagal mendapatkan lokasi'));
+        return 'Gagal mendapatkan lokasi';
+      }
+    } on PlatformException catch (e) {
+      if (e.code == 'IO_ERROR' && e.message == 'Service not Available') {
+        _log.warning(
+            'Failed to get address: Location services are not available or disabled.');
+        emit(const LocationError(
+            'Tidak dapat mengakses lokasi. Pastikan layanan lokasi diaktifkan.'));
+        return 'Tidak dapat mengakses lokasi. Pastikan layanan lokasi diaktifkan.';
+      } else {
+        _log.warning('Failed to get address: ${e.message}');
+        return 'Gagal mendapatkan lokasi';
+      }
     }
   }
 }
