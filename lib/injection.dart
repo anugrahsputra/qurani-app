@@ -59,6 +59,7 @@ Future<void> setup() async {
   sl.registerFactory<AppNavigator>(() => AppNavigator());
   sl.registerFactory<UserLocation>(() => IUserLocation());
   sl.registerFactory<DatabaseHelper>(() => DatabaseHelper());
+  sl.registerFactory<TimeStream>(() => TimeStream());
   sl.registerFactory<AudioPlayerManager>(
     () => AudioPlayerManagerImpl(audioPlayers: {}),
   );
