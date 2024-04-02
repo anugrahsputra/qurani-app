@@ -1,4 +1,4 @@
-import 'package:device_preview/device_preview.dart';
+import 'package:device_preview_screenshot/device_preview_screenshot.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,13 +10,17 @@ import 'observer.dart';
 import 'presentation/presentation.dart';
 
 Future<void> main() async {
-  CustomLog.initialize(showLog: true);
+  CustomLog.initialize(showLog: kDebugMode);
   Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
   runApp(DevicePreview(
-    enabled: !kDebugMode,
+    enabled: !kReleaseMode && !kProfileMode,
     builder: (context) => const MyApp(),
+    tools: const [
+      ...DevicePreview.defaultTools,
+      DevicePreviewScreenshot(),
+    ],
   ));
 }
 
@@ -37,6 +41,8 @@ class _MyAppState extends State<MyApp> {
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
+            locale: DevicePreview.locale(context),
+            builder: DevicePreview.appBuilder,
             title: 'Qurani',
             theme: AppThemes.light,
             initialRoute: AppRoutes.initial,
