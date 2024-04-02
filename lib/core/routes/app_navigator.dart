@@ -48,6 +48,12 @@ class AppNavigator {
         arguments: arguments);
   }
 
+  void goToSplash(BuildContext context) {
+    if (!canNavigate(context)) return;
+
+    pushNamedAndRemoveUntil(context, AppPages.splash);
+  }
+
   void goToHome(BuildContext context) {
     if (!canNavigate(context)) return;
 
