@@ -29,7 +29,7 @@ class HomeAppbar extends StatelessWidget {
           ),
           toolbarHeight: 50,
           collapsedHeight: 50,
-          expandedHeight: 0.364.sh,
+          expandedHeight: 0.37.sh,
           elevation: 0,
           pinned: true,
           floating: false,
