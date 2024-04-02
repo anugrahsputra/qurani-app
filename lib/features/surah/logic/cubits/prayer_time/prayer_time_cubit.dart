@@ -1,3 +1,5 @@
+// after refactored
+
 import 'package:adhan/adhan.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
@@ -21,25 +23,6 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
       : super(const PrayerTimeState.initial());
 
   Future<void> getLoc() async {
-    bool serviceEnabled = await location.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      _log.warning('Failed to get location: Location service is disabled');
-      emit(const LocationPermissionDenied());
-      return;
-    }
-
-    LocationPermission permission = await location.checkPermission();
-    if (permission != LocationPermission.always &&
-        permission != LocationPermission.whileInUse) {
-      permission = await location.requestPermission();
-      if (permission != LocationPermission.always &&
-          permission != LocationPermission.whileInUse) {
-        _log.warning('Failed to get location: Location permission denied');
-        emit(const LocationPermissionDenied());
-        return;
-      }
-    }
-
     emit(const PrayerTimeLoading());
     _log.info('Getting location...');
 
@@ -57,13 +40,14 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
         position.latitude,
         position.longitude,
       );
-      final times = PrayerTimes(
+      PrayerTimes times = PrayerTimes(
         coordinates,
         DateComponents.from(now),
         params,
       );
 
       _log.fine('Location loaded');
+
       emit(LocationLoaded(position, times));
     } catch (_) {
       _log.warning('Failed to get location');
