@@ -173,7 +173,4 @@ Future<void> setup() async {
       isBookmarkUsecase: sl<IsBookmarkUsecase>(),
     ),
   );
-  sl.registerFactory<SplashCubit>(
-    () => SplashCubit(location: sl<UserLocation>()),
-  );
 }

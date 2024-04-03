@@ -2669,6 +2669,16 @@ class MockUserLocation extends _i1.Mock implements _i14.UserLocation {
           ),
         )),
       ) as _i8.Future<_i16.Position>);
+
+  @override
+  _i8.Future<_i16.Position?> getLastKnownPosition() => (super.noSuchMethod(
+        Invocation.method(
+          #getLastKnownPosition,
+          [],
+        ),
+        returnValue: _i8.Future<_i16.Position?>.value(),
+        returnValueForMissingStub: _i8.Future<_i16.Position?>.value(),
+      ) as _i8.Future<_i16.Position?>);
 }
 
 /// A class which mocks [DatabaseHelper].
