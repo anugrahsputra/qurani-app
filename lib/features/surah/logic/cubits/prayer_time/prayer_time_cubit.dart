@@ -24,9 +24,27 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
 
   Future<void> getLoc() async {
     emit(const PrayerTimeLoading());
-    _log.info('Getting location...');
 
+    bool serviceEnabled = await location.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      _log.warning('Failed to get location: Location service is disabled');
+      emit(const LocationPermissionDenied('Location service is disabled'));
+      return;
+    }
+
+    LocationPermission permission = await location.checkPermission();
+    if (permission != LocationPermission.always &&
+        permission != LocationPermission.whileInUse) {
+      permission = await location.requestPermission();
+      if (permission != LocationPermission.always &&
+          permission != LocationPermission.whileInUse) {
+        _log.warning('Failed to get location: Location permission denied');
+        emit(const LocationPermissionDenied('Location permission is denied'));
+        return;
+      }
+    }
     try {
+      _log.info('Getting location...');
       Position position = await location.getCurrentPosition();
       final params = CalculationMethod.other.getParameters();
       params.madhab = Madhab.shafi;
@@ -47,11 +65,10 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
       );
 
       _log.fine('Location loaded');
-
       emit(LocationLoaded(position, times));
     } catch (_) {
       _log.warning('Failed to get location');
-      emit(const LocationPermissionDenied());
+      emit(const LocationPermissionDenied('Failed to get location'));
     }
   }
 
