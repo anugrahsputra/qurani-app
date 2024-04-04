@@ -48,10 +48,10 @@ class AppNavigator {
         arguments: arguments);
   }
 
-  void goToSplash(BuildContext context) {
+  void goToMain(BuildContext context) {
     if (!canNavigate(context)) return;
 
-    pushNamedAndRemoveUntil(context, AppPages.splash);
+    pushNamedAndRemoveUntil(context, AppPages.main);
   }
 
   void goToHome(BuildContext context) {
@@ -64,6 +64,19 @@ class AppNavigator {
     if (!canNavigate(context)) return;
 
     pushNamed(context, AppPages.detail, arguments: {
+      "surahNumber": surahNumber,
+    });
+  }
+
+  void goToAyah(
+    BuildContext context, {
+    required int surahNumber,
+    required int ayahNumber,
+  }) {
+    if (!canNavigate(context)) return;
+
+    pushNamed(context, AppPages.ayah, arguments: {
+      "ayahNumber": ayahNumber,
       "surahNumber": surahNumber,
     });
   }
