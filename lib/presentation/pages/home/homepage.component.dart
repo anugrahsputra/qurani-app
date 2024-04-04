@@ -1,8 +1,11 @@
 part of 'homepage.dart';
 
 class HomeAppbar extends StatelessWidget {
-  const HomeAppbar({super.key});
+  const HomeAppbar(
+      {super.key, required this.tabController, required this.appNavigator});
 
+  final TabController tabController;
+  final AppNavigator appNavigator;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppbarBloc, AppbarState>(
@@ -11,33 +14,58 @@ class HomeAppbar extends StatelessWidget {
           backgroundColor: AppColors.primaryContainer,
           systemOverlayStyle: Theme.of(context).appBarTheme.systemOverlayStyle,
           centerTitle: false,
-          title: AnimatedSwitcher(
+          actions: [
+            WidgetSwitcher(
+              isWidgetSwitched: state.displayAppbar,
+              switchWidget1: IconButton(
+                tooltip: 'Halaman Bookmark',
+                iconSize: 25,
+                icon: const Icon(Icons.bookmark),
+                color: AppColors.onPrimary,
+                onPressed: () => appNavigator.goToBookmarks(context),
+              ),
+              switchWidget2: const SizedBox.shrink(),
+            ),
+            WidgetSwitcher(
+              isWidgetSwitched: state.displayAppbar,
+              switchWidget1: IconButton(
+                tooltip: 'Halaman jadwal shalat',
+                iconSize: 25,
+                icon: const Icon(Icons.access_time),
+                color: AppColors.onPrimary,
+                onPressed: () {},
+              ),
+              switchWidget2: const SizedBox.shrink(),
+            ),
+          ],
+          title: WidgetSwitcher(
             duration: const Duration(milliseconds: 500),
             switchInCurve: Curves.easeInOut,
             switchOutCurve: Curves.easeInOut,
             reverseDuration: Duration.zero,
-            child: state.displayAppbar
-                ? Text(
-                    'Quranee',
-                    style: TextStyle(
-                      color: AppColors.onPrimary,
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  )
-                : const SizedBox.shrink(),
+            isWidgetSwitched: state.displayAppbar,
+            switchWidget1: Text(
+              'Quranee',
+              style: TextStyle(
+                color: AppColors.onPrimary,
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            switchWidget2: const SizedBox.shrink(),
           ),
           toolbarHeight: 50,
-          collapsedHeight: 50,
-          expandedHeight: 0.37.sh,
+          collapsedHeight: 100.h,
+          expandedHeight: 0.42.sh,
           elevation: 0,
           pinned: true,
           floating: false,
           snap: false,
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(28.h),
+            preferredSize: Size.fromHeight(25.h),
             child: Container(
               width: double.infinity.w,
+              padding: EdgeInsets.symmetric(vertical: 15.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(30.r),
@@ -46,15 +74,20 @@ class HomeAppbar extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 15.h),
-                    child: Container(
-                      width: 0.2.sw,
-                      height: 4.h,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
+                  Container(
+                    width: 0.2.sw,
+                    height: 4.h,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                  ),
+                  const Gap(10),
+                  const Text(
+                    'Daftar Surat',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
@@ -314,7 +347,7 @@ class PrayerSchedule extends StatelessWidget with PrayerTimeMixin {
               redact: true,
             );
           },
-          permissionDenied: () {
+          permissionDenied: (message) {
             return const PrayerScheduleLoading().redacted(
               context: context,
               redact: true,

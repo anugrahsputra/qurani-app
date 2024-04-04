@@ -31,22 +31,22 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomepageState extends State<Homepage>
+    with SingleTickerProviderStateMixin {
   final SurahBloc surahBloc = sl<SurahBloc>();
   final AyahsBloc ayahsBloc = sl<AyahsBloc>();
-  final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
   final AppbarBloc appbarBloc = sl<AppbarBloc>();
+  final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
   final AppNavigator appNavigator = sl<AppNavigator>();
   final ScrollController controller = ScrollController();
+
+  late TabController tabController;
+
+  String? message;
 
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      prayerTimeCubit.getLoc();
-      surahBloc.add(const OnGetSurah());
-      ayahsBloc.add(const OnGetRandomAyah());
-    });
     controller.addListener(() {
       if (BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
           controller.offset < 0.2.sh) {
@@ -60,16 +60,16 @@ class _HomepageState extends State<Homepage> {
         );
       }
     });
+    tabController = TabController(length: 2, vsync: this);
+    Future.microtask(() {
+      prayerTimeCubit.getLoc();
+      surahBloc.add(const OnGetSurah());
+      ayahsBloc.add(const OnGetRandomAyah());
+    });
   }
 
   Future<void> pullToRefresh() async {
-    prayerTimeCubit.getLoc();
     surahBloc.add(const OnGetSurah());
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
   }
 
   @override
@@ -104,7 +104,8 @@ class _HomepageState extends State<Homepage> {
           BlocListener<PrayerTimeCubit, PrayerTimeState>(
             listener: (context, state) {
               if (state is LocationPermissionDenied) {
-                AppSnackbar.showError(context, 'Location permission denied');
+                message = state.message;
+                AppSnackbar.showError(context, message ?? state.message);
               }
               if (state is LocationError) {
                 AppSnackbar.showError(context, state.message);
@@ -113,15 +114,65 @@ class _HomepageState extends State<Homepage> {
           ),
         ],
         child: AppScaffold(
-          body: RefreshIndicator(
-            onRefresh: pullToRefresh,
-            child: CustomScrollView(
-              controller: controller,
-              slivers: [
-                const HomeAppbar(),
-                SurahCards(),
-              ],
-            ),
+          body: BlocBuilder<AppbarBloc, AppbarState>(
+            builder: (context, state) {
+              return Stack(
+                children: [
+                  CustomScrollView(
+                    controller: controller,
+                    slivers: [
+                      HomeAppbar(
+                        tabController: tabController,
+                        appNavigator: appNavigator,
+                      ),
+                      SurahCards(),
+                    ],
+                  ),
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 700),
+                    curve: Easing.emphasizedAccelerate,
+                    bottom: state.displayAppbar ? -100.h : 25.h,
+                    left: 100.w,
+                    right: 100.w,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.background,
+                        borderRadius: BorderRadius.circular(45.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.shadow.withOpacity(0.85),
+                            offset: const Offset(8, 6),
+                            blurRadius: 14,
+                            spreadRadius: -8,
+                          )
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            tooltip: 'Halaman Bookmark',
+                            iconSize: 20,
+                            icon: const Icon(Icons.bookmark),
+                            color: AppColors.onBackground,
+                            onPressed: () =>
+                                appNavigator.goToBookmarks(context),
+                          ),
+                          IconButton(
+                            tooltip: 'Halaman jadwal shalat',
+                            iconSize: 20,
+                            icon: const Icon(Icons.access_time),
+                            color: AppColors.onBackground,
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
