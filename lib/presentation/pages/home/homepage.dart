@@ -129,14 +129,14 @@ class _HomepageState extends State<Homepage>
                     ],
                   ),
                   AnimatedPositioned(
-                    duration: const Duration(milliseconds: 700),
-                    curve: Easing.emphasizedAccelerate,
-                    bottom: state.displayAppbar ? -100.h : 25.h,
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOutCubic,
+                    bottom: state.displayAppbar ? -100.h : 40.h,
                     left: 100.w,
                     right: 100.w,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.background,
+                        color: AppColors.primaryContainer,
                         borderRadius: BorderRadius.circular(45.r),
                         boxShadow: [
                           BoxShadow(

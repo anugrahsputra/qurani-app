@@ -222,7 +222,7 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
           ),
         ),
         Positioned(
-          top: 0.05.sh,
+          top: 0.06.sh,
           left: 0.015.sh,
           right: 0.015.sh,
           child: Column(
