@@ -11,7 +11,7 @@ class DetailHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 138.h,
+      // height: 140.h,
       margin: EdgeInsets.symmetric(
         horizontal: 5.w,
         vertical: 5.h,
@@ -174,7 +174,10 @@ class _SurahContentState extends State<SurahContent> {
 
     final isBookmarked = context.select<BookmarkBloc, bool>((bloc) {
       final result = bloc.state;
-      return result is BookmarkCheck ? result.isBookmarked : false;
+      return result is BookmarkCheck &&
+              widget.id == widget.verse.number!.inQuran
+          ? result.isBookmarked
+          : false;
     });
     return Container(
       margin: EdgeInsets.symmetric(
@@ -211,8 +214,8 @@ class _SurahContentState extends State<SurahContent> {
                   verseNumber: widget.verse.number!.inSurah.toString(),
                   audioSource: widget.verse.audio!.primary!,
                 ),
-                InkWell(
-                  onTap: () async {
+                IconButton(
+                  onPressed: () async {
                     if (!isBookmarked) {
                       context
                           .read<BookmarkBloc>()
@@ -243,7 +246,7 @@ class _SurahContentState extends State<SurahContent> {
                           });
                     }
                   },
-                  child: Icon(
+                  icon: Icon(
                     Icons.bookmark_border,
                     color: Colors.black,
                     size: 20.dm,
