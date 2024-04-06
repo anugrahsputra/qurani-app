@@ -7,12 +7,12 @@ part 'surah.g.dart';
 class Surah with _$Surah {
   @JsonSerializable(explicitToJson: true)
   const factory Surah({
-    @JsonKey(name: "number") @Default(0) int number,
-    @JsonKey(name: "sequence") @Default(0) int sequence,
-    @JsonKey(name: "numberOfVerses") @Default(0) int numberOfVerses,
-    @JsonKey(name: "name") required Name name,
-    @JsonKey(name: "revelation") required Revelation revelation,
-    @JsonKey(name: "tafsir") required Tafsir tafsir,
+    @JsonKey(name: "number") int? number,
+    @JsonKey(name: "sequence") int? sequence,
+    @JsonKey(name: "numberOfVerses") int? numberOfVerses,
+    @JsonKey(name: "name") required Name? name,
+    @JsonKey(name: "revelation") required Revelation? revelation,
+    @JsonKey(name: "tafsir") required Tafsir? tafsir,
   }) = _Surah;
 
   factory Surah.fromJson(Map<String, dynamic> json) => _$SurahFromJson(json);
@@ -22,10 +22,10 @@ class Surah with _$Surah {
 class Name with _$Name {
   @JsonSerializable(explicitToJson: true)
   const factory Name({
-    @JsonKey(name: "short") required String short,
-    @JsonKey(name: "long") required String long,
-    @JsonKey(name: "transliteration") required Translation transliteration,
-    @JsonKey(name: "translation") required Translation translation,
+    @JsonKey(name: "short") required String? short,
+    @JsonKey(name: "long") required String? long,
+    @JsonKey(name: "transliteration") required Translation? transliteration,
+    @JsonKey(name: "translation") required Translation? translation,
   }) = _Name;
 
   factory Name.fromJson(Map<String, dynamic> json) => _$NameFromJson(json);
@@ -34,8 +34,8 @@ class Name with _$Name {
 @freezed
 class Translation with _$Translation {
   const factory Translation({
-    @JsonKey(name: "en") required String en,
-    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "en") required String? en,
+    @JsonKey(name: "id") required String? id,
   }) = _Translation;
 
   factory Translation.fromJson(Map<String, dynamic> json) =>
@@ -45,9 +45,9 @@ class Translation with _$Translation {
 @freezed
 class Revelation with _$Revelation {
   const factory Revelation({
-    @JsonKey(name: "arab") required String arab,
-    @JsonKey(name: "en") required String en,
-    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "arab") required String? arab,
+    @JsonKey(name: "en") required String? en,
+    @JsonKey(name: "id") required String? id,
   }) = _Revelation;
 
   factory Revelation.fromJson(Map<String, dynamic> json) =>
@@ -57,7 +57,7 @@ class Revelation with _$Revelation {
 @freezed
 class Tafsir with _$Tafsir {
   const factory Tafsir({
-    @JsonKey(name: "id") required String id,
+    @JsonKey(name: "id") required String? id,
   }) = _Tafsir;
 
   factory Tafsir.fromJson(Map<String, dynamic> json) => _$TafsirFromJson(json);

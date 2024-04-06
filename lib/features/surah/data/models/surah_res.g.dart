@@ -8,13 +8,12 @@ part of 'surah_res.dart';
 
 _$SurahResImpl _$$SurahResImplFromJson(Map<String, dynamic> json) =>
     _$SurahResImpl(
-      code: json['code'] as int? ?? 0,
-      status: json['status'] as String? ?? "",
-      message: json['message'] as String? ?? "",
+      code: json['code'] as int?,
+      status: json['status'] as String?,
+      message: json['message'] as String?,
       data: (json['data'] as List<dynamic>?)
-              ?.map((e) => Surah.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+          ?.map((e) => Surah.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$SurahResImplToJson(_$SurahResImpl instance) =>
@@ -22,5 +21,5 @@ Map<String, dynamic> _$$SurahResImplToJson(_$SurahResImpl instance) =>
       'code': instance.code,
       'status': instance.status,
       'message': instance.message,
-      'data': instance.data.map((e) => e.toJson()).toList(),
+      'data': instance.data?.map((e) => e.toJson()).toList(),
     };

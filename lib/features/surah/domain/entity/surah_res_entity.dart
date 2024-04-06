@@ -5,7 +5,7 @@ import 'entity.dart';
 part 'surah_res_entity.freezed.dart';
 
 @freezed
-class SurahResEntity with _$SurahResEntity {
+abstract class SurahResEntity with _$SurahResEntity {
   const factory SurahResEntity({
     required int code,
     required String status,
