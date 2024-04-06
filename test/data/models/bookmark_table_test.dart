@@ -22,7 +22,7 @@ void main() {
     });
 
     test('should create a BookmarkTable instance from an entity', () {
-      final result = BookmarkTable.fromEntity(tVerse, '');
+      final result = BookmarkTable.fromEntity(tVerse, '', 1);
       expect(result, tBookmarkTable);
     });
   });

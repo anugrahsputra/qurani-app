@@ -18,10 +18,10 @@ void main() {
 
   group('RemoveBookmarkUsecase', () {
     test('should called removebookmark from repository', () async {
-      when(mockRepository.removeBookmark(tVerse, ''))
+      when(mockRepository.removeBookmark(tVerse, '', 1))
           .thenAnswer((_) async => const Right('Remove bookmark success'));
 
-      final result = await usecase.call(tVerse, '');
+      final result = await usecase.call(tVerse, '', 1);
 
       expect(result, const Right('Remove bookmark success'));
     });

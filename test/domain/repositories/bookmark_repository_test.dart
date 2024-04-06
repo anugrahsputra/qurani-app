@@ -69,7 +69,7 @@ void main() {
         when(mockDatasource.insertBookmark(tBookmarkTable))
             .thenAnswer((_) async => 'Insert bookmark success');
 
-        final result = await repository.insertBookmark(tVerse, '');
+        final result = await repository.insertBookmark(tVerse, '', 1);
 
         expect(result, const Right('Insert bookmark success'));
         verify(mockDatasource.insertBookmark(tBookmarkTable));
@@ -80,7 +80,7 @@ void main() {
         when(mockDatasource.insertBookmark(tBookmarkTable))
             .thenThrow(DatabaseException());
 
-        final result = await repository.insertBookmark(tVerse, '');
+        final result = await repository.insertBookmark(tVerse, '', 1);
 
         expect(result,
             const Left(DatabaseFailure(message: 'Failed to insert bookmark')));
@@ -94,7 +94,7 @@ void main() {
         when(mockDatasource.removeBookmark(tBookmarkTable))
             .thenAnswer((_) async => 'Remove bookmark success');
 
-        final result = await repository.removeBookmark(tVerse, '');
+        final result = await repository.removeBookmark(tVerse, '', 1);
 
         expect(result, const Right('Remove bookmark success'));
         verify(mockDatasource.removeBookmark(tBookmarkTable));
@@ -104,7 +104,7 @@ void main() {
         when(mockDatasource.removeBookmark(tBookmarkTable))
             .thenThrow(DatabaseException());
 
-        final result = await repository.removeBookmark(tVerse, '');
+        final result = await repository.removeBookmark(tVerse, '', 1);
 
         expect(result,
             const Left(DatabaseFailure(message: 'Failed to remove bookmark')));

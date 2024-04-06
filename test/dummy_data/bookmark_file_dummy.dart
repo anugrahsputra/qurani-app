@@ -3,6 +3,7 @@ import 'package:qurani/features/bookmark/bookmark.dart';
 const tBookmarkTable = BookmarkTable(
   id: 1,
   inSurah: 1,
+  surahNumber: 1,
   surahName: '',
   textArab: '',
   textTranslate: '',
@@ -12,6 +13,7 @@ const tBookmarkTable = BookmarkTable(
 const tBookmarkMap = {
   'id': 1,
   'inSurah': 1,
+  'surahNumber': 1,
   'surahName': '',
   'textArab': '',
   'textTranslate': '',
@@ -21,6 +23,7 @@ const tBookmarkMap = {
 const tBookmark = Bookmark(
   id: 1,
   inSurah: 1,
+  surahNumber: 1,
   surahName: '',
   textArab: '',
   textTranslate: '',

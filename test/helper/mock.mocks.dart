@@ -12,7 +12,7 @@ import 'package:adhan/src/coordinates.dart' as _i9;
 import 'package:adhan/src/data/date_components.dart' as _i11;
 import 'package:adhan/src/prayer.dart' as _i36;
 import 'package:audioplayers/audioplayers.dart' as _i7;
-import 'package:bloc/bloc.dart' as _i40;
+import 'package:bloc/bloc.dart' as _i39;
 import 'package:dartz/dartz.dart' as _i21;
 import 'package:dio/dio.dart' as _i13;
 import 'package:dio/src/adapter.dart' as _i3;
@@ -29,11 +29,9 @@ import 'package:logging/logging.dart' as _i12;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i33;
 import 'package:qurani/core/core.dart' as _i14;
-import 'package:qurani/features/ayah/data/datasource/remote_datasource.dart'
-    as _i39;
+import 'package:qurani/features/ayah/ayah.dart' as _i28;
 import 'package:qurani/features/ayah/data/models/models.dart' as _i20;
 import 'package:qurani/features/ayah/domain/domain.dart' as _i24;
-import 'package:qurani/features/ayah/logic/blocs/ayahs/ayahs_bloc.dart' as _i28;
 import 'package:qurani/features/bookmark/bookmark.dart' as _i29;
 import 'package:qurani/features/bookmark/data/data.dart' as _i38;
 import 'package:qurani/features/bookmark/domain/domain.dart' as _i25;
@@ -2548,6 +2546,16 @@ class MockCustomInterceptor extends _i1.Mock implements _i14.CustomInterceptor {
         returnValue: false,
         returnValueForMissingStub: false,
       ) as bool);
+
+  @override
+  bool isUnknownError(_i13.DioException? err) => (super.noSuchMethod(
+        Invocation.method(
+          #isUnknownError,
+          [err],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
 }
 
 /// A class which mocks [RequestRetrier].
@@ -2850,7 +2858,7 @@ class MockDetailSurahRemoteDataSource extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAyahRemoteDatasource extends _i1.Mock
-    implements _i39.AyahRemoteDatasource {
+    implements _i28.AyahRemoteDatasource {
   @override
   _i8.Future<_i20.AyahResModel> getAyah(
     int? surahNumber,
@@ -3161,6 +3169,7 @@ class MockBookmarkRepository extends _i1.Mock
   _i8.Future<_i21.Either<_i14.Failure, String>> insertBookmark(
     _i22.Verse? verse,
     String? surah,
+    int? surahNumber,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -3168,6 +3177,7 @@ class MockBookmarkRepository extends _i1.Mock
           [
             verse,
             surah,
+            surahNumber,
           ],
         ),
         returnValue: _i8.Future<_i21.Either<_i14.Failure, String>>.value(
@@ -3178,6 +3188,7 @@ class MockBookmarkRepository extends _i1.Mock
             [
               verse,
               surah,
+              surahNumber,
             ],
           ),
         )),
@@ -3190,6 +3201,7 @@ class MockBookmarkRepository extends _i1.Mock
             [
               verse,
               surah,
+              surahNumber,
             ],
           ),
         )),
@@ -3199,6 +3211,7 @@ class MockBookmarkRepository extends _i1.Mock
   _i8.Future<_i21.Either<_i14.Failure, String>> removeBookmark(
     _i22.Verse? verse,
     String? surah,
+    int? surahNumber,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -3206,6 +3219,7 @@ class MockBookmarkRepository extends _i1.Mock
           [
             verse,
             surah,
+            surahNumber,
           ],
         ),
         returnValue: _i8.Future<_i21.Either<_i14.Failure, String>>.value(
@@ -3216,6 +3230,7 @@ class MockBookmarkRepository extends _i1.Mock
             [
               verse,
               surah,
+              surahNumber,
             ],
           ),
         )),
@@ -3228,6 +3243,7 @@ class MockBookmarkRepository extends _i1.Mock
             [
               verse,
               surah,
+              surahNumber,
             ],
           ),
         )),
@@ -3579,6 +3595,7 @@ class MockAddBookmarkUsecase extends _i1.Mock
   _i8.Future<_i21.Either<_i14.Failure, String>> call(
     _i22.Verse? verse,
     String? surah,
+    int? surahNumber,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -3586,6 +3603,7 @@ class MockAddBookmarkUsecase extends _i1.Mock
           [
             verse,
             surah,
+            surahNumber,
           ],
         ),
         returnValue: _i8.Future<_i21.Either<_i14.Failure, String>>.value(
@@ -3596,6 +3614,7 @@ class MockAddBookmarkUsecase extends _i1.Mock
             [
               verse,
               surah,
+              surahNumber,
             ],
           ),
         )),
@@ -3608,6 +3627,7 @@ class MockAddBookmarkUsecase extends _i1.Mock
             [
               verse,
               surah,
+              surahNumber,
             ],
           ),
         )),
@@ -3636,6 +3656,7 @@ class MockRemoveBookmarkUsecase extends _i1.Mock
   _i8.Future<_i21.Either<_i14.Failure, String>> call(
     _i22.Verse? verse,
     String? surah,
+    int? surahNumber,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -3643,6 +3664,7 @@ class MockRemoveBookmarkUsecase extends _i1.Mock
           [
             verse,
             surah,
+            surahNumber,
           ],
         ),
         returnValue: _i8.Future<_i21.Either<_i14.Failure, String>>.value(
@@ -3653,6 +3675,7 @@ class MockRemoveBookmarkUsecase extends _i1.Mock
             [
               verse,
               surah,
+              surahNumber,
             ],
           ),
         )),
@@ -3665,6 +3688,7 @@ class MockRemoveBookmarkUsecase extends _i1.Mock
             [
               verse,
               surah,
+              surahNumber,
             ],
           ),
         )),
@@ -3772,8 +3796,8 @@ class MockSurahBloc extends _i1.Mock implements _i26.SurahBloc {
 
   @override
   void on<E extends _i26.SurahEvent>(
-    _i40.EventHandler<E, _i26.SurahState>? handler, {
-    _i40.EventTransformer<E>? transformer,
+    _i39.EventHandler<E, _i26.SurahState>? handler, {
+    _i39.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -3786,7 +3810,7 @@ class MockSurahBloc extends _i1.Mock implements _i26.SurahBloc {
 
   @override
   void onTransition(
-          _i40.Transition<_i26.SurahEvent, _i26.SurahState>? transition) =>
+          _i39.Transition<_i26.SurahEvent, _i26.SurahState>? transition) =>
       super.noSuchMethod(
         Invocation.method(
           #onTransition,
@@ -3806,7 +3830,7 @@ class MockSurahBloc extends _i1.Mock implements _i26.SurahBloc {
       ) as _i8.Future<void>);
 
   @override
-  void onChange(_i40.Change<_i26.SurahState>? change) => super.noSuchMethod(
+  void onChange(_i39.Change<_i26.SurahState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -3920,8 +3944,8 @@ class MockDetailSurahBloc extends _i1.Mock implements _i27.DetailSurahBloc {
 
   @override
   void on<E extends _i27.DetailSurahEvent>(
-    _i40.EventHandler<E, _i27.DetailSurahState>? handler, {
-    _i40.EventTransformer<E>? transformer,
+    _i39.EventHandler<E, _i27.DetailSurahState>? handler, {
+    _i39.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -3934,7 +3958,7 @@ class MockDetailSurahBloc extends _i1.Mock implements _i27.DetailSurahBloc {
 
   @override
   void onTransition(
-          _i40.Transition<_i27.DetailSurahEvent, _i27.DetailSurahState>?
+          _i39.Transition<_i27.DetailSurahEvent, _i27.DetailSurahState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -3955,7 +3979,7 @@ class MockDetailSurahBloc extends _i1.Mock implements _i27.DetailSurahBloc {
       ) as _i8.Future<void>);
 
   @override
-  void onChange(_i40.Change<_i27.DetailSurahState>? change) =>
+  void onChange(_i39.Change<_i27.DetailSurahState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -4083,8 +4107,8 @@ class MockAyahsBloc extends _i1.Mock implements _i28.AyahsBloc {
 
   @override
   void on<E extends _i28.AyahsEvent>(
-    _i40.EventHandler<E, _i28.AyahsState>? handler, {
-    _i40.EventTransformer<E>? transformer,
+    _i39.EventHandler<E, _i28.AyahsState>? handler, {
+    _i39.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -4097,7 +4121,7 @@ class MockAyahsBloc extends _i1.Mock implements _i28.AyahsBloc {
 
   @override
   void onTransition(
-          _i40.Transition<_i28.AyahsEvent, _i28.AyahsState>? transition) =>
+          _i39.Transition<_i28.AyahsEvent, _i28.AyahsState>? transition) =>
       super.noSuchMethod(
         Invocation.method(
           #onTransition,
@@ -4117,7 +4141,7 @@ class MockAyahsBloc extends _i1.Mock implements _i28.AyahsBloc {
       ) as _i8.Future<void>);
 
   @override
-  void onChange(_i40.Change<_i28.AyahsState>? change) => super.noSuchMethod(
+  void onChange(_i39.Change<_i28.AyahsState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -4270,8 +4294,8 @@ class MockBookmarkBloc extends _i1.Mock implements _i29.BookmarkBloc {
 
   @override
   void on<E extends _i29.BookmarkEvent>(
-    _i40.EventHandler<E, _i29.BookmarkState>? handler, {
-    _i40.EventTransformer<E>? transformer,
+    _i39.EventHandler<E, _i29.BookmarkState>? handler, {
+    _i39.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -4284,7 +4308,7 @@ class MockBookmarkBloc extends _i1.Mock implements _i29.BookmarkBloc {
 
   @override
   void onTransition(
-          _i40.Transition<_i29.BookmarkEvent, _i29.BookmarkState>?
+          _i39.Transition<_i29.BookmarkEvent, _i29.BookmarkState>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -4305,7 +4329,7 @@ class MockBookmarkBloc extends _i1.Mock implements _i29.BookmarkBloc {
       ) as _i8.Future<void>);
 
   @override
-  void onChange(_i40.Change<_i29.BookmarkState>? change) => super.noSuchMethod(
+  void onChange(_i39.Change<_i29.BookmarkState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -4406,8 +4430,8 @@ class MockAppbarBloc extends _i1.Mock implements _i30.AppbarBloc {
 
   @override
   void on<E extends _i30.AppbarEvent>(
-    _i40.EventHandler<E, _i30.AppbarState>? handler, {
-    _i40.EventTransformer<E>? transformer,
+    _i39.EventHandler<E, _i30.AppbarState>? handler, {
+    _i39.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -4420,7 +4444,7 @@ class MockAppbarBloc extends _i1.Mock implements _i30.AppbarBloc {
 
   @override
   void onTransition(
-          _i40.Transition<_i30.AppbarEvent, _i30.AppbarState>? transition) =>
+          _i39.Transition<_i30.AppbarEvent, _i30.AppbarState>? transition) =>
       super.noSuchMethod(
         Invocation.method(
           #onTransition,
@@ -4440,7 +4464,7 @@ class MockAppbarBloc extends _i1.Mock implements _i30.AppbarBloc {
       ) as _i8.Future<void>);
 
   @override
-  void onChange(_i40.Change<_i30.AppbarState>? change) => super.noSuchMethod(
+  void onChange(_i39.Change<_i30.AppbarState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -4581,7 +4605,7 @@ class MockPrayerTimeCubit extends _i1.Mock implements _i31.PrayerTimeCubit {
       );
 
   @override
-  void onChange(_i40.Change<_i31.PrayerTimeState>? change) =>
+  void onChange(_i39.Change<_i31.PrayerTimeState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -4801,7 +4825,7 @@ class MockVerseAudioCubit extends _i1.Mock implements _i27.VerseAudioCubit {
       );
 
   @override
-  void onChange(_i40.Change<_i27.VerseAudioState>? change) =>
+  void onChange(_i39.Change<_i27.VerseAudioState>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,

@@ -18,10 +18,10 @@ void main() {
 
   group('AddBookmarkUsecase', () {
     test('should add bookmark to local database', () async {
-      when(mockRepository.insertBookmark(tVerse, ''))
+      when(mockRepository.insertBookmark(tVerse, '', 1))
           .thenAnswer((_) async => const Right('Insert bookmark success'));
 
-      final result = await usecase.call(tVerse, '');
+      final result = await usecase.call(tVerse, '', 1);
 
       expect(result, const Right('Insert bookmark success'));
     });
