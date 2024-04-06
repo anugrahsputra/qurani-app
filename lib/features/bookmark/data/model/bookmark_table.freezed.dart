@@ -22,6 +22,7 @@ BookmarkTable _$BookmarkTableFromJson(Map<String, dynamic> json) {
 mixin _$BookmarkTable {
   int get id => throw _privateConstructorUsedError;
   int get inSurah => throw _privateConstructorUsedError;
+  int get surahNumber => throw _privateConstructorUsedError;
   String get surahName => throw _privateConstructorUsedError;
   String get textArab => throw _privateConstructorUsedError;
   String get textTranslate => throw _privateConstructorUsedError;
@@ -42,6 +43,7 @@ abstract class $BookmarkTableCopyWith<$Res> {
   $Res call(
       {int id,
       int inSurah,
+      int surahNumber,
       String surahName,
       String textArab,
       String textTranslate,
@@ -63,6 +65,7 @@ class _$BookmarkTableCopyWithImpl<$Res, $Val extends BookmarkTable>
   $Res call({
     Object? id = null,
     Object? inSurah = null,
+    Object? surahNumber = null,
     Object? surahName = null,
     Object? textArab = null,
     Object? textTranslate = null,
@@ -76,6 +79,10 @@ class _$BookmarkTableCopyWithImpl<$Res, $Val extends BookmarkTable>
       inSurah: null == inSurah
           ? _value.inSurah
           : inSurah // ignore: cast_nullable_to_non_nullable
+              as int,
+      surahNumber: null == surahNumber
+          ? _value.surahNumber
+          : surahNumber // ignore: cast_nullable_to_non_nullable
               as int,
       surahName: null == surahName
           ? _value.surahName
@@ -108,6 +115,7 @@ abstract class _$$BookmarkTableImplCopyWith<$Res>
   $Res call(
       {int id,
       int inSurah,
+      int surahNumber,
       String surahName,
       String textArab,
       String textTranslate,
@@ -127,6 +135,7 @@ class __$$BookmarkTableImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? inSurah = null,
+    Object? surahNumber = null,
     Object? surahName = null,
     Object? textArab = null,
     Object? textTranslate = null,
@@ -140,6 +149,10 @@ class __$$BookmarkTableImplCopyWithImpl<$Res>
       inSurah: null == inSurah
           ? _value.inSurah
           : inSurah // ignore: cast_nullable_to_non_nullable
+              as int,
+      surahNumber: null == surahNumber
+          ? _value.surahNumber
+          : surahNumber // ignore: cast_nullable_to_non_nullable
               as int,
       surahName: null == surahName
           ? _value.surahName
@@ -167,6 +180,7 @@ class _$BookmarkTableImpl extends _BookmarkTable {
   const _$BookmarkTableImpl(
       {required this.id,
       required this.inSurah,
+      required this.surahNumber,
       required this.surahName,
       required this.textArab,
       required this.textTranslate,
@@ -181,6 +195,8 @@ class _$BookmarkTableImpl extends _BookmarkTable {
   @override
   final int inSurah;
   @override
+  final int surahNumber;
+  @override
   final String surahName;
   @override
   final String textArab;
@@ -191,7 +207,7 @@ class _$BookmarkTableImpl extends _BookmarkTable {
 
   @override
   String toString() {
-    return 'BookmarkTable(id: $id, inSurah: $inSurah, surahName: $surahName, textArab: $textArab, textTranslate: $textTranslate, textTransliteration: $textTransliteration)';
+    return 'BookmarkTable(id: $id, inSurah: $inSurah, surahNumber: $surahNumber, surahName: $surahName, textArab: $textArab, textTranslate: $textTranslate, textTransliteration: $textTransliteration)';
   }
 
   @override
@@ -201,6 +217,8 @@ class _$BookmarkTableImpl extends _BookmarkTable {
             other is _$BookmarkTableImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.inSurah, inSurah) || other.inSurah == inSurah) &&
+            (identical(other.surahNumber, surahNumber) ||
+                other.surahNumber == surahNumber) &&
             (identical(other.surahName, surahName) ||
                 other.surahName == surahName) &&
             (identical(other.textArab, textArab) ||
@@ -213,8 +231,8 @@ class _$BookmarkTableImpl extends _BookmarkTable {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, inSurah, surahName, textArab,
-      textTranslate, textTransliteration);
+  int get hashCode => Object.hash(runtimeType, id, inSurah, surahNumber,
+      surahName, textArab, textTranslate, textTransliteration);
 
   @JsonKey(ignore: true)
   @override
@@ -234,6 +252,7 @@ abstract class _BookmarkTable extends BookmarkTable {
   const factory _BookmarkTable(
       {required final int id,
       required final int inSurah,
+      required final int surahNumber,
       required final String surahName,
       required final String textArab,
       required final String textTranslate,
@@ -247,6 +266,8 @@ abstract class _BookmarkTable extends BookmarkTable {
   int get id;
   @override
   int get inSurah;
+  @override
+  int get surahNumber;
   @override
   String get surahName;
   @override

@@ -11,6 +11,7 @@ abstract class BookmarkTable with _$BookmarkTable {
   const factory BookmarkTable({
     required int id,
     required int inSurah,
+    required int surahNumber,
     required String surahName,
     required String textArab,
     required String textTranslate,
@@ -22,10 +23,11 @@ abstract class BookmarkTable with _$BookmarkTable {
   factory BookmarkTable.fromJson(Map<String, dynamic> json) =>
       _$BookmarkTableFromJson(json);
 
-  factory BookmarkTable.fromEntity(Verse verse, String surah) {
+  factory BookmarkTable.fromEntity(Verse verse, String surah, int surahNumber) {
     return BookmarkTable(
       id: verse.number!.inQuran!,
       inSurah: verse.number!.inSurah!,
+      surahNumber: surahNumber,
       surahName: surah,
       textArab: verse.text!.arab!,
       textTranslate: verse.translation!.id!,
@@ -37,6 +39,7 @@ abstract class BookmarkTable with _$BookmarkTable {
     return Bookmark(
       id: id,
       inSurah: inSurah,
+      surahNumber: surahNumber,
       surahName: surahName,
       textArab: textArab,
       textTranslate: textTranslate,

@@ -12,7 +12,8 @@ class AddBookmarkUsecase {
   Future<Either<Failure, String>> call(
     Verse verse,
     String surah,
+    int surahNumber,
   ) async {
-    return await repository.insertBookmark(verse, surah);
+    return await repository.insertBookmark(verse, surah, surahNumber);
   }
 }

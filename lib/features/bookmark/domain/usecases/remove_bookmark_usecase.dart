@@ -12,7 +12,8 @@ class RemoveBookmarkUsecase {
   Future<Either<Failure, String>> call(
     Verse verse,
     String surah,
+    int surahNumber,
   ) async {
-    return await repository.removeBookmark(verse, surah);
+    return await repository.removeBookmark(verse, surah, surahNumber);
   }
 }

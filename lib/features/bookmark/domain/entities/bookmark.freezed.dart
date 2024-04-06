@@ -16,12 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Bookmark {
-  int get id => throw _privateConstructorUsedError;
-  int get inSurah => throw _privateConstructorUsedError;
-  String get surahName => throw _privateConstructorUsedError;
-  String get textArab => throw _privateConstructorUsedError;
-  String get textTranslate => throw _privateConstructorUsedError;
-  String get textTransliteration => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  int? get inSurah => throw _privateConstructorUsedError;
+  int? get surahNumber => throw _privateConstructorUsedError;
+  String? get surahName => throw _privateConstructorUsedError;
+  String? get textArab => throw _privateConstructorUsedError;
+  String? get textTranslate => throw _privateConstructorUsedError;
+  String? get textTransliteration => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BookmarkCopyWith<Bookmark> get copyWith =>
@@ -34,12 +35,13 @@ abstract class $BookmarkCopyWith<$Res> {
       _$BookmarkCopyWithImpl<$Res, Bookmark>;
   @useResult
   $Res call(
-      {int id,
-      int inSurah,
-      String surahName,
-      String textArab,
-      String textTranslate,
-      String textTransliteration});
+      {int? id,
+      int? inSurah,
+      int? surahNumber,
+      String? surahName,
+      String? textArab,
+      String? textTranslate,
+      String? textTransliteration});
 }
 
 /// @nodoc
@@ -55,38 +57,43 @@ class _$BookmarkCopyWithImpl<$Res, $Val extends Bookmark>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? inSurah = null,
-    Object? surahName = null,
-    Object? textArab = null,
-    Object? textTranslate = null,
-    Object? textTransliteration = null,
+    Object? id = freezed,
+    Object? inSurah = freezed,
+    Object? surahNumber = freezed,
+    Object? surahName = freezed,
+    Object? textArab = freezed,
+    Object? textTranslate = freezed,
+    Object? textTransliteration = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      inSurah: null == inSurah
+              as int?,
+      inSurah: freezed == inSurah
           ? _value.inSurah
           : inSurah // ignore: cast_nullable_to_non_nullable
-              as int,
-      surahName: null == surahName
+              as int?,
+      surahNumber: freezed == surahNumber
+          ? _value.surahNumber
+          : surahNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      surahName: freezed == surahName
           ? _value.surahName
           : surahName // ignore: cast_nullable_to_non_nullable
-              as String,
-      textArab: null == textArab
+              as String?,
+      textArab: freezed == textArab
           ? _value.textArab
           : textArab // ignore: cast_nullable_to_non_nullable
-              as String,
-      textTranslate: null == textTranslate
+              as String?,
+      textTranslate: freezed == textTranslate
           ? _value.textTranslate
           : textTranslate // ignore: cast_nullable_to_non_nullable
-              as String,
-      textTransliteration: null == textTransliteration
+              as String?,
+      textTransliteration: freezed == textTransliteration
           ? _value.textTransliteration
           : textTransliteration // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -100,12 +107,13 @@ abstract class _$$BookmarkImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
-      int inSurah,
-      String surahName,
-      String textArab,
-      String textTranslate,
-      String textTransliteration});
+      {int? id,
+      int? inSurah,
+      int? surahNumber,
+      String? surahName,
+      String? textArab,
+      String? textTranslate,
+      String? textTransliteration});
 }
 
 /// @nodoc
@@ -119,38 +127,43 @@ class __$$BookmarkImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? inSurah = null,
-    Object? surahName = null,
-    Object? textArab = null,
-    Object? textTranslate = null,
-    Object? textTransliteration = null,
+    Object? id = freezed,
+    Object? inSurah = freezed,
+    Object? surahNumber = freezed,
+    Object? surahName = freezed,
+    Object? textArab = freezed,
+    Object? textTranslate = freezed,
+    Object? textTransliteration = freezed,
   }) {
     return _then(_$BookmarkImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      inSurah: null == inSurah
+              as int?,
+      inSurah: freezed == inSurah
           ? _value.inSurah
           : inSurah // ignore: cast_nullable_to_non_nullable
-              as int,
-      surahName: null == surahName
+              as int?,
+      surahNumber: freezed == surahNumber
+          ? _value.surahNumber
+          : surahNumber // ignore: cast_nullable_to_non_nullable
+              as int?,
+      surahName: freezed == surahName
           ? _value.surahName
           : surahName // ignore: cast_nullable_to_non_nullable
-              as String,
-      textArab: null == textArab
+              as String?,
+      textArab: freezed == textArab
           ? _value.textArab
           : textArab // ignore: cast_nullable_to_non_nullable
-              as String,
-      textTranslate: null == textTranslate
+              as String?,
+      textTranslate: freezed == textTranslate
           ? _value.textTranslate
           : textTranslate // ignore: cast_nullable_to_non_nullable
-              as String,
-      textTransliteration: null == textTransliteration
+              as String?,
+      textTransliteration: freezed == textTransliteration
           ? _value.textTransliteration
           : textTransliteration // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -161,27 +174,30 @@ class _$BookmarkImpl implements _Bookmark {
   const _$BookmarkImpl(
       {required this.id,
       required this.inSurah,
+      required this.surahNumber,
       required this.surahName,
       required this.textArab,
       required this.textTranslate,
       required this.textTransliteration});
 
   @override
-  final int id;
+  final int? id;
   @override
-  final int inSurah;
+  final int? inSurah;
   @override
-  final String surahName;
+  final int? surahNumber;
   @override
-  final String textArab;
+  final String? surahName;
   @override
-  final String textTranslate;
+  final String? textArab;
   @override
-  final String textTransliteration;
+  final String? textTranslate;
+  @override
+  final String? textTransliteration;
 
   @override
   String toString() {
-    return 'Bookmark(id: $id, inSurah: $inSurah, surahName: $surahName, textArab: $textArab, textTranslate: $textTranslate, textTransliteration: $textTransliteration)';
+    return 'Bookmark(id: $id, inSurah: $inSurah, surahNumber: $surahNumber, surahName: $surahName, textArab: $textArab, textTranslate: $textTranslate, textTransliteration: $textTransliteration)';
   }
 
   @override
@@ -191,6 +207,8 @@ class _$BookmarkImpl implements _Bookmark {
             other is _$BookmarkImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.inSurah, inSurah) || other.inSurah == inSurah) &&
+            (identical(other.surahNumber, surahNumber) ||
+                other.surahNumber == surahNumber) &&
             (identical(other.surahName, surahName) ||
                 other.surahName == surahName) &&
             (identical(other.textArab, textArab) ||
@@ -202,8 +220,8 @@ class _$BookmarkImpl implements _Bookmark {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, inSurah, surahName, textArab,
-      textTranslate, textTransliteration);
+  int get hashCode => Object.hash(runtimeType, id, inSurah, surahNumber,
+      surahName, textArab, textTranslate, textTransliteration);
 
   @JsonKey(ignore: true)
   @override
@@ -214,25 +232,28 @@ class _$BookmarkImpl implements _Bookmark {
 
 abstract class _Bookmark implements Bookmark {
   const factory _Bookmark(
-      {required final int id,
-      required final int inSurah,
-      required final String surahName,
-      required final String textArab,
-      required final String textTranslate,
-      required final String textTransliteration}) = _$BookmarkImpl;
+      {required final int? id,
+      required final int? inSurah,
+      required final int? surahNumber,
+      required final String? surahName,
+      required final String? textArab,
+      required final String? textTranslate,
+      required final String? textTransliteration}) = _$BookmarkImpl;
 
   @override
-  int get id;
+  int? get id;
   @override
-  int get inSurah;
+  int? get inSurah;
   @override
-  String get surahName;
+  int? get surahNumber;
   @override
-  String get textArab;
+  String? get surahName;
   @override
-  String get textTranslate;
+  String? get textArab;
   @override
-  String get textTransliteration;
+  String? get textTranslate;
+  @override
+  String? get textTransliteration;
   @override
   @JsonKey(ignore: true)
   _$$BookmarkImplCopyWith<_$BookmarkImpl> get copyWith =>

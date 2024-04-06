@@ -22,10 +22,10 @@ class IBookmarkRepository implements BookmarkRepository {
 
   @override
   Future<Either<Failure, String>> insertBookmark(
-      Verse verse, String surah) async {
+      Verse verse, String surah, int surahNumber) async {
     try {
       final result = await datasource
-          .insertBookmark(BookmarkTable.fromEntity(verse, surah));
+          .insertBookmark(BookmarkTable.fromEntity(verse, surah, surahNumber));
       return Right(result);
     } on DatabaseException {
       return const Left(DatabaseFailure(message: 'Failed to insert bookmark'));
@@ -42,10 +42,11 @@ class IBookmarkRepository implements BookmarkRepository {
   Future<Either<Failure, String>> removeBookmark(
     Verse verse,
     String surah,
+    int surahNumber,
   ) async {
     try {
       final result = await datasource
-          .removeBookmark(BookmarkTable.fromEntity(verse, surah));
+          .removeBookmark(BookmarkTable.fromEntity(verse, surah, surahNumber));
       return Right(result);
     } on DatabaseException {
       return const Left(DatabaseFailure(message: 'Failed to remove bookmark'));
