@@ -48,7 +48,7 @@ class _AyahPageState extends State<AyahPage> {
             } else if (state is AyahLoaded) {
               final Ayah ayah = state.ayah;
               return Center(
-                child: Text(ayah.surah!.name!.short!),
+                child: Text(ayah.text.arab),
               );
             } else if (state is AyahError) {
               return Center(child: Text(state.message));

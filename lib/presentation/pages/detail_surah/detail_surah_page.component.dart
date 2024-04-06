@@ -155,6 +155,7 @@ class SurahContent extends StatefulWidget {
 
 class _SurahContentState extends State<SurahContent> {
   bool isBookmark = false;
+  final AppNavigator appNavigator = sl<AppNavigator>();
 
   @override
   void initState() {
@@ -252,11 +253,13 @@ class _SurahContentState extends State<SurahContent> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () => appNavigator.goToAyah(context,
+                      surahNumber: surahNumber,
+                      ayahNumber: widget.verse.number!.inSurah!),
                   icon: Icon(
-                    Icons.share,
+                    Icons.chevron_right_rounded,
                     color: Colors.black,
-                    size: 20.dm,
+                    size: 25.dm,
                   ),
                 ),
               ],

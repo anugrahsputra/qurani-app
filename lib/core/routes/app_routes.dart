@@ -7,7 +7,6 @@ abstract class AppRoutes {
   static String get initial => AppPages.home;
 
   static final Map<String, Widget Function(BuildContext context)> routes = {
-    AppPages.main: (context) => const MainPage(),
     AppPages.home: (context) => const Homepage(),
     AppPages.detail: (context) {
       Map<String, dynamic> args =

@@ -21,7 +21,7 @@ void main() {
   });
 
   test('initial state is AyahsInitial', () {
-    expect(ayahsBloc.state, const AyahInitial());
+    expect(ayahsBloc.state, AyahInitial());
   });
 
   blocTest<AyahsBloc, AyahsState>(
@@ -34,7 +34,7 @@ void main() {
     },
     act: (bloc) => bloc.add(const OnGetAyah(1, 1)),
     expect: () => <AyahsState>[
-      const AyahLoading(),
+      AyahLoading(),
       AyahLoaded(tAyahRes.data),
     ],
   );
@@ -46,9 +46,9 @@ void main() {
 
       return ayahsBloc;
     },
-    act: (bloc) => bloc.add(const OnGetRandomAyah()),
+    act: (bloc) => bloc.add(OnGetRandomAyah()),
     expect: () => <AyahsState>[
-      const AyahLoading(),
+      AyahLoading(),
       AyahLoaded(tAyahRes.data),
     ],
   );

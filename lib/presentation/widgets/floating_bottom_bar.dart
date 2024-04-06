@@ -25,8 +25,8 @@ class FloatingBottomBar extends StatelessWidget {
       duration: duration ?? const Duration(milliseconds: 700),
       curve: curves,
       bottom: isFloating ? -100.h : 40.h,
-      left: 100.w,
-      right: 100.w,
+      left: 80.w,
+      right: 80.w,
       child: Container(
         height: 60.h,
         decoration: BoxDecoration(

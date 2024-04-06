@@ -39,7 +39,7 @@ void main() {
       },
       act: (cubit) => cubit.getLoc(),
       expect: () => [
-        const PrayerTimeLoading(),
+        PrayerTimeLoading(),
         isA<LocationLoaded>(),
       ],
       verify: (bloc) {
@@ -60,7 +60,7 @@ void main() {
       },
       act: (cubit) => cubit.getLoc(),
       expect: () => [
-        const PrayerTimeLoading(),
+        PrayerTimeLoading(),
         const LocationPermissionDenied('Location service is disabled'),
       ],
       verify: (bloc) {
@@ -79,7 +79,7 @@ void main() {
       },
       act: (cubit) => cubit.getLoc(),
       expect: () => [
-        const PrayerTimeLoading(),
+        PrayerTimeLoading(),
         const LocationPermissionDenied('Location permission is denied'),
       ],
       verify: (bloc) {
@@ -102,7 +102,7 @@ void main() {
       },
       act: (cubit) => cubit.getLoc(),
       expect: () => [
-        const PrayerTimeLoading(),
+        PrayerTimeLoading(),
         const LocationPermissionDenied('Failed to get location'),
       ],
       verify: (bloc) {

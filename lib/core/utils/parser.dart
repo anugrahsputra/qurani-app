@@ -12,7 +12,7 @@ class Parser {
   static Map<String, dynamic>? getMap(dynamic data) {
     try {
       final Map<String, dynamic> result =
-          json.decode(data) as Map<String, dynamic>;
+          jsonDecode(data) as Map<String, dynamic>;
 
       return result;
     } catch (_) {

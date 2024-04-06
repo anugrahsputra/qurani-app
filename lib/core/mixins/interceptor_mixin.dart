@@ -26,4 +26,8 @@ mixin InterceptorMixin on Interceptor {
         (err.type == DioExceptionType.connectionError ||
             err.type == DioExceptionType.connectionTimeout);
   }
+
+  bool isUnknownError(DioException err) {
+    return (err.type == DioExceptionType.unknown && err.error == null);
+  }
 }
