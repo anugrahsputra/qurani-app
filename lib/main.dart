@@ -15,7 +15,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setup();
   runApp(DevicePreview(
-    enabled: !kReleaseMode && !kProfileMode,
+    enabled: !kReleaseMode,
     builder: (context) => const MyApp(),
     tools: const [
       ...DevicePreview.defaultTools,
@@ -33,9 +33,18 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<AppbarBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<AppbarBloc>(),
+        ),
+      ],
       child: ScreenUtilInit(
         designSize: const Size(412.0, 916.0),
         builder: (context, child) {

@@ -166,11 +166,4 @@ Future<void> setup() async {
   sl.registerFactory<PrayerTimeCubit>(
     () => PrayerTimeCubit(location: sl<UserLocation>()),
   );
-  sl.registerFactory<BookmarkOpCubit>(
-    () => BookmarkOpCubit(
-      addBookmarkUsecase: sl<AddBookmarkUsecase>(),
-      removeBookmarkUsecase: sl<RemoveBookmarkUsecase>(),
-      isBookmarkUsecase: sl<IsBookmarkUsecase>(),
-    ),
-  );
 }
