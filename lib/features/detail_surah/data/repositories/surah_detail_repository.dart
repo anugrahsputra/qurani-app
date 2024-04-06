@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 import '../../../../core/core.dart';
 import '../../domain/domain.dart';
@@ -21,7 +22,7 @@ class ISurahDetailRepository implements SurahDetailRepository {
       return const Left(NetworkFailure(message: "No Internet Connection"));
     } on NotFoundException {
       return const Left(RequestFailure(message: "Not Found"));
-    } on UnknownException {
+    } on DioException {
       return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
@@ -37,7 +38,7 @@ class ISurahDetailRepository implements SurahDetailRepository {
       return const Left(NetworkFailure(message: "No Internet Connection"));
     } on NotFoundException {
       return const Left(RequestFailure(message: "Not Found"));
-    } on UnknownException {
+    } on DioException {
       return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
