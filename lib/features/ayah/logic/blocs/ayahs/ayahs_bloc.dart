@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
-import '../../../domain/domain.dart';
+import '../../../ayah.dart';
 
-part 'ayahs_bloc.freezed.dart';
+// part 'ayahs_bloc.freezed.dart';
 part 'ayahs_event.dart';
 part 'ayahs_state.dart';
 
@@ -14,7 +14,7 @@ class AyahsBloc extends Bloc<AyahsEvent, AyahsState> {
   AyahsBloc({
     required this.getAyahUsecase,
     required this.getRandomAyahUsecase,
-  }) : super(const AyahInitial()) {
+  }) : super(AyahInitial()) {
     on<OnGetAyah>(_onGetAyah);
     on<OnGetRandomAyah>(_onGetRandomAyah);
   }
@@ -25,11 +25,11 @@ class AyahsBloc extends Bloc<AyahsEvent, AyahsState> {
   ) async {
     int surahNumber = event.surahNumber;
     int ayahNumber = event.ayahNumber;
-    emit(const AyahLoading());
+    emit(AyahLoading());
     final result = await getAyahUsecase(surahNumber, ayahNumber);
     result.fold(
       (failure) => emit(AyahError(failure.message)),
-      (ayah) => emit(AyahLoaded(ayah.data)),
+      (ayah) => emit(AyahLoaded(ayah.data!)),
     );
   }
 
@@ -37,11 +37,11 @@ class AyahsBloc extends Bloc<AyahsEvent, AyahsState> {
     OnGetRandomAyah event,
     Emitter<AyahsState> emit,
   ) async {
-    emit(const AyahLoading());
+    emit(AyahLoading());
     final result = await getRandomAyahUsecase();
     result.fold(
       (failure) => emit(AyahError(failure.message)),
-      (ayah) => emit(AyahLoaded(ayah.data)),
+      (ayah) => emit(AyahLoaded(ayah.data!)),
     );
   }
 }

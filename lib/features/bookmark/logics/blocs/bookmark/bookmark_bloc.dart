@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 import 'package:logging/logging.dart';
 
 import '../../../../detail_surah/detail_surah.dart';
 import '../../../bookmark.dart';
 
-part 'bookmark_bloc.freezed.dart';
+// part 'bookmark_bloc.freezed.dart';
 part 'bookmark_event.dart';
 part 'bookmark_state.dart';
 
@@ -23,7 +23,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     required this.isBookmarkUsecase,
     required this.addBookmarkUsecase,
     required this.removeBookmarkUsecase,
-  }) : super(const BookmarkInitial()) {
+  }) : super(BookmarkInitial()) {
     on<OnFetchBookmark>(_onFetchBookmark);
     on<OnBookmarkStatus>(_onBookmarkStatus);
     on<OnAddBookmark>(_onAddBookmark);
@@ -34,7 +34,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     OnFetchBookmark event,
     Emitter<BookmarkState> emit,
   ) async {
-    emit(const BookmarkLoading());
+    emit(BookmarkLoading());
     final result = await usecase();
     result.fold(
       (fail) => emit(BookmarkError(fail.message)),
@@ -42,7 +42,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
         if (r.isNotEmpty) {
           emit(BookmarkLoaded(r));
         } else {
-          emit(const BookmarkInitial());
+          emit(BookmarkInitial());
         }
       },
     );
@@ -52,7 +52,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     OnBookmarkStatus event,
     Emitter<BookmarkState> emit,
   ) async {
-    emit(const BookmarkLoading());
+    emit(BookmarkLoading());
     final result = await isBookmarkUsecase(event.id);
     _log.info('check bookmark: id:${event.id} $result');
     emit(BookmarkCheck(result));
@@ -62,8 +62,12 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     OnAddBookmark event,
     Emitter<BookmarkState> emit,
   ) async {
-    emit(const BookmarkLoading());
-    final result = await addBookmarkUsecase(event.verse, event.surah);
+    emit(BookmarkLoading());
+    final result = await addBookmarkUsecase(
+      event.verse,
+      event.surah,
+      event.surahNumber,
+    );
     result.fold(
       (l) => emit(BookmarkError(l.message)),
       (r) => emit(BookmarkMessage(r)),
@@ -74,8 +78,12 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     OnRemoveBookmark event,
     Emitter<BookmarkState> emit,
   ) async {
-    emit(const BookmarkLoading());
-    final result = await removeBookmarkUsecase(event.verse, event.surah);
+    emit(BookmarkLoading());
+    final result = await removeBookmarkUsecase(
+      event.verse,
+      event.surah,
+      event.surahNumber,
+    );
     result.fold(
       (l) => emit(BookmarkError(l.message)),
       (r) => emit(BookmarkMessage(r)),
