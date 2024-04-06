@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logging/logging.dart';
@@ -29,6 +31,9 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
   @override
   void onResponse(response, handler) {
     log.fine("Response: ${response.requestOptions.uri}");
+    if (response.data is String) {
+      jsonDecode(response.data);
+    }
     if (response.statusCode == 304) {
       log.shout("cache hit: ${response.requestOptions.uri}");
     }
