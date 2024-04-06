@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
-part 'appbar_bloc.freezed.dart';
+// part 'appbar_bloc.freezed.dart';
 part 'appbar_event.dart';
 part 'appbar_state.dart';
 
 class AppbarBloc extends Bloc<AppbarEvent, AppbarState> {
-  AppbarBloc() : super(const AppbarDisplay(false)) {
+  AppbarBloc() : super(const AppbarState(false)) {
     on<ToggleDisplay>(_toggleDisplay);
   }
 
@@ -14,6 +14,6 @@ class AppbarBloc extends Bloc<AppbarEvent, AppbarState> {
     ToggleDisplay event,
     Emitter<AppbarState> emit,
   ) {
-    emit(AppbarDisplay(!state.displayAppbar));
+    emit(AppbarState(!state.displayAppbar));
   }
 }

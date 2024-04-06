@@ -64,7 +64,7 @@ class _HomepageState extends State<Homepage>
     Future.microtask(() {
       prayerTimeCubit.getLoc();
       surahBloc.add(const OnGetSurah());
-      ayahsBloc.add(const OnGetRandomAyah());
+      ayahsBloc.add(OnGetRandomAyah());
     });
   }
 
@@ -128,47 +128,27 @@ class _HomepageState extends State<Homepage>
                       SurahCards(),
                     ],
                   ),
-                  AnimatedPositioned(
+                  FloatingBottomBar(
                     duration: const Duration(milliseconds: 400),
-                    curve: Curves.easeInOutCubic,
-                    bottom: state.displayAppbar ? -100.h : 40.h,
-                    left: 100.w,
-                    right: 100.w,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryContainer,
-                        borderRadius: BorderRadius.circular(45.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.shadow.withOpacity(0.85),
-                            offset: const Offset(8, 6),
-                            blurRadius: 14,
-                            spreadRadius: -8,
-                          )
-                        ],
+                    isFloating: state.displayAppbar,
+                    children: [
+                      IconButton(
+                        tooltip: 'Halaman Bookmark',
+                        iconSize: 20,
+                        // padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        icon: const Icon(Icons.bookmark),
+                        color: AppColors.onBackground,
+                        onPressed: () => appNavigator.goToBookmarks(context),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            tooltip: 'Halaman Bookmark',
-                            iconSize: 20,
-                            icon: const Icon(Icons.bookmark),
-                            color: AppColors.onBackground,
-                            onPressed: () =>
-                                appNavigator.goToBookmarks(context),
-                          ),
-                          IconButton(
-                            tooltip: 'Halaman jadwal shalat',
-                            iconSize: 20,
-                            icon: const Icon(Icons.access_time),
-                            color: AppColors.onBackground,
-                            onPressed: () {},
-                          ),
-                        ],
+                      IconButton(
+                        tooltip: 'Halaman jadwal shalat',
+                        iconSize: 20,
+                        // padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        icon: const Icon(Icons.access_time),
+                        color: AppColors.onBackground,
+                        onPressed: () {},
                       ),
-                    ),
+                    ],
                   ),
                 ],
               );

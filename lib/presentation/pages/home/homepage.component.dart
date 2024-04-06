@@ -149,7 +149,6 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
         // _log.warning(
         //     'Failed to get address: Location services are not available or disabled.');
 
-        /// Terjadi kesalahan my a**. This is a workaround for the finicky
         return 'Terjadi Kesalahan';
       } else {
         _log.warning('Failed to get address: ${e.message}');
@@ -171,7 +170,7 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
   Widget build(BuildContext context) {
     return BlocBuilder<PrayerTimeCubit, PrayerTimeState>(
       builder: (context, state) {
-        if (state is LocationInitial || state is PrayerTimeLoading) {
+        if (state is PrayerTimeInitial || state is PrayerTimeLoading) {
           return _bannerLoading();
         } else if (state is LocationPermissionDenied) {
           return const SizedBox.shrink();
@@ -334,54 +333,44 @@ class PrayerSchedule extends StatelessWidget with PrayerTimeMixin {
   Widget build(BuildContext context) {
     return BlocBuilder<PrayerTimeCubit, PrayerTimeState>(
       builder: (context, state) {
-        return state.when(
-          initial: () {
-            return const PrayerScheduleLoading().redacted(
-              context: context,
-              redact: true,
-            );
-          },
-          loading: () {
-            return const PrayerScheduleLoading().redacted(
-              context: context,
-              redact: true,
-            );
-          },
-          permissionDenied: (message) {
-            return const PrayerScheduleLoading().redacted(
-              context: context,
-              redact: true,
-            );
-          },
-          error: (message) {
-            return const PrayerScheduleLoading().redacted(
-              context: context,
-              redact: true,
-            );
-          },
-          prayerTimesLoaded: (location, prayerTime) {
-            final now = DateTime.now();
-            final highlightedPrayerTime = getCurrentPrayerTimeMap(
-              now,
-              prayerTime,
-            );
-            String next = highlightedPrayerTime['next'];
-            final timeRemaining = highlightedPrayerTime['remainingTime'];
-            Color titleColor = getTextColor(currentTime);
-            final prayerTimes = getPrayerSchedule(prayerTime);
-            final prayerTimeIcon = getPrayerIcon(prayerTime);
+        if ((state is PrayerTimeInitial) && (state is PrayerTimeLoading)) {
+          return const PrayerScheduleLoading().redacted(
+            context: context,
+            redact: true,
+          );
+        } else if (state is LocationPermissionDenied) {
+          return const PrayerScheduleLoading().redacted(
+            context: context,
+            redact: true,
+          );
+        } else if (state is LocationLoaded) {
+          var prayerTime = state.prayerTime;
+          final now = DateTime.now();
+          final highlightedPrayerTime = getCurrentPrayerTimeMap(
+            now,
+            prayerTime,
+          );
+          String next = highlightedPrayerTime['next'];
+          final timeRemaining = highlightedPrayerTime['remainingTime'];
+          Color titleColor = getTextColor(currentTime);
+          final prayerTimes = getPrayerSchedule(prayerTime);
+          final prayerTimeIcon = getPrayerIcon(prayerTime);
 
-            String text = 'Shalat $next ${formatDuration(timeRemaining)}';
+          String text = 'Shalat $next ${formatDuration(timeRemaining)}';
 
-            return PrayerScheduleWidget(
-              text: text,
-              color: titleColor,
-              prayerTimes: prayerTimes,
-              prayerTimeIcon: prayerTimeIcon,
-              highlightedPrayerTime: highlightedPrayerTime,
-            );
-          },
-        );
+          return PrayerScheduleWidget(
+            text: text,
+            color: titleColor,
+            prayerTimes: prayerTimes,
+            prayerTimeIcon: prayerTimeIcon,
+            highlightedPrayerTime: highlightedPrayerTime,
+          );
+        } else {
+          return const PrayerScheduleLoading().redacted(
+            context: context,
+            redact: true,
+          );
+        }
       },
     );
   }

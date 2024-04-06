@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +10,7 @@ import 'package:qurani/features/bookmark/logics/logics.dart';
 
 import '../../../../core/core.dart';
 import '../../../../injection.dart';
+import '../../../features/ayah/ayah.dart';
 import '../../../features/bookmark/bookmark.dart';
 import '../../../features/detail_surah/detail_surah.dart';
 import '../../presentation.dart';
@@ -30,10 +29,12 @@ class DetailSurahPage extends StatefulWidget {
 class _DetailSurahPageState extends State<DetailSurahPage> {
   final DetailSurahBloc detailSurahBloc = sl<DetailSurahBloc>();
   final VerseAudioCubit verseAudioCubit = sl<VerseAudioCubit>();
+  final GetAyahUsecase getAyah = sl<GetAyahUsecase>();
   int get surahNumber => widget.surahNumber;
 
   @override
   void initState() {
+    getAyah.call(surahNumber, 3);
     detailSurahBloc.add(OnGetDetail(surahNumber));
     super.initState();
   }
@@ -64,7 +65,12 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
           titleSpacing: 0.0,
           title: const DetailTitle(),
         ),
-        body: BlocBuilder<DetailSurahBloc, DetailSurahState>(
+        body: BlocConsumer<DetailSurahBloc, DetailSurahState>(
+          listener: (context, state) {
+            if (state is DetailSurahError) {
+              AppSnackbar.showError(context, state.message);
+            }
+          },
           builder: (context, state) {
             if (state is DetailSurahLoaded) {
               SurahDetail surahDetail = state.detailSurah;
@@ -101,48 +107,25 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
                       ],
                     ),
                   ),
-                  AnimatedPositioned(
+                  FloatingBottomBar(
                     duration: const Duration(milliseconds: 700),
-                    curve: Curves.easeInOutCubic,
-                    bottom: isPlayedAll ? -100.h : 40.h,
-                    left: 50.w,
-                    right: 50.w,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(45.r),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                        child: Container(
-                          padding: const EdgeInsets.all(15),
-                          decoration: BoxDecoration(
-                            color: AppColors.primaryContainer,
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.shadow.withOpacity(0.85),
-                                offset: const Offset(8, 6),
-                                blurRadius: 14,
-                                spreadRadius: -8,
-                              )
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(playSurah,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                              Text(_formatDuration(audioPosition),
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                            ],
-                          ),
+                    isFloating: isPlayedAll,
+                    children: [
+                      Text(
+                        playSurah,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                    ),
+                      Text(
+                        _formatDuration(audioPosition),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               );

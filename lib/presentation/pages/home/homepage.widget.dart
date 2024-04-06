@@ -249,3 +249,40 @@ class PrayerScheduleLoading extends StatelessWidget {
     );
   }
 }
+
+class FloatingMenu extends StatelessWidget {
+  const FloatingMenu({
+    super.key,
+    required this.appNavigator,
+    required this.isScrolled,
+  });
+
+  final bool isScrolled;
+  final AppNavigator appNavigator;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingBottomBar(
+      duration: const Duration(milliseconds: 400),
+      isFloating: isScrolled,
+      children: [
+        IconButton(
+          tooltip: 'Halaman Bookmark',
+          iconSize: 20,
+          // padding: EdgeInsets.symmetric(horizontal: 10.w),
+          icon: const Icon(Icons.bookmark),
+          color: AppColors.onBackground,
+          onPressed: () => appNavigator.goToBookmarks(context),
+        ),
+        IconButton(
+          tooltip: 'Halaman jadwal shalat',
+          iconSize: 20,
+          // padding: EdgeInsets.symmetric(horizontal: 10.w),
+          icon: const Icon(Icons.access_time),
+          color: AppColors.onBackground,
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+}

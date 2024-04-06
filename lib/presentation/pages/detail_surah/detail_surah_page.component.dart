@@ -165,6 +165,7 @@ class _SurahContentState extends State<SurahContent> {
 
   @override
   Widget build(BuildContext context) {
+    int surahNumber = widget.surah.number!;
     String surahName = widget.surah.name!.transliteration!.id!;
     String numberInSurah = '${widget.verse.number!.inSurah?.toArabicDigits()}';
     String verseText = widget.verse.text!.arab ?? 'Error';
@@ -217,13 +218,11 @@ class _SurahContentState extends State<SurahContent> {
                 IconButton(
                   onPressed: () async {
                     if (!isBookmarked) {
-                      context
-                          .read<BookmarkBloc>()
-                          .add(OnAddBookmark(widget.verse, surahName));
+                      context.read<BookmarkBloc>().add(
+                          OnAddBookmark(widget.verse, surahName, surahNumber));
                     } else {
-                      context
-                          .read<BookmarkBloc>()
-                          .add(OnRemoveBookmark(widget.verse, surahName));
+                      context.read<BookmarkBloc>().add(OnRemoveBookmark(
+                          widget.verse, surahName, surahNumber));
                     }
 
                     String message = !isBookmarked
