@@ -93,7 +93,7 @@ class SurahAyahModel with _$SurahAyahModel {
     @JsonKey(name: "name") required NameAyahModel name,
     @JsonKey(name: "revelation") required RevelationAyahModel revelation,
     @JsonKey(name: "tafsir") required SurahTafsirAyahModel tafsir,
-    @JsonKey(name: "preBismillah") required PreBismillahAyahModel preBismillah,
+    @JsonKey(name: "preBismillah") PreBismillahAyahModel? preBismillah,
   }) = _SurahAyahModel;
 
   factory SurahAyahModel.fromJson(Map<String, dynamic> json) =>

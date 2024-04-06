@@ -1172,7 +1172,7 @@ mixin _$SurahAyah {
   NameAyah get name => throw _privateConstructorUsedError;
   RevelationAyah get revelation => throw _privateConstructorUsedError;
   SurahAyahTafsir get tafsir => throw _privateConstructorUsedError;
-  PreBismillahAyah get preBismillah => throw _privateConstructorUsedError;
+  PreBismillahAyah? get preBismillah => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SurahAyahCopyWith<SurahAyah> get copyWith =>
@@ -1191,12 +1191,12 @@ abstract class $SurahAyahCopyWith<$Res> {
       NameAyah name,
       RevelationAyah revelation,
       SurahAyahTafsir tafsir,
-      PreBismillahAyah preBismillah});
+      PreBismillahAyah? preBismillah});
 
   $NameAyahCopyWith<$Res> get name;
   $RevelationAyahCopyWith<$Res> get revelation;
   $SurahAyahTafsirCopyWith<$Res> get tafsir;
-  $PreBismillahAyahCopyWith<$Res> get preBismillah;
+  $PreBismillahAyahCopyWith<$Res>? get preBismillah;
 }
 
 /// @nodoc
@@ -1218,7 +1218,7 @@ class _$SurahAyahCopyWithImpl<$Res, $Val extends SurahAyah>
     Object? name = null,
     Object? revelation = null,
     Object? tafsir = null,
-    Object? preBismillah = null,
+    Object? preBismillah = freezed,
   }) {
     return _then(_value.copyWith(
       number: null == number
@@ -1245,10 +1245,10 @@ class _$SurahAyahCopyWithImpl<$Res, $Val extends SurahAyah>
           ? _value.tafsir
           : tafsir // ignore: cast_nullable_to_non_nullable
               as SurahAyahTafsir,
-      preBismillah: null == preBismillah
+      preBismillah: freezed == preBismillah
           ? _value.preBismillah
           : preBismillah // ignore: cast_nullable_to_non_nullable
-              as PreBismillahAyah,
+              as PreBismillahAyah?,
     ) as $Val);
   }
 
@@ -1278,8 +1278,12 @@ class _$SurahAyahCopyWithImpl<$Res, $Val extends SurahAyah>
 
   @override
   @pragma('vm:prefer-inline')
-  $PreBismillahAyahCopyWith<$Res> get preBismillah {
-    return $PreBismillahAyahCopyWith<$Res>(_value.preBismillah, (value) {
+  $PreBismillahAyahCopyWith<$Res>? get preBismillah {
+    if (_value.preBismillah == null) {
+      return null;
+    }
+
+    return $PreBismillahAyahCopyWith<$Res>(_value.preBismillah!, (value) {
       return _then(_value.copyWith(preBismillah: value) as $Val);
     });
   }
@@ -1300,7 +1304,7 @@ abstract class _$$SurahAyahImplCopyWith<$Res>
       NameAyah name,
       RevelationAyah revelation,
       SurahAyahTafsir tafsir,
-      PreBismillahAyah preBismillah});
+      PreBismillahAyah? preBismillah});
 
   @override
   $NameAyahCopyWith<$Res> get name;
@@ -1309,7 +1313,7 @@ abstract class _$$SurahAyahImplCopyWith<$Res>
   @override
   $SurahAyahTafsirCopyWith<$Res> get tafsir;
   @override
-  $PreBismillahAyahCopyWith<$Res> get preBismillah;
+  $PreBismillahAyahCopyWith<$Res>? get preBismillah;
 }
 
 /// @nodoc
@@ -1329,7 +1333,7 @@ class __$$SurahAyahImplCopyWithImpl<$Res>
     Object? name = null,
     Object? revelation = null,
     Object? tafsir = null,
-    Object? preBismillah = null,
+    Object? preBismillah = freezed,
   }) {
     return _then(_$SurahAyahImpl(
       number: null == number
@@ -1356,10 +1360,10 @@ class __$$SurahAyahImplCopyWithImpl<$Res>
           ? _value.tafsir
           : tafsir // ignore: cast_nullable_to_non_nullable
               as SurahAyahTafsir,
-      preBismillah: null == preBismillah
+      preBismillah: freezed == preBismillah
           ? _value.preBismillah
           : preBismillah // ignore: cast_nullable_to_non_nullable
-              as PreBismillahAyah,
+              as PreBismillahAyah?,
     ));
   }
 }
@@ -1389,7 +1393,7 @@ class _$SurahAyahImpl implements _SurahAyah {
   @override
   final SurahAyahTafsir tafsir;
   @override
-  final PreBismillahAyah preBismillah;
+  final PreBismillahAyah? preBismillah;
 
   @override
   String toString() {
@@ -1433,7 +1437,7 @@ abstract class _SurahAyah implements SurahAyah {
       required final NameAyah name,
       required final RevelationAyah revelation,
       required final SurahAyahTafsir tafsir,
-      required final PreBismillahAyah preBismillah}) = _$SurahAyahImpl;
+      required final PreBismillahAyah? preBismillah}) = _$SurahAyahImpl;
 
   @override
   int get number;
@@ -1448,7 +1452,7 @@ abstract class _SurahAyah implements SurahAyah {
   @override
   SurahAyahTafsir get tafsir;
   @override
-  PreBismillahAyah get preBismillah;
+  PreBismillahAyah? get preBismillah;
   @override
   @JsonKey(ignore: true)
   _$$SurahAyahImplCopyWith<_$SurahAyahImpl> get copyWith =>

@@ -29,7 +29,7 @@ class AyahsBloc extends Bloc<AyahsEvent, AyahsState> {
     final result = await getAyahUsecase(surahNumber, ayahNumber);
     result.fold(
       (failure) => emit(AyahError(failure.message)),
-      (ayah) => emit(AyahLoaded(ayah.data!)),
+      (ayah) => emit(AyahLoaded(ayah.data)),
     );
   }
 
@@ -41,7 +41,7 @@ class AyahsBloc extends Bloc<AyahsEvent, AyahsState> {
     final result = await getRandomAyahUsecase();
     result.fold(
       (failure) => emit(AyahError(failure.message)),
-      (ayah) => emit(AyahLoaded(ayah.data!)),
+      (ayah) => emit(AyahLoaded(ayah.data)),
     );
   }
 }

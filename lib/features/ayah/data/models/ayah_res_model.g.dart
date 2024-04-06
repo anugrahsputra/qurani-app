@@ -116,8 +116,10 @@ _$SurahAyahModelImpl _$$SurahAyahModelImplFromJson(Map<String, dynamic> json) =>
           json['revelation'] as Map<String, dynamic>),
       tafsir:
           SurahTafsirAyahModel.fromJson(json['tafsir'] as Map<String, dynamic>),
-      preBismillah: PreBismillahAyahModel.fromJson(
-          json['preBismillah'] as Map<String, dynamic>),
+      preBismillah: json['preBismillah'] == null
+          ? null
+          : PreBismillahAyahModel.fromJson(
+              json['preBismillah'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$SurahAyahModelImplToJson(
@@ -129,7 +131,7 @@ Map<String, dynamic> _$$SurahAyahModelImplToJson(
       'name': instance.name.toJson(),
       'revelation': instance.revelation.toJson(),
       'tafsir': instance.tafsir.toJson(),
-      'preBismillah': instance.preBismillah.toJson(),
+      'preBismillah': instance.preBismillah?.toJson(),
     };
 
 _$NameAyahModelImpl _$$NameAyahModelImplFromJson(Map<String, dynamic> json) =>

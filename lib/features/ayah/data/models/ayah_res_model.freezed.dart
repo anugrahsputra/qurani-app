@@ -1413,7 +1413,7 @@ mixin _$SurahAyahModel {
   @JsonKey(name: "tafsir")
   SurahTafsirAyahModel get tafsir => throw _privateConstructorUsedError;
   @JsonKey(name: "preBismillah")
-  PreBismillahAyahModel get preBismillah => throw _privateConstructorUsedError;
+  PreBismillahAyahModel? get preBismillah => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1434,12 +1434,12 @@ abstract class $SurahAyahModelCopyWith<$Res> {
       @JsonKey(name: "name") NameAyahModel name,
       @JsonKey(name: "revelation") RevelationAyahModel revelation,
       @JsonKey(name: "tafsir") SurahTafsirAyahModel tafsir,
-      @JsonKey(name: "preBismillah") PreBismillahAyahModel preBismillah});
+      @JsonKey(name: "preBismillah") PreBismillahAyahModel? preBismillah});
 
   $NameAyahModelCopyWith<$Res> get name;
   $RevelationAyahModelCopyWith<$Res> get revelation;
   $SurahTafsirAyahModelCopyWith<$Res> get tafsir;
-  $PreBismillahAyahModelCopyWith<$Res> get preBismillah;
+  $PreBismillahAyahModelCopyWith<$Res>? get preBismillah;
 }
 
 /// @nodoc
@@ -1461,7 +1461,7 @@ class _$SurahAyahModelCopyWithImpl<$Res, $Val extends SurahAyahModel>
     Object? name = null,
     Object? revelation = null,
     Object? tafsir = null,
-    Object? preBismillah = null,
+    Object? preBismillah = freezed,
   }) {
     return _then(_value.copyWith(
       number: null == number
@@ -1488,10 +1488,10 @@ class _$SurahAyahModelCopyWithImpl<$Res, $Val extends SurahAyahModel>
           ? _value.tafsir
           : tafsir // ignore: cast_nullable_to_non_nullable
               as SurahTafsirAyahModel,
-      preBismillah: null == preBismillah
+      preBismillah: freezed == preBismillah
           ? _value.preBismillah
           : preBismillah // ignore: cast_nullable_to_non_nullable
-              as PreBismillahAyahModel,
+              as PreBismillahAyahModel?,
     ) as $Val);
   }
 
@@ -1521,8 +1521,12 @@ class _$SurahAyahModelCopyWithImpl<$Res, $Val extends SurahAyahModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $PreBismillahAyahModelCopyWith<$Res> get preBismillah {
-    return $PreBismillahAyahModelCopyWith<$Res>(_value.preBismillah, (value) {
+  $PreBismillahAyahModelCopyWith<$Res>? get preBismillah {
+    if (_value.preBismillah == null) {
+      return null;
+    }
+
+    return $PreBismillahAyahModelCopyWith<$Res>(_value.preBismillah!, (value) {
       return _then(_value.copyWith(preBismillah: value) as $Val);
     });
   }
@@ -1543,7 +1547,7 @@ abstract class _$$SurahAyahModelImplCopyWith<$Res>
       @JsonKey(name: "name") NameAyahModel name,
       @JsonKey(name: "revelation") RevelationAyahModel revelation,
       @JsonKey(name: "tafsir") SurahTafsirAyahModel tafsir,
-      @JsonKey(name: "preBismillah") PreBismillahAyahModel preBismillah});
+      @JsonKey(name: "preBismillah") PreBismillahAyahModel? preBismillah});
 
   @override
   $NameAyahModelCopyWith<$Res> get name;
@@ -1552,7 +1556,7 @@ abstract class _$$SurahAyahModelImplCopyWith<$Res>
   @override
   $SurahTafsirAyahModelCopyWith<$Res> get tafsir;
   @override
-  $PreBismillahAyahModelCopyWith<$Res> get preBismillah;
+  $PreBismillahAyahModelCopyWith<$Res>? get preBismillah;
 }
 
 /// @nodoc
@@ -1572,7 +1576,7 @@ class __$$SurahAyahModelImplCopyWithImpl<$Res>
     Object? name = null,
     Object? revelation = null,
     Object? tafsir = null,
-    Object? preBismillah = null,
+    Object? preBismillah = freezed,
   }) {
     return _then(_$SurahAyahModelImpl(
       number: null == number
@@ -1599,10 +1603,10 @@ class __$$SurahAyahModelImplCopyWithImpl<$Res>
           ? _value.tafsir
           : tafsir // ignore: cast_nullable_to_non_nullable
               as SurahTafsirAyahModel,
-      preBismillah: null == preBismillah
+      preBismillah: freezed == preBismillah
           ? _value.preBismillah
           : preBismillah // ignore: cast_nullable_to_non_nullable
-              as PreBismillahAyahModel,
+              as PreBismillahAyahModel?,
     ));
   }
 }
@@ -1618,7 +1622,7 @@ class _$SurahAyahModelImpl implements _SurahAyahModel {
       @JsonKey(name: "name") required this.name,
       @JsonKey(name: "revelation") required this.revelation,
       @JsonKey(name: "tafsir") required this.tafsir,
-      @JsonKey(name: "preBismillah") required this.preBismillah});
+      @JsonKey(name: "preBismillah") this.preBismillah});
 
   factory _$SurahAyahModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SurahAyahModelImplFromJson(json);
@@ -1643,7 +1647,7 @@ class _$SurahAyahModelImpl implements _SurahAyahModel {
   final SurahTafsirAyahModel tafsir;
   @override
   @JsonKey(name: "preBismillah")
-  final PreBismillahAyahModel preBismillah;
+  final PreBismillahAyahModel? preBismillah;
 
   @override
   String toString() {
@@ -1690,16 +1694,15 @@ class _$SurahAyahModelImpl implements _SurahAyahModel {
 
 abstract class _SurahAyahModel implements SurahAyahModel {
   const factory _SurahAyahModel(
-          {@JsonKey(name: "number") required final int number,
-          @JsonKey(name: "sequence") required final int sequence,
-          @JsonKey(name: "numberOfVerses") required final int numberOfVerses,
-          @JsonKey(name: "name") required final NameAyahModel name,
-          @JsonKey(name: "revelation")
-          required final RevelationAyahModel revelation,
-          @JsonKey(name: "tafsir") required final SurahTafsirAyahModel tafsir,
-          @JsonKey(name: "preBismillah")
-          required final PreBismillahAyahModel preBismillah}) =
-      _$SurahAyahModelImpl;
+      {@JsonKey(name: "number") required final int number,
+      @JsonKey(name: "sequence") required final int sequence,
+      @JsonKey(name: "numberOfVerses") required final int numberOfVerses,
+      @JsonKey(name: "name") required final NameAyahModel name,
+      @JsonKey(name: "revelation")
+      required final RevelationAyahModel revelation,
+      @JsonKey(name: "tafsir") required final SurahTafsirAyahModel tafsir,
+      @JsonKey(name: "preBismillah")
+      final PreBismillahAyahModel? preBismillah}) = _$SurahAyahModelImpl;
 
   factory _SurahAyahModel.fromJson(Map<String, dynamic> json) =
       _$SurahAyahModelImpl.fromJson;
@@ -1724,7 +1727,7 @@ abstract class _SurahAyahModel implements SurahAyahModel {
   SurahTafsirAyahModel get tafsir;
   @override
   @JsonKey(name: "preBismillah")
-  PreBismillahAyahModel get preBismillah;
+  PreBismillahAyahModel? get preBismillah;
   @override
   @JsonKey(ignore: true)
   _$$SurahAyahModelImplCopyWith<_$SurahAyahModelImpl> get copyWith =>
