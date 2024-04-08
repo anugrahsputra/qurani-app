@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/core.dart';
 import '../../../features/ayah/ayah.dart';
 import '../../../injection.dart';
 import '../../presentation.dart';
+
+part 'ayah_page.component.dart';
 
 class AyahPage extends StatefulWidget {
   const AyahPage({
@@ -38,6 +44,7 @@ class _AyahPageState extends State<AyahPage> {
       child: AppScaffold(
         appBar: AppBar(
           title: const Text('Ayah'),
+          backgroundColor: Colors.transparent,
         ),
         body: BlocBuilder<AyahsBloc, AyahsState>(
           builder: (context, state) {
@@ -46,14 +53,11 @@ class _AyahPageState extends State<AyahPage> {
                 child: CircularProgressIndicator(),
               );
             } else if (state is AyahLoaded) {
-              final Ayah ayah = state.ayah;
-              return Center(
-                child: Text(ayah.text.arab),
-              );
-            } else if (state is AyahError) {
-              return Center(child: Text(state.message));
+              Ayah ayah = state.ayah;
+              return AyahView(ayah: ayah);
+            } else {
+              return const Center(child: Text('Something went wrong!'));
             }
-            return const Center(child: Text('something is wrong 2'));
           },
         ),
       ),
