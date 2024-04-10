@@ -38,7 +38,7 @@ void main() {
       player: mockAudioPlayer,
       getSurahAudioUsecase: mockGetSurahAudioUsecase,
     );
-    expect(verseAudioCubit.state, VerseInitial());
+    expect(verseAudioCubit.state, const VerseInitial());
   });
 
   test('reset verse', () async {
@@ -71,7 +71,7 @@ void main() {
     expect: () => [
       const VerseLoading('1'),
       const VersePlaying('1', Duration.zero, Duration.zero),
-      VerseStopped(),
+      const VerseStopped(),
     ],
   );
 
@@ -82,7 +82,7 @@ void main() {
       return verseAudioCubit;
     },
     act: (cubit) => cubit.stopVerse(),
-    expect: () => [VerseStopped()],
+    expect: () => [const VerseStopped()],
   );
 
   blocTest(
@@ -95,7 +95,7 @@ void main() {
     act: (cubit) => cubit.playAllVerse(1),
     expect: () => [
       const VerseLoading('1'),
-      VerseStopped(),
+      const VerseStopped(),
     ],
   );
 

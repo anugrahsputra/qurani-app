@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:qurani/features/ayah/data/models/to_entity/model_to_entity.dart';
 
 import '../../../../core/core.dart';
@@ -39,7 +38,7 @@ class IAyahRepository implements AyahRepository {
       return const Left(NetworkFailure(message: "No Internet Connection"));
     } on NotFoundException {
       return const Left(RequestFailure(message: "Not Found"));
-    } on DioException {
+    } on UnknownException {
       return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
