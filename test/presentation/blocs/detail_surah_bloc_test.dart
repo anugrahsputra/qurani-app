@@ -29,7 +29,7 @@ void main() {
     },
     act: (bloc) => bloc.add(const OnGetDetail(1)),
     expect: () => <DetailSurahState>[
-      DetailSurahLoading(),
+      const DetailSurahLoading(),
       DetailSurahLoaded(tSurahDetailRes.data!),
     ],
   );
@@ -44,7 +44,7 @@ void main() {
     },
     act: (bloc) => bloc.add(const OnGetDetail(1)),
     expect: () => <DetailSurahState>[
-      DetailSurahLoading(),
+      const DetailSurahLoading(),
       const DetailSurahError("Server Error"),
     ],
   );

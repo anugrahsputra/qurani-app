@@ -40,9 +40,9 @@ void main() {
         when(mockGetBookmarkUsecase.call())
             .thenAnswer((_) async => const Right([tBookmark]));
       },
-      act: (bloc) => bookmarkBloc.add(OnFetchBookmark()),
+      act: (bloc) => bookmarkBloc.add(const OnFetchBookmark()),
       expect: () => [
-        BookmarkLoading(),
+        const BookmarkLoading(),
         const BookmarkLoaded([tBookmark]),
       ],
     );
@@ -53,10 +53,10 @@ void main() {
         when(mockGetBookmarkUsecase.call())
             .thenAnswer((_) async => const Right([]));
       },
-      act: (bloc) => bookmarkBloc.add(OnFetchBookmark()),
+      act: (bloc) => bookmarkBloc.add(const OnFetchBookmark()),
       expect: () => [
-        BookmarkLoading(),
-        BookmarkInitial(),
+        const BookmarkLoading(),
+        const BookmarkInitial(),
       ],
     );
     blocTest(
@@ -66,9 +66,9 @@ void main() {
         when(mockGetBookmarkUsecase.call()).thenAnswer((_) async =>
             const Left(DatabaseFailure(message: 'Failed get bookmark')));
       },
-      act: (bloc) => bookmarkBloc.add(OnFetchBookmark()),
+      act: (bloc) => bookmarkBloc.add(const OnFetchBookmark()),
       expect: () => [
-        BookmarkLoading(),
+        const BookmarkLoading(),
         const BookmarkError('Failed get bookmark'),
       ],
     );
@@ -80,7 +80,7 @@ void main() {
       },
       act: (bloc) => bookmarkBloc.add(const OnBookmarkStatus(1)),
       expect: () => [
-        BookmarkLoading(),
+        const BookmarkLoading(),
         const BookmarkCheck(false),
       ],
     );
@@ -92,7 +92,7 @@ void main() {
       },
       act: (bloc) => bookmarkBloc.add(const OnBookmarkStatus(1)),
       expect: () => [
-        BookmarkLoading(),
+        const BookmarkLoading(),
         const BookmarkCheck(true),
       ],
     );
@@ -105,7 +105,7 @@ void main() {
       },
       act: (bloc) => bookmarkBloc.add(const OnAddBookmark(tVerse, '', 1)),
       expect: () => [
-        BookmarkLoading(),
+        const BookmarkLoading(),
         const BookmarkMessage('Insert bookmark success'),
       ],
     );
@@ -118,7 +118,7 @@ void main() {
       },
       act: (bloc) => bookmarkBloc.add(const OnAddBookmark(tVerse, '', 1)),
       expect: () => [
-        BookmarkLoading(),
+        const BookmarkLoading(),
         const BookmarkError('Failed to insert bookmark'),
       ],
     );
@@ -131,7 +131,7 @@ void main() {
       },
       act: (bloc) => bookmarkBloc.add(const OnRemoveBookmark(tVerse, '', 1)),
       expect: () => [
-        BookmarkLoading(),
+        const BookmarkLoading(),
         const BookmarkMessage('Remove bookmark success'),
       ],
     );
@@ -145,7 +145,7 @@ void main() {
       },
       act: (bloc) => bookmarkBloc.add(const OnRemoveBookmark(tVerse, '', 1)),
       expect: () => [
-        BookmarkLoading(),
+        const BookmarkLoading(),
         const BookmarkError('Failed to remove bookmark'),
       ],
     );

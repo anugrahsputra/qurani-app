@@ -12,7 +12,7 @@ void main() {
     build: () => appbarBloc,
     act: (bloc) => appbarBloc.add(const ToggleDisplay()),
     expect: () => const [
-      AppbarState(true),
+      AppbarDisplay(true),
     ],
   );
 }

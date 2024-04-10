@@ -32,7 +32,7 @@ void main() {
     },
     act: (bloc) => bloc.add(const OnGetSurah()),
     expect: () => [
-      SurahLoading(),
+      const SurahLoading(),
       SurahLoaded(tSurahResEntity.data),
     ],
   );
@@ -46,7 +46,7 @@ void main() {
     },
     act: (bloc) => bloc.add(const OnGetSurah()),
     expect: () => [
-      SurahLoading(),
+      const SurahLoading(),
       const SurahError("error"),
     ],
   );
