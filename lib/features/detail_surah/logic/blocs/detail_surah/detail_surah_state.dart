@@ -1,39 +1,39 @@
 part of 'detail_surah_bloc.dart';
 
-// @freezed
-// class DetailSurahState with _$DetailSurahState {
-//   const factory DetailSurahState.initial() = DetailSurahInitial;
-//   const factory DetailSurahState.loading() = DetailSurahLoading;
-//   const factory DetailSurahState.loaded(SurahDetail detailSurah) =
-//       DetailSurahLoaded;
-//   const factory DetailSurahState.error(String message) = DetailSurahError;
+@freezed
+class DetailSurahState with _$DetailSurahState {
+  const factory DetailSurahState.initial() = DetailSurahInitial;
+  const factory DetailSurahState.loading() = DetailSurahLoading;
+  const factory DetailSurahState.loaded(SurahDetail detailSurah) =
+      DetailSurahLoaded;
+  const factory DetailSurahState.error(String message) = DetailSurahError;
+}
+
+// abstract class DetailSurahState extends Equatable {
+//   const DetailSurahState();
+
+//   @override
+//   List<Object> get props => [];
 // }
 
-abstract class DetailSurahState extends Equatable {
-  const DetailSurahState();
+// class DetailSurahInitial extends DetailSurahState {}
 
-  @override
-  List<Object> get props => [];
-}
+// class DetailSurahLoading extends DetailSurahState {}
 
-class DetailSurahInitial extends DetailSurahState {}
+// class DetailSurahLoaded extends DetailSurahState {
+//   final SurahDetail detailSurah;
 
-class DetailSurahLoading extends DetailSurahState {}
+//   const DetailSurahLoaded(this.detailSurah);
 
-class DetailSurahLoaded extends DetailSurahState {
-  final SurahDetail detailSurah;
+//   @override
+//   List<Object> get props => [detailSurah];
+// }
 
-  const DetailSurahLoaded(this.detailSurah);
+// class DetailSurahError extends DetailSurahState {
+//   final String message;
 
-  @override
-  List<Object> get props => [detailSurah];
-}
+//   const DetailSurahError(this.message);
 
-class DetailSurahError extends DetailSurahState {
-  final String message;
-
-  const DetailSurahError(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
+//   @override
+//   List<Object> get props => [message];
+// }

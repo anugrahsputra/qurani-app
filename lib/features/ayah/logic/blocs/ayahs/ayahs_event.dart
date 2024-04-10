@@ -1,28 +1,28 @@
 part of 'ayahs_bloc.dart';
 
-// @freezed
-// class AyahsEvent with _$AyahsEvent {
-//   const factory AyahsEvent.onGetAyah(int surahNumber, int ayahNumber) =
-//       OnGetAyah;
+@freezed
+class AyahsEvent with _$AyahsEvent {
+  const factory AyahsEvent.onGetAyah(int surahNumber, int ayahNumber) =
+      OnGetAyah;
 
-//   const factory AyahsEvent.onGetRandomAyah() = OnGetRandomAyah;
+  const factory AyahsEvent.onGetRandomAyah() = OnGetRandomAyah;
+}
+
+// abstract class AyahsEvent extends Equatable {
+//   const AyahsEvent();
+
+//   @override
+//   List<Object> get props => [];
 // }
 
-abstract class AyahsEvent extends Equatable {
-  const AyahsEvent();
+// class OnGetAyah extends AyahsEvent {
+//   final int surahNumber;
+//   final int ayahNumber;
 
-  @override
-  List<Object> get props => [];
-}
+//   const OnGetAyah(this.surahNumber, this.ayahNumber);
 
-class OnGetAyah extends AyahsEvent {
-  final int surahNumber;
-  final int ayahNumber;
+//   @override
+//   List<Object> get props => [surahNumber, ayahNumber];
+// }
 
-  const OnGetAyah(this.surahNumber, this.ayahNumber);
-
-  @override
-  List<Object> get props => [surahNumber, ayahNumber];
-}
-
-class OnGetRandomAyah extends AyahsEvent {}
+// class OnGetRandomAyah extends AyahsEvent {}

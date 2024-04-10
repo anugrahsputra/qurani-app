@@ -1,52 +1,58 @@
 part of 'bookmark_bloc.dart';
 
-// @freezed
-// class BookmarkEvent with _$BookmarkEvent {
-//   const factory BookmarkEvent.fetch() = OnFetchBookmark;
-//   const factory BookmarkEvent.statusBookmark(int id) = OnBookmarkStatus;
-//   const factory BookmarkEvent.addBookmark(Verse verse, String surah) =
-//       OnAddBookmark;
+@freezed
+class BookmarkEvent with _$BookmarkEvent {
+  const factory BookmarkEvent.fetch() = OnFetchBookmark;
+  const factory BookmarkEvent.statusBookmark(int id) = OnBookmarkStatus;
+  const factory BookmarkEvent.addBookmark(
+    Verse verse,
+    String surah,
+    int surahNumber,
+  ) = OnAddBookmark;
 
-//   const factory BookmarkEvent.removeBookmark(Verse verse, String surah) =
-//       OnRemoveBookmark;
+  const factory BookmarkEvent.removeBookmark(
+    Verse verse,
+    String surah,
+    int surahNumber,
+  ) = OnRemoveBookmark;
+}
+
+// abstract class BookmarkEvent extends Equatable {
+//   const BookmarkEvent();
+
+//   @override
+//   List<Object> get props => [];
 // }
 
-abstract class BookmarkEvent extends Equatable {
-  const BookmarkEvent();
+// class OnFetchBookmark extends BookmarkEvent {}
 
-  @override
-  List<Object> get props => [];
-}
+// class OnBookmarkStatus extends BookmarkEvent {
+//   final int id;
 
-class OnFetchBookmark extends BookmarkEvent {}
+//   const OnBookmarkStatus(this.id);
 
-class OnBookmarkStatus extends BookmarkEvent {
-  final int id;
+//   @override
+//   List<Object> get props => [id];
+// }
 
-  const OnBookmarkStatus(this.id);
+// class OnAddBookmark extends BookmarkEvent {
+//   final Verse verse;
+//   final String surah;
+//   final int surahNumber;
 
-  @override
-  List<Object> get props => [id];
-}
+//   const OnAddBookmark(this.verse, this.surah, this.surahNumber);
 
-class OnAddBookmark extends BookmarkEvent {
-  final Verse verse;
-  final String surah;
-  final int surahNumber;
+//   @override
+//   List<Object> get props => [verse, surah];
+// }
 
-  const OnAddBookmark(this.verse, this.surah, this.surahNumber);
+// class OnRemoveBookmark extends BookmarkEvent {
+//   final Verse verse;
+//   final String surah;
+//   final int surahNumber;
 
-  @override
-  List<Object> get props => [verse, surah];
-}
+//   const OnRemoveBookmark(this.verse, this.surah, this.surahNumber);
 
-class OnRemoveBookmark extends BookmarkEvent {
-  final Verse verse;
-  final String surah;
-  final int surahNumber;
-
-  const OnRemoveBookmark(this.verse, this.surah, this.surahNumber);
-
-  @override
-  List<Object> get props => [verse, surah];
-}
+//   @override
+//   List<Object> get props => [verse, surah];
+// }

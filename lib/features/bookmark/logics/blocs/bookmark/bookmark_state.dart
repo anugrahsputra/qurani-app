@@ -1,58 +1,58 @@
 part of 'bookmark_bloc.dart';
 
-// @freezed
-// class BookmarkState with _$BookmarkState {
-//   const factory BookmarkState.initial() = BookmarkInitial;
-//   const factory BookmarkState.loading() = BookmarkLoading;
-//   const factory BookmarkState.checkBookmark(bool isBookmarked) = BookmarkCheck;
-//   const factory BookmarkState.loaded(List<Bookmark> bookmarks) = BookmarkLoaded;
-//   const factory BookmarkState.message(String message) = BookmarkMessage;
-//   const factory BookmarkState.error(String message) = BookmarkError;
+@freezed
+class BookmarkState with _$BookmarkState {
+  const factory BookmarkState.initial() = BookmarkInitial;
+  const factory BookmarkState.loading() = BookmarkLoading;
+  const factory BookmarkState.checkBookmark(bool isBookmarked) = BookmarkCheck;
+  const factory BookmarkState.loaded(List<Bookmark> bookmarks) = BookmarkLoaded;
+  const factory BookmarkState.message(String message) = BookmarkMessage;
+  const factory BookmarkState.error(String message) = BookmarkError;
+}
+
+// abstract class BookmarkState extends Equatable {
+//   const BookmarkState();
+
+//   @override
+//   List<Object> get props => [];
 // }
 
-abstract class BookmarkState extends Equatable {
-  const BookmarkState();
+// class BookmarkInitial extends BookmarkState {}
 
-  @override
-  List<Object> get props => [];
-}
+// class BookmarkLoading extends BookmarkState {}
 
-class BookmarkInitial extends BookmarkState {}
+// class BookmarkCheck extends BookmarkState {
+//   final bool isBookmarked;
 
-class BookmarkLoading extends BookmarkState {}
+//   const BookmarkCheck(this.isBookmarked);
 
-class BookmarkCheck extends BookmarkState {
-  final bool isBookmarked;
+//   @override
+//   List<Object> get props => [isBookmarked];
+// }
 
-  const BookmarkCheck(this.isBookmarked);
+// class BookmarkLoaded extends BookmarkState {
+//   final List<Bookmark> bookmarks;
 
-  @override
-  List<Object> get props => [isBookmarked];
-}
+//   const BookmarkLoaded(this.bookmarks);
 
-class BookmarkLoaded extends BookmarkState {
-  final List<Bookmark> bookmarks;
+//   @override
+//   List<Object> get props => [bookmarks];
+// }
 
-  const BookmarkLoaded(this.bookmarks);
+// class BookmarkMessage extends BookmarkState {
+//   final String message;
 
-  @override
-  List<Object> get props => [bookmarks];
-}
+//   const BookmarkMessage(this.message);
 
-class BookmarkMessage extends BookmarkState {
-  final String message;
+//   @override
+//   List<Object> get props => [message];
+// }
 
-  const BookmarkMessage(this.message);
+// class BookmarkError extends BookmarkState {
+//   final String message;
 
-  @override
-  List<Object> get props => [message];
-}
+//   const BookmarkError(this.message);
 
-class BookmarkError extends BookmarkState {
-  final String message;
-
-  const BookmarkError(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
+//   @override
+//   List<Object> get props => [message];
+// }

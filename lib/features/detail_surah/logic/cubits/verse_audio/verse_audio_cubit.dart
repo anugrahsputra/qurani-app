@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
 
 import '../../../../../../core/core.dart';
 import '../../../domain/domain.dart';
 
-// part 'verse_audio_cubit.freezed.dart';
+part 'verse_audio_cubit.freezed.dart';
 part 'verse_audio_state.dart';
 
 class VerseAudioCubit extends Cubit<VerseAudioState> {
@@ -25,7 +25,7 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
     required this.audioPlayerManager,
     required this.player,
     required this.getSurahAudioUsecase,
-  }) : super(VerseInitial());
+  }) : super(const VerseInitial());
 
   Future<void> playVerse(
     String verseNumber,
@@ -55,7 +55,7 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
         stopVerse();
       });
     } catch (e) {
-      emit(VerseStopped());
+      emit(const VerseStopped());
       stopVerse();
     }
   }
@@ -66,7 +66,7 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
     emit(VerseLoading(surahNumber.toString()));
     final result = await getSurahAudioUsecase(surahNumber);
     result.fold((l) {
-      emit(VerseStopped());
+      emit(const VerseStopped());
       stopVerse();
     }, (r) {
       audioPlayerManager.stopAllExcept(surahNumber.toString());
@@ -109,7 +109,7 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
 
   Future<void> stopVerse() async {
     await player?.stop();
-    emit(VerseStopped());
+    emit(const VerseStopped());
     player?.state = PlayerState.stopped;
     log.info('Verse Stopped');
   }

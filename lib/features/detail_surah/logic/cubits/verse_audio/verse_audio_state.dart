@@ -1,65 +1,65 @@
 part of 'verse_audio_cubit.dart';
 
-// @freezed
-// class VerseAudioState with _$VerseAudioState {
-//   const factory VerseAudioState.initial() = VerseInitial;
-//   const factory VerseAudioState.loading(
-//     String verseNumber,
-//   ) = VerseLoading;
-//   const factory VerseAudioState.playing(
-//     String verseNumber,
-//     Duration? position,
-//     Duration? duration,
-//   ) = VersePlaying;
-//   const factory VerseAudioState.playingAll(
-//     String surahNumber,
-//     Duration? position,
-//     Duration? duration,
-//   ) = VersePlayingAll;
-//   const factory VerseAudioState.stopped() = VerseStopped;
-//   const factory VerseAudioState.paused() = VersePaused;
+@freezed
+class VerseAudioState with _$VerseAudioState {
+  const factory VerseAudioState.initial() = VerseInitial;
+  const factory VerseAudioState.loading(
+    String verseNumber,
+  ) = VerseLoading;
+  const factory VerseAudioState.playing(
+    String verseNumber,
+    Duration? position,
+    Duration? duration,
+  ) = VersePlaying;
+  const factory VerseAudioState.playingAll(
+    String surahNumber,
+    Duration? position,
+    Duration? duration,
+  ) = VersePlayingAll;
+  const factory VerseAudioState.stopped() = VerseStopped;
+  const factory VerseAudioState.paused() = VersePaused;
+}
+
+// abstract class VerseAudioState extends Equatable {
+//   const VerseAudioState();
+
+//   @override
+//   List<Object> get props => [];
 // }
 
-abstract class VerseAudioState extends Equatable {
-  const VerseAudioState();
+// class VerseInitial extends VerseAudioState {}
 
-  @override
-  List<Object> get props => [];
-}
+// class VerseLoading extends VerseAudioState {
+//   final String verseNumber;
 
-class VerseInitial extends VerseAudioState {}
+//   const VerseLoading(this.verseNumber);
 
-class VerseLoading extends VerseAudioState {
-  final String verseNumber;
+//   @override
+//   List<Object> get props => [verseNumber];
+// }
 
-  const VerseLoading(this.verseNumber);
+// class VersePlaying extends VerseAudioState {
+//   final String verseNumber;
+//   final Duration? position;
+//   final Duration? duration;
 
-  @override
-  List<Object> get props => [verseNumber];
-}
+//   const VersePlaying(this.verseNumber, this.position, this.duration);
 
-class VersePlaying extends VerseAudioState {
-  final String verseNumber;
-  final Duration? position;
-  final Duration? duration;
+//   @override
+//   List<Object> get props => [verseNumber, position!, duration!];
+// }
 
-  const VersePlaying(this.verseNumber, this.position, this.duration);
+// class VersePlayingAll extends VerseAudioState {
+//   final String surahNumber;
+//   final Duration? position;
+//   final Duration? duration;
 
-  @override
-  List<Object> get props => [verseNumber, position!, duration!];
-}
+//   const VersePlayingAll(this.surahNumber, this.position, this.duration);
 
-class VersePlayingAll extends VerseAudioState {
-  final String surahNumber;
-  final Duration? position;
-  final Duration? duration;
+//   @override
+//   List<Object> get props => [surahNumber, position!, duration!];
+// }
 
-  const VersePlayingAll(this.surahNumber, this.position, this.duration);
+// class VerseStopped extends VerseAudioState {}
 
-  @override
-  List<Object> get props => [surahNumber, position!, duration!];
-}
-
-class VerseStopped extends VerseAudioState {}
-
-class VersePaused extends VerseAudioState {}
+// class VersePaused extends VerseAudioState {}

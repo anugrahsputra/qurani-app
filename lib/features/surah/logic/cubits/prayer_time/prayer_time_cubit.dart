@@ -2,8 +2,8 @@
 
 import 'package:adhan/adhan.dart';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logging/logging.dart';
@@ -11,7 +11,7 @@ import 'package:timezone/timezone.dart' as tz;
 
 import '../../../../../core/core.dart';
 
-// part 'prayer_time_cubit.freezed.dart';
+part 'prayer_time_cubit.freezed.dart';
 part 'prayer_time_state.dart';
 
 class PrayerTimeCubit extends Cubit<PrayerTimeState> {
@@ -19,10 +19,10 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
 
   final Logger _log = Logger('PrayerTimeCubit');
 
-  PrayerTimeCubit({required this.location}) : super(PrayerTimeInitial());
+  PrayerTimeCubit({required this.location}) : super(const PrayerTimeInitial());
 
   Future<void> getLoc() async {
-    emit(PrayerTimeLoading());
+    emit(const PrayerTimeLoading());
 
     bool serviceEnabled = await location.isLocationServiceEnabled();
     if (!serviceEnabled) {
