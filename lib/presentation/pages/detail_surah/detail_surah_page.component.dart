@@ -1,5 +1,42 @@
 part of 'detail_surah_page.dart';
 
+class DetailTitle extends StatelessWidget {
+  const DetailTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DetailSurahBloc, DetailSurahState>(
+      builder: (context, state) {
+        if (state is DetailSurahLoaded) {
+          SurahDetail surahDetail = state.detailSurah;
+          return Row(
+            children: [
+              Text(
+                '${surahDetail.number}. ',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                ),
+              ),
+              Text(
+                surahDetail.name!.transliteration!.id ?? 'Error',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                ),
+              ),
+            ],
+          );
+        } else {
+          return const Text('Detail Surah');
+        }
+      },
+    );
+  }
+}
+
 class DetailHeader extends StatelessWidget {
   const DetailHeader(
       {super.key, required this.surahDetail, required this.verseAudioCubit});
@@ -11,9 +48,8 @@ class DetailHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      // height: 140.h,
       margin: EdgeInsets.symmetric(
-        horizontal: 5.w,
+        horizontal: 16.w,
         vertical: 5.h,
       ),
       padding: EdgeInsets.fromLTRB(15.w, 15.h, 0.w, 15.h),
@@ -127,115 +163,132 @@ class Verses extends StatelessWidget {
       shrinkWrap: true,
       itemCount: verses.length,
       itemBuilder: (ctx, i) {
-        return SurahContent(
-          id: verses[i].number!.inQuran!,
-          verse: verses[i],
-          surah: surah,
+        Verse verse = verses[i];
+        return VerseView(
+          verse: verse,
+          numberInQuran: verse.number!.inQuran!,
+          numberInSurah: verse.number!.inSurah!,
+          surahName: surah.name!.transliteration!.id!,
+          verseText: verse.text!.arab!,
+          translation: verse.translation!.id!,
+          transliteration: verse.text!.transliteration!.en!,
         );
       },
     );
   }
 }
 
-class SurahContent extends StatefulWidget {
-  const SurahContent({
+class VerseView extends StatefulWidget {
+  const VerseView({
     super.key,
+    required this.numberInQuran,
+    required this.numberInSurah,
+    required this.surahName,
+    required this.verseText,
+    required this.translation,
+    required this.transliteration,
     required this.verse,
-    required this.surah,
-    required this.id,
   });
 
-  final int id;
+  final int numberInQuran;
+  final int numberInSurah;
+  final String surahName;
+  final String verseText;
+  final String translation;
+  final String transliteration;
   final Verse verse;
-  final SurahDetail surah;
 
   @override
-  State<SurahContent> createState() => _SurahContentState();
+  State<VerseView> createState() => _VerseViewState();
 }
 
-class _SurahContentState extends State<SurahContent> {
-  bool isBookmark = false;
-  final AppNavigator appNavigator = sl<AppNavigator>();
+class _VerseViewState extends State<VerseView> {
+  int get key => widget.numberInQuran;
 
   @override
   void initState() {
-    context.read<BookmarkBloc>().add(OnBookmarkStatus(widget.id));
-
+    context.read<BookmarkBloc>().add(OnBookmarkStatus(key));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    int surahNumber = widget.surah.number!;
-    String surahName = widget.surah.name!.transliteration!.id!;
-    String numberInSurah = '${widget.verse.number!.inSurah?.toArabicDigits()}';
-    String verseText = widget.verse.text!.arab ?? 'Error';
-    String translation = widget.verse.translation!.id ?? 'Error';
-    String transliteration = widget.verse.text!.transliteration!.en ?? 'Error';
-    String ayah = '$verseText ﴿$numberInSurah﴾';
-
     final isBookmarked = context.select<BookmarkBloc, bool>((bloc) {
       final result = bloc.state;
-      return result is BookmarkCheck &&
-              widget.id == widget.verse.number!.inQuran
-          ? result.isBookmarked
-          : false;
+      return result is BookmarkCheck ? result.isBookmarked : false;
     });
     return Container(
+      key: Key(key.toString()),
       margin: EdgeInsets.symmetric(
-        horizontal: 10.w,
-        vertical: 5.h,
+        horizontal: 16.w,
+        vertical: 10.h,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.onPrimary,
+        borderRadius: BorderRadius.circular(10.r),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.shadow.withOpacity(0.15),
+            offset: const Offset(8, 8),
+            blurRadius: 14,
+            spreadRadius: -8,
+          )
+        ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            width: double.infinity.w,
+            width: double.infinity,
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(10),
+              color: AppColors.primaryContainer,
             ),
             child: Row(
               children: [
                 Text(
-                  '${widget.verse.number!.inSurah}.',
-                  style: TextStyle(
+                  '${widget.numberInSurah}.',
+                  style: const TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 16.r,
-                    color: Colors.black,
                   ),
                 ),
-                Gap(15.w),
-                Expanded(
-                  child: AudioSlider(
-                    verseNumber: widget.verse.number!.inSurah.toString(),
-                    audioSource: widget.verse.audio!.primary!,
+                const Spacer(),
+                InkWell(
+                  onTap: () {
+                    // TODO: go to surah
+                  },
+                  child: const Icon(
+                    Icons.play_arrow,
+                    size: 18,
                   ),
                 ),
-                PlayButton(
-                  verseNumber: widget.verse.number!.inSurah.toString(),
-                  audioSource: widget.verse.audio!.primary!,
-                ),
-                IconButton(
-                  onPressed: () async {
+                Gap(10.w),
+                InkWell(
+                  onTap: () {
                     if (!isBookmarked) {
-                      context.read<BookmarkBloc>().add(
-                          OnAddBookmark(widget.verse, surahName, surahNumber));
+                      context.read<BookmarkBloc>().add(OnAddBookmark(
+                            widget.verse,
+                            widget.surahName,
+                            widget.numberInSurah,
+                          ));
                     } else {
                       context.read<BookmarkBloc>().add(OnRemoveBookmark(
-                          widget.verse, surahName, surahNumber));
+                            widget.verse,
+                            widget.surahName,
+                            widget.numberInSurah,
+                          ));
                     }
 
                     String message = !isBookmarked
-                        ? 'surat $surahName ayat $numberInSurah berhasil ditambahkan'
-                        : 'surat $surahName ayat $numberInSurah berhasil dihapus';
+                        ? 'surat ${widget.surahName} ayat ${widget.numberInSurah} berhasil ditambahkan'
+                        : 'surat ${widget.surahName} ayat ${widget.numberInSurah} berhasil dihapus';
 
                     final state = BlocProvider.of<BookmarkBloc>(context).state;
 
                     if (state is BookmarkMessage || state is BookmarkCheck) {
                       AppSnackbar.showSuccess(context, message);
                       BlocProvider.of<BookmarkBloc>(context)
-                          .add(OnBookmarkStatus(widget.verse.number!.inQuran!));
+                          .add(OnBookmarkStatus(key));
                     } else {
                       showDialog(
                           context: context,
@@ -246,69 +299,73 @@ class _SurahContentState extends State<SurahContent> {
                           });
                     }
                   },
-                  icon: Icon(
-                    Icons.bookmark_border,
-                    color: Colors.black,
-                    size: 20.dm,
+                  child: const Icon(
+                    Icons.bookmark_border_rounded,
+                    size: 18,
                   ),
                 ),
-                IconButton(
-                  onPressed: () => appNavigator.goToAyah(context,
-                      surahNumber: surahNumber,
-                      ayahNumber: widget.verse.number!.inSurah!),
-                  icon: Icon(
+                Gap(10.w),
+                InkWell(
+                  onTap: () {
+                    // TODO: go to surah
+                  },
+                  child: const Icon(
                     Icons.chevron_right_rounded,
-                    color: Colors.black,
-                    size: 25.dm,
+                    size: 18,
                   ),
                 ),
               ],
             ),
           ),
-          Gap(10.h),
-          Container(
-            width: double.infinity.w,
+          Gap(15.h),
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    ayah,
-                    style: GoogleFonts.amiri(
-                      height: 2,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24.sp,
-                      color: Colors.black,
-                    ),
-                    textDirection: TextDirection.rtl,
-                    textAlign: TextAlign.start,
-                  ),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '${widget.verseText} ﴿${widget.numberInSurah.toArabicDigits()}﴾',
+                style: GoogleFonts.amiri(
+                  height: 2,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 26.sp,
+                  color: Colors.black,
                 ),
-              ],
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.start,
+              ),
             ),
           ),
-          Gap(10.h),
-          Text(
-            transliteration,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 14.sp,
-              color: Colors.black,
+          Gap(10.w),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                widget.transliteration,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14.sp,
+                  color: Colors.black,
+                ),
+              ),
             ),
-            textAlign: TextAlign.justify,
           ),
           Gap(5.h),
-          Text(
-            translation,
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 14.sp,
-              color: Colors.black,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                widget.translation,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                  color: Colors.black,
+                ),
+              ),
             ),
-            textAlign: TextAlign.justify,
           ),
+          const Gap(10),
         ],
       ),
     );
@@ -355,12 +412,6 @@ class _PlayButtonState extends State<PlayButton> {
               size: 25.dm,
             ),
           );
-        } else if (state is VerseLoading) {
-          return Icon(
-            Icons.circle,
-            color: Colors.black,
-            size: 25.dm,
-          );
         } else {
           return IconButton(
             onPressed: () {
@@ -375,6 +426,33 @@ class _PlayButtonState extends State<PlayButton> {
         }
       },
     );
+  }
+}
+
+class SurahPlayer extends StatefulWidget {
+  const SurahPlayer({super.key});
+
+  @override
+  State<SurahPlayer> createState() => _SurahPlayerState();
+}
+
+class _SurahPlayerState extends State<SurahPlayer> {
+  bool isLoading = false;
+  late AudioPlayer? _player;
+  PlayerState playerState = PlayerState.stopped;
+
+  void _surahAudio() async {
+    setState(() => isLoading = false);
+    if (playerState == PlayerState.playing) {
+      await _player?.stop();
+    } else {
+      await _player?.stop();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
@@ -413,43 +491,6 @@ class PlayAllButton extends StatelessWidget {
             },
             icon: Icon(Icons.play_circle_rounded, size: 50.dm),
           );
-        }
-      },
-    );
-  }
-}
-
-class DetailTitle extends StatelessWidget {
-  const DetailTitle({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<DetailSurahBloc, DetailSurahState>(
-      builder: (context, state) {
-        if (state is DetailSurahLoaded) {
-          SurahDetail surahDetail = state.detailSurah;
-          return Row(
-            children: [
-              Text(
-                '${surahDetail.number}. ',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18.sp,
-                ),
-              ),
-              Text(
-                surahDetail.name!.transliteration!.id ?? 'Error',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18.sp,
-                ),
-              ),
-            ],
-          );
-        } else {
-          return const Text('Detail Surah');
         }
       },
     );

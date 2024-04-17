@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -75,8 +76,8 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
             if (state is DetailSurahLoaded) {
               SurahDetail surahDetail = state.detailSurah;
               List<Verse> verses = surahDetail.verses!;
-              String playSurah =
-                  'Memutar Surat ${surahDetail.name!.transliteration!.id!}';
+              String playSurah = surahDetail.name!.transliteration!.id!;
+              String totalVerse = '${surahDetail.numberOfVerses} ayat';
 
               final isPlayedAll =
                   context.select<VerseAudioCubit, bool>((cubit) {
@@ -111,12 +112,24 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
                     duration: const Duration(milliseconds: 700),
                     isFloating: isPlayedAll,
                     children: [
-                      Text(
-                        playSurah,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            playSurah,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            totalVerse,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
                       ),
                       Text(
                         _formatDuration(audioPosition),

@@ -23,7 +23,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
 
   @override
   void initState() {
-    Future.microtask(() => bookmarkBloc.add(OnFetchBookmark()));
+    Future.microtask(() => bookmarkBloc.add(const OnFetchBookmark()));
     super.initState();
   }
 
