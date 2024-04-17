@@ -66,21 +66,25 @@ class _AyahPageState extends State<AyahPage> {
                       _screenshotController
                           .captureFromWidget(AyahView(ayah: state.ayah),
                               delay: const Duration(milliseconds: 800))
-                          .then((imgCaptured) {
-                        showAdaptiveDialog(
-                          context: context,
-                          builder: (context) {
-                            return Container(
+                          .then(
+                        (imgCaptured) {
+                          // TODO: show dialog to preview image before sharing them
+                          showAdaptiveDialog(
+                            context: context,
+                            builder: (context) {
+                              return Container(
                                 width: MediaQuery.sizeOf(context).width * 0.5,
                                 height: MediaQuery.sizeOf(context).height * 0.5,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20.r),
-                                  color: AppColors.background,
+                                  color: AppColors.onPrimary,
                                 ),
-                                child: Image.memory(imgCaptured));
-                          },
-                        );
-                      });
+                                child: Image.memory(imgCaptured),
+                              );
+                            },
+                          );
+                        },
+                      );
                     },
                     icon: const Icon(Icons.share_rounded),
                   );
@@ -105,7 +109,10 @@ class _AyahPageState extends State<AyahPage> {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    AyahView(ayah: ayah),
+                    Screenshot(
+                      controller: _screenshotController,
+                      child: AyahView(ayah: ayah),
+                    ),
                     TafsirView(ayah: ayah),
                   ],
                 ),

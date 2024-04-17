@@ -64,7 +64,7 @@ class _HomepageState extends State<Homepage>
     Future.microtask(() {
       prayerTimeCubit.getLoc();
       surahBloc.add(const OnGetSurah());
-      ayahsBloc.add(OnGetRandomAyah());
+      ayahsBloc.add(const OnGetRandomAyah());
     });
   }
 
@@ -144,9 +144,11 @@ class _HomepageState extends State<Homepage>
                         tooltip: 'Halaman jadwal shalat',
                         iconSize: 20,
                         // padding: EdgeInsets.symmetric(horizontal: 10.w),
+
                         icon: const Icon(Icons.access_time),
                         color: AppColors.onBackground,
-                        onPressed: () {},
+                        onPressed: () =>
+                            appNavigator.goToPrayerSchedule(context),
                       ),
                     ],
                   ),

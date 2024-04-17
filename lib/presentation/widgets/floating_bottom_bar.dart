@@ -28,7 +28,7 @@ class FloatingBottomBar extends StatelessWidget {
       left: 80.w,
       right: 80.w,
       child: Container(
-        height: 60.h,
+        padding: EdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
           color: color ?? AppColors.primaryContainer,
           borderRadius: BorderRadius.circular(45.r),
