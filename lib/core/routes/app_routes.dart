@@ -22,5 +22,6 @@ abstract class AppRoutes {
       return AyahPage(ayahNumber: ayahNumber, surahNumber: surahNumber);
     },
     AppPages.bookmark: (context) => const BookmarksPage(),
+    AppPages.prayerSchedule: (context) => const PrayerSchedulePage(),
   };
 }
