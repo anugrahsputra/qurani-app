@@ -10,9 +10,9 @@ import 'observer.dart';
 import 'presentation/presentation.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   CustomLog.initialize(showLog: kDebugMode);
   Bloc.observer = MyBlocObserver();
-  WidgetsFlutterBinding.ensureInitialized();
   await setup();
   runApp(DevicePreview(
     enabled: !kReleaseMode,
