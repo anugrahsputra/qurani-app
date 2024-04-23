@@ -1,9 +1,10 @@
-import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audioplayers.dart' as ap;
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cache_interceptor_hive_store/dio_cache_interceptor_hive_store.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:just_audio/just_audio.dart' as ja;
 import 'package:path_provider/path_provider.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -53,9 +54,15 @@ Future<void> setup() async {
       ]),
   );
   /* -----------------> External <-----------------*/
-  sl.registerFactory<AudioPlayer>(() => AudioPlayer());
+  sl.registerFactory<ja.AudioPlayer>(() => ja.AudioPlayer());
+  sl.registerFactory<ap.AudioPlayer>(() => ap.AudioPlayer());
   /* -----------------> Core <-----------------*/
-  sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
+  sl.registerFactory<DioClient>(
+    () => DioClientImpl(dio: sl<Dio>()),
+  );
+  sl.registerFactory<AudioHelper>(
+    () => AudioHelperImpl(audioPlayer: sl<ja.AudioPlayer>()),
+  );
   sl.registerFactory<AppNavigator>(() => AppNavigator());
   sl.registerFactory<UserLocation>(() => IUserLocation());
   sl.registerFactory<DatabaseHelper>(() => DatabaseHelper());
@@ -159,7 +166,7 @@ Future<void> setup() async {
   sl.registerFactory<VerseAudioCubit>(
     () => VerseAudioCubit(
       audioPlayerManager: sl<AudioPlayerManager>(),
-      player: sl<AudioPlayer>(),
+      player: sl<ap.AudioPlayer>(),
       getSurahAudioUsecase: sl<GetSurahAudioUsecase>(),
     ),
   );
