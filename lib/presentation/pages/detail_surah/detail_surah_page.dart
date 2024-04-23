@@ -11,7 +11,6 @@ import 'package:qurani/features/bookmark/logics/logics.dart';
 
 import '../../../../core/core.dart';
 import '../../../../injection.dart';
-import '../../../features/ayah/ayah.dart';
 import '../../../features/bookmark/bookmark.dart';
 import '../../../features/detail_surah/detail_surah.dart';
 import '../../presentation.dart';
@@ -30,12 +29,11 @@ class DetailSurahPage extends StatefulWidget {
 class _DetailSurahPageState extends State<DetailSurahPage> {
   final DetailSurahBloc detailSurahBloc = sl<DetailSurahBloc>();
   final VerseAudioCubit verseAudioCubit = sl<VerseAudioCubit>();
-  final GetAyahUsecase getAyah = sl<GetAyahUsecase>();
+  final AppNavigator appNavigator = sl<AppNavigator>();
   int get surahNumber => widget.surahNumber;
 
   @override
   void initState() {
-    getAyah.call(surahNumber, 3);
     detailSurahBloc.add(OnGetDetail(surahNumber));
     super.initState();
   }
@@ -54,7 +52,6 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
           create: (context) => detailSurahBloc,
         ),
         BlocProvider(
-          lazy: false,
           create: (context) => verseAudioCubit,
         ),
         BlocProvider(
@@ -103,7 +100,11 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
                           verseAudioCubit: verseAudioCubit,
                         ),
                         OpeningBismillah(surahDetail: surahDetail),
-                        Verses(verses: verses, surah: surahDetail),
+                        Verses(
+                          verses: verses,
+                          surah: surahDetail,
+                          appNavigator: appNavigator,
+                        ),
                         const Gap(20),
                       ],
                     ),

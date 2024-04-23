@@ -152,10 +152,12 @@ class Verses extends StatelessWidget {
     super.key,
     required this.verses,
     required this.surah,
+    required this.appNavigator,
   });
 
   final List<Verse> verses;
   final SurahDetail surah;
+  final AppNavigator appNavigator;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -166,12 +168,15 @@ class Verses extends StatelessWidget {
         Verse verse = verses[i];
         return VerseView(
           verse: verse,
+          surahNumber: surah.number!,
           numberInQuran: verse.number!.inQuran!,
           numberInSurah: verse.number!.inSurah!,
           surahName: surah.name!.transliteration!.id!,
           verseText: verse.text!.arab!,
           translation: verse.translation!.id!,
           transliteration: verse.text!.transliteration!.en!,
+          goToAyahPage: () => appNavigator.goToAyah(context,
+              surahNumber: surah.number!, ayahNumber: verse.number!.inSurah!),
         );
       },
     );
@@ -183,20 +188,24 @@ class VerseView extends StatefulWidget {
     super.key,
     required this.numberInQuran,
     required this.numberInSurah,
+    required this.surahNumber,
     required this.surahName,
     required this.verseText,
     required this.translation,
     required this.transliteration,
+    required this.goToAyahPage,
     required this.verse,
   });
 
   final int numberInQuran;
   final int numberInSurah;
+  final int surahNumber;
   final String surahName;
   final String verseText;
   final String translation;
   final String transliteration;
   final Verse verse;
+  final void Function()? goToAyahPage;
 
   @override
   State<VerseView> createState() => _VerseViewState();
@@ -253,14 +262,9 @@ class _VerseViewState extends State<VerseView> {
                   ),
                 ),
                 const Spacer(),
-                InkWell(
-                  onTap: () {
-                    // TODO: go to surah
-                  },
-                  child: const Icon(
-                    Icons.play_arrow,
-                    size: 18,
-                  ),
+                PlayButton(
+                  verseNumber: widget.numberInSurah.toString(),
+                  audioSource: widget.verse.audio!.primary!,
                 ),
                 Gap(10.w),
                 InkWell(
@@ -269,13 +273,13 @@ class _VerseViewState extends State<VerseView> {
                       context.read<BookmarkBloc>().add(OnAddBookmark(
                             widget.verse,
                             widget.surahName,
-                            widget.numberInSurah,
+                            widget.surahNumber,
                           ));
                     } else {
                       context.read<BookmarkBloc>().add(OnRemoveBookmark(
                             widget.verse,
                             widget.surahName,
-                            widget.numberInSurah,
+                            widget.surahNumber,
                           ));
                     }
 
@@ -306,9 +310,7 @@ class _VerseViewState extends State<VerseView> {
                 ),
                 Gap(10.w),
                 InkWell(
-                  onTap: () {
-                    // TODO: go to surah
-                  },
+                  onTap: widget.goToAyahPage,
                   child: const Icon(
                     Icons.chevron_right_rounded,
                     size: 18,
@@ -402,22 +404,22 @@ class _PlayButtonState extends State<PlayButton> {
     return BlocBuilder<VerseAudioCubit, VerseAudioState>(
       builder: (context, state) {
         if (state is VersePlaying && state.verseNumber == widget.verseNumber) {
-          return IconButton(
-            onPressed: () {
+          return InkWell(
+            onTap: () {
               cubit.stopVerse();
             },
-            icon: Icon(
+            child: Icon(
               Icons.stop,
               color: Colors.black,
               size: 25.dm,
             ),
           );
         } else {
-          return IconButton(
-            onPressed: () {
+          return InkWell(
+            onTap: () {
               cubit.playVerse(widget.verseNumber, widget.audioSource);
             },
-            icon: Icon(
+            child: Icon(
               Icons.play_arrow,
               color: Colors.black,
               size: 25.dm,
@@ -479,14 +481,14 @@ class PlayAllButton extends StatelessWidget {
           );
         } else if (state is VerseStopped) {
           return IconButton(
-            onPressed: () {
+            onPressed: () async {
               verseAudioCubit.playAllVerse(surahNumber);
             },
             icon: Icon(Icons.play_circle_rounded, size: 50.dm),
           );
         } else {
           return IconButton(
-            onPressed: () {
+            onPressed: () async {
               verseAudioCubit.playAllVerse(surahNumber);
             },
             icon: Icon(Icons.play_circle_rounded, size: 50.dm),
