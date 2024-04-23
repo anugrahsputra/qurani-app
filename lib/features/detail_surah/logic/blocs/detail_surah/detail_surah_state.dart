@@ -8,32 +8,3 @@ class DetailSurahState with _$DetailSurahState {
       DetailSurahLoaded;
   const factory DetailSurahState.error(String message) = DetailSurahError;
 }
-
-// abstract class DetailSurahState extends Equatable {
-//   const DetailSurahState();
-
-//   @override
-//   List<Object> get props => [];
-// }
-
-// class DetailSurahInitial extends DetailSurahState {}
-
-// class DetailSurahLoading extends DetailSurahState {}
-
-// class DetailSurahLoaded extends DetailSurahState {
-//   final SurahDetail detailSurah;
-
-//   const DetailSurahLoaded(this.detailSurah);
-
-//   @override
-//   List<Object> get props => [detailSurah];
-// }
-
-// class DetailSurahError extends DetailSurahState {
-//   final String message;
-
-//   const DetailSurahError(this.message);
-
-//   @override
-//   List<Object> get props => [message];
-// }
