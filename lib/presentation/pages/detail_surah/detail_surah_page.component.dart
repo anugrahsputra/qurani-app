@@ -499,68 +499,68 @@ class PlayAllButton extends StatelessWidget {
   }
 }
 
-class AudioSlider extends StatefulWidget {
-  final String verseNumber;
-  final String audioSource;
+// class AudioSlider extends StatefulWidget {
+//   final String verseNumber;
+//   final String audioSource;
 
-  const AudioSlider(
-      {super.key, required this.verseNumber, required this.audioSource});
+//   const AudioSlider(
+//       {super.key, required this.verseNumber, required this.audioSource});
 
-  @override
-  State<AudioSlider> createState() => _AudioSliderState();
-}
+//   @override
+//   State<AudioSlider> createState() => _AudioSliderState();
+// }
 
-class _AudioSliderState extends State<AudioSlider> {
-  final cubit = sl<VerseAudioCubit>();
+// class _AudioSliderState extends State<AudioSlider> {
+//   final cubit = sl<VerseAudioCubit>();
 
-  @override
-  void initState() {
-    cubit.audioPlayerManager.verseAudio(widget.verseNumber);
-    super.initState();
-  }
+//   @override
+//   void initState() {
+//     cubit.audioPlayerManager.verseAudio(widget.verseNumber);
+//     super.initState();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<VerseAudioCubit, VerseAudioState>(
-      builder: (context, state) {
-        if (state is VersePlaying && state.verseNumber == widget.verseNumber) {
-          final position = state.position ?? Duration.zero;
-          final duration = state.duration ?? Duration.zero;
-          double? value = duration.inMilliseconds > 0
-              ? position.inMicroseconds / duration.inMicroseconds
-              : 0;
-          return Container(
-            height: 2.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.5.r),
-              color: AppColors.primaryContainer,
-            ),
-            child: LinearProgressIndicator(
-              value: value,
-              color: AppColors.primary,
-              backgroundColor: AppColors.primaryContainer,
-              borderRadius: BorderRadius.circular(2.5.r),
-            ),
-          );
-        } else if (state is VerseLoading &&
-            state.verseNumber == widget.verseNumber) {
-          return Container(
-            height: 2.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.5.r),
-              color: AppColors.primaryContainer,
-            ),
-          );
-        } else {
-          return Container(
-            height: 2.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.5.r),
-              color: AppColors.primaryContainer,
-            ),
-          );
-        }
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<VerseAudioCubit, VerseAudioState>(
+//       builder: (context, state) {
+//         if (state is VersePlaying && state.verseNumber == widget.verseNumber) {
+//           final position = state.position ?? Duration.zero;
+//           final duration = state.duration ?? Duration.zero;
+//           double? value = duration.inMilliseconds > 0
+//               ? position.inMicroseconds / duration.inMicroseconds
+//               : 0;
+//           return Container(
+//             height: 2.h,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(2.5.r),
+//               color: AppColors.primaryContainer,
+//             ),
+//             child: LinearProgressIndicator(
+//               value: value,
+//               color: AppColors.primary,
+//               backgroundColor: AppColors.primaryContainer,
+//               borderRadius: BorderRadius.circular(2.5.r),
+//             ),
+//           );
+//         } else if (state is VerseLoading &&
+//             state.verseNumber == widget.verseNumber) {
+//           return Container(
+//             height: 2.h,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(2.5.r),
+//               color: AppColors.primaryContainer,
+//             ),
+//           );
+//         } else {
+//           return Container(
+//             height: 2.h,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(2.5.r),
+//               color: AppColors.primaryContainer,
+//             ),
+//           );
+//         }
+//       },
+//     );
+//   }
+// }

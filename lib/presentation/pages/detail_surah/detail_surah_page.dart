@@ -81,14 +81,6 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
                 final result = cubit.state;
                 return result is VersePlayingAll ? false : true;
               });
-              final audioPosition =
-                  context.select<VerseAudioCubit, Duration>((cubit) {
-                final result = cubit.state;
-                if (result is VersePlayingAll) {
-                  return result.position ?? Duration.zero;
-                }
-                return Duration.zero;
-              });
               return Stack(
                 children: [
                   SingleChildScrollView(
@@ -109,37 +101,10 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
                       ],
                     ),
                   ),
-                  FloatingBottomBar(
-                    duration: const Duration(milliseconds: 700),
-                    isFloating: isPlayedAll,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            playSurah,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            totalVerse,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        _formatDuration(audioPosition),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
+                  AudioTime(
+                    isPlayedAll: isPlayedAll,
+                    playSurah: playSurah,
+                    totalVerse: totalVerse,
                   ),
                 ],
               );
@@ -157,11 +122,85 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
       ),
     );
   }
+}
+
+class AudioTime extends StatefulWidget {
+  const AudioTime({
+    super.key,
+    required this.isPlayedAll,
+    required this.playSurah,
+    required this.totalVerse,
+  });
+
+  final bool isPlayedAll;
+  final String playSurah;
+  final String totalVerse;
+
+  @override
+  State<AudioTime> createState() => _AudioTimeState();
+}
+
+class _AudioTimeState extends State<AudioTime> {
+  Duration _position = Duration.zero;
+  // ignore: unused_field
+  Duration _duration = Duration.zero;
+
+  @override
+  void initState() {
+    super.initState();
+    final verseAudioCubit = context.read<VerseAudioCubit>();
+    verseAudioCubit.player?.onDurationChanged.listen((newDuration) {
+      setState(() {
+        _duration = newDuration;
+      });
+    });
+    verseAudioCubit.player?.onPositionChanged.listen((newPosition) {
+      setState(() {
+        _position = newPosition;
+      });
+    });
+  }
 
   String _formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
     return '$minutes:$seconds';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingBottomBar(
+      duration: const Duration(milliseconds: 700),
+      isFloating: widget.isPlayedAll,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.playSurah,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              widget.totalVerse,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+        Text(
+          _formatDuration(_position),
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+    );
   }
 }

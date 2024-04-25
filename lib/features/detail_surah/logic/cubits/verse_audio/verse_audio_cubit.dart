@@ -34,7 +34,7 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
     try {
       emit(VerseLoading(verseNumber));
       audioPlayerManager.stopAllExcept(verseNumber);
-      emit(VersePlaying(verseNumber, Duration.zero, Duration.zero));
+      emit(VersePlaying(verseNumber));
       await player?.play(UrlSource(audioSource));
       player?.state = PlayerState.playing;
       player?.onPlayerComplete.listen((event) {
@@ -57,34 +57,7 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
     }, (r) async {
       audioPlayerManager.stopAllExcept(surahNumber.toString());
 
-      emit(VersePlayingAll(
-        surahNumber.toString(),
-        Duration.zero,
-        Duration.zero,
-      ));
-      Duration? duration;
-
-      /// this thing causing jank
-      player?.onDurationChanged.listen((newDuration) {
-        duration = newDuration;
-        emit(VersePlayingAll(
-          surahNumber.toString(),
-          Duration.zero,
-          duration ?? Duration.zero,
-        ));
-      });
-
-      /// also this thing causing jank
-      /// will fix it later
-      player?.onPositionChanged.listen((position) {
-        if (duration != null) {
-          emit(VersePlayingAll(
-            surahNumber.toString(),
-            position,
-            duration ?? Duration.zero,
-          ));
-        }
-      });
+      emit(VersePlayingAll(surahNumber.toString()));
       await player?.play(UrlSource(r.audioUrl), position: Duration.zero);
       player?.state = PlayerState.playing;
       player?.onPlayerComplete.listen((event) {
