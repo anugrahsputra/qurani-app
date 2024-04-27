@@ -57,7 +57,7 @@ void main() {
     act: (cubit) => cubit.playVerse('1', 'audioSource'),
     expect: () => [
       const VerseLoading('1'),
-      const VersePlaying('1', Duration.zero, Duration.zero),
+      const VersePlaying('1'),
     ],
   );
 
@@ -70,7 +70,7 @@ void main() {
     act: (cubit) => cubit.playVerse('1', 'audioSource'),
     expect: () => [
       const VerseLoading('1'),
-      const VersePlaying('1', Duration.zero, Duration.zero),
+      const VersePlaying('1'),
       const VerseStopped(),
     ],
   );
@@ -109,7 +109,7 @@ void main() {
     act: (cubit) => cubit.playAllVerse(1),
     expect: () => [
       const VerseLoading('1'),
-      const VersePlayingAll('1', Duration.zero, Duration.zero),
+      const VersePlayingAll('1'),
     ],
   );
 }
