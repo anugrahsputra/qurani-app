@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qurani/core/core.dart';
+import 'package:screenshot/screenshot.dart';
 
 import 'injection.dart';
 import 'observer.dart';
@@ -14,9 +15,12 @@ Future<void> main() async {
   CustomLog.initialize(showLog: kDebugMode);
   Bloc.observer = MyBlocObserver();
   await setup();
+  ScreenshotController screenshotController = ScreenshotController();
+
   runApp(DevicePreview(
     enabled: !kReleaseMode,
-    builder: (context) => const MyApp(),
+    builder: (context) =>
+        Screenshot(controller: screenshotController, child: const MyApp()),
     tools: const [
       ...DevicePreview.defaultTools,
       DevicePreviewScreenshot(),

@@ -353,6 +353,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  device_preview_store_screenshot:
+    dependency: "direct main"
+    description:
+      name: device_preview_store_screenshot
+      sha256: b32f1fd8fa99a82529d65901e1f5352f8437e1b7f714ae90c637180b6c752f10
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   diff_match_patch:
     dependency: transitive
     description:
