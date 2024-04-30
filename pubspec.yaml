@@ -62,6 +62,7 @@ dependencies:
   intl: ^0.18.1
   json_annotation: ^4.8.1
   logging: ^1.2.0
+  lottie: ^3.1.0
   modal_bottom_sheet: ^3.0.0
   ndialog: ^4.3.1
   path: ^1.9.0
@@ -100,6 +101,7 @@ flutter:
     - assets/svgs/
     - assets/pngs/
     - assets/backgrounds/
+    - assets/lottie/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
