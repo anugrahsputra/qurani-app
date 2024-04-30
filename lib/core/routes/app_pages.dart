@@ -4,5 +4,5 @@ abstract class AppPages {
   static const String detail = '/detail';
   static const String ayah = '/ayah';
   static const String bookmark = '/bookmark';
-  static const String prayerSchedule = '/prayer-schedule';
+  static const String search = '/search';
 }

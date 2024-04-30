@@ -87,9 +87,9 @@ class AppNavigator {
     pushNamed(context, AppPages.bookmark);
   }
 
-  void goToPrayerSchedule(BuildContext context) {
+  void goToSearch(BuildContext context) {
     if (!canNavigate(context)) return;
 
-    pushNamed(context, AppPages.prayerSchedule);
+    pushNamed(context, AppPages.search);
   }
 }
