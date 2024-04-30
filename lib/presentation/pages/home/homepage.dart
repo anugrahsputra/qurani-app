@@ -128,30 +128,10 @@ class _HomepageState extends State<Homepage>
                       SurahCards(),
                     ],
                   ),
-                  FloatingBottomBar(
-                    duration: const Duration(milliseconds: 400),
-                    isFloating: state.displayAppbar,
-                    children: [
-                      IconButton(
-                        tooltip: 'Halaman Bookmark',
-                        iconSize: 20,
-                        // padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        icon: const Icon(Icons.bookmark),
-                        color: AppColors.onBackground,
-                        onPressed: () => appNavigator.goToBookmarks(context),
-                      ),
-                      IconButton(
-                        tooltip: 'Halaman jadwal shalat',
-                        iconSize: 20,
-                        // padding: EdgeInsets.symmetric(horizontal: 10.w),
-
-                        icon: const Icon(Icons.access_time),
-                        color: AppColors.onBackground,
-                        onPressed: () =>
-                            appNavigator.goToPrayerSchedule(context),
-                      ),
-                    ],
-                  ),
+                  FloatingMenu(
+                    appNavigator: appNavigator,
+                    isScrolled: state.displayAppbar,
+                  )
                 ],
               );
             },

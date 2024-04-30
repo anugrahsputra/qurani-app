@@ -151,7 +151,7 @@ class PrayerScheduleWidget extends StatelessWidget {
                   padding: EdgeInsets.all(5.w),
                   decoration: BoxDecoration(
                     color: isHighlighted
-                        ? AppColors.background.withOpacity(0.5)
+                        ? AppColors.onBackground.withOpacity(0.23)
                         : Colors.transparent,
                     borderRadius: BorderRadius.circular(10.r),
                     boxShadow: [
@@ -268,19 +268,19 @@ class FloatingMenu extends StatelessWidget {
       children: [
         IconButton(
           tooltip: 'Halaman Bookmark',
-          iconSize: 20,
+          iconSize: 24,
           // padding: EdgeInsets.symmetric(horizontal: 10.w),
-          icon: const Icon(Icons.bookmark),
+          icon: const Icon(Icons.bookmark_rounded),
           color: AppColors.onBackground,
           onPressed: () => appNavigator.goToBookmarks(context),
         ),
         IconButton(
-          tooltip: 'Halaman jadwal shalat',
-          iconSize: 20,
+          tooltip: 'Halaman Pencarian',
+          iconSize: 24,
           // padding: EdgeInsets.symmetric(horizontal: 10.w),
-          icon: const Icon(Icons.access_time),
+          icon: const Icon(Icons.search_rounded),
           color: AppColors.onBackground,
-          onPressed: () {},
+          onPressed: () => appNavigator.goToSearch(context),
         ),
       ],
     );

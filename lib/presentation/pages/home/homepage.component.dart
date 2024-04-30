@@ -29,11 +29,11 @@ class HomeAppbar extends StatelessWidget {
             WidgetSwitcher(
               isWidgetSwitched: state.displayAppbar,
               switchWidget1: IconButton(
-                tooltip: 'Halaman jadwal shalat',
+                tooltip: 'Halaman Pencarian',
                 iconSize: 25,
-                icon: const Icon(Icons.access_time),
+                icon: const Icon(Icons.search_rounded),
                 color: AppColors.onPrimary,
-                onPressed: () {},
+                onPressed: () => appNavigator.goToSearch(context),
               ),
               switchWidget2: const SizedBox.shrink(),
             ),
@@ -45,8 +45,8 @@ class HomeAppbar extends StatelessWidget {
             reverseDuration: Duration.zero,
             isWidgetSwitched: state.displayAppbar,
             switchWidget1: Text(
-              'Quranee',
-              style: TextStyle(
+              'Quraani',
+              style: GoogleFonts.poppins(
                 color: AppColors.onPrimary,
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w600,
