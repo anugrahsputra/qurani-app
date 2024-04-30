@@ -37,12 +37,17 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ],
       child: AppScaffold(
         appBar: AppBar(
-          title: const Text('Bookmarks'),
+          title: Text(
+            'Bookmarks',
+            style: GoogleFonts.poppins(),
+          ),
+          backgroundColor: AppColors.primaryContainer,
         ),
         body: BlocBuilder<BookmarkBloc, BookmarkState>(
           builder: (ctx, state) {
             if (state is BookmarkInitial) {
-              return const Center(child: Text('You haven\'t add any bookmark'));
+              return const Center(
+                  child: Text('Anda belum menambahkan bookmark'));
             } else if (state is BookmarkLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is BookmarkLoaded) {
@@ -59,8 +64,9 @@ class _BookmarksPageState extends State<BookmarksPage> {
                 },
               );
             } else {
-              return const Center(
-                  child: Text('if this text then something is wrong'));
+              return Center(
+                child: Text('Terjadi kesalahan.', style: GoogleFonts.poppins()),
+              );
             }
           },
         ),

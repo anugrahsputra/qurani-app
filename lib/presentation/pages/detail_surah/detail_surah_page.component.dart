@@ -50,7 +50,7 @@ class DetailHeader extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.symmetric(
         horizontal: 16.w,
-        vertical: 5.h,
+        vertical: 10.h,
       ),
       padding: EdgeInsets.fromLTRB(15.w, 15.h, 0.w, 15.h),
       decoration: BoxDecoration(

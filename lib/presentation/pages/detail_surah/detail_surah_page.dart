@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,6 +61,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
         appBar: AppBar(
           titleSpacing: 0.0,
           title: const DetailTitle(),
+          backgroundColor: AppColors.primaryContainer,
         ),
         body: BlocConsumer<DetailSurahBloc, DetailSurahState>(
           listener: (context, state) {
@@ -84,6 +87,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
                     physics: const BouncingScrollPhysics(),
                     child: Column(
                       children: [
+                        Gap(10.h),
                         DetailHeader(
                           surahDetail: surahDetail,
                           verseAudioCubit: verseAudioCubit,
@@ -142,19 +146,28 @@ class _AudioTimeState extends State<AudioTime> {
   // ignore: unused_field
   Duration _duration = Duration.zero;
 
+  StreamSubscription? _positionSubscription;
+  StreamSubscription? _durationSubscription;
+
   @override
   void initState() {
     super.initState();
     final verseAudioCubit = context.read<VerseAudioCubit>();
-    verseAudioCubit.player?.onDurationChanged.listen((newDuration) {
-      setState(() {
-        _duration = newDuration;
-      });
+    _durationSubscription =
+        verseAudioCubit.player?.onDurationChanged.listen((newDuration) {
+      if (mounted) {
+        setState(() {
+          _duration = newDuration;
+        });
+      }
     });
-    verseAudioCubit.player?.onPositionChanged.listen((newPosition) {
-      setState(() {
-        _position = newPosition;
-      });
+    _positionSubscription =
+        verseAudioCubit.player?.onPositionChanged.listen((newPosition) {
+      if (mounted) {
+        setState(() {
+          _position = newPosition;
+        });
+      }
     });
   }
 
@@ -163,6 +176,13 @@ class _AudioTimeState extends State<AudioTime> {
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
     return '$minutes:$seconds';
+  }
+
+  @override
+  void dispose() {
+    _positionSubscription?.cancel();
+    _durationSubscription?.cancel();
+    super.dispose();
   }
 
   @override
@@ -176,15 +196,15 @@ class _AudioTimeState extends State<AudioTime> {
           children: [
             Text(
               widget.playSurah,
-              style: const TextStyle(
-                fontSize: 14,
+              style: TextStyle(
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
               ),
             ),
             Text(
               widget.totalVerse,
-              style: const TextStyle(
-                fontSize: 14,
+              style: TextStyle(
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -192,8 +212,8 @@ class _AudioTimeState extends State<AudioTime> {
         ),
         Text(
           _formatDuration(_position),
-          style: const TextStyle(
-            fontSize: 14,
+          style: TextStyle(
+            fontSize: 14.sp,
             fontWeight: FontWeight.w600,
           ),
         ),
