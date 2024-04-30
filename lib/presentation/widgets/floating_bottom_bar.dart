@@ -25,13 +25,13 @@ class FloatingBottomBar extends StatelessWidget {
       duration: duration ?? const Duration(milliseconds: 700),
       curve: curves,
       bottom: isFloating ? -100.h : 40.h,
-      left: 80.w,
-      right: 80.w,
+      left: 80,
+      right: 80,
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.h),
+        padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
         decoration: BoxDecoration(
           color: color ?? AppColors.primaryContainer,
-          borderRadius: BorderRadius.circular(45.r),
+          borderRadius: BorderRadius.circular(20.r),
           boxShadow: [
             BoxShadow(
               color: AppColors.shadow.withOpacity(0.85),
@@ -42,7 +42,7 @@ class FloatingBottomBar extends StatelessWidget {
           ],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: children ?? [],
         ),
