@@ -17,8 +17,8 @@ mixin ShareScreenshotMixin {
   ) async {
     AppSnackbar.showSnackBar(
       context,
-      message: 'Getting image...',
-      snackbarColor: AppColors.onBackground,
+      message: 'Memuat...',
+      snackbarColor: AppColors.primary,
     );
 
     final mediaQuery = MediaQuery.of(context);

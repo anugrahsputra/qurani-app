@@ -51,8 +51,8 @@ class _AyahPageState extends State<AyahPage> {
       create: (context) => ayahsBloc,
       child: AppScaffold(
         appBar: AppBar(
-          title: const Text('Ayah'),
-          backgroundColor: Colors.transparent,
+          title: const Text('Detail Ayat'),
+          backgroundColor: AppColors.primaryContainer,
           actions: const [
             ShareIcon(),
           ],
