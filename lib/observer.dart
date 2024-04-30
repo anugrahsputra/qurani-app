@@ -5,15 +5,21 @@ class MyBlocObserver extends BlocObserver {
   final Logger _log = Logger('MyBlocObserver');
 
   @override
-  void onCreate(BlocBase bloc) {
-    super.onCreate(bloc);
-    _log.info('onCreate -- ${bloc.runtimeType}');
+  void onEvent(Bloc bloc, Object? event) {
+    super.onEvent(bloc, event);
+    _log.info('onEvent -- ${bloc.runtimeType}, $event');
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    _log.info('onTransition -- ${bloc.runtimeType} $transition');
   }
 
   @override
   void onChange(BlocBase bloc, Change change) {
     super.onChange(bloc, change);
-    _log.shout('onChange -- ${bloc.runtimeType}, $change');
+    _log.info('onChange -- ${bloc.runtimeType}, $change');
   }
 
   @override

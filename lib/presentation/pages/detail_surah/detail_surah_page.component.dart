@@ -1,5 +1,42 @@
 part of 'detail_surah_page.dart';
 
+class DetailTitle extends StatelessWidget {
+  const DetailTitle({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DetailSurahBloc, DetailSurahState>(
+      builder: (context, state) {
+        if (state is DetailSurahLoaded) {
+          SurahDetail surahDetail = state.detailSurah;
+          return Row(
+            children: [
+              Text(
+                '${surahDetail.number}. ',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                ),
+              ),
+              Text(
+                surahDetail.name!.transliteration!.id ?? 'Error',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                ),
+              ),
+            ],
+          );
+        } else {
+          return const Text('Detail Surah');
+        }
+      },
+    );
+  }
+}
+
 class DetailHeader extends StatelessWidget {
   const DetailHeader(
       {super.key, required this.surahDetail, required this.verseAudioCubit});
@@ -11,15 +48,14 @@ class DetailHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 120,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 5,
-        vertical: 5,
+      margin: EdgeInsets.symmetric(
+        horizontal: 16.w,
+        vertical: 10.h,
       ),
-      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+      padding: EdgeInsets.fromLTRB(15.w, 15.h, 0.w, 15.h),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,34 +66,34 @@ class DetailHeader extends StatelessWidget {
             children: [
               Text(
                 surahDetail.name!.transliteration!.id ?? 'Error',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 16,
+                  fontSize: 18.sp,
                   color: Colors.black,
                 ),
               ),
               Text(
                 surahDetail.name!.translation!.id ?? 'Error',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 18,
+                  fontSize: 16.sp,
                   color: Colors.black,
                 ),
               ),
-              const Gap(10),
+              Gap(10.h),
               Text(
                 '${surahDetail.numberOfVerses} ayat',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   color: Colors.black,
                 ),
               ),
               Text(
                 surahDetail.revelation!.id ?? 'Error',
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   color: Colors.black,
                 ),
               ),
@@ -65,8 +101,8 @@ class DetailHeader extends StatelessWidget {
           ),
           const Spacer(),
           Container(
-            width: 120,
-            height: 120,
+            width: 120.w,
+            height: 120.h,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(PngPath.ornaments),
@@ -93,10 +129,10 @@ class OpeningBismillah extends StatelessWidget {
   Widget build(BuildContext context) {
     return surahDetail.preBismillah != null
         ? Container(
-            width: double.infinity,
-            margin: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 5,
+            width: double.infinity.w,
+            margin: EdgeInsets.symmetric(
+              horizontal: 10.w,
+              vertical: 5.h,
             ),
             child: SvgPicture.asset(
               SvgPath.bismillah,
@@ -116,10 +152,12 @@ class Verses extends StatelessWidget {
     super.key,
     required this.verses,
     required this.surah,
+    required this.appNavigator,
   });
 
   final List<Verse> verses;
   final SurahDetail surah;
+  final AppNavigator appNavigator;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -127,113 +165,134 @@ class Verses extends StatelessWidget {
       shrinkWrap: true,
       itemCount: verses.length,
       itemBuilder: (ctx, i) {
-        return SurahContent(
-          id: verses[i].number!.inQuran!,
-          verse: verses[i],
-          surah: surah,
+        Verse verse = verses[i];
+        return VerseView(
+          verse: verse,
+          surahNumber: surah.number!,
+          numberInQuran: verse.number!.inQuran!,
+          numberInSurah: verse.number!.inSurah!,
+          surahName: surah.name!.transliteration!.id!,
+          verseText: verse.text!.arab!,
+          translation: verse.translation!.id!,
+          transliteration: verse.text!.transliteration!.en!,
+          goToAyahPage: () => appNavigator.goToAyah(context,
+              surahNumber: surah.number!, ayahNumber: verse.number!.inSurah!),
         );
       },
     );
   }
 }
 
-class SurahContent extends StatefulWidget {
-  const SurahContent({
+class VerseView extends StatefulWidget {
+  const VerseView({
     super.key,
+    required this.numberInQuran,
+    required this.numberInSurah,
+    required this.surahNumber,
+    required this.surahName,
+    required this.verseText,
+    required this.translation,
+    required this.transliteration,
+    required this.goToAyahPage,
     required this.verse,
-    required this.surah,
-    required this.id,
   });
 
-  final int id;
+  final int numberInQuran;
+  final int numberInSurah;
+  final int surahNumber;
+  final String surahName;
+  final String verseText;
+  final String translation;
+  final String transliteration;
   final Verse verse;
-  final SurahDetail surah;
+  final void Function()? goToAyahPage;
 
   @override
-  State<SurahContent> createState() => _SurahContentState();
+  State<VerseView> createState() => _VerseViewState();
 }
 
-class _SurahContentState extends State<SurahContent> {
-  bool isBookmark = false;
+class _VerseViewState extends State<VerseView> {
+  int get key => widget.numberInQuran;
 
   @override
   void initState() {
-    context.read<BookmarkBloc>().add(OnBookmarkStatus(widget.id));
-
+    context.read<BookmarkBloc>().add(OnBookmarkStatus(key));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    String surahName = widget.surah.name!.transliteration!.id!;
-    String numberInSurah = '${widget.verse.number!.inSurah?.toArabicDigits()}';
-    String verseText = widget.verse.text!.arab ?? 'Error';
-    String translation = widget.verse.translation!.id ?? 'Error';
-    String transliteration = widget.verse.text!.transliteration!.en ?? 'Error';
-    String ayah = '$verseText ﴿$numberInSurah﴾';
-
     final isBookmarked = context.select<BookmarkBloc, bool>((bloc) {
       final result = bloc.state;
       return result is BookmarkCheck ? result.isBookmarked : false;
     });
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 5,
+      key: Key(key.toString()),
+      margin: EdgeInsets.symmetric(
+        horizontal: 16.w,
+        vertical: 10.h,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.onPrimary,
+        borderRadius: BorderRadius.circular(10.r),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.shadow.withOpacity(0.15),
+            offset: const Offset(8, 8),
+            blurRadius: 14,
+            spreadRadius: -8,
+          )
+        ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             width: double.infinity,
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              // color: Colors.deepPurple[100],
               borderRadius: BorderRadius.circular(10),
+              color: AppColors.primaryContainer,
             ),
             child: Row(
               children: [
                 Text(
-                  '${widget.verse.number!.inSurah}.',
+                  '${widget.numberInSurah}.',
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                    color: Colors.black,
                   ),
                 ),
-                const Gap(15),
-                Expanded(
-                  child: AudioSlider(
-                    verseNumber: widget.verse.number!.inSurah.toString(),
-                    audioSource: widget.verse.audio!.primary!,
-                  ),
-                ),
+                const Spacer(),
                 PlayButton(
-                  verseNumber: widget.verse.number!.inSurah.toString(),
+                  verseNumber: widget.numberInSurah.toString(),
                   audioSource: widget.verse.audio!.primary!,
                 ),
+                Gap(10.w),
                 InkWell(
-                  onTap: () async {
+                  onTap: () {
                     if (!isBookmarked) {
-                      context
-                          .read<BookmarkBloc>()
-                          .add(OnAddBookmark(widget.verse, surahName));
+                      context.read<BookmarkBloc>().add(OnAddBookmark(
+                            widget.verse,
+                            widget.surahName,
+                            widget.surahNumber,
+                          ));
                     } else {
-                      context
-                          .read<BookmarkBloc>()
-                          .add(OnRemoveBookmark(widget.verse, surahName));
+                      context.read<BookmarkBloc>().add(OnRemoveBookmark(
+                            widget.verse,
+                            widget.surahName,
+                            widget.surahNumber,
+                          ));
                     }
 
                     String message = !isBookmarked
-                        ? 'surat $surahName ayat $numberInSurah berhasil ditambahkan'
-                        : 'surat $surahName ayat $numberInSurah berhasil dihapus';
+                        ? 'surat ${widget.surahName} ayat ${widget.numberInSurah} berhasil ditambahkan'
+                        : 'surat ${widget.surahName} ayat ${widget.numberInSurah} berhasil dihapus';
 
                     final state = BlocProvider.of<BookmarkBloc>(context).state;
 
                     if (state is BookmarkMessage || state is BookmarkCheck) {
                       AppSnackbar.showSuccess(context, message);
                       BlocProvider.of<BookmarkBloc>(context)
-                          .add(OnBookmarkStatus(widget.verse.number!.inQuran!));
+                          .add(OnBookmarkStatus(key));
                     } else {
                       showDialog(
                           context: context,
@@ -245,66 +304,70 @@ class _SurahContentState extends State<SurahContent> {
                     }
                   },
                   child: const Icon(
-                    Icons.bookmark_border,
-                    color: Colors.black,
-                    size: 20,
+                    Icons.bookmark_border_rounded,
+                    size: 18,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.share,
-                    color: Colors.black,
-                    size: 20,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Gap(10),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    ayah,
-                    style: GoogleFonts.amiri(
-                      height: 2,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color: Colors.black,
-                    ),
-                    textDirection: TextDirection.rtl,
-                    textAlign: TextAlign.start,
+                Gap(10.w),
+                InkWell(
+                  onTap: widget.goToAyahPage,
+                  child: const Icon(
+                    Icons.chevron_right_rounded,
+                    size: 18,
                   ),
                 ),
               ],
             ),
           ),
+          Gap(15.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                '${widget.verseText} ﴿${widget.numberInSurah.toArabicDigits()}﴾',
+                style: GoogleFonts.amiri(
+                  height: 2,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 26.sp,
+                  color: Colors.black,
+                ),
+                textDirection: TextDirection.rtl,
+                textAlign: TextAlign.start,
+              ),
+            ),
+          ),
+          Gap(10.w),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                widget.transliteration,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14.sp,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
+          Gap(5.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.w),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                widget.translation,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.sp,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ),
           const Gap(10),
-          Text(
-            transliteration,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-            textAlign: TextAlign.justify,
-          ),
-          const Gap(5),
-          Text(
-            translation,
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 14,
-              color: Colors.black,
-            ),
-            textAlign: TextAlign.justify,
-          ),
         ],
       ),
     );
@@ -341,36 +404,57 @@ class _PlayButtonState extends State<PlayButton> {
     return BlocBuilder<VerseAudioCubit, VerseAudioState>(
       builder: (context, state) {
         if (state is VersePlaying && state.verseNumber == widget.verseNumber) {
-          return IconButton(
-            onPressed: () {
+          return InkWell(
+            onTap: () {
               cubit.stopVerse();
             },
-            icon: const Icon(
+            child: Icon(
               Icons.stop,
               color: Colors.black,
-              size: 25,
+              size: 25.dm,
             ),
           );
-        } else if (state is VerseLoading) {
-          return const Icon(
-            Icons.circle,
-            color: Colors.black,
-            size: 25,
-          );
         } else {
-          return IconButton(
-            onPressed: () {
+          return InkWell(
+            onTap: () {
               cubit.playVerse(widget.verseNumber, widget.audioSource);
             },
-            icon: const Icon(
+            child: Icon(
               Icons.play_arrow,
               color: Colors.black,
-              size: 25,
+              size: 25.dm,
             ),
           );
         }
       },
     );
+  }
+}
+
+class SurahPlayer extends StatefulWidget {
+  const SurahPlayer({super.key});
+
+  @override
+  State<SurahPlayer> createState() => _SurahPlayerState();
+}
+
+class _SurahPlayerState extends State<SurahPlayer> {
+  bool isLoading = false;
+  late AudioPlayer? _player;
+  PlayerState playerState = PlayerState.stopped;
+
+  void _surahAudio() async {
+    setState(() => isLoading = false);
+    if (playerState == PlayerState.playing) {
+      await _player?.stop();
+    } else {
+      await _player?.stop();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
@@ -393,21 +477,21 @@ class PlayAllButton extends StatelessWidget {
             onPressed: () {
               verseAudioCubit.stopVerse();
             },
-            icon: const Icon(Icons.stop_circle_rounded, size: 50),
+            icon: Icon(Icons.stop_circle_rounded, size: 50.dm),
           );
         } else if (state is VerseStopped) {
           return IconButton(
-            onPressed: () {
+            onPressed: () async {
               verseAudioCubit.playAllVerse(surahNumber);
             },
-            icon: const Icon(Icons.play_circle_rounded, size: 50),
+            icon: Icon(Icons.play_circle_rounded, size: 50.dm),
           );
         } else {
           return IconButton(
-            onPressed: () {
+            onPressed: () async {
               verseAudioCubit.playAllVerse(surahNumber);
             },
-            icon: const Icon(Icons.play_circle_rounded, size: 50),
+            icon: Icon(Icons.play_circle_rounded, size: 50.dm),
           );
         }
       },
@@ -415,103 +499,68 @@ class PlayAllButton extends StatelessWidget {
   }
 }
 
-class DetailTitle extends StatelessWidget {
-  const DetailTitle({
-    super.key,
-  });
+// class AudioSlider extends StatefulWidget {
+//   final String verseNumber;
+//   final String audioSource;
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<DetailSurahBloc, DetailSurahState>(
-      builder: (context, state) {
-        if (state is DetailSurahLoaded) {
-          SurahDetail surahDetail = state.detailSurah;
-          return Row(
-            children: [
-              Text(
-                '${surahDetail.number}. ',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Text(
-                surahDetail.name!.transliteration!.id ?? 'Error',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          );
-        } else {
-          return const Text('Detail Surah');
-        }
-      },
-    );
-  }
-}
+//   const AudioSlider(
+//       {super.key, required this.verseNumber, required this.audioSource});
 
-class AudioSlider extends StatefulWidget {
-  final String verseNumber;
-  final String audioSource;
+//   @override
+//   State<AudioSlider> createState() => _AudioSliderState();
+// }
 
-  const AudioSlider(
-      {super.key, required this.verseNumber, required this.audioSource});
+// class _AudioSliderState extends State<AudioSlider> {
+//   final cubit = sl<VerseAudioCubit>();
 
-  @override
-  State<AudioSlider> createState() => _AudioSliderState();
-}
+//   @override
+//   void initState() {
+//     cubit.audioPlayerManager.verseAudio(widget.verseNumber);
+//     super.initState();
+//   }
 
-class _AudioSliderState extends State<AudioSlider> {
-  final cubit = sl<VerseAudioCubit>();
-
-  @override
-  void initState() {
-    cubit.audioPlayerManager.verseAudio(widget.verseNumber);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<VerseAudioCubit, VerseAudioState>(
-      builder: (context, state) {
-        if (state is VersePlaying && state.verseNumber == widget.verseNumber) {
-          final position = state.position ?? Duration.zero;
-          final duration = state.duration ?? Duration.zero;
-          double? value = duration.inMilliseconds > 0
-              ? position.inMicroseconds / duration.inMicroseconds
-              : 0;
-          return Container(
-            height: 2,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.5),
-              color: AppColors.primaryContainer,
-            ),
-            child: LinearProgressIndicator(
-              value: value,
-              color: AppColors.primary,
-              backgroundColor: AppColors.primaryContainer,
-              borderRadius: BorderRadius.circular(2.5),
-            ),
-          );
-        } else if (state is VerseLoading &&
-            state.verseNumber == widget.verseNumber) {
-          return Container(
-            height: 2,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.5),
-              color: AppColors.primaryContainer,
-            ),
-          );
-        } else {
-          return Container(
-            height: 2,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.5),
-              color: AppColors.primaryContainer,
-            ),
-          );
-        }
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocBuilder<VerseAudioCubit, VerseAudioState>(
+//       builder: (context, state) {
+//         if (state is VersePlaying && state.verseNumber == widget.verseNumber) {
+//           final position = state.position ?? Duration.zero;
+//           final duration = state.duration ?? Duration.zero;
+//           double? value = duration.inMilliseconds > 0
+//               ? position.inMicroseconds / duration.inMicroseconds
+//               : 0;
+//           return Container(
+//             height: 2.h,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(2.5.r),
+//               color: AppColors.primaryContainer,
+//             ),
+//             child: LinearProgressIndicator(
+//               value: value,
+//               color: AppColors.primary,
+//               backgroundColor: AppColors.primaryContainer,
+//               borderRadius: BorderRadius.circular(2.5.r),
+//             ),
+//           );
+//         } else if (state is VerseLoading &&
+//             state.verseNumber == widget.verseNumber) {
+//           return Container(
+//             height: 2.h,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(2.5.r),
+//               color: AppColors.primaryContainer,
+//             ),
+//           );
+//         } else {
+//           return Container(
+//             height: 2.h,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(2.5.r),
+//               color: AppColors.primaryContainer,
+//             ),
+//           );
+//         }
+//       },
+//     );
+//   }
+// }

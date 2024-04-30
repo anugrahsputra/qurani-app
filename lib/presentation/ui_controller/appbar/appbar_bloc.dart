@@ -7,10 +7,13 @@ part 'appbar_state.dart';
 
 class AppbarBloc extends Bloc<AppbarEvent, AppbarState> {
   AppbarBloc() : super(const AppbarDisplay(false)) {
-    on<AppbarEvent>((event, emit) {
-      if (event is ToggleDisplay) {
-        emit(AppbarDisplay(!state.displayAppbar));
-      }
-    });
+    on<ToggleDisplay>(_toggleDisplay);
+  }
+
+  void _toggleDisplay(
+    ToggleDisplay event,
+    Emitter<AppbarState> emit,
+  ) {
+    emit(AppbarDisplay(!state.displayAppbar));
   }
 }

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../domain/domain.dart';
+import '../../../ayah.dart';
 
 part 'ayahs_bloc.freezed.dart';
 part 'ayahs_event.dart';

@@ -34,21 +34,7 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
     try {
       emit(VerseLoading(verseNumber));
       audioPlayerManager.stopAllExcept(verseNumber);
-      emit(VersePlaying(verseNumber, Duration.zero, Duration.zero));
-      Duration? duration;
-      player?.onDurationChanged.listen((newDuration) {
-        duration = newDuration;
-        emit(VersePlaying(
-          verseNumber,
-          Duration.zero,
-          duration ?? Duration.zero,
-        ));
-      });
-      player?.onPositionChanged.listen((position) {
-        if (duration != null) {
-          emit(VersePlaying(verseNumber, position, duration!));
-        }
-      });
+      emit(VersePlaying(verseNumber));
       await player?.play(UrlSource(audioSource));
       player?.state = PlayerState.playing;
       player?.onPlayerComplete.listen((event) {
@@ -68,30 +54,11 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
     result.fold((l) {
       emit(const VerseStopped());
       stopVerse();
-    }, (r) {
+    }, (r) async {
       audioPlayerManager.stopAllExcept(surahNumber.toString());
 
-      emit(VersePlayingAll(
-        surahNumber.toString(),
-        Duration.zero,
-        Duration.zero,
-      ));
-      Duration? duration;
-      player?.onDurationChanged.listen((newDuration) {
-        duration = newDuration;
-        emit(VersePlayingAll(
-          surahNumber.toString(),
-          Duration.zero,
-          duration ?? Duration.zero,
-        ));
-      });
-      player?.onPositionChanged.listen((position) {
-        if (duration != null) {
-          emit(VersePlayingAll(
-              surahNumber.toString(), position, duration ?? Duration.zero));
-        }
-      });
-      player?.play(UrlSource(r.audioUrl), position: Duration.zero);
+      emit(VersePlayingAll(surahNumber.toString()));
+      await player?.play(UrlSource(r.audioUrl), position: Duration.zero);
       player?.state = PlayerState.playing;
       player?.onPlayerComplete.listen((event) {
         stopVerse();

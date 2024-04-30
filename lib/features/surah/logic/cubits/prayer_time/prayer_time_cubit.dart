@@ -1,3 +1,5 @@
+// after refactored
+
 import 'package:adhan/adhan.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
@@ -17,14 +19,15 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
 
   final Logger _log = Logger('PrayerTimeCubit');
 
-  PrayerTimeCubit({required this.location})
-      : super(const PrayerTimeState.initial());
+  PrayerTimeCubit({required this.location}) : super(const PrayerTimeInitial());
 
   Future<void> getLoc() async {
+    emit(const PrayerTimeLoading());
+
     bool serviceEnabled = await location.isLocationServiceEnabled();
     if (!serviceEnabled) {
       _log.warning('Failed to get location: Location service is disabled');
-      emit(const LocationPermissionDenied());
+      emit(const LocationPermissionDenied('Location service is disabled'));
       return;
     }
 
@@ -35,27 +38,18 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
       if (permission != LocationPermission.always &&
           permission != LocationPermission.whileInUse) {
         _log.warning('Failed to get location: Location permission denied');
-        emit(const LocationPermissionDenied());
+        emit(const LocationPermissionDenied('Location permission is denied'));
         return;
       }
     }
-
-    emit(const PrayerTimeLoading());
-    _log.info('Getting location...');
-
     try {
+      _log.info('Getting location...');
       Position position = await location.getCurrentPosition();
       final params = CalculationMethod.other.getParameters();
       params.madhab = Madhab.shafi;
       params.highLatitudeRule = HighLatitudeRule.middle_of_the_night;
       params.fajrAngle = 20.0;
       params.ishaAngle = 18.0;
-      params.adjustments.dhuhr = -2;
-      params.adjustments.asr = -3;
-      params.adjustments.maghrib = -3;
-      params.adjustments.isha = -2;
-      params.adjustments.fajr = 5;
-      params.adjustments.sunrise = -4;
       final timezone = tz.getLocation('Asia/Jakarta');
       final now = tz.TZDateTime.now(timezone);
 
@@ -63,7 +57,7 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
         position.latitude,
         position.longitude,
       );
-      final times = PrayerTimes(
+      PrayerTimes times = PrayerTimes(
         coordinates,
         DateComponents.from(now),
         params,
@@ -73,7 +67,7 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
       emit(LocationLoaded(position, times));
     } catch (_) {
       _log.warning('Failed to get location');
-      emit(const LocationPermissionDenied());
+      emit(const LocationPermissionDenied('Failed to get location'));
     }
   }
 

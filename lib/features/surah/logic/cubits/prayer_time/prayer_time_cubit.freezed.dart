@@ -20,7 +20,7 @@ mixin _$PrayerTimeState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() permissionDenied,
+    required TResult Function(String message) permissionDenied,
     required TResult Function(Position location, PrayerTimes prayerTime)
         prayerTimesLoaded,
     required TResult Function(String message) error,
@@ -30,7 +30,7 @@ mixin _$PrayerTimeState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? permissionDenied,
+    TResult? Function(String message)? permissionDenied,
     TResult? Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult? Function(String message)? error,
@@ -40,7 +40,7 @@ mixin _$PrayerTimeState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? permissionDenied,
+    TResult Function(String message)? permissionDenied,
     TResult Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult Function(String message)? error,
@@ -49,7 +49,7 @@ mixin _$PrayerTimeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LocationInitial value) initial,
+    required TResult Function(PrayerTimeInitial value) initial,
     required TResult Function(PrayerTimeLoading value) loading,
     required TResult Function(LocationPermissionDenied value) permissionDenied,
     required TResult Function(LocationLoaded value) prayerTimesLoaded,
@@ -58,7 +58,7 @@ mixin _$PrayerTimeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LocationInitial value)? initial,
+    TResult? Function(PrayerTimeInitial value)? initial,
     TResult? Function(PrayerTimeLoading value)? loading,
     TResult? Function(LocationPermissionDenied value)? permissionDenied,
     TResult? Function(LocationLoaded value)? prayerTimesLoaded,
@@ -67,7 +67,7 @@ mixin _$PrayerTimeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LocationInitial value)? initial,
+    TResult Function(PrayerTimeInitial value)? initial,
     TResult Function(PrayerTimeLoading value)? loading,
     TResult Function(LocationPermissionDenied value)? permissionDenied,
     TResult Function(LocationLoaded value)? prayerTimesLoaded,
@@ -96,25 +96,25 @@ class _$PrayerTimeStateCopyWithImpl<$Res, $Val extends PrayerTimeState>
 }
 
 /// @nodoc
-abstract class _$$LocationInitialImplCopyWith<$Res> {
-  factory _$$LocationInitialImplCopyWith(_$LocationInitialImpl value,
-          $Res Function(_$LocationInitialImpl) then) =
-      __$$LocationInitialImplCopyWithImpl<$Res>;
+abstract class _$$PrayerTimeInitialImplCopyWith<$Res> {
+  factory _$$PrayerTimeInitialImplCopyWith(_$PrayerTimeInitialImpl value,
+          $Res Function(_$PrayerTimeInitialImpl) then) =
+      __$$PrayerTimeInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LocationInitialImplCopyWithImpl<$Res>
-    extends _$PrayerTimeStateCopyWithImpl<$Res, _$LocationInitialImpl>
-    implements _$$LocationInitialImplCopyWith<$Res> {
-  __$$LocationInitialImplCopyWithImpl(
-      _$LocationInitialImpl _value, $Res Function(_$LocationInitialImpl) _then)
+class __$$PrayerTimeInitialImplCopyWithImpl<$Res>
+    extends _$PrayerTimeStateCopyWithImpl<$Res, _$PrayerTimeInitialImpl>
+    implements _$$PrayerTimeInitialImplCopyWith<$Res> {
+  __$$PrayerTimeInitialImplCopyWithImpl(_$PrayerTimeInitialImpl _value,
+      $Res Function(_$PrayerTimeInitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$LocationInitialImpl implements LocationInitial {
-  const _$LocationInitialImpl();
+class _$PrayerTimeInitialImpl implements PrayerTimeInitial {
+  const _$PrayerTimeInitialImpl();
 
   @override
   String toString() {
@@ -124,7 +124,7 @@ class _$LocationInitialImpl implements LocationInitial {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LocationInitialImpl);
+        (other.runtimeType == runtimeType && other is _$PrayerTimeInitialImpl);
   }
 
   @override
@@ -135,7 +135,7 @@ class _$LocationInitialImpl implements LocationInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() permissionDenied,
+    required TResult Function(String message) permissionDenied,
     required TResult Function(Position location, PrayerTimes prayerTime)
         prayerTimesLoaded,
     required TResult Function(String message) error,
@@ -148,7 +148,7 @@ class _$LocationInitialImpl implements LocationInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? permissionDenied,
+    TResult? Function(String message)? permissionDenied,
     TResult? Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult? Function(String message)? error,
@@ -161,7 +161,7 @@ class _$LocationInitialImpl implements LocationInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? permissionDenied,
+    TResult Function(String message)? permissionDenied,
     TResult Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult Function(String message)? error,
@@ -176,7 +176,7 @@ class _$LocationInitialImpl implements LocationInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LocationInitial value) initial,
+    required TResult Function(PrayerTimeInitial value) initial,
     required TResult Function(PrayerTimeLoading value) loading,
     required TResult Function(LocationPermissionDenied value) permissionDenied,
     required TResult Function(LocationLoaded value) prayerTimesLoaded,
@@ -188,7 +188,7 @@ class _$LocationInitialImpl implements LocationInitial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LocationInitial value)? initial,
+    TResult? Function(PrayerTimeInitial value)? initial,
     TResult? Function(PrayerTimeLoading value)? loading,
     TResult? Function(LocationPermissionDenied value)? permissionDenied,
     TResult? Function(LocationLoaded value)? prayerTimesLoaded,
@@ -200,7 +200,7 @@ class _$LocationInitialImpl implements LocationInitial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LocationInitial value)? initial,
+    TResult Function(PrayerTimeInitial value)? initial,
     TResult Function(PrayerTimeLoading value)? loading,
     TResult Function(LocationPermissionDenied value)? permissionDenied,
     TResult Function(LocationLoaded value)? prayerTimesLoaded,
@@ -214,8 +214,8 @@ class _$LocationInitialImpl implements LocationInitial {
   }
 }
 
-abstract class LocationInitial implements PrayerTimeState {
-  const factory LocationInitial() = _$LocationInitialImpl;
+abstract class PrayerTimeInitial implements PrayerTimeState {
+  const factory PrayerTimeInitial() = _$PrayerTimeInitialImpl;
 }
 
 /// @nodoc
@@ -258,7 +258,7 @@ class _$PrayerTimeLoadingImpl implements PrayerTimeLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() permissionDenied,
+    required TResult Function(String message) permissionDenied,
     required TResult Function(Position location, PrayerTimes prayerTime)
         prayerTimesLoaded,
     required TResult Function(String message) error,
@@ -271,7 +271,7 @@ class _$PrayerTimeLoadingImpl implements PrayerTimeLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? permissionDenied,
+    TResult? Function(String message)? permissionDenied,
     TResult? Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult? Function(String message)? error,
@@ -284,7 +284,7 @@ class _$PrayerTimeLoadingImpl implements PrayerTimeLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? permissionDenied,
+    TResult Function(String message)? permissionDenied,
     TResult Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult Function(String message)? error,
@@ -299,7 +299,7 @@ class _$PrayerTimeLoadingImpl implements PrayerTimeLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LocationInitial value) initial,
+    required TResult Function(PrayerTimeInitial value) initial,
     required TResult Function(PrayerTimeLoading value) loading,
     required TResult Function(LocationPermissionDenied value) permissionDenied,
     required TResult Function(LocationLoaded value) prayerTimesLoaded,
@@ -311,7 +311,7 @@ class _$PrayerTimeLoadingImpl implements PrayerTimeLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LocationInitial value)? initial,
+    TResult? Function(PrayerTimeInitial value)? initial,
     TResult? Function(PrayerTimeLoading value)? loading,
     TResult? Function(LocationPermissionDenied value)? permissionDenied,
     TResult? Function(LocationLoaded value)? prayerTimesLoaded,
@@ -323,7 +323,7 @@ class _$PrayerTimeLoadingImpl implements PrayerTimeLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LocationInitial value)? initial,
+    TResult Function(PrayerTimeInitial value)? initial,
     TResult Function(PrayerTimeLoading value)? loading,
     TResult Function(LocationPermissionDenied value)? permissionDenied,
     TResult Function(LocationLoaded value)? prayerTimesLoaded,
@@ -347,6 +347,8 @@ abstract class _$$LocationPermissionDeniedImplCopyWith<$Res> {
           _$LocationPermissionDeniedImpl value,
           $Res Function(_$LocationPermissionDeniedImpl) then) =
       __$$LocationPermissionDeniedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -357,39 +359,63 @@ class __$$LocationPermissionDeniedImplCopyWithImpl<$Res>
       _$LocationPermissionDeniedImpl _value,
       $Res Function(_$LocationPermissionDeniedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$LocationPermissionDeniedImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$LocationPermissionDeniedImpl implements LocationPermissionDenied {
-  const _$LocationPermissionDeniedImpl();
+  const _$LocationPermissionDeniedImpl(this.message);
+
+  @override
+  final String message;
 
   @override
   String toString() {
-    return 'PrayerTimeState.permissionDenied()';
+    return 'PrayerTimeState.permissionDenied(message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LocationPermissionDeniedImpl);
+            other is _$LocationPermissionDeniedImpl &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LocationPermissionDeniedImplCopyWith<_$LocationPermissionDeniedImpl>
+      get copyWith => __$$LocationPermissionDeniedImplCopyWithImpl<
+          _$LocationPermissionDeniedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() permissionDenied,
+    required TResult Function(String message) permissionDenied,
     required TResult Function(Position location, PrayerTimes prayerTime)
         prayerTimesLoaded,
     required TResult Function(String message) error,
   }) {
-    return permissionDenied();
+    return permissionDenied(message);
   }
 
   @override
@@ -397,12 +423,12 @@ class _$LocationPermissionDeniedImpl implements LocationPermissionDenied {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? permissionDenied,
+    TResult? Function(String message)? permissionDenied,
     TResult? Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult? Function(String message)? error,
   }) {
-    return permissionDenied?.call();
+    return permissionDenied?.call(message);
   }
 
   @override
@@ -410,14 +436,14 @@ class _$LocationPermissionDeniedImpl implements LocationPermissionDenied {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? permissionDenied,
+    TResult Function(String message)? permissionDenied,
     TResult Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (permissionDenied != null) {
-      return permissionDenied();
+      return permissionDenied(message);
     }
     return orElse();
   }
@@ -425,7 +451,7 @@ class _$LocationPermissionDeniedImpl implements LocationPermissionDenied {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LocationInitial value) initial,
+    required TResult Function(PrayerTimeInitial value) initial,
     required TResult Function(PrayerTimeLoading value) loading,
     required TResult Function(LocationPermissionDenied value) permissionDenied,
     required TResult Function(LocationLoaded value) prayerTimesLoaded,
@@ -437,7 +463,7 @@ class _$LocationPermissionDeniedImpl implements LocationPermissionDenied {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LocationInitial value)? initial,
+    TResult? Function(PrayerTimeInitial value)? initial,
     TResult? Function(PrayerTimeLoading value)? loading,
     TResult? Function(LocationPermissionDenied value)? permissionDenied,
     TResult? Function(LocationLoaded value)? prayerTimesLoaded,
@@ -449,7 +475,7 @@ class _$LocationPermissionDeniedImpl implements LocationPermissionDenied {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LocationInitial value)? initial,
+    TResult Function(PrayerTimeInitial value)? initial,
     TResult Function(PrayerTimeLoading value)? loading,
     TResult Function(LocationPermissionDenied value)? permissionDenied,
     TResult Function(LocationLoaded value)? prayerTimesLoaded,
@@ -464,7 +490,13 @@ class _$LocationPermissionDeniedImpl implements LocationPermissionDenied {
 }
 
 abstract class LocationPermissionDenied implements PrayerTimeState {
-  const factory LocationPermissionDenied() = _$LocationPermissionDeniedImpl;
+  const factory LocationPermissionDenied(final String message) =
+      _$LocationPermissionDeniedImpl;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$LocationPermissionDeniedImplCopyWith<_$LocationPermissionDeniedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -544,7 +576,7 @@ class _$LocationLoadedImpl implements LocationLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() permissionDenied,
+    required TResult Function(String message) permissionDenied,
     required TResult Function(Position location, PrayerTimes prayerTime)
         prayerTimesLoaded,
     required TResult Function(String message) error,
@@ -557,7 +589,7 @@ class _$LocationLoadedImpl implements LocationLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? permissionDenied,
+    TResult? Function(String message)? permissionDenied,
     TResult? Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult? Function(String message)? error,
@@ -570,7 +602,7 @@ class _$LocationLoadedImpl implements LocationLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? permissionDenied,
+    TResult Function(String message)? permissionDenied,
     TResult Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult Function(String message)? error,
@@ -585,7 +617,7 @@ class _$LocationLoadedImpl implements LocationLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LocationInitial value) initial,
+    required TResult Function(PrayerTimeInitial value) initial,
     required TResult Function(PrayerTimeLoading value) loading,
     required TResult Function(LocationPermissionDenied value) permissionDenied,
     required TResult Function(LocationLoaded value) prayerTimesLoaded,
@@ -597,7 +629,7 @@ class _$LocationLoadedImpl implements LocationLoaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LocationInitial value)? initial,
+    TResult? Function(PrayerTimeInitial value)? initial,
     TResult? Function(PrayerTimeLoading value)? loading,
     TResult? Function(LocationPermissionDenied value)? permissionDenied,
     TResult? Function(LocationLoaded value)? prayerTimesLoaded,
@@ -609,7 +641,7 @@ class _$LocationLoadedImpl implements LocationLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LocationInitial value)? initial,
+    TResult Function(PrayerTimeInitial value)? initial,
     TResult Function(PrayerTimeLoading value)? loading,
     TResult Function(LocationPermissionDenied value)? permissionDenied,
     TResult Function(LocationLoaded value)? prayerTimesLoaded,
@@ -701,7 +733,7 @@ class _$LocationErrorImpl implements LocationError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() permissionDenied,
+    required TResult Function(String message) permissionDenied,
     required TResult Function(Position location, PrayerTimes prayerTime)
         prayerTimesLoaded,
     required TResult Function(String message) error,
@@ -714,7 +746,7 @@ class _$LocationErrorImpl implements LocationError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? permissionDenied,
+    TResult? Function(String message)? permissionDenied,
     TResult? Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult? Function(String message)? error,
@@ -727,7 +759,7 @@ class _$LocationErrorImpl implements LocationError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? permissionDenied,
+    TResult Function(String message)? permissionDenied,
     TResult Function(Position location, PrayerTimes prayerTime)?
         prayerTimesLoaded,
     TResult Function(String message)? error,
@@ -742,7 +774,7 @@ class _$LocationErrorImpl implements LocationError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LocationInitial value) initial,
+    required TResult Function(PrayerTimeInitial value) initial,
     required TResult Function(PrayerTimeLoading value) loading,
     required TResult Function(LocationPermissionDenied value) permissionDenied,
     required TResult Function(LocationLoaded value) prayerTimesLoaded,
@@ -754,7 +786,7 @@ class _$LocationErrorImpl implements LocationError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LocationInitial value)? initial,
+    TResult? Function(PrayerTimeInitial value)? initial,
     TResult? Function(PrayerTimeLoading value)? loading,
     TResult? Function(LocationPermissionDenied value)? permissionDenied,
     TResult? Function(LocationLoaded value)? prayerTimesLoaded,
@@ -766,7 +798,7 @@ class _$LocationErrorImpl implements LocationError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LocationInitial value)? initial,
+    TResult Function(PrayerTimeInitial value)? initial,
     TResult Function(PrayerTimeLoading value)? loading,
     TResult Function(LocationPermissionDenied value)? permissionDenied,
     TResult Function(LocationLoaded value)? prayerTimesLoaded,

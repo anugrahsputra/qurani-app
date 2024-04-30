@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,45 +31,45 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomepageState extends State<Homepage>
+    with SingleTickerProviderStateMixin {
   final SurahBloc surahBloc = sl<SurahBloc>();
   final AyahsBloc ayahsBloc = sl<AyahsBloc>();
-  final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
   final AppbarBloc appbarBloc = sl<AppbarBloc>();
+  final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
   final AppNavigator appNavigator = sl<AppNavigator>();
   final ScrollController controller = ScrollController();
+
+  late TabController tabController;
+
+  String? message;
 
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      prayerTimeCubit.getLoc();
-      surahBloc.add(const OnGetSurah());
-      ayahsBloc.add(const OnGetRandomAyah());
-    });
     controller.addListener(() {
       if (BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
-          controller.offset < 200) {
+          controller.offset < 0.2.sh) {
         BlocProvider.of<AppbarBloc>(context).add(
           const ToggleDisplay(),
         );
       } else if (!BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
-          controller.offset > 200) {
+          controller.offset > 0.2.sh) {
         BlocProvider.of<AppbarBloc>(context).add(
           const ToggleDisplay(),
         );
       }
     });
+    tabController = TabController(length: 2, vsync: this);
+    Future.microtask(() {
+      prayerTimeCubit.getLoc();
+      surahBloc.add(const OnGetSurah());
+      ayahsBloc.add(const OnGetRandomAyah());
+    });
   }
 
   Future<void> pullToRefresh() async {
-    prayerTimeCubit.getLoc();
     surahBloc.add(const OnGetSurah());
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
   }
 
   @override
@@ -102,7 +104,8 @@ class _HomepageState extends State<Homepage> {
           BlocListener<PrayerTimeCubit, PrayerTimeState>(
             listener: (context, state) {
               if (state is LocationPermissionDenied) {
-                AppSnackbar.showError(context, 'Location permission denied');
+                message = state.message;
+                AppSnackbar.showError(context, message ?? state.message);
               }
               if (state is LocationError) {
                 AppSnackbar.showError(context, state.message);
@@ -111,15 +114,27 @@ class _HomepageState extends State<Homepage> {
           ),
         ],
         child: AppScaffold(
-          body: RefreshIndicator(
-            onRefresh: pullToRefresh,
-            child: CustomScrollView(
-              controller: controller,
-              slivers: [
-                const HomeAppbar(),
-                SurahCards(),
-              ],
-            ),
+          body: BlocBuilder<AppbarBloc, AppbarState>(
+            builder: (context, state) {
+              return Stack(
+                children: [
+                  CustomScrollView(
+                    controller: controller,
+                    slivers: [
+                      HomeAppbar(
+                        tabController: tabController,
+                        appNavigator: appNavigator,
+                      ),
+                      SurahCards(),
+                    ],
+                  ),
+                  FloatingMenu(
+                    appNavigator: appNavigator,
+                    isScrolled: state.displayAppbar,
+                  )
+                ],
+              );
+            },
           ),
         ),
       ),

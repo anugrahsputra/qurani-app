@@ -10,6 +10,7 @@ _$BookmarkTableImpl _$$BookmarkTableImplFromJson(Map<String, dynamic> json) =>
     _$BookmarkTableImpl(
       id: json['id'] as int,
       inSurah: json['inSurah'] as int,
+      surahNumber: json['surahNumber'] as int,
       surahName: json['surahName'] as String,
       textArab: json['textArab'] as String,
       textTranslate: json['textTranslate'] as String,
@@ -20,6 +21,7 @@ Map<String, dynamic> _$$BookmarkTableImplToJson(_$BookmarkTableImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'inSurah': instance.inSurah,
+      'surahNumber': instance.surahNumber,
       'surahName': instance.surahName,
       'textArab': instance.textArab,
       'textTranslate': instance.textTranslate,

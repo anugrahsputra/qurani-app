@@ -5,11 +5,12 @@ part 'bookmark.freezed.dart';
 @freezed
 abstract class Bookmark with _$Bookmark {
   const factory Bookmark({
-    required int id,
-    required int inSurah,
-    required String surahName,
-    required String textArab,
-    required String textTranslate,
-    required String textTransliteration,
+    required int? id,
+    required int? inSurah,
+    required int? surahNumber,
+    required String? surahName,
+    required String? textArab,
+    required String? textTranslate,
+    required String? textTransliteration,
   }) = _Bookmark;
 }

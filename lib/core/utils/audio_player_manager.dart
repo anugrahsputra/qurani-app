@@ -7,7 +7,7 @@ abstract class AudioPlayerManager {
   void stopAll();
 }
 
-class AudioPlayerManagerImpl implements AudioPlayerManager {
+class AudioPlayerManagerImpl extends AudioPlayerManager {
   final Map<String?, AudioPlayer> audioPlayers;
 
   final Logger log = Logger('AudioPlayerManager');
@@ -18,7 +18,6 @@ class AudioPlayerManagerImpl implements AudioPlayerManager {
   void stopAll() {
     audioPlayers.forEach((key, player) {
       player.stop();
-      log.info('Stopping audio player for verse $key');
     });
   }
 
@@ -27,7 +26,6 @@ class AudioPlayerManagerImpl implements AudioPlayerManager {
     audioPlayers.forEach((key, player) {
       if (key != verseNumber) {
         player.stop();
-        log.info('Stopping all audio except for verse $key');
       }
     });
   }

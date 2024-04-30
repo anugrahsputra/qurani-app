@@ -40,7 +40,7 @@ class _AppScaffoldState extends State<AppScaffold> {
       drawerScrimColor: widget.drawerScrimColor,
       drawerEdgeDragWidth: widget.drawerEdgeDragWidth,
       onDrawerChanged: widget.onDrawerChanged,
-      backgroundColor: AppColors.background,
+      backgroundColor: widget.backgroundColor ?? AppColors.background,
       body: widget.body,
       resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
       extendBodyBehindAppBar: widget.extendBodyBehindAppBar,

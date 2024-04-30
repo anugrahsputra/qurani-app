@@ -34,6 +34,7 @@ class DatabaseHelper {
           CREATE TABLE $_verseTableName(
             id INTEGER PRIMARY KEY,
             inSurah INTEGER,
+            surahNumber INTEGER,
             surahName TEXT,
             textArab TEXT,
             textTranslate TEXT,

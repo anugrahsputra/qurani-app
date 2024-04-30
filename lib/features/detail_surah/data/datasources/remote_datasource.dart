@@ -16,6 +16,7 @@ class DetailSurahRemoteDataSourceImpl implements DetailSurahRemoteDataSource {
     final response = await dioClient.get('${Endpoint.surah}/$surahNumber');
     final parsedData =
         response.data is String ? Parser.getMap(response.data) : response.data;
+
     return SurahDetailResModel.fromJson(parsedData);
   }
 

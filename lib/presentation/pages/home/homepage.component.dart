@@ -1,8 +1,11 @@
 part of 'homepage.dart';
 
 class HomeAppbar extends StatelessWidget {
-  const HomeAppbar({super.key});
+  const HomeAppbar(
+      {super.key, required this.tabController, required this.appNavigator});
 
+  final TabController tabController;
+  final AppNavigator appNavigator;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AppbarBloc, AppbarState>(
@@ -11,50 +14,80 @@ class HomeAppbar extends StatelessWidget {
           backgroundColor: AppColors.primaryContainer,
           systemOverlayStyle: Theme.of(context).appBarTheme.systemOverlayStyle,
           centerTitle: false,
-          title: AnimatedSwitcher(
+          actions: [
+            WidgetSwitcher(
+              isWidgetSwitched: state.displayAppbar,
+              switchWidget1: IconButton(
+                tooltip: 'Halaman Bookmark',
+                iconSize: 25,
+                icon: const Icon(Icons.bookmark),
+                color: AppColors.onPrimary,
+                onPressed: () => appNavigator.goToBookmarks(context),
+              ),
+              switchWidget2: const SizedBox.shrink(),
+            ),
+            WidgetSwitcher(
+              isWidgetSwitched: state.displayAppbar,
+              switchWidget1: IconButton(
+                tooltip: 'Halaman Pencarian',
+                iconSize: 25,
+                icon: const Icon(Icons.search_rounded),
+                color: AppColors.onPrimary,
+                onPressed: () => appNavigator.goToSearch(context),
+              ),
+              switchWidget2: const SizedBox.shrink(),
+            ),
+          ],
+          title: WidgetSwitcher(
             duration: const Duration(milliseconds: 500),
             switchInCurve: Curves.easeInOut,
             switchOutCurve: Curves.easeInOut,
             reverseDuration: Duration.zero,
-            child: state.displayAppbar
-                ? Text(
-                    'Quranee',
-                    style: TextStyle(
-                      color: AppColors.onPrimary,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  )
-                : const SizedBox.shrink(),
+            isWidgetSwitched: state.displayAppbar,
+            switchWidget1: Text(
+              'Quraani',
+              style: GoogleFonts.poppins(
+                color: AppColors.onPrimary,
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            switchWidget2: const SizedBox.shrink(),
           ),
           toolbarHeight: 50,
-          collapsedHeight: 50,
-          expandedHeight: 300,
+          collapsedHeight: 100.h,
+          expandedHeight: 0.42.sh,
           elevation: 0,
           pinned: true,
           floating: false,
           snap: false,
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(24),
+            preferredSize: Size.fromHeight(25.h),
             child: Container(
-              width: double.infinity,
+              width: double.infinity.w,
+              padding: EdgeInsets.symmetric(vertical: 15.h),
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(30.r),
                 ),
                 color: AppColors.background,
               ),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Container(
-                      width: 40,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
+                  Container(
+                    width: 0.2.sw,
+                    height: 4.h,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                  ),
+                  const Gap(10),
+                  const Text(
+                    'Daftar Surat',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ],
@@ -82,9 +115,26 @@ class DisplayBanner extends StatefulWidget {
 
 class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
   final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
+  final TimeStream _timeStream = sl<TimeStream>();
+
   final Logger _log = Logger('DisplayBanner');
 
   String address = '';
+  String _currentTimeString = '';
+  late tz.TZDateTime _currentTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _timeStream.stream.listen((time) {
+      final timezone = tz.getLocation('Asia/Jakarta');
+      final currentTime = tz.TZDateTime.from(time, timezone);
+      setState(() {
+        _currentTime = currentTime;
+        _currentTimeString = dt.DateFormat('HH:mm').format(_currentTime);
+      });
+    });
+  }
 
   Future<String> getAddress(double lat, double lng) async {
     try {
@@ -95,9 +145,11 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
       return address;
     } on PlatformException catch (e) {
       if (e.code == 'IO_ERROR' && e.message == 'Service not Available') {
-        _log.warning(
-            'Failed to get address: Location services are not available or disabled.');
-        return 'Tidak dapat mengakses lokasi. Pastikan layanan lokasi diaktifkan.';
+        /// commented out because it's so f-ing finicky
+        // _log.warning(
+        //     'Failed to get address: Location services are not available or disabled.');
+
+        return 'Terjadi Kesalahan';
       } else {
         _log.warning('Failed to get address: ${e.message}');
         return 'Gagal mendapatkan lokasi';
@@ -109,18 +161,22 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
   }
 
   @override
+  void dispose() {
+    _timeStream.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<PrayerTimeCubit, PrayerTimeState>(
       builder: (context, state) {
-        if (state is LocationInitial || state is PrayerTimeLoading) {
+        if (state is PrayerTimeInitial || state is PrayerTimeLoading) {
           return _bannerLoading();
         } else if (state is LocationPermissionDenied) {
           return const SizedBox.shrink();
         } else if (state is LocationLoaded) {
           PrayerTimes prayerTime = state.prayerTime;
-          prayerTimeCubit
-              .getAddressFromCoordinates(
-                  state.location.latitude, state.location.longitude)
+          getAddress(state.location.latitude, state.location.longitude)
               .then((value) => setState(() {
                     address = value;
                   }));
@@ -137,10 +193,7 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
     PrayerTimes prayerTime,
     String? address,
   ) {
-    var timezone = tz.getLocation('Asia/Jakarta');
-    var currentTime = tz.TZDateTime.now(timezone);
-    String currentTimeString = dt.DateFormat('HH:mm:ss').format(currentTime);
-    final time = getCurrentPrayerTimeMap(currentTime, prayerTime);
+    final time = getCurrentPrayerTimeMap(_currentTime, prayerTime);
     final currentPrayerTime = time['current'];
     final imagePath = getImagePath(currentPrayerTime);
     return Stack(
@@ -150,26 +203,37 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
           switchInCurve: Curves.easeInOut,
           switchOutCurve: Curves.easeInOut,
           reverseDuration: Duration.zero,
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: AppColors.primaryContainer.withOpacity(0.8),
+              ),
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
+                width: double.infinity.w,
+                height: double.infinity.h,
+              ),
+            ),
           ),
         ),
         Positioned(
-          top: 40,
-          left: 15,
-          right: 15,
+          top: 0.06.sh,
+          left: 0.015.sh,
+          right: 0.015.sh,
           child: Column(
             children: [
               BannerWidget(
-                currentTimeString: currentTimeString,
+                currentTimeString: _currentTimeString,
                 currentPrayerTime: currentPrayerTime,
                 address: address!,
+                textColor: getTextColor(currentPrayerTime),
               ),
               const Gap(20),
-              const PrayerSchedule(),
+              PrayerSchedule(currentTime: _currentTimeString),
             ],
           ),
         ),
@@ -185,19 +249,19 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
           width: double.infinity,
           height: double.infinity,
         ),
-        const Positioned(
-          top: 40,
-          left: 15,
-          right: 15,
+        Positioned(
+          top: 0.04.sh,
+          left: 0.015.sh,
+          right: 0.015.sh,
           child: Column(
             children: [
               BannerWidget(
-                currentTimeString: 'Loading...',
+                currentTimeString: _currentTimeString,
                 currentPrayerTime: 'Loading...',
                 address: 'Loading...',
               ),
-              Gap(20),
-              PrayerSchedule(),
+              const Gap(20),
+              PrayerSchedule(currentTime: _currentTimeString),
             ],
           ),
         ),
@@ -220,7 +284,12 @@ class BuildDates extends StatelessWidget with PrayerTimeMixin {
     final now = tz.TZDateTime.now(location);
 
     final textColor = getTextColor(prayerTimes);
-    var hijriCalendar = hijri.HijriCalendar.fromDate(now);
+
+    /// Subtract 1 day from the current date
+    final adjustedNow = now.subtract(const Duration(days: 1));
+
+    /// The Hijri calendar is offset by 1 day, so we need to subtract 1 day
+    var hijriCalendar = hijri.HijriCalendar.fromDate(adjustedNow);
     String formattedHijriDate =
         '${hijriCalendar.hDay} ${hijriCalendar.longMonthName} ${hijriCalendar.hYear} AH';
 
@@ -234,7 +303,7 @@ class BuildDates extends StatelessWidget with PrayerTimeMixin {
         Text(
           formattedGregorianDate,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 16.sp,
             color: textColor,
             fontWeight: FontWeight.w600,
           ),
@@ -242,7 +311,7 @@ class BuildDates extends StatelessWidget with PrayerTimeMixin {
         Text(
           formattedHijriDate,
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 14.sp,
             color: textColor,
             fontWeight: FontWeight.w400,
           ),
@@ -252,88 +321,56 @@ class BuildDates extends StatelessWidget with PrayerTimeMixin {
   }
 }
 
-class PrayerSchedule extends StatefulWidget {
-  const PrayerSchedule({super.key});
+class PrayerSchedule extends StatelessWidget with PrayerTimeMixin {
+  const PrayerSchedule({
+    super.key,
+    required this.currentTime,
+  });
 
-  @override
-  State<PrayerSchedule> createState() => _PrayerScheduleState();
-}
-
-class _PrayerScheduleState extends State<PrayerSchedule> with PrayerTimeMixin {
-  final _timeStream = sl<TimeStream>();
-  String _currentTime = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _timeStream.stream.listen((time) {
-      final timezone = tz.getLocation('Asia/Jakarta');
-      final currentTime = tz.TZDateTime.from(time, timezone);
-      setState(() {
-        _currentTime = dt.DateFormat('HH:mm').format(currentTime);
-      });
-    });
-    // _startTimer();
-  }
-
-  @override
-  void dispose() {
-    _timeStream.dispose();
-    super.dispose();
-  }
+  final String currentTime;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PrayerTimeCubit, PrayerTimeState>(
       builder: (context, state) {
-        return state.when(
-          initial: () {
-            return const PrayerScheduleLoading().redacted(
-              context: context,
-              redact: true,
-            );
-          },
-          loading: () {
-            return const PrayerScheduleLoading().redacted(
-              context: context,
-              redact: true,
-            );
-          },
-          permissionDenied: () {
-            return const PrayerScheduleLoading().redacted(
-              context: context,
-              redact: true,
-            );
-          },
-          error: (message) {
-            return const PrayerScheduleLoading().redacted(
-              context: context,
-              redact: true,
-            );
-          },
-          prayerTimesLoaded: (location, prayerTime) {
-            final now = DateTime.now();
-            final highlightedPrayerTime = getCurrentPrayerTimeMap(
-              now,
-              prayerTime,
-            );
-            String next = highlightedPrayerTime['next'];
-            final timeRemaining = highlightedPrayerTime['remainingTime'];
-            Color titleColor = getTextColor(_currentTime);
-            final prayerTimes = getPrayerSchedule(prayerTime);
-            final prayerTimeIcon = getPrayerIcon(prayerTime);
+        if ((state is PrayerTimeInitial) && (state is PrayerTimeLoading)) {
+          return const PrayerScheduleLoading().redacted(
+            context: context,
+            redact: true,
+          );
+        } else if (state is LocationPermissionDenied) {
+          return const PrayerScheduleLoading().redacted(
+            context: context,
+            redact: true,
+          );
+        } else if (state is LocationLoaded) {
+          var prayerTime = state.prayerTime;
+          final now = DateTime.now();
+          final highlightedPrayerTime = getCurrentPrayerTimeMap(
+            now,
+            prayerTime,
+          );
+          String next = highlightedPrayerTime['next'];
+          final timeRemaining = highlightedPrayerTime['remainingTime'];
+          Color titleColor = getTextColor(currentTime);
+          final prayerTimes = getPrayerSchedule(prayerTime);
+          final prayerTimeIcon = getPrayerIcon(prayerTime);
 
-            String text = 'Shalat $next ${formatDuration(timeRemaining)}';
+          String text = 'Shalat $next ${formatDuration(timeRemaining)}';
 
-            return PrayerScheduleWidget(
-              text: text,
-              color: titleColor,
-              prayerTimes: prayerTimes,
-              prayerTimeIcon: prayerTimeIcon,
-              highlightedPrayerTime: highlightedPrayerTime,
-            );
-          },
-        );
+          return PrayerScheduleWidget(
+            text: text,
+            color: titleColor,
+            prayerTimes: prayerTimes,
+            prayerTimeIcon: prayerTimeIcon,
+            highlightedPrayerTime: highlightedPrayerTime,
+          );
+        } else {
+          return const PrayerScheduleLoading().redacted(
+            context: context,
+            redact: true,
+          );
+        }
       },
     );
   }
@@ -368,11 +405,11 @@ class SurahCards extends StatelessWidget {
             itemCount: 10,
             itemBuilder: (context, index) {
               return Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 10,
+                margin: EdgeInsets.symmetric(
+                  horizontal: 1.sw,
+                  vertical: 1.sh,
                 ),
-                height: 75,
+                height: 75.sh,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -409,9 +446,9 @@ class CardView extends StatelessWidget {
     String name = surah?.name.transliteration.id ?? 'unknown';
 
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 10,
+      margin: EdgeInsets.symmetric(
+        horizontal: 10.w,
+        vertical: 10.h,
       ),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -430,13 +467,13 @@ class CardView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            height: 40,
+            height: 40.h,
             child: Center(
               child: Text(
                 '﴾$surahNumber﴿',
                 style: GoogleFonts.amiriQuran(
                   fontWeight: FontWeight.w500,
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   color: Colors.black,
                 ),
                 textAlign: TextAlign.center,
@@ -449,14 +486,18 @@ class CardView extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                 ),
               ),
-              const Gap(5),
+              Gap(5.h),
               Text(
                 '$revelationType - $numberOfVerses ayat',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Colors.grey,
+                ),
               )
             ],
           ),
@@ -464,7 +505,7 @@ class CardView extends StatelessWidget {
           Text(
             translation,
             style: GoogleFonts.notoSansArabic(
-              fontSize: 16,
+              fontSize: 16.sp,
               fontWeight: FontWeight.w500,
             ),
           ),

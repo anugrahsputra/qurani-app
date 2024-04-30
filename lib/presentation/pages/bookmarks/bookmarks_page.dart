@@ -8,6 +8,8 @@ import '../../../features/bookmark/bookmark.dart';
 import '../../../injection.dart';
 import '../../presentation.dart';
 
+part 'bookmark_page.component.dart';
+
 class BookmarksPage extends StatefulWidget {
   const BookmarksPage({super.key});
 
@@ -17,6 +19,7 @@ class BookmarksPage extends StatefulWidget {
 
 class _BookmarksPageState extends State<BookmarksPage> {
   final BookmarkBloc bookmarkBloc = sl<BookmarkBloc>();
+  final AppNavigator appNavigator = sl<AppNavigator>();
 
   @override
   void initState() {
@@ -34,12 +37,17 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ],
       child: AppScaffold(
         appBar: AppBar(
-          title: const Text('Bookmarks'),
+          title: Text(
+            'Bookmarks',
+            style: GoogleFonts.poppins(),
+          ),
+          backgroundColor: AppColors.primaryContainer,
         ),
         body: BlocBuilder<BookmarkBloc, BookmarkState>(
           builder: (ctx, state) {
             if (state is BookmarkInitial) {
-              return const Center(child: Text('You haven\'t add any bookmark'));
+              return const Center(
+                  child: Text('Anda belum menambahkan bookmark'));
             } else if (state is BookmarkLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is BookmarkLoaded) {
@@ -49,129 +57,19 @@ class _BookmarksPageState extends State<BookmarksPage> {
                 itemCount: data.length,
                 itemBuilder: (ctx, i) {
                   Bookmark bookmark = data[i];
-                  return BookmarkCard(bookmark: bookmark);
+                  return BookmarkCard(
+                    bookmark: bookmark,
+                    appNavigator: appNavigator,
+                  );
                 },
               );
             } else {
-              return const Center(
-                  child: Text('if this the one then something is wrong'));
+              return Center(
+                child: Text('Terjadi kesalahan.', style: GoogleFonts.poppins()),
+              );
             }
           },
         ),
-      ),
-    );
-  }
-}
-
-class BookmarkCard extends StatelessWidget {
-  const BookmarkCard({
-    super.key,
-    required this.bookmark,
-  });
-
-  final Bookmark bookmark;
-
-  @override
-  Widget build(BuildContext context) {
-    String title = 'Surat ${bookmark.surahName}, ayat ${bookmark.inSurah}';
-
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 10,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.onPrimary,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadow.withOpacity(0.15),
-            offset: const Offset(8, 8),
-            blurRadius: 14,
-            spreadRadius: -8,
-          )
-        ],
-      ),
-      child: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: AppColors.primaryContainer,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    // TODO: go to surah
-                  },
-                  child: const Icon(
-                    Icons.chevron_right_rounded,
-                    size: 18,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Gap(15),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                bookmark.textArab,
-                style: GoogleFonts.amiri(
-                  height: 2,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                  color: Colors.black,
-                ),
-                textDirection: TextDirection.rtl,
-                textAlign: TextAlign.start,
-              ),
-            ),
-          ),
-          const Gap(10),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                bookmark.textTransliteration,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-          const Gap(5),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                bookmark.textTranslate,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                  color: Colors.black,
-                ),
-              ),
-            ),
-          ),
-          const Gap(10),
-        ],
       ),
     );
   }

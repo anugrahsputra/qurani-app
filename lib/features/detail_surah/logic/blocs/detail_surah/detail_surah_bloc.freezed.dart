@@ -20,32 +20,38 @@ mixin _$DetailSurahEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int surahNumber) onGetDetail,
+    required TResult Function(int surahNumber) onGetSurahAudio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int surahNumber)? onGetDetail,
+    TResult? Function(int surahNumber)? onGetSurahAudio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int surahNumber)? onGetDetail,
+    TResult Function(int surahNumber)? onGetSurahAudio,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(OnGetDetail value) onGetDetail,
+    required TResult Function(OnGetSurahAudio value) onGetSurahAudio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(OnGetDetail value)? onGetDetail,
+    TResult? Function(OnGetSurahAudio value)? onGetSurahAudio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OnGetDetail value)? onGetDetail,
+    TResult Function(OnGetSurahAudio value)? onGetSurahAudio,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,6 +162,7 @@ class _$OnGetDetailImpl implements OnGetDetail {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int surahNumber) onGetDetail,
+    required TResult Function(int surahNumber) onGetSurahAudio,
   }) {
     return onGetDetail(surahNumber);
   }
@@ -164,6 +171,7 @@ class _$OnGetDetailImpl implements OnGetDetail {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int surahNumber)? onGetDetail,
+    TResult? Function(int surahNumber)? onGetSurahAudio,
   }) {
     return onGetDetail?.call(surahNumber);
   }
@@ -172,6 +180,7 @@ class _$OnGetDetailImpl implements OnGetDetail {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int surahNumber)? onGetDetail,
+    TResult Function(int surahNumber)? onGetSurahAudio,
     required TResult orElse(),
   }) {
     if (onGetDetail != null) {
@@ -184,6 +193,7 @@ class _$OnGetDetailImpl implements OnGetDetail {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(OnGetDetail value) onGetDetail,
+    required TResult Function(OnGetSurahAudio value) onGetSurahAudio,
   }) {
     return onGetDetail(this);
   }
@@ -192,6 +202,7 @@ class _$OnGetDetailImpl implements OnGetDetail {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(OnGetDetail value)? onGetDetail,
+    TResult? Function(OnGetSurahAudio value)? onGetSurahAudio,
   }) {
     return onGetDetail?.call(this);
   }
@@ -200,6 +211,7 @@ class _$OnGetDetailImpl implements OnGetDetail {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OnGetDetail value)? onGetDetail,
+    TResult Function(OnGetSurahAudio value)? onGetSurahAudio,
     required TResult orElse(),
   }) {
     if (onGetDetail != null) {
@@ -217,6 +229,145 @@ abstract class OnGetDetail implements DetailSurahEvent {
   @override
   @JsonKey(ignore: true)
   _$$OnGetDetailImplCopyWith<_$OnGetDetailImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$OnGetSurahAudioImplCopyWith<$Res>
+    implements $DetailSurahEventCopyWith<$Res> {
+  factory _$$OnGetSurahAudioImplCopyWith(_$OnGetSurahAudioImpl value,
+          $Res Function(_$OnGetSurahAudioImpl) then) =
+      __$$OnGetSurahAudioImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({int surahNumber});
+}
+
+/// @nodoc
+class __$$OnGetSurahAudioImplCopyWithImpl<$Res>
+    extends _$DetailSurahEventCopyWithImpl<$Res, _$OnGetSurahAudioImpl>
+    implements _$$OnGetSurahAudioImplCopyWith<$Res> {
+  __$$OnGetSurahAudioImplCopyWithImpl(
+      _$OnGetSurahAudioImpl _value, $Res Function(_$OnGetSurahAudioImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? surahNumber = null,
+  }) {
+    return _then(_$OnGetSurahAudioImpl(
+      null == surahNumber
+          ? _value.surahNumber
+          : surahNumber // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnGetSurahAudioImpl implements OnGetSurahAudio {
+  const _$OnGetSurahAudioImpl(this.surahNumber);
+
+  @override
+  final int surahNumber;
+
+  @override
+  String toString() {
+    return 'DetailSurahEvent.onGetSurahAudio(surahNumber: $surahNumber)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnGetSurahAudioImpl &&
+            (identical(other.surahNumber, surahNumber) ||
+                other.surahNumber == surahNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, surahNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnGetSurahAudioImplCopyWith<_$OnGetSurahAudioImpl> get copyWith =>
+      __$$OnGetSurahAudioImplCopyWithImpl<_$OnGetSurahAudioImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int surahNumber) onGetDetail,
+    required TResult Function(int surahNumber) onGetSurahAudio,
+  }) {
+    return onGetSurahAudio(surahNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int surahNumber)? onGetDetail,
+    TResult? Function(int surahNumber)? onGetSurahAudio,
+  }) {
+    return onGetSurahAudio?.call(surahNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int surahNumber)? onGetDetail,
+    TResult Function(int surahNumber)? onGetSurahAudio,
+    required TResult orElse(),
+  }) {
+    if (onGetSurahAudio != null) {
+      return onGetSurahAudio(surahNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OnGetDetail value) onGetDetail,
+    required TResult Function(OnGetSurahAudio value) onGetSurahAudio,
+  }) {
+    return onGetSurahAudio(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OnGetDetail value)? onGetDetail,
+    TResult? Function(OnGetSurahAudio value)? onGetSurahAudio,
+  }) {
+    return onGetSurahAudio?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OnGetDetail value)? onGetDetail,
+    TResult Function(OnGetSurahAudio value)? onGetSurahAudio,
+    required TResult orElse(),
+  }) {
+    if (onGetSurahAudio != null) {
+      return onGetSurahAudio(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnGetSurahAudio implements DetailSurahEvent {
+  const factory OnGetSurahAudio(final int surahNumber) = _$OnGetSurahAudioImpl;
+
+  @override
+  int get surahNumber;
+  @override
+  @JsonKey(ignore: true)
+  _$$OnGetSurahAudioImplCopyWith<_$OnGetSurahAudioImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

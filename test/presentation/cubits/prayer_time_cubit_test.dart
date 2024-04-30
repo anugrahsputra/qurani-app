@@ -60,7 +60,8 @@ void main() {
       },
       act: (cubit) => cubit.getLoc(),
       expect: () => [
-        const LocationPermissionDenied(),
+        const PrayerTimeLoading(),
+        const LocationPermissionDenied('Location service is disabled'),
       ],
       verify: (bloc) {
         verify(mockUserLocation.isLocationServiceEnabled());
@@ -78,7 +79,8 @@ void main() {
       },
       act: (cubit) => cubit.getLoc(),
       expect: () => [
-        const LocationPermissionDenied(),
+        const PrayerTimeLoading(),
+        const LocationPermissionDenied('Location permission is denied'),
       ],
       verify: (bloc) {
         verifyInOrder([
@@ -101,7 +103,7 @@ void main() {
       act: (cubit) => cubit.getLoc(),
       expect: () => [
         const PrayerTimeLoading(),
-        const LocationPermissionDenied(),
+        const LocationPermissionDenied('Failed to get location'),
       ],
       verify: (bloc) {
         verifyInOrder([

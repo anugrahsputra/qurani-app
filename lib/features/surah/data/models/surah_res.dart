@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'models.dart';
+import '../../surah.dart';
 
 part 'surah_res.freezed.dart';
 part 'surah_res.g.dart';
@@ -9,10 +9,10 @@ part 'surah_res.g.dart';
 class SurahRes with _$SurahRes {
   @JsonSerializable(explicitToJson: true)
   const factory SurahRes({
-    @JsonKey(name: "code") @Default(0) int code,
-    @JsonKey(name: "status") @Default("") String status,
-    @JsonKey(name: "message") @Default("") String message,
-    @JsonKey(name: "data") @Default([]) List<Surah> data,
+    @JsonKey(name: "code") int? code,
+    @JsonKey(name: "status") String? status,
+    @JsonKey(name: "message") String? message,
+    @JsonKey(name: "data") List<Surah>? data,
   }) = _SurahRes;
 
   factory SurahRes.fromJson(Map<String, dynamic> json) =>

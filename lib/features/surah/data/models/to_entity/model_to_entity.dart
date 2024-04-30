@@ -3,12 +3,12 @@ import '../models.dart';
 
 extension SurahResModelX on SurahRes {
   SurahResEntity toEntity() {
-    final surah = data.map((e) => e.toEntity()).toList();
+    final surah = data?.map((e) => e.toEntity()).toList();
     return SurahResEntity(
-      code: code,
-      status: status,
-      message: message,
-      data: surah,
+      code: code!,
+      status: status!,
+      message: message!,
+      data: surah!,
     );
   }
 }
@@ -16,12 +16,12 @@ extension SurahResModelX on SurahRes {
 extension SurahModelX on Surah {
   SurahEntity toEntity() {
     return SurahEntity(
-      number: number,
-      sequence: sequence,
-      numberOfVerses: numberOfVerses,
-      name: name.toEntity(),
-      revelation: revelation.toEntity(),
-      tafsir: tafsir.toEntity(),
+      number: number!,
+      sequence: sequence!,
+      numberOfVerses: numberOfVerses!,
+      name: name!.toEntity(),
+      revelation: revelation!.toEntity(),
+      tafsir: tafsir!.toEntity(),
     );
   }
 }
@@ -29,10 +29,10 @@ extension SurahModelX on Surah {
 extension NameModelX on Name {
   NameEntity toEntity() {
     return NameEntity(
-      short: short,
-      long: long,
-      transliteration: transliteration.toEntity(),
-      translation: translation.toEntity(),
+      short: short!,
+      long: long!,
+      transliteration: transliteration!.toEntity(),
+      translation: translation!.toEntity(),
     );
   }
 }
@@ -40,8 +40,8 @@ extension NameModelX on Name {
 extension TranslationModelX on Translation {
   TranslationEntity toEntity() {
     return TranslationEntity(
-      en: en,
-      id: id,
+      en: en!,
+      id: id!,
     );
   }
 }
@@ -49,9 +49,9 @@ extension TranslationModelX on Translation {
 extension RevelationModelX on Revelation {
   RevelationEntity toEntity() {
     return RevelationEntity(
-      arab: arab,
-      en: en,
-      id: id,
+      arab: arab!,
+      en: en!,
+      id: id!,
     );
   }
 }
@@ -59,7 +59,7 @@ extension RevelationModelX on Revelation {
 extension TafsirModelX on Tafsir {
   TafsirEntity toEntity() {
     return TafsirEntity(
-      id: id,
+      id: id!,
     );
   }
 }

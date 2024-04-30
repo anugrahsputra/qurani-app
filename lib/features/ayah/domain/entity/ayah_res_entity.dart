@@ -70,7 +70,7 @@ class SurahAyah with _$SurahAyah {
     required NameAyah name,
     required RevelationAyah revelation,
     required SurahAyahTafsir tafsir,
-    required PreBismillahAyah preBismillah,
+    required PreBismillahAyah? preBismillah,
   }) = _SurahAyah;
 }
 

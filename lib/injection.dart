@@ -55,7 +55,9 @@ Future<void> setup() async {
   /* -----------------> External <-----------------*/
   sl.registerFactory<AudioPlayer>(() => AudioPlayer());
   /* -----------------> Core <-----------------*/
-  sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
+  sl.registerFactory<DioClient>(
+    () => DioClientImpl(dio: sl<Dio>()),
+  );
   sl.registerFactory<AppNavigator>(() => AppNavigator());
   sl.registerFactory<UserLocation>(() => IUserLocation());
   sl.registerFactory<DatabaseHelper>(() => DatabaseHelper());
@@ -165,12 +167,5 @@ Future<void> setup() async {
   );
   sl.registerFactory<PrayerTimeCubit>(
     () => PrayerTimeCubit(location: sl<UserLocation>()),
-  );
-  sl.registerFactory<BookmarkOpCubit>(
-    () => BookmarkOpCubit(
-      addBookmarkUsecase: sl<AddBookmarkUsecase>(),
-      removeBookmarkUsecase: sl<RemoveBookmarkUsecase>(),
-      isBookmarkUsecase: sl<IsBookmarkUsecase>(),
-    ),
   );
 }

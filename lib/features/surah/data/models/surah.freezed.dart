@@ -21,17 +21,17 @@ Surah _$SurahFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Surah {
   @JsonKey(name: "number")
-  int get number => throw _privateConstructorUsedError;
+  int? get number => throw _privateConstructorUsedError;
   @JsonKey(name: "sequence")
-  int get sequence => throw _privateConstructorUsedError;
+  int? get sequence => throw _privateConstructorUsedError;
   @JsonKey(name: "numberOfVerses")
-  int get numberOfVerses => throw _privateConstructorUsedError;
+  int? get numberOfVerses => throw _privateConstructorUsedError;
   @JsonKey(name: "name")
-  Name get name => throw _privateConstructorUsedError;
+  Name? get name => throw _privateConstructorUsedError;
   @JsonKey(name: "revelation")
-  Revelation get revelation => throw _privateConstructorUsedError;
+  Revelation? get revelation => throw _privateConstructorUsedError;
   @JsonKey(name: "tafsir")
-  Tafsir get tafsir => throw _privateConstructorUsedError;
+  Tafsir? get tafsir => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,16 +44,16 @@ abstract class $SurahCopyWith<$Res> {
       _$SurahCopyWithImpl<$Res, Surah>;
   @useResult
   $Res call(
-      {@JsonKey(name: "number") int number,
-      @JsonKey(name: "sequence") int sequence,
-      @JsonKey(name: "numberOfVerses") int numberOfVerses,
-      @JsonKey(name: "name") Name name,
-      @JsonKey(name: "revelation") Revelation revelation,
-      @JsonKey(name: "tafsir") Tafsir tafsir});
+      {@JsonKey(name: "number") int? number,
+      @JsonKey(name: "sequence") int? sequence,
+      @JsonKey(name: "numberOfVerses") int? numberOfVerses,
+      @JsonKey(name: "name") Name? name,
+      @JsonKey(name: "revelation") Revelation? revelation,
+      @JsonKey(name: "tafsir") Tafsir? tafsir});
 
-  $NameCopyWith<$Res> get name;
-  $RevelationCopyWith<$Res> get revelation;
-  $TafsirCopyWith<$Res> get tafsir;
+  $NameCopyWith<$Res>? get name;
+  $RevelationCopyWith<$Res>? get revelation;
+  $TafsirCopyWith<$Res>? get tafsir;
 }
 
 /// @nodoc
@@ -69,61 +69,73 @@ class _$SurahCopyWithImpl<$Res, $Val extends Surah>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? number = null,
-    Object? sequence = null,
-    Object? numberOfVerses = null,
-    Object? name = null,
-    Object? revelation = null,
-    Object? tafsir = null,
+    Object? number = freezed,
+    Object? sequence = freezed,
+    Object? numberOfVerses = freezed,
+    Object? name = freezed,
+    Object? revelation = freezed,
+    Object? tafsir = freezed,
   }) {
     return _then(_value.copyWith(
-      number: null == number
+      number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
-              as int,
-      sequence: null == sequence
+              as int?,
+      sequence: freezed == sequence
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
-              as int,
-      numberOfVerses: null == numberOfVerses
+              as int?,
+      numberOfVerses: freezed == numberOfVerses
           ? _value.numberOfVerses
           : numberOfVerses // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
+              as int?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as Name,
-      revelation: null == revelation
+              as Name?,
+      revelation: freezed == revelation
           ? _value.revelation
           : revelation // ignore: cast_nullable_to_non_nullable
-              as Revelation,
-      tafsir: null == tafsir
+              as Revelation?,
+      tafsir: freezed == tafsir
           ? _value.tafsir
           : tafsir // ignore: cast_nullable_to_non_nullable
-              as Tafsir,
+              as Tafsir?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $NameCopyWith<$Res> get name {
-    return $NameCopyWith<$Res>(_value.name, (value) {
+  $NameCopyWith<$Res>? get name {
+    if (_value.name == null) {
+      return null;
+    }
+
+    return $NameCopyWith<$Res>(_value.name!, (value) {
       return _then(_value.copyWith(name: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $RevelationCopyWith<$Res> get revelation {
-    return $RevelationCopyWith<$Res>(_value.revelation, (value) {
+  $RevelationCopyWith<$Res>? get revelation {
+    if (_value.revelation == null) {
+      return null;
+    }
+
+    return $RevelationCopyWith<$Res>(_value.revelation!, (value) {
       return _then(_value.copyWith(revelation: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $TafsirCopyWith<$Res> get tafsir {
-    return $TafsirCopyWith<$Res>(_value.tafsir, (value) {
+  $TafsirCopyWith<$Res>? get tafsir {
+    if (_value.tafsir == null) {
+      return null;
+    }
+
+    return $TafsirCopyWith<$Res>(_value.tafsir!, (value) {
       return _then(_value.copyWith(tafsir: value) as $Val);
     });
   }
@@ -137,19 +149,19 @@ abstract class _$$SurahImplCopyWith<$Res> implements $SurahCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "number") int number,
-      @JsonKey(name: "sequence") int sequence,
-      @JsonKey(name: "numberOfVerses") int numberOfVerses,
-      @JsonKey(name: "name") Name name,
-      @JsonKey(name: "revelation") Revelation revelation,
-      @JsonKey(name: "tafsir") Tafsir tafsir});
+      {@JsonKey(name: "number") int? number,
+      @JsonKey(name: "sequence") int? sequence,
+      @JsonKey(name: "numberOfVerses") int? numberOfVerses,
+      @JsonKey(name: "name") Name? name,
+      @JsonKey(name: "revelation") Revelation? revelation,
+      @JsonKey(name: "tafsir") Tafsir? tafsir});
 
   @override
-  $NameCopyWith<$Res> get name;
+  $NameCopyWith<$Res>? get name;
   @override
-  $RevelationCopyWith<$Res> get revelation;
+  $RevelationCopyWith<$Res>? get revelation;
   @override
-  $TafsirCopyWith<$Res> get tafsir;
+  $TafsirCopyWith<$Res>? get tafsir;
 }
 
 /// @nodoc
@@ -163,38 +175,38 @@ class __$$SurahImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? number = null,
-    Object? sequence = null,
-    Object? numberOfVerses = null,
-    Object? name = null,
-    Object? revelation = null,
-    Object? tafsir = null,
+    Object? number = freezed,
+    Object? sequence = freezed,
+    Object? numberOfVerses = freezed,
+    Object? name = freezed,
+    Object? revelation = freezed,
+    Object? tafsir = freezed,
   }) {
     return _then(_$SurahImpl(
-      number: null == number
+      number: freezed == number
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
-              as int,
-      sequence: null == sequence
+              as int?,
+      sequence: freezed == sequence
           ? _value.sequence
           : sequence // ignore: cast_nullable_to_non_nullable
-              as int,
-      numberOfVerses: null == numberOfVerses
+              as int?,
+      numberOfVerses: freezed == numberOfVerses
           ? _value.numberOfVerses
           : numberOfVerses // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
+              as int?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as Name,
-      revelation: null == revelation
+              as Name?,
+      revelation: freezed == revelation
           ? _value.revelation
           : revelation // ignore: cast_nullable_to_non_nullable
-              as Revelation,
-      tafsir: null == tafsir
+              as Revelation?,
+      tafsir: freezed == tafsir
           ? _value.tafsir
           : tafsir // ignore: cast_nullable_to_non_nullable
-              as Tafsir,
+              as Tafsir?,
     ));
   }
 }
@@ -204,9 +216,9 @@ class __$$SurahImplCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$SurahImpl implements _Surah {
   const _$SurahImpl(
-      {@JsonKey(name: "number") this.number = 0,
-      @JsonKey(name: "sequence") this.sequence = 0,
-      @JsonKey(name: "numberOfVerses") this.numberOfVerses = 0,
+      {@JsonKey(name: "number") this.number,
+      @JsonKey(name: "sequence") this.sequence,
+      @JsonKey(name: "numberOfVerses") this.numberOfVerses,
       @JsonKey(name: "name") required this.name,
       @JsonKey(name: "revelation") required this.revelation,
       @JsonKey(name: "tafsir") required this.tafsir});
@@ -216,22 +228,22 @@ class _$SurahImpl implements _Surah {
 
   @override
   @JsonKey(name: "number")
-  final int number;
+  final int? number;
   @override
   @JsonKey(name: "sequence")
-  final int sequence;
+  final int? sequence;
   @override
   @JsonKey(name: "numberOfVerses")
-  final int numberOfVerses;
+  final int? numberOfVerses;
   @override
   @JsonKey(name: "name")
-  final Name name;
+  final Name? name;
   @override
   @JsonKey(name: "revelation")
-  final Revelation revelation;
+  final Revelation? revelation;
   @override
   @JsonKey(name: "tafsir")
-  final Tafsir tafsir;
+  final Tafsir? tafsir;
 
   @override
   String toString() {
@@ -275,33 +287,33 @@ class _$SurahImpl implements _Surah {
 
 abstract class _Surah implements Surah {
   const factory _Surah(
-      {@JsonKey(name: "number") final int number,
-      @JsonKey(name: "sequence") final int sequence,
-      @JsonKey(name: "numberOfVerses") final int numberOfVerses,
-      @JsonKey(name: "name") required final Name name,
-      @JsonKey(name: "revelation") required final Revelation revelation,
-      @JsonKey(name: "tafsir") required final Tafsir tafsir}) = _$SurahImpl;
+      {@JsonKey(name: "number") final int? number,
+      @JsonKey(name: "sequence") final int? sequence,
+      @JsonKey(name: "numberOfVerses") final int? numberOfVerses,
+      @JsonKey(name: "name") required final Name? name,
+      @JsonKey(name: "revelation") required final Revelation? revelation,
+      @JsonKey(name: "tafsir") required final Tafsir? tafsir}) = _$SurahImpl;
 
   factory _Surah.fromJson(Map<String, dynamic> json) = _$SurahImpl.fromJson;
 
   @override
   @JsonKey(name: "number")
-  int get number;
+  int? get number;
   @override
   @JsonKey(name: "sequence")
-  int get sequence;
+  int? get sequence;
   @override
   @JsonKey(name: "numberOfVerses")
-  int get numberOfVerses;
+  int? get numberOfVerses;
   @override
   @JsonKey(name: "name")
-  Name get name;
+  Name? get name;
   @override
   @JsonKey(name: "revelation")
-  Revelation get revelation;
+  Revelation? get revelation;
   @override
   @JsonKey(name: "tafsir")
-  Tafsir get tafsir;
+  Tafsir? get tafsir;
   @override
   @JsonKey(ignore: true)
   _$$SurahImplCopyWith<_$SurahImpl> get copyWith =>
@@ -315,13 +327,13 @@ Name _$NameFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Name {
   @JsonKey(name: "short")
-  String get short => throw _privateConstructorUsedError;
+  String? get short => throw _privateConstructorUsedError;
   @JsonKey(name: "long")
-  String get long => throw _privateConstructorUsedError;
+  String? get long => throw _privateConstructorUsedError;
   @JsonKey(name: "transliteration")
-  Translation get transliteration => throw _privateConstructorUsedError;
+  Translation? get transliteration => throw _privateConstructorUsedError;
   @JsonKey(name: "translation")
-  Translation get translation => throw _privateConstructorUsedError;
+  Translation? get translation => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -334,13 +346,13 @@ abstract class $NameCopyWith<$Res> {
       _$NameCopyWithImpl<$Res, Name>;
   @useResult
   $Res call(
-      {@JsonKey(name: "short") String short,
-      @JsonKey(name: "long") String long,
-      @JsonKey(name: "transliteration") Translation transliteration,
-      @JsonKey(name: "translation") Translation translation});
+      {@JsonKey(name: "short") String? short,
+      @JsonKey(name: "long") String? long,
+      @JsonKey(name: "transliteration") Translation? transliteration,
+      @JsonKey(name: "translation") Translation? translation});
 
-  $TranslationCopyWith<$Res> get transliteration;
-  $TranslationCopyWith<$Res> get translation;
+  $TranslationCopyWith<$Res>? get transliteration;
+  $TranslationCopyWith<$Res>? get translation;
 }
 
 /// @nodoc
@@ -356,43 +368,51 @@ class _$NameCopyWithImpl<$Res, $Val extends Name>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? short = null,
-    Object? long = null,
-    Object? transliteration = null,
-    Object? translation = null,
+    Object? short = freezed,
+    Object? long = freezed,
+    Object? transliteration = freezed,
+    Object? translation = freezed,
   }) {
     return _then(_value.copyWith(
-      short: null == short
+      short: freezed == short
           ? _value.short
           : short // ignore: cast_nullable_to_non_nullable
-              as String,
-      long: null == long
+              as String?,
+      long: freezed == long
           ? _value.long
           : long // ignore: cast_nullable_to_non_nullable
-              as String,
-      transliteration: null == transliteration
+              as String?,
+      transliteration: freezed == transliteration
           ? _value.transliteration
           : transliteration // ignore: cast_nullable_to_non_nullable
-              as Translation,
-      translation: null == translation
+              as Translation?,
+      translation: freezed == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
-              as Translation,
+              as Translation?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $TranslationCopyWith<$Res> get transliteration {
-    return $TranslationCopyWith<$Res>(_value.transliteration, (value) {
+  $TranslationCopyWith<$Res>? get transliteration {
+    if (_value.transliteration == null) {
+      return null;
+    }
+
+    return $TranslationCopyWith<$Res>(_value.transliteration!, (value) {
       return _then(_value.copyWith(transliteration: value) as $Val);
     });
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $TranslationCopyWith<$Res> get translation {
-    return $TranslationCopyWith<$Res>(_value.translation, (value) {
+  $TranslationCopyWith<$Res>? get translation {
+    if (_value.translation == null) {
+      return null;
+    }
+
+    return $TranslationCopyWith<$Res>(_value.translation!, (value) {
       return _then(_value.copyWith(translation: value) as $Val);
     });
   }
@@ -406,15 +426,15 @@ abstract class _$$NameImplCopyWith<$Res> implements $NameCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "short") String short,
-      @JsonKey(name: "long") String long,
-      @JsonKey(name: "transliteration") Translation transliteration,
-      @JsonKey(name: "translation") Translation translation});
+      {@JsonKey(name: "short") String? short,
+      @JsonKey(name: "long") String? long,
+      @JsonKey(name: "transliteration") Translation? transliteration,
+      @JsonKey(name: "translation") Translation? translation});
 
   @override
-  $TranslationCopyWith<$Res> get transliteration;
+  $TranslationCopyWith<$Res>? get transliteration;
   @override
-  $TranslationCopyWith<$Res> get translation;
+  $TranslationCopyWith<$Res>? get translation;
 }
 
 /// @nodoc
@@ -427,28 +447,28 @@ class __$$NameImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? short = null,
-    Object? long = null,
-    Object? transliteration = null,
-    Object? translation = null,
+    Object? short = freezed,
+    Object? long = freezed,
+    Object? transliteration = freezed,
+    Object? translation = freezed,
   }) {
     return _then(_$NameImpl(
-      short: null == short
+      short: freezed == short
           ? _value.short
           : short // ignore: cast_nullable_to_non_nullable
-              as String,
-      long: null == long
+              as String?,
+      long: freezed == long
           ? _value.long
           : long // ignore: cast_nullable_to_non_nullable
-              as String,
-      transliteration: null == transliteration
+              as String?,
+      transliteration: freezed == transliteration
           ? _value.transliteration
           : transliteration // ignore: cast_nullable_to_non_nullable
-              as Translation,
-      translation: null == translation
+              as Translation?,
+      translation: freezed == translation
           ? _value.translation
           : translation // ignore: cast_nullable_to_non_nullable
-              as Translation,
+              as Translation?,
     ));
   }
 }
@@ -468,16 +488,16 @@ class _$NameImpl implements _Name {
 
   @override
   @JsonKey(name: "short")
-  final String short;
+  final String? short;
   @override
   @JsonKey(name: "long")
-  final String long;
+  final String? long;
   @override
   @JsonKey(name: "transliteration")
-  final Translation transliteration;
+  final Translation? transliteration;
   @override
   @JsonKey(name: "translation")
-  final Translation translation;
+  final Translation? translation;
 
   @override
   String toString() {
@@ -518,27 +538,27 @@ class _$NameImpl implements _Name {
 
 abstract class _Name implements Name {
   const factory _Name(
-      {@JsonKey(name: "short") required final String short,
-      @JsonKey(name: "long") required final String long,
+      {@JsonKey(name: "short") required final String? short,
+      @JsonKey(name: "long") required final String? long,
       @JsonKey(name: "transliteration")
-      required final Translation transliteration,
+      required final Translation? transliteration,
       @JsonKey(name: "translation")
-      required final Translation translation}) = _$NameImpl;
+      required final Translation? translation}) = _$NameImpl;
 
   factory _Name.fromJson(Map<String, dynamic> json) = _$NameImpl.fromJson;
 
   @override
   @JsonKey(name: "short")
-  String get short;
+  String? get short;
   @override
   @JsonKey(name: "long")
-  String get long;
+  String? get long;
   @override
   @JsonKey(name: "transliteration")
-  Translation get transliteration;
+  Translation? get transliteration;
   @override
   @JsonKey(name: "translation")
-  Translation get translation;
+  Translation? get translation;
   @override
   @JsonKey(ignore: true)
   _$$NameImplCopyWith<_$NameImpl> get copyWith =>
@@ -552,9 +572,9 @@ Translation _$TranslationFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Translation {
   @JsonKey(name: "en")
-  String get en => throw _privateConstructorUsedError;
+  String? get en => throw _privateConstructorUsedError;
   @JsonKey(name: "id")
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -568,7 +588,7 @@ abstract class $TranslationCopyWith<$Res> {
           Translation value, $Res Function(Translation) then) =
       _$TranslationCopyWithImpl<$Res, Translation>;
   @useResult
-  $Res call({@JsonKey(name: "en") String en, @JsonKey(name: "id") String id});
+  $Res call({@JsonKey(name: "en") String? en, @JsonKey(name: "id") String? id});
 }
 
 /// @nodoc
@@ -584,18 +604,18 @@ class _$TranslationCopyWithImpl<$Res, $Val extends Translation>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? en = null,
-    Object? id = null,
+    Object? en = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      en: null == en
+      en: freezed == en
           ? _value.en
           : en // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
+              as String?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -608,7 +628,7 @@ abstract class _$$TranslationImplCopyWith<$Res>
       __$$TranslationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "en") String en, @JsonKey(name: "id") String id});
+  $Res call({@JsonKey(name: "en") String? en, @JsonKey(name: "id") String? id});
 }
 
 /// @nodoc
@@ -622,18 +642,18 @@ class __$$TranslationImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? en = null,
-    Object? id = null,
+    Object? en = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$TranslationImpl(
-      en: null == en
+      en: freezed == en
           ? _value.en
           : en // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
+              as String?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -650,10 +670,10 @@ class _$TranslationImpl implements _Translation {
 
   @override
   @JsonKey(name: "en")
-  final String en;
+  final String? en;
   @override
   @JsonKey(name: "id")
-  final String id;
+  final String? id;
 
   @override
   String toString() {
@@ -689,18 +709,18 @@ class _$TranslationImpl implements _Translation {
 
 abstract class _Translation implements Translation {
   const factory _Translation(
-      {@JsonKey(name: "en") required final String en,
-      @JsonKey(name: "id") required final String id}) = _$TranslationImpl;
+      {@JsonKey(name: "en") required final String? en,
+      @JsonKey(name: "id") required final String? id}) = _$TranslationImpl;
 
   factory _Translation.fromJson(Map<String, dynamic> json) =
       _$TranslationImpl.fromJson;
 
   @override
   @JsonKey(name: "en")
-  String get en;
+  String? get en;
   @override
   @JsonKey(name: "id")
-  String get id;
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$TranslationImplCopyWith<_$TranslationImpl> get copyWith =>
@@ -714,11 +734,11 @@ Revelation _$RevelationFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Revelation {
   @JsonKey(name: "arab")
-  String get arab => throw _privateConstructorUsedError;
+  String? get arab => throw _privateConstructorUsedError;
   @JsonKey(name: "en")
-  String get en => throw _privateConstructorUsedError;
+  String? get en => throw _privateConstructorUsedError;
   @JsonKey(name: "id")
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -733,9 +753,9 @@ abstract class $RevelationCopyWith<$Res> {
       _$RevelationCopyWithImpl<$Res, Revelation>;
   @useResult
   $Res call(
-      {@JsonKey(name: "arab") String arab,
-      @JsonKey(name: "en") String en,
-      @JsonKey(name: "id") String id});
+      {@JsonKey(name: "arab") String? arab,
+      @JsonKey(name: "en") String? en,
+      @JsonKey(name: "id") String? id});
 }
 
 /// @nodoc
@@ -751,23 +771,23 @@ class _$RevelationCopyWithImpl<$Res, $Val extends Revelation>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? arab = null,
-    Object? en = null,
-    Object? id = null,
+    Object? arab = freezed,
+    Object? en = freezed,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      arab: null == arab
+      arab: freezed == arab
           ? _value.arab
           : arab // ignore: cast_nullable_to_non_nullable
-              as String,
-      en: null == en
+              as String?,
+      en: freezed == en
           ? _value.en
           : en // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
+              as String?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -781,9 +801,9 @@ abstract class _$$RevelationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "arab") String arab,
-      @JsonKey(name: "en") String en,
-      @JsonKey(name: "id") String id});
+      {@JsonKey(name: "arab") String? arab,
+      @JsonKey(name: "en") String? en,
+      @JsonKey(name: "id") String? id});
 }
 
 /// @nodoc
@@ -797,23 +817,23 @@ class __$$RevelationImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? arab = null,
-    Object? en = null,
-    Object? id = null,
+    Object? arab = freezed,
+    Object? en = freezed,
+    Object? id = freezed,
   }) {
     return _then(_$RevelationImpl(
-      arab: null == arab
+      arab: freezed == arab
           ? _value.arab
           : arab // ignore: cast_nullable_to_non_nullable
-              as String,
-      en: null == en
+              as String?,
+      en: freezed == en
           ? _value.en
           : en // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
+              as String?,
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -831,13 +851,13 @@ class _$RevelationImpl implements _Revelation {
 
   @override
   @JsonKey(name: "arab")
-  final String arab;
+  final String? arab;
   @override
   @JsonKey(name: "en")
-  final String en;
+  final String? en;
   @override
   @JsonKey(name: "id")
-  final String id;
+  final String? id;
 
   @override
   String toString() {
@@ -874,22 +894,22 @@ class _$RevelationImpl implements _Revelation {
 
 abstract class _Revelation implements Revelation {
   const factory _Revelation(
-      {@JsonKey(name: "arab") required final String arab,
-      @JsonKey(name: "en") required final String en,
-      @JsonKey(name: "id") required final String id}) = _$RevelationImpl;
+      {@JsonKey(name: "arab") required final String? arab,
+      @JsonKey(name: "en") required final String? en,
+      @JsonKey(name: "id") required final String? id}) = _$RevelationImpl;
 
   factory _Revelation.fromJson(Map<String, dynamic> json) =
       _$RevelationImpl.fromJson;
 
   @override
   @JsonKey(name: "arab")
-  String get arab;
+  String? get arab;
   @override
   @JsonKey(name: "en")
-  String get en;
+  String? get en;
   @override
   @JsonKey(name: "id")
-  String get id;
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$RevelationImplCopyWith<_$RevelationImpl> get copyWith =>
@@ -903,7 +923,7 @@ Tafsir _$TafsirFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Tafsir {
   @JsonKey(name: "id")
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -915,7 +935,7 @@ abstract class $TafsirCopyWith<$Res> {
   factory $TafsirCopyWith(Tafsir value, $Res Function(Tafsir) then) =
       _$TafsirCopyWithImpl<$Res, Tafsir>;
   @useResult
-  $Res call({@JsonKey(name: "id") String id});
+  $Res call({@JsonKey(name: "id") String? id});
 }
 
 /// @nodoc
@@ -931,13 +951,13 @@ class _$TafsirCopyWithImpl<$Res, $Val extends Tafsir>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -949,7 +969,7 @@ abstract class _$$TafsirImplCopyWith<$Res> implements $TafsirCopyWith<$Res> {
       __$$TafsirImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "id") String id});
+  $Res call({@JsonKey(name: "id") String? id});
 }
 
 /// @nodoc
@@ -963,13 +983,13 @@ class __$$TafsirImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
   }) {
     return _then(_$TafsirImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -984,7 +1004,7 @@ class _$TafsirImpl implements _Tafsir {
 
   @override
   @JsonKey(name: "id")
-  final String id;
+  final String? id;
 
   @override
   String toString() {
@@ -1018,14 +1038,14 @@ class _$TafsirImpl implements _Tafsir {
 }
 
 abstract class _Tafsir implements Tafsir {
-  const factory _Tafsir({@JsonKey(name: "id") required final String id}) =
+  const factory _Tafsir({@JsonKey(name: "id") required final String? id}) =
       _$TafsirImpl;
 
   factory _Tafsir.fromJson(Map<String, dynamic> json) = _$TafsirImpl.fromJson;
 
   @override
   @JsonKey(name: "id")
-  String get id;
+  String? get id;
   @override
   @JsonKey(ignore: true)
   _$$TafsirImplCopyWith<_$TafsirImpl> get copyWith =>

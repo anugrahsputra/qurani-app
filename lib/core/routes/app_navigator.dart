@@ -48,6 +48,12 @@ class AppNavigator {
         arguments: arguments);
   }
 
+  void goToMain(BuildContext context) {
+    if (!canNavigate(context)) return;
+
+    pushNamedAndRemoveUntil(context, AppPages.main);
+  }
+
   void goToHome(BuildContext context) {
     if (!canNavigate(context)) return;
 
@@ -62,9 +68,28 @@ class AppNavigator {
     });
   }
 
+  void goToAyah(
+    BuildContext context, {
+    required int surahNumber,
+    required int ayahNumber,
+  }) {
+    if (!canNavigate(context)) return;
+
+    pushNamed(context, AppPages.ayah, arguments: {
+      "ayahNumber": ayahNumber,
+      "surahNumber": surahNumber,
+    });
+  }
+
   void goToBookmarks(BuildContext context) {
     if (!canNavigate(context)) return;
 
     pushNamed(context, AppPages.bookmark);
+  }
+
+  void goToSearch(BuildContext context) {
+    if (!canNavigate(context)) return;
+
+    pushNamed(context, AppPages.search);
   }
 }

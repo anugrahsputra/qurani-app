@@ -10,8 +10,9 @@ part 'detail_surah_state.dart';
 class DetailSurahBloc extends Bloc<DetailSurahEvent, DetailSurahState> {
   final GetSurahDetailUseCase getSurahDetailUsecase;
 
-  DetailSurahBloc({required this.getSurahDetailUsecase})
-      : super(const DetailSurahInitial()) {
+  DetailSurahBloc({
+    required this.getSurahDetailUsecase,
+  }) : super(const DetailSurahInitial()) {
     on<OnGetDetail>(_onGetDetail);
   }
 

@@ -20,24 +20,28 @@ mixin _$BookmarkEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
     required TResult Function(int id) statusBookmark,
-    required TResult Function(Verse verse, String surah) addBookmark,
-    required TResult Function(Verse verse, String surah) removeBookmark,
+    required TResult Function(Verse verse, String surah, int surahNumber)
+        addBookmark,
+    required TResult Function(Verse verse, String surah, int surahNumber)
+        removeBookmark,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
     TResult? Function(int id)? statusBookmark,
-    TResult? Function(Verse verse, String surah)? addBookmark,
-    TResult? Function(Verse verse, String surah)? removeBookmark,
+    TResult? Function(Verse verse, String surah, int surahNumber)? addBookmark,
+    TResult? Function(Verse verse, String surah, int surahNumber)?
+        removeBookmark,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function(int id)? statusBookmark,
-    TResult Function(Verse verse, String surah)? addBookmark,
-    TResult Function(Verse verse, String surah)? removeBookmark,
+    TResult Function(Verse verse, String surah, int surahNumber)? addBookmark,
+    TResult Function(Verse verse, String surah, int surahNumber)?
+        removeBookmark,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,8 +130,10 @@ class _$OnFetchBookmarkImpl implements OnFetchBookmark {
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
     required TResult Function(int id) statusBookmark,
-    required TResult Function(Verse verse, String surah) addBookmark,
-    required TResult Function(Verse verse, String surah) removeBookmark,
+    required TResult Function(Verse verse, String surah, int surahNumber)
+        addBookmark,
+    required TResult Function(Verse verse, String surah, int surahNumber)
+        removeBookmark,
   }) {
     return fetch();
   }
@@ -137,8 +143,9 @@ class _$OnFetchBookmarkImpl implements OnFetchBookmark {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
     TResult? Function(int id)? statusBookmark,
-    TResult? Function(Verse verse, String surah)? addBookmark,
-    TResult? Function(Verse verse, String surah)? removeBookmark,
+    TResult? Function(Verse verse, String surah, int surahNumber)? addBookmark,
+    TResult? Function(Verse verse, String surah, int surahNumber)?
+        removeBookmark,
   }) {
     return fetch?.call();
   }
@@ -148,8 +155,9 @@ class _$OnFetchBookmarkImpl implements OnFetchBookmark {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function(int id)? statusBookmark,
-    TResult Function(Verse verse, String surah)? addBookmark,
-    TResult Function(Verse verse, String surah)? removeBookmark,
+    TResult Function(Verse verse, String surah, int surahNumber)? addBookmark,
+    TResult Function(Verse verse, String surah, int surahNumber)?
+        removeBookmark,
     required TResult orElse(),
   }) {
     if (fetch != null) {
@@ -267,8 +275,10 @@ class _$OnBookmarkStatusImpl implements OnBookmarkStatus {
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
     required TResult Function(int id) statusBookmark,
-    required TResult Function(Verse verse, String surah) addBookmark,
-    required TResult Function(Verse verse, String surah) removeBookmark,
+    required TResult Function(Verse verse, String surah, int surahNumber)
+        addBookmark,
+    required TResult Function(Verse verse, String surah, int surahNumber)
+        removeBookmark,
   }) {
     return statusBookmark(id);
   }
@@ -278,8 +288,9 @@ class _$OnBookmarkStatusImpl implements OnBookmarkStatus {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
     TResult? Function(int id)? statusBookmark,
-    TResult? Function(Verse verse, String surah)? addBookmark,
-    TResult? Function(Verse verse, String surah)? removeBookmark,
+    TResult? Function(Verse verse, String surah, int surahNumber)? addBookmark,
+    TResult? Function(Verse verse, String surah, int surahNumber)?
+        removeBookmark,
   }) {
     return statusBookmark?.call(id);
   }
@@ -289,8 +300,9 @@ class _$OnBookmarkStatusImpl implements OnBookmarkStatus {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function(int id)? statusBookmark,
-    TResult Function(Verse verse, String surah)? addBookmark,
-    TResult Function(Verse verse, String surah)? removeBookmark,
+    TResult Function(Verse verse, String surah, int surahNumber)? addBookmark,
+    TResult Function(Verse verse, String surah, int surahNumber)?
+        removeBookmark,
     required TResult orElse(),
   }) {
     if (statusBookmark != null) {
@@ -352,7 +364,7 @@ abstract class _$$OnAddBookmarkImplCopyWith<$Res> {
           _$OnAddBookmarkImpl value, $Res Function(_$OnAddBookmarkImpl) then) =
       __$$OnAddBookmarkImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Verse verse, String surah});
+  $Res call({Verse verse, String surah, int surahNumber});
 
   $VerseCopyWith<$Res> get verse;
 }
@@ -370,6 +382,7 @@ class __$$OnAddBookmarkImplCopyWithImpl<$Res>
   $Res call({
     Object? verse = null,
     Object? surah = null,
+    Object? surahNumber = null,
   }) {
     return _then(_$OnAddBookmarkImpl(
       null == verse
@@ -380,6 +393,10 @@ class __$$OnAddBookmarkImplCopyWithImpl<$Res>
           ? _value.surah
           : surah // ignore: cast_nullable_to_non_nullable
               as String,
+      null == surahNumber
+          ? _value.surahNumber
+          : surahNumber // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
@@ -395,16 +412,18 @@ class __$$OnAddBookmarkImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$OnAddBookmarkImpl implements OnAddBookmark {
-  const _$OnAddBookmarkImpl(this.verse, this.surah);
+  const _$OnAddBookmarkImpl(this.verse, this.surah, this.surahNumber);
 
   @override
   final Verse verse;
   @override
   final String surah;
+  @override
+  final int surahNumber;
 
   @override
   String toString() {
-    return 'BookmarkEvent.addBookmark(verse: $verse, surah: $surah)';
+    return 'BookmarkEvent.addBookmark(verse: $verse, surah: $surah, surahNumber: $surahNumber)';
   }
 
   @override
@@ -413,11 +432,13 @@ class _$OnAddBookmarkImpl implements OnAddBookmark {
         (other.runtimeType == runtimeType &&
             other is _$OnAddBookmarkImpl &&
             (identical(other.verse, verse) || other.verse == verse) &&
-            (identical(other.surah, surah) || other.surah == surah));
+            (identical(other.surah, surah) || other.surah == surah) &&
+            (identical(other.surahNumber, surahNumber) ||
+                other.surahNumber == surahNumber));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, verse, surah);
+  int get hashCode => Object.hash(runtimeType, verse, surah, surahNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -430,10 +451,12 @@ class _$OnAddBookmarkImpl implements OnAddBookmark {
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
     required TResult Function(int id) statusBookmark,
-    required TResult Function(Verse verse, String surah) addBookmark,
-    required TResult Function(Verse verse, String surah) removeBookmark,
+    required TResult Function(Verse verse, String surah, int surahNumber)
+        addBookmark,
+    required TResult Function(Verse verse, String surah, int surahNumber)
+        removeBookmark,
   }) {
-    return addBookmark(verse, surah);
+    return addBookmark(verse, surah, surahNumber);
   }
 
   @override
@@ -441,10 +464,11 @@ class _$OnAddBookmarkImpl implements OnAddBookmark {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
     TResult? Function(int id)? statusBookmark,
-    TResult? Function(Verse verse, String surah)? addBookmark,
-    TResult? Function(Verse verse, String surah)? removeBookmark,
+    TResult? Function(Verse verse, String surah, int surahNumber)? addBookmark,
+    TResult? Function(Verse verse, String surah, int surahNumber)?
+        removeBookmark,
   }) {
-    return addBookmark?.call(verse, surah);
+    return addBookmark?.call(verse, surah, surahNumber);
   }
 
   @override
@@ -452,12 +476,13 @@ class _$OnAddBookmarkImpl implements OnAddBookmark {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function(int id)? statusBookmark,
-    TResult Function(Verse verse, String surah)? addBookmark,
-    TResult Function(Verse verse, String surah)? removeBookmark,
+    TResult Function(Verse verse, String surah, int surahNumber)? addBookmark,
+    TResult Function(Verse verse, String surah, int surahNumber)?
+        removeBookmark,
     required TResult orElse(),
   }) {
     if (addBookmark != null) {
-      return addBookmark(verse, surah);
+      return addBookmark(verse, surah, surahNumber);
     }
     return orElse();
   }
@@ -501,11 +526,13 @@ class _$OnAddBookmarkImpl implements OnAddBookmark {
 }
 
 abstract class OnAddBookmark implements BookmarkEvent {
-  const factory OnAddBookmark(final Verse verse, final String surah) =
+  const factory OnAddBookmark(
+          final Verse verse, final String surah, final int surahNumber) =
       _$OnAddBookmarkImpl;
 
   Verse get verse;
   String get surah;
+  int get surahNumber;
   @JsonKey(ignore: true)
   _$$OnAddBookmarkImplCopyWith<_$OnAddBookmarkImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -517,7 +544,7 @@ abstract class _$$OnRemoveBookmarkImplCopyWith<$Res> {
           $Res Function(_$OnRemoveBookmarkImpl) then) =
       __$$OnRemoveBookmarkImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Verse verse, String surah});
+  $Res call({Verse verse, String surah, int surahNumber});
 
   $VerseCopyWith<$Res> get verse;
 }
@@ -535,6 +562,7 @@ class __$$OnRemoveBookmarkImplCopyWithImpl<$Res>
   $Res call({
     Object? verse = null,
     Object? surah = null,
+    Object? surahNumber = null,
   }) {
     return _then(_$OnRemoveBookmarkImpl(
       null == verse
@@ -545,6 +573,10 @@ class __$$OnRemoveBookmarkImplCopyWithImpl<$Res>
           ? _value.surah
           : surah // ignore: cast_nullable_to_non_nullable
               as String,
+      null == surahNumber
+          ? _value.surahNumber
+          : surahNumber // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 
@@ -560,16 +592,18 @@ class __$$OnRemoveBookmarkImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$OnRemoveBookmarkImpl implements OnRemoveBookmark {
-  const _$OnRemoveBookmarkImpl(this.verse, this.surah);
+  const _$OnRemoveBookmarkImpl(this.verse, this.surah, this.surahNumber);
 
   @override
   final Verse verse;
   @override
   final String surah;
+  @override
+  final int surahNumber;
 
   @override
   String toString() {
-    return 'BookmarkEvent.removeBookmark(verse: $verse, surah: $surah)';
+    return 'BookmarkEvent.removeBookmark(verse: $verse, surah: $surah, surahNumber: $surahNumber)';
   }
 
   @override
@@ -578,11 +612,13 @@ class _$OnRemoveBookmarkImpl implements OnRemoveBookmark {
         (other.runtimeType == runtimeType &&
             other is _$OnRemoveBookmarkImpl &&
             (identical(other.verse, verse) || other.verse == verse) &&
-            (identical(other.surah, surah) || other.surah == surah));
+            (identical(other.surah, surah) || other.surah == surah) &&
+            (identical(other.surahNumber, surahNumber) ||
+                other.surahNumber == surahNumber));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, verse, surah);
+  int get hashCode => Object.hash(runtimeType, verse, surah, surahNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -596,10 +632,12 @@ class _$OnRemoveBookmarkImpl implements OnRemoveBookmark {
   TResult when<TResult extends Object?>({
     required TResult Function() fetch,
     required TResult Function(int id) statusBookmark,
-    required TResult Function(Verse verse, String surah) addBookmark,
-    required TResult Function(Verse verse, String surah) removeBookmark,
+    required TResult Function(Verse verse, String surah, int surahNumber)
+        addBookmark,
+    required TResult Function(Verse verse, String surah, int surahNumber)
+        removeBookmark,
   }) {
-    return removeBookmark(verse, surah);
+    return removeBookmark(verse, surah, surahNumber);
   }
 
   @override
@@ -607,10 +645,11 @@ class _$OnRemoveBookmarkImpl implements OnRemoveBookmark {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? fetch,
     TResult? Function(int id)? statusBookmark,
-    TResult? Function(Verse verse, String surah)? addBookmark,
-    TResult? Function(Verse verse, String surah)? removeBookmark,
+    TResult? Function(Verse verse, String surah, int surahNumber)? addBookmark,
+    TResult? Function(Verse verse, String surah, int surahNumber)?
+        removeBookmark,
   }) {
-    return removeBookmark?.call(verse, surah);
+    return removeBookmark?.call(verse, surah, surahNumber);
   }
 
   @override
@@ -618,12 +657,13 @@ class _$OnRemoveBookmarkImpl implements OnRemoveBookmark {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetch,
     TResult Function(int id)? statusBookmark,
-    TResult Function(Verse verse, String surah)? addBookmark,
-    TResult Function(Verse verse, String surah)? removeBookmark,
+    TResult Function(Verse verse, String surah, int surahNumber)? addBookmark,
+    TResult Function(Verse verse, String surah, int surahNumber)?
+        removeBookmark,
     required TResult orElse(),
   }) {
     if (removeBookmark != null) {
-      return removeBookmark(verse, surah);
+      return removeBookmark(verse, surah, surahNumber);
     }
     return orElse();
   }
@@ -667,11 +707,13 @@ class _$OnRemoveBookmarkImpl implements OnRemoveBookmark {
 }
 
 abstract class OnRemoveBookmark implements BookmarkEvent {
-  const factory OnRemoveBookmark(final Verse verse, final String surah) =
+  const factory OnRemoveBookmark(
+          final Verse verse, final String surah, final int surahNumber) =
       _$OnRemoveBookmarkImpl;
 
   Verse get verse;
   String get surah;
+  int get surahNumber;
   @JsonKey(ignore: true)
   _$$OnRemoveBookmarkImplCopyWith<_$OnRemoveBookmarkImpl> get copyWith =>
       throw _privateConstructorUsedError;

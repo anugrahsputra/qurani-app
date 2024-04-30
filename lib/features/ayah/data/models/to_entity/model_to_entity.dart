@@ -75,7 +75,7 @@ extension SurahAyahModelX on SurahAyahModel {
       revelation: revelation.toEntity(),
       tafsir: tafsir.toEntity(),
       numberOfVerses: numberOfVerses,
-      preBismillah: preBismillah.toEntity(),
+      preBismillah: preBismillah?.toEntity(),
     );
   }
 }
