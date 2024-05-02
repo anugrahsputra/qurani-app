@@ -15,7 +15,7 @@ Quraani is a simple and easy-to-use Quran app for Android built with Flutter. It
 - [ ] Search: Quickly find specific verses or chapters using the search feature.
 - [ ] Night Mode: Switch to a dark theme for reading in low-light conditions.
 - [ ] Localization: Support for multiple languages to cater to a global audience. 
-- [ ] Settings: Customize the app to suit your preferences with various settings options.
+- [ ] Settings: Customize the app to suit user preferences with various settings options.
 
 ## Packages Used
 - [Dio](https://pub.dev/packages/dio) - A powerful Http client for Dart, which supports Interceptors, Global configuration, FormData, Request Cancellation, File downloading, Timeout, etc.
@@ -33,14 +33,6 @@ for more information about the packages used in this project, please refer to th
 - [Quran API](https://api.quran.gading.dev/) - A free API that provides access to the Quran text, translations, and audio recitations.
 - [Quran Audio API](https://api.quran.com/api/v4/) - A free API that provides access to audio recitations of the Quran by various Qaris.
 
-
-## To-Do
-- Implement search functionality
-- Implement night mode feature
-- Implement Localization and translations
-- Implement local notifications for prayer times
-- Implement settings options
-- Revamp UI/UX design
 
 
 ## Try it yourself
