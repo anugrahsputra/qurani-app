@@ -14,21 +14,40 @@ Quraani is a simple and easy-to-use Quran app for Android built with Flutter. It
 - [x] Tafsir: Access detailed explanations of the Quranic text with the Tafsir feature.
 - [ ] Search: Quickly find specific verses or chapters using the search feature.
 - [ ] Night Mode: Switch to a dark theme for reading in low-light conditions.
-- [ ] Translation: Read the Quran in multiple languages with the translation feature.
+- [ ] Localization: Support for multiple languages to cater to a global audience. 
 - [ ] Settings: Customize the app to suit your preferences with various settings options.
 
+## Packages Used
+- [Dio](https://pub.dev/packages/dio) - A powerful Http client for Dart, which supports Interceptors, Global configuration, FormData, Request Cancellation, File downloading, Timeout, etc.
+- [Flutter Bloc](https://pub.dev/packages/flutter_bloc) - A Flutter package that helps implement the BLoC (Business Logic Component) design pattern.
+- [Sqflite](https://pub.dev/packages/sqflite) - A Flutter plugin for SQLite, a self-contained, serverless, zero-configuration, transactional SQL database engine.
+- [Audioplayers](https://pub.dev/packages/audioplayers) - A Flutter plugin to play audio files.
+- [Freezed](https://pub.dev/packages/freezed) - A code generator for unions/pattern-matching/copy.
+- [Adhan](https://pub.dev/packages/adhan) - A well-tested library for calculating Islamic prayer times.
+- [GeoLocator](https://pub.dev/packages/geolocator) - A Flutter plugin for geolocation.
+- [Share Plus](https://pub.dev/packages/share_plus) - A Flutter plugin for sharing content from your Flutter app via the platform's share dialog.
 
-## Screenshots
+for more information about the packages used in this project, please refer to the pubspec.yaml file.
 
+## API Used
+- [Quran API](https://api.quran.gading.dev/) - A free API that provides access to the Quran text, translations, and audio recitations.
+- [Quran Audio API](https://api.quran.com/api/v4/) - A free API that provides access to audio recitations of the Quran by various Qaris.
 
 
 ## To-Do
 - Implement search functionality
 - Implement night mode feature
-- Implement translation feature
+- Implement Localization and translations
+- Implement local notifications for prayer times
 - Implement settings options
-- Add app icon
-- Add splash screen
 - Revamp UI/UX design
 
 
+## Try it yourself
+You can try the app by downloading the APK from the [releases](https://github.com/anugrahsputra/qurani-app/releases/tag/v0.0-pre-alpha.1)
+or clone the repository and run the app on your local machine.
+
+Please note that the app is currently only available in Bahasa Indonesia.
+
+## Note
+This project is to showcase my skills in Flutter and is not intended for commercial use. The app is still in the early stages of development and may contain bugs or incomplete features.
