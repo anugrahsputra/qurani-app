@@ -2,6 +2,9 @@
 
 Quraani is a simple and easy-to-use Quran app for Android built with Flutter. It is a project that aims to provide a clean and simple interface for reading the Quran. The app is designed to be fast, lightweight, and easy to use. Quraani is a mobile application built with Flutter that allows users to conveniently access and interact with the Quran while on the go.
 
+<img src="/shots/Frame 1.png">
+<img src="/shots/Frame 2.png">
+
 ## Features
 - [x] Complete Quran: Read the full Quran text with clear and easy-to-read formatting.
 - [x] Prayer Times: Stay informed with automatic prayer time notifications based on your location.
@@ -14,9 +17,9 @@ Quraani is a simple and easy-to-use Quran app for Android built with Flutter. It
 - [ ] Translation: Read the Quran in multiple languages with the translation feature.
 - [ ] Settings: Customize the app to suit your preferences with various settings options.
 
+
 ## Screenshots
 
-screenshot
 
 
 ## To-Do
@@ -24,6 +27,8 @@ screenshot
 - Implement night mode feature
 - Implement translation feature
 - Implement settings options
+- Add app icon
+- Add splash screen
 - Revamp UI/UX design
 
 
