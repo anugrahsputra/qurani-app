@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:logging/logging.dart';
 
 import '../../../../detail_surah/detail_surah.dart';
 import '../../../bookmark.dart';
@@ -15,8 +14,6 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   final IsBookmarkUsecase isBookmarkUsecase;
   final AddBookmarkUsecase addBookmarkUsecase;
   final RemoveBookmarkUsecase removeBookmarkUsecase;
-
-  final Logger _log = Logger("Bookmark Bloc");
 
   BookmarkBloc({
     required this.usecase,
@@ -54,7 +51,6 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   ) async {
     emit(const BookmarkLoading());
     final result = await isBookmarkUsecase(event.id);
-    _log.info('check bookmark: id:${event.id} $result');
     emit(BookmarkCheck(result));
   }
 
