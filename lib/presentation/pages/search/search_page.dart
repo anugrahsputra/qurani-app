@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/core.dart';
 import '../../../features/surah/surah.dart';
@@ -19,12 +18,22 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final SurahBloc surahBloc = sl<SurahBloc>();
+
   final AppNavigator appNavigator = sl<AppNavigator>();
+
+  late FocusNode focusNode;
 
   @override
   void initState() {
     surahBloc.add(const OnGetSurah());
+    focusNode = FocusNode();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -33,14 +42,13 @@ class _SearchPageState extends State<SearchPage> {
       create: (context) => surahBloc,
       child: AppScaffold(
         appBar: AppBar(
-          title: Text('Cari Surah', style: GoogleFonts.poppins()),
+          titleSpacing: 0,
+          title: SearchTextField(
+            surahBloc: surahBloc,
+            focusNode: focusNode,
+          ),
         ),
-        body: Column(
-          children: [
-            SearchTextField(surahBloc: surahBloc),
-            SearchList(appNavigator: appNavigator),
-          ],
-        ),
+        body: SearchList(appNavigator: appNavigator),
       ),
     );
   }
