@@ -19,32 +19,38 @@ mixin _$SurahEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() onGetSurah,
+    required TResult Function(String query) onSearchSurah,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? onGetSurah,
+    TResult? Function(String query)? onSearchSurah,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? onGetSurah,
+    TResult Function(String query)? onSearchSurah,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(OnGetSurah value) onGetSurah,
+    required TResult Function(OnSearchSurah value) onSearchSurah,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(OnGetSurah value)? onGetSurah,
+    TResult? Function(OnSearchSurah value)? onSearchSurah,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OnGetSurah value)? onGetSurah,
+    TResult Function(OnSearchSurah value)? onSearchSurah,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -107,6 +113,7 @@ class _$OnGetSurahImpl implements OnGetSurah {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() onGetSurah,
+    required TResult Function(String query) onSearchSurah,
   }) {
     return onGetSurah();
   }
@@ -115,6 +122,7 @@ class _$OnGetSurahImpl implements OnGetSurah {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? onGetSurah,
+    TResult? Function(String query)? onSearchSurah,
   }) {
     return onGetSurah?.call();
   }
@@ -123,6 +131,7 @@ class _$OnGetSurahImpl implements OnGetSurah {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? onGetSurah,
+    TResult Function(String query)? onSearchSurah,
     required TResult orElse(),
   }) {
     if (onGetSurah != null) {
@@ -135,6 +144,7 @@ class _$OnGetSurahImpl implements OnGetSurah {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(OnGetSurah value) onGetSurah,
+    required TResult Function(OnSearchSurah value) onSearchSurah,
   }) {
     return onGetSurah(this);
   }
@@ -143,6 +153,7 @@ class _$OnGetSurahImpl implements OnGetSurah {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(OnGetSurah value)? onGetSurah,
+    TResult? Function(OnSearchSurah value)? onSearchSurah,
   }) {
     return onGetSurah?.call(this);
   }
@@ -151,6 +162,7 @@ class _$OnGetSurahImpl implements OnGetSurah {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(OnGetSurah value)? onGetSurah,
+    TResult Function(OnSearchSurah value)? onSearchSurah,
     required TResult orElse(),
   }) {
     if (onGetSurah != null) {
@@ -165,12 +177,146 @@ abstract class OnGetSurah implements SurahEvent {
 }
 
 /// @nodoc
+abstract class _$$OnSearchSurahImplCopyWith<$Res> {
+  factory _$$OnSearchSurahImplCopyWith(
+          _$OnSearchSurahImpl value, $Res Function(_$OnSearchSurahImpl) then) =
+      __$$OnSearchSurahImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String query});
+}
+
+/// @nodoc
+class __$$OnSearchSurahImplCopyWithImpl<$Res>
+    extends _$SurahEventCopyWithImpl<$Res, _$OnSearchSurahImpl>
+    implements _$$OnSearchSurahImplCopyWith<$Res> {
+  __$$OnSearchSurahImplCopyWithImpl(
+      _$OnSearchSurahImpl _value, $Res Function(_$OnSearchSurahImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? query = null,
+  }) {
+    return _then(_$OnSearchSurahImpl(
+      null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$OnSearchSurahImpl implements OnSearchSurah {
+  const _$OnSearchSurahImpl(this.query);
+
+  @override
+  final String query;
+
+  @override
+  String toString() {
+    return 'SurahEvent.onSearchSurah(query: $query)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OnSearchSurahImpl &&
+            (identical(other.query, query) || other.query == query));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, query);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OnSearchSurahImplCopyWith<_$OnSearchSurahImpl> get copyWith =>
+      __$$OnSearchSurahImplCopyWithImpl<_$OnSearchSurahImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() onGetSurah,
+    required TResult Function(String query) onSearchSurah,
+  }) {
+    return onSearchSurah(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? onGetSurah,
+    TResult? Function(String query)? onSearchSurah,
+  }) {
+    return onSearchSurah?.call(query);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? onGetSurah,
+    TResult Function(String query)? onSearchSurah,
+    required TResult orElse(),
+  }) {
+    if (onSearchSurah != null) {
+      return onSearchSurah(query);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(OnGetSurah value) onGetSurah,
+    required TResult Function(OnSearchSurah value) onSearchSurah,
+  }) {
+    return onSearchSurah(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(OnGetSurah value)? onGetSurah,
+    TResult? Function(OnSearchSurah value)? onSearchSurah,
+  }) {
+    return onSearchSurah?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(OnGetSurah value)? onGetSurah,
+    TResult Function(OnSearchSurah value)? onSearchSurah,
+    required TResult orElse(),
+  }) {
+    if (onSearchSurah != null) {
+      return onSearchSurah(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnSearchSurah implements SurahEvent {
+  const factory OnSearchSurah(final String query) = _$OnSearchSurahImpl;
+
+  String get query;
+  @JsonKey(ignore: true)
+  _$$OnSearchSurahImplCopyWith<_$OnSearchSurahImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$SurahState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SurahEntity> listSurah) loaded,
+    required TResult Function(List<SurahEntity> filteredSurah) searched,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -179,6 +325,7 @@ mixin _$SurahState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<SurahEntity> listSurah)? loaded,
+    TResult? Function(List<SurahEntity> filteredSurah)? searched,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -187,6 +334,7 @@ mixin _$SurahState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SurahEntity> listSurah)? loaded,
+    TResult Function(List<SurahEntity> filteredSurah)? searched,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -196,6 +344,7 @@ mixin _$SurahState {
     required TResult Function(SurahInitial value) initial,
     required TResult Function(SurahLoading value) loading,
     required TResult Function(SurahLoaded value) loaded,
+    required TResult Function(SurahSearched value) searched,
     required TResult Function(SurahError value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -204,6 +353,7 @@ mixin _$SurahState {
     TResult? Function(SurahInitial value)? initial,
     TResult? Function(SurahLoading value)? loading,
     TResult? Function(SurahLoaded value)? loaded,
+    TResult? Function(SurahSearched value)? searched,
     TResult? Function(SurahError value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -212,6 +362,7 @@ mixin _$SurahState {
     TResult Function(SurahInitial value)? initial,
     TResult Function(SurahLoading value)? loading,
     TResult Function(SurahLoaded value)? loaded,
+    TResult Function(SurahSearched value)? searched,
     TResult Function(SurahError value)? error,
     required TResult orElse(),
   }) =>
@@ -277,6 +428,7 @@ class _$SurahInitialImpl implements SurahInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SurahEntity> listSurah) loaded,
+    required TResult Function(List<SurahEntity> filteredSurah) searched,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -288,6 +440,7 @@ class _$SurahInitialImpl implements SurahInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<SurahEntity> listSurah)? loaded,
+    TResult? Function(List<SurahEntity> filteredSurah)? searched,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -299,6 +452,7 @@ class _$SurahInitialImpl implements SurahInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SurahEntity> listSurah)? loaded,
+    TResult Function(List<SurahEntity> filteredSurah)? searched,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -314,6 +468,7 @@ class _$SurahInitialImpl implements SurahInitial {
     required TResult Function(SurahInitial value) initial,
     required TResult Function(SurahLoading value) loading,
     required TResult Function(SurahLoaded value) loaded,
+    required TResult Function(SurahSearched value) searched,
     required TResult Function(SurahError value) error,
   }) {
     return initial(this);
@@ -325,6 +480,7 @@ class _$SurahInitialImpl implements SurahInitial {
     TResult? Function(SurahInitial value)? initial,
     TResult? Function(SurahLoading value)? loading,
     TResult? Function(SurahLoaded value)? loaded,
+    TResult? Function(SurahSearched value)? searched,
     TResult? Function(SurahError value)? error,
   }) {
     return initial?.call(this);
@@ -336,6 +492,7 @@ class _$SurahInitialImpl implements SurahInitial {
     TResult Function(SurahInitial value)? initial,
     TResult Function(SurahLoading value)? loading,
     TResult Function(SurahLoaded value)? loaded,
+    TResult Function(SurahSearched value)? searched,
     TResult Function(SurahError value)? error,
     required TResult orElse(),
   }) {
@@ -391,6 +548,7 @@ class _$SurahLoadingImpl implements SurahLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SurahEntity> listSurah) loaded,
+    required TResult Function(List<SurahEntity> filteredSurah) searched,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -402,6 +560,7 @@ class _$SurahLoadingImpl implements SurahLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<SurahEntity> listSurah)? loaded,
+    TResult? Function(List<SurahEntity> filteredSurah)? searched,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -413,6 +572,7 @@ class _$SurahLoadingImpl implements SurahLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SurahEntity> listSurah)? loaded,
+    TResult Function(List<SurahEntity> filteredSurah)? searched,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -428,6 +588,7 @@ class _$SurahLoadingImpl implements SurahLoading {
     required TResult Function(SurahInitial value) initial,
     required TResult Function(SurahLoading value) loading,
     required TResult Function(SurahLoaded value) loaded,
+    required TResult Function(SurahSearched value) searched,
     required TResult Function(SurahError value) error,
   }) {
     return loading(this);
@@ -439,6 +600,7 @@ class _$SurahLoadingImpl implements SurahLoading {
     TResult? Function(SurahInitial value)? initial,
     TResult? Function(SurahLoading value)? loading,
     TResult? Function(SurahLoaded value)? loaded,
+    TResult? Function(SurahSearched value)? searched,
     TResult? Function(SurahError value)? error,
   }) {
     return loading?.call(this);
@@ -450,6 +612,7 @@ class _$SurahLoadingImpl implements SurahLoading {
     TResult Function(SurahInitial value)? initial,
     TResult Function(SurahLoading value)? loading,
     TResult Function(SurahLoaded value)? loaded,
+    TResult Function(SurahSearched value)? searched,
     TResult Function(SurahError value)? error,
     required TResult orElse(),
   }) {
@@ -539,6 +702,7 @@ class _$SurahLoadedImpl implements SurahLoaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SurahEntity> listSurah) loaded,
+    required TResult Function(List<SurahEntity> filteredSurah) searched,
     required TResult Function(String message) error,
   }) {
     return loaded(listSurah);
@@ -550,6 +714,7 @@ class _$SurahLoadedImpl implements SurahLoaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<SurahEntity> listSurah)? loaded,
+    TResult? Function(List<SurahEntity> filteredSurah)? searched,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(listSurah);
@@ -561,6 +726,7 @@ class _$SurahLoadedImpl implements SurahLoaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SurahEntity> listSurah)? loaded,
+    TResult Function(List<SurahEntity> filteredSurah)? searched,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -576,6 +742,7 @@ class _$SurahLoadedImpl implements SurahLoaded {
     required TResult Function(SurahInitial value) initial,
     required TResult Function(SurahLoading value) loading,
     required TResult Function(SurahLoaded value) loaded,
+    required TResult Function(SurahSearched value) searched,
     required TResult Function(SurahError value) error,
   }) {
     return loaded(this);
@@ -587,6 +754,7 @@ class _$SurahLoadedImpl implements SurahLoaded {
     TResult? Function(SurahInitial value)? initial,
     TResult? Function(SurahLoading value)? loading,
     TResult? Function(SurahLoaded value)? loaded,
+    TResult? Function(SurahSearched value)? searched,
     TResult? Function(SurahError value)? error,
   }) {
     return loaded?.call(this);
@@ -598,6 +766,7 @@ class _$SurahLoadedImpl implements SurahLoaded {
     TResult Function(SurahInitial value)? initial,
     TResult Function(SurahLoading value)? loading,
     TResult Function(SurahLoaded value)? loaded,
+    TResult Function(SurahSearched value)? searched,
     TResult Function(SurahError value)? error,
     required TResult orElse(),
   }) {
@@ -615,6 +784,166 @@ abstract class SurahLoaded implements SurahState {
   List<SurahEntity> get listSurah;
   @JsonKey(ignore: true)
   _$$SurahLoadedImplCopyWith<_$SurahLoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SurahSearchedImplCopyWith<$Res> {
+  factory _$$SurahSearchedImplCopyWith(
+          _$SurahSearchedImpl value, $Res Function(_$SurahSearchedImpl) then) =
+      __$$SurahSearchedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<SurahEntity> filteredSurah});
+}
+
+/// @nodoc
+class __$$SurahSearchedImplCopyWithImpl<$Res>
+    extends _$SurahStateCopyWithImpl<$Res, _$SurahSearchedImpl>
+    implements _$$SurahSearchedImplCopyWith<$Res> {
+  __$$SurahSearchedImplCopyWithImpl(
+      _$SurahSearchedImpl _value, $Res Function(_$SurahSearchedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? filteredSurah = null,
+  }) {
+    return _then(_$SurahSearchedImpl(
+      null == filteredSurah
+          ? _value._filteredSurah
+          : filteredSurah // ignore: cast_nullable_to_non_nullable
+              as List<SurahEntity>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SurahSearchedImpl implements SurahSearched {
+  const _$SurahSearchedImpl(final List<SurahEntity> filteredSurah)
+      : _filteredSurah = filteredSurah;
+
+  final List<SurahEntity> _filteredSurah;
+  @override
+  List<SurahEntity> get filteredSurah {
+    if (_filteredSurah is EqualUnmodifiableListView) return _filteredSurah;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filteredSurah);
+  }
+
+  @override
+  String toString() {
+    return 'SurahState.searched(filteredSurah: $filteredSurah)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SurahSearchedImpl &&
+            const DeepCollectionEquality()
+                .equals(other._filteredSurah, _filteredSurah));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_filteredSurah));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SurahSearchedImplCopyWith<_$SurahSearchedImpl> get copyWith =>
+      __$$SurahSearchedImplCopyWithImpl<_$SurahSearchedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<SurahEntity> listSurah) loaded,
+    required TResult Function(List<SurahEntity> filteredSurah) searched,
+    required TResult Function(String message) error,
+  }) {
+    return searched(filteredSurah);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<SurahEntity> listSurah)? loaded,
+    TResult? Function(List<SurahEntity> filteredSurah)? searched,
+    TResult? Function(String message)? error,
+  }) {
+    return searched?.call(filteredSurah);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<SurahEntity> listSurah)? loaded,
+    TResult Function(List<SurahEntity> filteredSurah)? searched,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (searched != null) {
+      return searched(filteredSurah);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SurahInitial value) initial,
+    required TResult Function(SurahLoading value) loading,
+    required TResult Function(SurahLoaded value) loaded,
+    required TResult Function(SurahSearched value) searched,
+    required TResult Function(SurahError value) error,
+  }) {
+    return searched(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SurahInitial value)? initial,
+    TResult? Function(SurahLoading value)? loading,
+    TResult? Function(SurahLoaded value)? loaded,
+    TResult? Function(SurahSearched value)? searched,
+    TResult? Function(SurahError value)? error,
+  }) {
+    return searched?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SurahInitial value)? initial,
+    TResult Function(SurahLoading value)? loading,
+    TResult Function(SurahLoaded value)? loaded,
+    TResult Function(SurahSearched value)? searched,
+    TResult Function(SurahError value)? error,
+    required TResult orElse(),
+  }) {
+    if (searched != null) {
+      return searched(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SurahSearched implements SurahState {
+  const factory SurahSearched(final List<SurahEntity> filteredSurah) =
+      _$SurahSearchedImpl;
+
+  List<SurahEntity> get filteredSurah;
+  @JsonKey(ignore: true)
+  _$$SurahSearchedImplCopyWith<_$SurahSearchedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -685,6 +1014,7 @@ class _$SurahErrorImpl implements SurahError {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<SurahEntity> listSurah) loaded,
+    required TResult Function(List<SurahEntity> filteredSurah) searched,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -696,6 +1026,7 @@ class _$SurahErrorImpl implements SurahError {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(List<SurahEntity> listSurah)? loaded,
+    TResult? Function(List<SurahEntity> filteredSurah)? searched,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -707,6 +1038,7 @@ class _$SurahErrorImpl implements SurahError {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<SurahEntity> listSurah)? loaded,
+    TResult Function(List<SurahEntity> filteredSurah)? searched,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -722,6 +1054,7 @@ class _$SurahErrorImpl implements SurahError {
     required TResult Function(SurahInitial value) initial,
     required TResult Function(SurahLoading value) loading,
     required TResult Function(SurahLoaded value) loaded,
+    required TResult Function(SurahSearched value) searched,
     required TResult Function(SurahError value) error,
   }) {
     return error(this);
@@ -733,6 +1066,7 @@ class _$SurahErrorImpl implements SurahError {
     TResult? Function(SurahInitial value)? initial,
     TResult? Function(SurahLoading value)? loading,
     TResult? Function(SurahLoaded value)? loaded,
+    TResult? Function(SurahSearched value)? searched,
     TResult? Function(SurahError value)? error,
   }) {
     return error?.call(this);
@@ -744,6 +1078,7 @@ class _$SurahErrorImpl implements SurahError {
     TResult Function(SurahInitial value)? initial,
     TResult Function(SurahLoading value)? loading,
     TResult Function(SurahLoaded value)? loaded,
+    TResult Function(SurahSearched value)? searched,
     TResult Function(SurahError value)? error,
     required TResult orElse(),
   }) {

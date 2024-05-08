@@ -69,6 +69,7 @@ dependencies:
   path_provider: ^2.1.2
   permission_handler: ^11.3.0
   redacted: ^1.0.11
+  rxdart: ^0.27.7
   screenshot: ^2.3.0
   share_plus: ^8.0.3
   shared_preferences: ^2.2.2

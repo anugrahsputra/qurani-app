@@ -396,7 +396,7 @@ class SurahCards extends StatelessWidget {
                   context,
                   surahNumber: surah.number,
                 ),
-                child: CardView(surah: surah),
+                child: SurahCardView(surah: surah),
               );
             },
           );
@@ -423,94 +423,11 @@ class SurahCards extends StatelessWidget {
         } else {
           return const SliverFillRemaining(
             child: Center(
-              child: Text('Something went wrong, try again'),
+              child: Text('Terjadi kesalahan, Coba lagi nanti'),
             ),
           );
         }
       },
-    );
-  }
-}
-
-class CardView extends StatelessWidget {
-  const CardView({super.key, this.surah});
-
-  final SurahEntity? surah;
-
-  @override
-  Widget build(BuildContext context) {
-    String translation = surah?.name.short ?? "unknown";
-    String numberOfVerses = surah?.numberOfVerses.toString() ?? "000";
-    String revelationType = surah?.revelation.id ?? "unknown";
-    String surahNumber = surah?.number.toArabicDigits() ?? 1.toArabicDigits();
-    String name = surah?.name.transliteration.id ?? 'unknown';
-
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 10.w,
-        vertical: 10.h,
-      ),
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.shadow.withOpacity(0.15),
-            offset: const Offset(8, 8),
-            blurRadius: 14,
-            spreadRadius: -8,
-          )
-        ],
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 40.h,
-            child: Center(
-              child: Text(
-                '﴾$surahNumber﴿',
-                style: GoogleFonts.amiriQuran(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 20.sp,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          const Gap(10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.sp,
-                ),
-              ),
-              Gap(5.h),
-              Text(
-                '$revelationType - $numberOfVerses ayat',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.grey,
-                ),
-              )
-            ],
-          ),
-          const Spacer(),
-          Text(
-            translation,
-            style: GoogleFonts.notoSansArabic(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

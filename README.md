@@ -12,7 +12,7 @@ Quraani is a simple and easy-to-use Quran app for Android built with Flutter. It
 - [x] Bookmarking: Save and revisit specific verses for later reference with the bookmarking feature.
 - [x] Social Sharing: Share Quran verses with friends and family on social media platforms.
 - [x] Tafsir: Access detailed explanations of the Quranic text with the Tafsir feature.
-- [ ] Search: Quickly find specific verses or chapters using the search feature.
+- [x] Search: Quickly find specific surah.
 - [ ] Night Mode: Switch to a dark theme for reading in low-light conditions.
 - [ ] Localization: Support for multiple languages to cater to a global audience. 
 - [ ] Settings: Customize the app to suit user preferences with various settings options.
@@ -40,6 +40,3 @@ You can try the app by downloading the APK from the [releases](https://github.co
 or clone the repository and run the app on your local machine.
 
 Please note that the app is currently only available in Bahasa Indonesia.
-
-## Note
-This project is to showcase my skills in Flutter and is not intended for commercial use. The app is still in the early stages of development and may contain bugs or incomplete features.
