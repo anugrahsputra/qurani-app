@@ -4,6 +4,10 @@ Quraani is a simple and easy-to-use Quran app for Android built with Flutter. It
 
 <img src="/shots/Frame 1.png">
 <img src="/shots/Frame 2.png">
+<img src="/shots/Frame 3.png">
+<img src="/shots/Frame 4.png">
+<img src="/shots/Frame 5.png">
+<img src="/shots/Frame 6.png">
 
 ## Features
 - [x] Complete Quran: Read the full Quran text with clear and easy-to-read formatting.

@@ -47,6 +47,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
+  flutter_native_splash: ^2.4.0
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.10+1
   freezed_annotation: ^2.4.1
@@ -87,6 +88,12 @@ dev_dependencies:
   json_serializable: ^6.7.1
   mockito: ^5.4.4
 
+flutter_native_splash:
+  background_image: assets/splash/quraani_splash.png
+  android: true
+  ios: false
+  web: false
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
@@ -103,6 +110,7 @@ flutter:
     - assets/pngs/
     - assets/backgrounds/
     - assets/lottie/
+    - assets/splash/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
