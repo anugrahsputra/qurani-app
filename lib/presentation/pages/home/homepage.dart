@@ -17,7 +17,6 @@ import 'package:timezone/timezone.dart' as tz;
 
 import '../../../../../core/core.dart';
 import '../../../../../injection.dart';
-import '../../../features/ayah/ayah.dart';
 import '../../../features/surah/surah.dart';
 import '../../presentation.dart';
 
@@ -34,7 +33,6 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage>
     with SingleTickerProviderStateMixin {
   final SurahBloc surahBloc = sl<SurahBloc>();
-  final AyahsBloc ayahsBloc = sl<AyahsBloc>();
   final AppbarBloc appbarBloc = sl<AppbarBloc>();
   final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
   final AppNavigator appNavigator = sl<AppNavigator>();
@@ -64,7 +62,6 @@ class _HomepageState extends State<Homepage>
     Future.microtask(() {
       prayerTimeCubit.getLoc();
       surahBloc.add(const OnGetSurah());
-      ayahsBloc.add(const OnGetRandomAyah());
     });
   }
 
@@ -84,9 +81,6 @@ class _HomepageState extends State<Homepage>
       providers: [
         BlocProvider(
           create: (context) => surahBloc,
-        ),
-        BlocProvider(
-          create: (context) => ayahsBloc,
         ),
         BlocProvider(
           create: (context) => prayerTimeCubit,
@@ -118,15 +112,18 @@ class _HomepageState extends State<Homepage>
             builder: (context, state) {
               return Stack(
                 children: [
-                  CustomScrollView(
-                    controller: controller,
-                    slivers: [
-                      HomeAppbar(
-                        tabController: tabController,
-                        appNavigator: appNavigator,
-                      ),
-                      SurahCards(),
-                    ],
+                  RefreshIndicator(
+                    onRefresh: pullToRefresh,
+                    child: CustomScrollView(
+                      controller: controller,
+                      slivers: [
+                        HomeAppbar(
+                          tabController: tabController,
+                          appNavigator: appNavigator,
+                        ),
+                        SurahCards(),
+                      ],
+                    ),
                   ),
                   FloatingMenu(
                     appNavigator: appNavigator,
