@@ -14,11 +14,14 @@ jobs:
                 distribution: 'zulu'
                 java-version: '17'
                 cache: 'gradle'
+            - uses: kuhnroyal/flutter-fvm-config-action@v2
+              id: fvm-config-action
+              with:
+                path: '.fvmrc'
             - uses: subosito/flutter-action@v2
               with:
-                flutter-version: '3.19.0'
-                channel: 'stable'
-                cache: true
+                flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+                channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
             - name: Install dependencies
               run: flutter pub get
             - name: Generate g.dart
