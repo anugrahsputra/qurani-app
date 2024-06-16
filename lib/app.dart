@@ -1,4 +1,3 @@
-import 'package:device_preview_screenshot/device_preview_screenshot.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,8 +42,6 @@ class _MyAppState extends State<MyApp> {
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            locale: DevicePreview.locale(context),
-            builder: DevicePreview.appBuilder,
             title: 'Qurani',
             theme: AppThemes.light,
             initialRoute: AppRoutes.initial,

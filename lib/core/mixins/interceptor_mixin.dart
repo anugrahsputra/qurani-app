@@ -19,6 +19,10 @@ mixin InterceptorMixin on Interceptor {
     return err.response?.statusCode == 404;
   }
 
+  bool isServerError(DioException err) {
+    return err.response?.statusCode == 500;
+  }
+
   bool isConnectionError(DioException err) {
     return (err.type == DioExceptionType.unknown &&
             err.error != null &&

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:qurani/core/core.dart';
@@ -19,6 +20,8 @@ void main() {
     );
   });
 
+  final RequestOptions requestOptions = RequestOptions(path: '');
+
   group('getDetailSurah', () {
     test(
         'should return SurahDetailResEntity when the call to remote data source is successful',
@@ -38,11 +41,14 @@ void main() {
         'should return ServerFailure when the call to remote data source is unsuccessful',
         () async {
       when(detailSurahRemoteDataSource.getDetailSurah(any))
-          .thenThrow(ServerException());
+          .thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: ServerException(),
+      ));
 
       final result = await surahDetailRepository.getDetailSurah(1);
 
-      expect(result, const Left(ServerFailure(message: 'server failure')));
+      expect(result, const Left(ServerFailure(message: 'Server Failure')));
       verify(detailSurahRemoteDataSource.getDetailSurah(1));
     });
 
@@ -50,7 +56,10 @@ void main() {
         'should return NetworkFailure when the call to remote data source is unsuccessful',
         () async {
       when(detailSurahRemoteDataSource.getDetailSurah(any))
-          .thenThrow(NetworkException());
+          .thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NetworkException(),
+      ));
 
       final result = await surahDetailRepository.getDetailSurah(1);
 
@@ -63,7 +72,10 @@ void main() {
         'should return RequestFailure when the call to remote data source is unsuccessful',
         () async {
       when(detailSurahRemoteDataSource.getDetailSurah(any))
-          .thenThrow(NotFoundException());
+          .thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NotFoundException(),
+      ));
 
       final result = await surahDetailRepository.getDetailSurah(1);
 
@@ -75,7 +87,10 @@ void main() {
         'should return UnknownFailure when the call to remote data source is unsuccessfull',
         () async {
       when(detailSurahRemoteDataSource.getDetailSurah(any))
-          .thenThrow(UnknownException());
+          .thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: UnknownException(),
+      ));
 
       final result = await surahDetailRepository.getDetailSurah(1);
 
@@ -102,11 +117,14 @@ void main() {
         'should return ServerFailure when the call to remote data source is unsuccessful',
         () async {
       when(detailSurahRemoteDataSource.getFullAudio(any))
-          .thenThrow(ServerException());
+          .thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: ServerException(),
+      ));
 
       final result = await surahDetailRepository.getFullAudio(1);
 
-      expect(result, const Left(ServerFailure(message: 'server failure')));
+      expect(result, const Left(ServerFailure(message: 'Server Failure')));
       verify(detailSurahRemoteDataSource.getFullAudio(1));
     });
 
@@ -114,7 +132,10 @@ void main() {
         'should return NetworkFailure when the call to remote data source is unsuccessful',
         () async {
       when(detailSurahRemoteDataSource.getFullAudio(any))
-          .thenThrow(NetworkException());
+          .thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NetworkException(),
+      ));
 
       final result = await surahDetailRepository.getFullAudio(1);
 
@@ -127,7 +148,10 @@ void main() {
         'should return RequestFailure when the call to remote data source is unsuccessful',
         () async {
       when(detailSurahRemoteDataSource.getFullAudio(any))
-          .thenThrow(NotFoundException());
+          .thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NotFoundException(),
+      ));
 
       final result = await surahDetailRepository.getFullAudio(1);
 
@@ -139,7 +163,10 @@ void main() {
         'should return UnknownFailure when the call to remote data source is unsuccessfull',
         () async {
       when(detailSurahRemoteDataSource.getFullAudio(any))
-          .thenThrow(UnknownException());
+          .thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: UnknownException(),
+      ));
 
       final result = await surahDetailRepository.getFullAudio(1);
 

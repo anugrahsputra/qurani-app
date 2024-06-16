@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 import '../../../../core/core.dart';
 import '../../domain/domain.dart';
@@ -14,14 +15,24 @@ class SurahRepositoryImpl implements BaseSurahRepository {
     try {
       final result = await remoteDataSource.getSurahs();
       return Right(result.toEntity());
-    } on ServerException {
-      return const Left(ServerFailure(message: 'server failure'));
-    } on BadRequestException {
-      return const Left(RequestFailure(message: 'bad request'));
-    } on NetworkException {
-      return const Left(NetworkFailure(message: 'network failure'));
-    } on UnknownException {
-      return const Left(UnknownFailure(message: 'unknown failure'));
+    } on DioException catch (e) {
+      if (e.error is BadRequestException) {
+        return const Left(RequestFailure(message: "Bad Request"));
+      } else if (e.error is UnauthorizedException) {
+        return const Left(RequestFailure(message: "Unauthorized"));
+      } else if (e.error is ForbiddenException) {
+        return const Left(RequestFailure(message: "Forbidden"));
+      } else if (e.error is ServerException) {
+        return const Left(ServerFailure(message: "Server Failure"));
+      } else if (e.error is NotFoundException) {
+        return const Left(RequestFailure(message: "Not Found"));
+      } else if (e.error is NetworkException) {
+        return const Left(NetworkFailure(message: "No Internet Connection"));
+      } else {
+        return const Left(UnknownFailure(message: "Unknown Error"));
+      }
+    } catch (e) {
+      return const Left(UnknownFailure(message: "Unknown Error"));
     }
   }
 }

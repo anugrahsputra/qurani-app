@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:qurani/core/core.dart';
@@ -19,6 +20,8 @@ void main() {
     );
   });
 
+  final RequestOptions requestOptions = RequestOptions(path: '');
+
   group('get ayah', () {
     test('should get ayah from repository', () async {
       when(mockAyahRemoteDatasource.getAyah(any, any))
@@ -33,8 +36,10 @@ void main() {
     test(
         'should return ServerFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockAyahRemoteDatasource.getAyah(any, any))
-          .thenThrow(ServerException());
+      when(mockAyahRemoteDatasource.getAyah(any, any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: ServerException(),
+      ));
 
       final result = await ayahRepository.getAyah(1, 1);
 
@@ -44,8 +49,10 @@ void main() {
     test(
         'should return NetworkFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockAyahRemoteDatasource.getAyah(any, any))
-          .thenThrow(NetworkException());
+      when(mockAyahRemoteDatasource.getAyah(any, any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NetworkException(),
+      ));
 
       final result = await ayahRepository.getAyah(1, 1);
 
@@ -55,8 +62,10 @@ void main() {
     test(
         'should return NotFoundFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockAyahRemoteDatasource.getAyah(any, any))
-          .thenThrow(NotFoundException());
+      when(mockAyahRemoteDatasource.getAyah(any, any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NotFoundException(),
+      ));
 
       final result = await ayahRepository.getAyah(1, 1);
 
@@ -65,8 +74,10 @@ void main() {
     test(
         'should return UnknownFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockAyahRemoteDatasource.getAyah(any, any))
-          .thenThrow(UnknownException());
+      when(mockAyahRemoteDatasource.getAyah(any, any)).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: UnknownException(),
+      ));
 
       final result = await ayahRepository.getAyah(1, 1);
 
@@ -87,8 +98,10 @@ void main() {
     test(
         'should return ServerFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockAyahRemoteDatasource.getRandomAyah())
-          .thenThrow(ServerException());
+      when(mockAyahRemoteDatasource.getRandomAyah()).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: ServerException(),
+      ));
 
       final result = await ayahRepository.getRandomAyah();
 
@@ -97,8 +110,10 @@ void main() {
     test(
         'should return NetworkFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockAyahRemoteDatasource.getRandomAyah())
-          .thenThrow(NetworkException());
+      when(mockAyahRemoteDatasource.getRandomAyah()).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NetworkException(),
+      ));
 
       final result = await ayahRepository.getRandomAyah();
 
@@ -108,8 +123,10 @@ void main() {
     test(
         'should return NotFoundFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockAyahRemoteDatasource.getRandomAyah())
-          .thenThrow(NotFoundException());
+      when(mockAyahRemoteDatasource.getRandomAyah()).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: NotFoundException(),
+      ));
 
       final result = await ayahRepository.getRandomAyah();
 
@@ -118,8 +135,10 @@ void main() {
     test(
         'should return UnknownFailure when the call to remote data source is unsuccessful',
         () async {
-      when(mockAyahRemoteDatasource.getRandomAyah())
-          .thenThrow(UnknownException());
+      when(mockAyahRemoteDatasource.getRandomAyah()).thenThrow(DioException(
+        requestOptions: requestOptions,
+        error: UnknownException(),
+      ));
 
       final result = await ayahRepository.getRandomAyah();
 
