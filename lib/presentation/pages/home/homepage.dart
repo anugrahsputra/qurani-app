@@ -99,7 +99,8 @@ class _HomepageState extends State<Homepage>
             listener: (context, state) {
               if (state is LocationPermissionDenied) {
                 message = state.message;
-                AppSnackbar.showError(context, message ?? state.message);
+                AppSnackbar.showError(
+                    context, message ?? "Location permission denied");
               }
               if (state is LocationError) {
                 AppSnackbar.showError(context, state.message);

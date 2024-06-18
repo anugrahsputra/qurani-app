@@ -329,7 +329,7 @@ class _VerseViewState extends State<VerseView> {
                 style: GoogleFonts.amiri(
                   height: 2,
                   fontWeight: FontWeight.bold,
-                  fontSize: 26.sp,
+                  fontSize: 24.sp,
                   color: Colors.black,
                 ),
                 textDirection: TextDirection.rtl,

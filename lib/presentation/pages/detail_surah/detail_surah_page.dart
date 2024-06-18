@@ -113,9 +113,13 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
               return const Center(
                 child: CircularProgressIndicator(),
               );
+            } else if (state is DetailSurahError) {
+              return Center(
+                child: Text(state.message),
+              );
             } else {
               return const Center(
-                child: Text('Something went wrong'),
+                child: Text("unknown error"),
               );
             }
           },

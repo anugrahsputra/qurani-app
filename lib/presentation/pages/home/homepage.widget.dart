@@ -282,6 +282,14 @@ class FloatingMenu extends StatelessWidget {
           color: AppColors.onBackground,
           onPressed: () => appNavigator.goToSearch(context),
         ),
+        IconButton(
+          onPressed: () {
+            AppSnackbar.showSnackBar(context,
+                message: 'This feature is still on development',
+                snackbarColor: Colors.orange);
+          },
+          icon: const Icon(Icons.settings_rounded),
+        )
       ],
     );
   }

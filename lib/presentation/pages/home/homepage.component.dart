@@ -37,6 +37,21 @@ class HomeAppbar extends StatelessWidget {
               ),
               switchWidget2: const SizedBox.shrink(),
             ),
+            WidgetSwitcher(
+              isWidgetSwitched: state.displayAppbar,
+              switchWidget1: IconButton(
+                tooltip: 'Pengaturan Aplikasi',
+                iconSize: 25,
+                icon: const Icon(Icons.settings_rounded),
+                color: AppColors.onPrimary,
+                onPressed: () => AppSnackbar.showSnackBar(
+                  context,
+                  message: 'Fitur ini masih dalam pengembangan',
+                  snackbarColor: Colors.orange,
+                ),
+              ),
+              switchWidget2: const SizedBox.shrink(),
+            ),
           ],
           title: WidgetSwitcher(
             duration: const Duration(milliseconds: 500),
@@ -44,12 +59,15 @@ class HomeAppbar extends StatelessWidget {
             switchOutCurve: Curves.easeInOut,
             reverseDuration: Duration.zero,
             isWidgetSwitched: state.displayAppbar,
-            switchWidget1: Text(
-              'Quraani',
-              style: GoogleFonts.poppins(
-                color: AppColors.onPrimary,
-                fontSize: 24.sp,
-                fontWeight: FontWeight.w600,
+            switchWidget1: Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Text(
+                'Qurani',
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.onPrimary,
+                ),
               ),
             ),
             switchWidget2: const SizedBox.shrink(),
