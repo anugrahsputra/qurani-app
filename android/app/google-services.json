@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "297896487082",
+    "project_id": "qurani-app",
+    "storage_bucket": "qurani-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:297896487082:android:f727a029c46006652508d3",
+        "android_client_info": {
+          "package_name": "com.downormal.qurani"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI1atfbS16h3po_CDW1hPcL6-T10MEko0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
