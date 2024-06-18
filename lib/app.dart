@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qurani/core/core.dart';
@@ -9,11 +9,16 @@ import 'observer.dart';
 import 'presentation/presentation.dart';
 
 Future<void> initialize() async {
-  CustomLog.initialize(showLog: kDebugMode);
+  await FirebaseService.init();
   Bloc.observer = MyBlocObserver();
   await setup();
 
-  runApp(const MyApp());
+  return SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatefulWidget {
@@ -31,6 +36,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
+    );
     return MultiBlocProvider(
       providers: [
         BlocProvider(
