@@ -12,18 +12,32 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
   Dio dio = sl<Dio>(instanceName: "interceptor");
   late final RequestRetrier requestRetrier;
 
-  CustomInterceptor() {
-    requestRetrier = RequestRetrier(
-      dio: dio,
-      internetConnectionChecker: InternetConnectionChecker.createInstance(
-        checkInterval: const Duration(seconds: 5),
-        checkTimeout: const Duration(seconds: 5),
-      ),
-    );
-  }
+  // CustomInterceptor() {
+  //   requestRetrier = RequestRetrier(
+  //     dio: dio,
+  //     internetConnectionChecker: InternetConnectionChecker.createInstance(
+  //       checkInterval: const Duration(seconds: 5),
+  //       checkTimeout: const Duration(seconds: 5),
+  //     ),
+  //   );
+  // }
+
+  CustomInterceptor({RequestRetrier? requestRetrier})
+      : requestRetrier =
+      requestRetrier ??
+          RequestRetrier(
+            dio: sl<Dio>(instanceName: "interceptor"),
+            internetConnectionChecker: InternetConnectionChecker.createInstance(
+              checkInterval: const Duration(seconds: 5),
+              checkTimeout: const Duration(seconds: 5),
+            ),
+          );
 
   @override
   void onRequest(options, handler) {
+    log.fine("➡️ Request [${options.method}] => URL: ${options.uri}");
+    log.fine("➡️ Headers: ${options.headers}");
+    log.info("➡️ On Send Progress: ${options.onSendProgress}");
     log.fine("Request: ${options.uri}");
     super.onRequest(options, handler);
   }
@@ -43,14 +57,35 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
   @override
   void onError(err, handler) async {
     log.severe("Error: ${err.requestOptions.uri}");
+    log.severe("Error: ${err.response?.data}");
     if (isBadRequest(err)) {
-      throw BadRequestException();
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: BadRequestException(message: err.response!.data["error"]),
+        ),
+      );
     } else if (isUnauthorized(err)) {
-      throw UnauthorizedException();
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: UnauthorizedException(message: err.response!.data["error"]),
+        ),
+      );
     } else if (isForbidden(err)) {
-      throw ForbiddenException();
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: ForbiddenException(),
+        ),
+      );
     } else if (isNotFound(err)) {
-      throw NotFoundException();
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: NotFoundException(),
+        ),
+      );
     } else if (isConnectionError(err)) {
       try {
         log.warning("Connection Error: ${err.requestOptions.uri}");
@@ -58,10 +93,20 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
         return handler.resolve(response);
       } catch (e) {
         log.severe("Connection Error: ${err.requestOptions.uri}");
-        handler.reject(err);
-        throw NetworkException();
+        return handler.reject(
+          DioException(
+            requestOptions: err.requestOptions,
+            error: NetworkException(),
+          ),
+        );
       }
+    } else {
+      return handler.reject(
+        DioException(
+          requestOptions: err.requestOptions,
+          error: UnknownException(),
+        ),
+      );
     }
-    super.onError(err, handler);
   }
 }
