@@ -6,7 +6,7 @@ part 'surah_detail_res_model.freezed.dart';
 part 'surah_detail_res_model.g.dart';
 
 @freezed
-class SurahDetailResModel with _$SurahDetailResModel {
+abstract class SurahDetailResModel with _$SurahDetailResModel {
   @JsonSerializable(explicitToJson: true)
   const factory SurahDetailResModel({
     @JsonKey(name: "code") required int code,

@@ -4,7 +4,7 @@ part 'surah.freezed.dart';
 part 'surah.g.dart';
 
 @freezed
-class Surah with _$Surah {
+abstract class Surah with _$Surah {
   @JsonSerializable(explicitToJson: true)
   const factory Surah({
     @JsonKey(name: "number") int? number,
@@ -19,7 +19,7 @@ class Surah with _$Surah {
 }
 
 @freezed
-class Name with _$Name {
+abstract class Name with _$Name {
   @JsonSerializable(explicitToJson: true)
   const factory Name({
     @JsonKey(name: "short") required String? short,
@@ -32,7 +32,7 @@ class Name with _$Name {
 }
 
 @freezed
-class Translation with _$Translation {
+abstract class Translation with _$Translation {
   const factory Translation({
     @JsonKey(name: "en") required String? en,
     @JsonKey(name: "id") required String? id,
@@ -43,7 +43,7 @@ class Translation with _$Translation {
 }
 
 @freezed
-class Revelation with _$Revelation {
+abstract class Revelation with _$Revelation {
   const factory Revelation({
     @JsonKey(name: "arab") required String? arab,
     @JsonKey(name: "en") required String? en,
@@ -55,7 +55,7 @@ class Revelation with _$Revelation {
 }
 
 @freezed
-class Tafsir with _$Tafsir {
+abstract class Tafsir with _$Tafsir {
   const factory Tafsir({
     @JsonKey(name: "id") required String? id,
   }) = _Tafsir;

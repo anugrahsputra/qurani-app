@@ -12,33 +12,20 @@ class ISurahDetailRepository implements SurahDetailRepository {
   @override
   Future<Either<Failure, SurahDetailRes>> getDetailSurah(
       int surahNumber) async {
-    try {
-      final result = await remoteDataSource.getDetailSurah(surahNumber);
-      return Right(result.toEntity());
-    } on ServerException {
-      return const Left(ServerFailure(message: "server failure"));
-    } on NetworkException {
-      return const Left(NetworkFailure(message: "No Internet Connection"));
-    } on NotFoundException {
-      return const Left(RequestFailure(message: "Not Found"));
-    } on UnknownException {
-      return const Left(UnknownFailure(message: "Unknown Error"));
-    }
+    final result = await remoteDataSource.getDetailSurah(surahNumber);
+    return result.fold(
+      (failure) => Left(failure),
+      (data) => Right(data.toEntity()),
+    );
   }
 
   @override
   Future<Either<Failure, AudioFile>> getFullAudio(int surahNumber) async {
-    try {
-      final result = await remoteDataSource.getFullAudio(surahNumber);
-      return Right(result.toEntity());
-    } on ServerException {
-      return const Left(ServerFailure(message: "server failure"));
-    } on NetworkException {
-      return const Left(NetworkFailure(message: "No Internet Connection"));
-    } on NotFoundException {
-      return const Left(RequestFailure(message: "Not Found"));
-    } on UnknownException {
-      return const Left(UnknownFailure(message: "Unknown Error"));
-    }
+
+    final result = await remoteDataSource.getFullAudio(surahNumber);
+    return result.fold(
+          (failure) => Left(failure),
+          (data) => Right(data.toEntity()),
+    );
   }
 }

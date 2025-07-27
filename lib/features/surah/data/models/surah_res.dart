@@ -6,7 +6,7 @@ part 'surah_res.freezed.dart';
 part 'surah_res.g.dart';
 
 @freezed
-class SurahRes with _$SurahRes {
+abstract class SurahRes with _$SurahRes {
   @JsonSerializable(explicitToJson: true)
   const factory SurahRes({
     @JsonKey(name: "code") int? code,

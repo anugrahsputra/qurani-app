@@ -5,7 +5,7 @@ import '../domain.dart';
 part 'surah_detail_res_entity.freezed.dart';
 
 @freezed
-class SurahDetailRes with _$SurahDetailRes {
+abstract class SurahDetailRes with _$SurahDetailRes {
   const factory SurahDetailRes({
     int? code,
     String? status,

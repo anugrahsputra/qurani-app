@@ -1,9 +1,11 @@
+import 'package:dartz/dartz.dart';
+
 import '../../../../core/core.dart';
 import '../models/models.dart';
 
 abstract class DetailSurahRemoteDataSource {
-  Future<SurahDetailResModel> getDetailSurah(int surahNumber);
-  Future<AudioFileModel> getFullAudio(int surahNumber);
+  Future<Either<Failure, SurahDetailResModel>> getDetailSurah(int surahNumber);
+  Future<Either<Failure, AudioFileModel>> getFullAudio(int surahNumber);
 }
 
 class DetailSurahRemoteDataSourceImpl implements DetailSurahRemoteDataSource {
@@ -12,21 +14,23 @@ class DetailSurahRemoteDataSourceImpl implements DetailSurahRemoteDataSource {
   DetailSurahRemoteDataSourceImpl({required this.dioClient});
 
   @override
-  Future<SurahDetailResModel> getDetailSurah(int surahNumber) async {
-    final response = await dioClient.get('${Endpoint.surah}/$surahNumber');
-    final parsedData =
-        response.data is String ? Parser.getMap(response.data) : response.data;
+  Future<Either<Failure, SurahDetailResModel>> getDetailSurah(int surahNumber) async {
+    return await dioClient.getParsedSafe(
+      '${Endpoint.surah}/$surahNumber',
+      converter: (json) => SurahDetailResModel.fromJson(json),
+    );
 
-    return SurahDetailResModel.fromJson(parsedData);
   }
 
   @override
-  Future<AudioFileModel> getFullAudio(int surahNumber) async {
-    final response =
-        await dioClient.get('${Endpoint.recitalSurah}$surahNumber');
-    final parsedData = response.data['audio_file'] is String
-        ? Parser.getMap(response.data['audio_file'])
-        : response.data['audio_file'];
-    return AudioFileModel.fromJson(parsedData);
+  Future<Either<Failure, AudioFileModel>> getFullAudio(int surahNumber) async {
+    return await dioClient.getParsedSafe(
+      '${Endpoint.recitalSurah}$surahNumber',
+      converter: (json) {
+        final data = json['audio_file'];
+        return AudioFileModel.fromJson(data);
+      },
+      useIsolate: true
+    );
   }
 }

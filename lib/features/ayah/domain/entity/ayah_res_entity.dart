@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'ayah_res_entity.freezed.dart';
 
 @freezed
-class AyahRes with _$AyahRes {
+abstract class AyahRes with _$AyahRes {
   const factory AyahRes({
     required int code,
     required String status,
@@ -13,7 +13,7 @@ class AyahRes with _$AyahRes {
 }
 
 @freezed
-class Ayah with _$Ayah {
+abstract class Ayah with _$Ayah {
   const factory Ayah({
     required NumberAyah number,
     required MetaAyah meta,
@@ -26,7 +26,7 @@ class Ayah with _$Ayah {
 }
 
 @freezed
-class AudioAyah with _$AudioAyah {
+abstract class AudioAyah with _$AudioAyah {
   const factory AudioAyah({
     required String primary,
     required List<String> secondary,
@@ -34,7 +34,7 @@ class AudioAyah with _$AudioAyah {
 }
 
 @freezed
-class MetaAyah with _$MetaAyah {
+abstract class MetaAyah with _$MetaAyah {
   const factory MetaAyah({
     required int juz,
     required int page,
@@ -46,7 +46,7 @@ class MetaAyah with _$MetaAyah {
 }
 
 @freezed
-class SajdaAyah with _$SajdaAyah {
+abstract class SajdaAyah with _$SajdaAyah {
   const factory SajdaAyah({
     required bool recommended,
     required bool obligatory,
@@ -54,7 +54,7 @@ class SajdaAyah with _$SajdaAyah {
 }
 
 @freezed
-class NumberAyah with _$NumberAyah {
+abstract class NumberAyah with _$NumberAyah {
   const factory NumberAyah({
     required int inQuran,
     required int inSurah,
@@ -62,7 +62,7 @@ class NumberAyah with _$NumberAyah {
 }
 
 @freezed
-class SurahAyah with _$SurahAyah {
+abstract class SurahAyah with _$SurahAyah {
   const factory SurahAyah({
     required int number,
     required int sequence,
@@ -75,7 +75,7 @@ class SurahAyah with _$SurahAyah {
 }
 
 @freezed
-class NameAyah with _$NameAyah {
+abstract class NameAyah with _$NameAyah {
   const factory NameAyah({
     required String short,
     required String long,
@@ -85,7 +85,7 @@ class NameAyah with _$NameAyah {
 }
 
 @freezed
-class TranslationAyah with _$TranslationAyah {
+abstract class TranslationAyah with _$TranslationAyah {
   const factory TranslationAyah({
     required String en,
     required String id,
@@ -93,7 +93,7 @@ class TranslationAyah with _$TranslationAyah {
 }
 
 @freezed
-class PreBismillahAyah with _$PreBismillahAyah {
+abstract class PreBismillahAyah with _$PreBismillahAyah {
   const factory PreBismillahAyah({
     required TextAyah text,
     required TranslationAyah translation,
@@ -102,7 +102,7 @@ class PreBismillahAyah with _$PreBismillahAyah {
 }
 
 @freezed
-class TextAyah with _$TextAyah {
+abstract class TextAyah with _$TextAyah {
   const factory TextAyah({
     required String arab,
     required TransliterationAyah transliteration,
@@ -110,14 +110,14 @@ class TextAyah with _$TextAyah {
 }
 
 @freezed
-class TransliterationAyah with _$TransliterationAyah {
+abstract class TransliterationAyah with _$TransliterationAyah {
   const factory TransliterationAyah({
     required String en,
   }) = _TransliterationAyah;
 }
 
 @freezed
-class RevelationAyah with _$RevelationAyah {
+abstract class RevelationAyah with _$RevelationAyah {
   const factory RevelationAyah({
     required String arab,
     required String en,
@@ -126,21 +126,21 @@ class RevelationAyah with _$RevelationAyah {
 }
 
 @freezed
-class SurahAyahTafsir with _$SurahAyahTafsir {
+abstract class SurahAyahTafsir with _$SurahAyahTafsir {
   const factory SurahAyahTafsir({
     required String id,
   }) = _SurahAyahTafsir;
 }
 
 @freezed
-class TafsirAyah with _$TafsirAyah {
+abstract class TafsirAyah with _$TafsirAyah {
   const factory TafsirAyah({
     required IdAyah id,
   }) = _TafsirAyah;
 }
 
 @freezed
-class IdAyah with _$IdAyah {
+abstract class IdAyah with _$IdAyah {
   const factory IdAyah({
     required String short,
     required String long,

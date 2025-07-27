@@ -4,7 +4,7 @@ part 'surah_detail_model.freezed.dart';
 part 'surah_detail_model.g.dart';
 
 @freezed
-class SurahDetailModel with _$SurahDetailModel {
+abstract class SurahDetailModel with _$SurahDetailModel {
   @JsonSerializable(explicitToJson: true)
   const factory SurahDetailModel({
     @JsonKey(name: "number") int? number,
@@ -22,7 +22,7 @@ class SurahDetailModel with _$SurahDetailModel {
 }
 
 @freezed
-class NameModel with _$NameModel {
+abstract class NameModel with _$NameModel {
   @JsonSerializable(explicitToJson: true)
   const factory NameModel({
     @JsonKey(name: "short") String? short,
@@ -36,7 +36,7 @@ class NameModel with _$NameModel {
 }
 
 @freezed
-class TranslationModel with _$TranslationModel {
+abstract class TranslationModel with _$TranslationModel {
   const factory TranslationModel({
     @JsonKey(name: "en") String? en,
     @JsonKey(name: "id") String? id,
@@ -47,7 +47,7 @@ class TranslationModel with _$TranslationModel {
 }
 
 @freezed
-class PreBismillahModel with _$PreBismillahModel {
+abstract class PreBismillahModel with _$PreBismillahModel {
   @JsonSerializable(explicitToJson: true)
   const factory PreBismillahModel({
     @JsonKey(name: "text") TextsModel? text,
@@ -60,7 +60,7 @@ class PreBismillahModel with _$PreBismillahModel {
 }
 
 @freezed
-class AudioModel with _$AudioModel {
+abstract class AudioModel with _$AudioModel {
   const factory AudioModel({
     @JsonKey(name: "primary") String? primary,
     @JsonKey(name: "secondary") List<String>? secondary,
@@ -71,7 +71,7 @@ class AudioModel with _$AudioModel {
 }
 
 @freezed
-class TextsModel with _$TextsModel {
+abstract class TextsModel with _$TextsModel {
   @JsonSerializable(explicitToJson: true)
   const factory TextsModel({
     @JsonKey(name: "arab") String? arab,
@@ -83,7 +83,7 @@ class TextsModel with _$TextsModel {
 }
 
 @freezed
-class TransliterationModel with _$TransliterationModel {
+abstract class TransliterationModel with _$TransliterationModel {
   const factory TransliterationModel({
     @JsonKey(name: "en") String? en,
   }) = _TransliterationModel;
@@ -93,7 +93,7 @@ class TransliterationModel with _$TransliterationModel {
 }
 
 @freezed
-class RevelationModel with _$RevelationModel {
+abstract class RevelationModel with _$RevelationModel {
   const factory RevelationModel({
     @JsonKey(name: "arab") String? arab,
     @JsonKey(name: "en") String? en,
@@ -105,7 +105,7 @@ class RevelationModel with _$RevelationModel {
 }
 
 @freezed
-class TafsirModel with _$TafsirModel {
+abstract class TafsirModel with _$TafsirModel {
   const factory TafsirModel({
     @JsonKey(name: "id") String? id,
   }) = _TafsirModel;
@@ -115,7 +115,7 @@ class TafsirModel with _$TafsirModel {
 }
 
 @freezed
-class VerseModel with _$VerseModel {
+abstract class VerseModel with _$VerseModel {
   @JsonSerializable(explicitToJson: true)
   const factory VerseModel({
     @JsonKey(name: "number") NumberModel? number,
@@ -131,7 +131,7 @@ class VerseModel with _$VerseModel {
 }
 
 @freezed
-class MetaModel with _$MetaModel {
+abstract class MetaModel with _$MetaModel {
   @JsonSerializable(explicitToJson: true)
   const factory MetaModel({
     @JsonKey(name: "juz") int? juz,
@@ -147,7 +147,7 @@ class MetaModel with _$MetaModel {
 }
 
 @freezed
-class SajdaModel with _$SajdaModel {
+abstract class SajdaModel with _$SajdaModel {
   const factory SajdaModel({
     @JsonKey(name: "recommended") bool? recommended,
     @JsonKey(name: "obligatory") bool? obligatory,
@@ -158,7 +158,7 @@ class SajdaModel with _$SajdaModel {
 }
 
 @freezed
-class NumberModel with _$NumberModel {
+abstract class NumberModel with _$NumberModel {
   const factory NumberModel({
     @JsonKey(name: "inQuran") int? inQuran,
     @JsonKey(name: "inSurah") int? inSurah,
@@ -169,7 +169,7 @@ class NumberModel with _$NumberModel {
 }
 
 @freezed
-class VerseTafsirModel with _$VerseTafsirModel {
+abstract class VerseTafsirModel with _$VerseTafsirModel {
   @JsonSerializable(explicitToJson: true)
   const factory VerseTafsirModel({
     @JsonKey(name: "id") IdModel? id,
@@ -180,7 +180,7 @@ class VerseTafsirModel with _$VerseTafsirModel {
 }
 
 @freezed
-class IdModel with _$IdModel {
+abstract class IdModel with _$IdModel {
   const factory IdModel({
     @JsonKey(name: "short") String? short,
     @JsonKey(name: "long") String? long,

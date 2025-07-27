@@ -5,7 +5,7 @@ import 'entity.dart';
 part 'name_entity.freezed.dart';
 
 @freezed
-class NameEntity with _$NameEntity {
+abstract class NameEntity with _$NameEntity {
   const factory NameEntity({
     required String short,
     required String long,
