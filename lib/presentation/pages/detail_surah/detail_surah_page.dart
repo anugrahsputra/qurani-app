@@ -29,6 +29,7 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
   final DetailSurahBloc detailSurahBloc = sl<DetailSurahBloc>();
   final VerseAudioCubit verseAudioCubit = sl<VerseAudioCubit>();
   final AppNavigator appNavigator = sl<AppNavigator>();
+
   int get surahNumber => widget.surahNumber;
 
   @override
@@ -47,15 +48,9 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => detailSurahBloc,
-        ),
-        BlocProvider(
-          create: (context) => verseAudioCubit,
-        ),
-        BlocProvider(
-          create: (context) => sl<BookmarkBloc>(),
-        )
+        BlocProvider(create: (context) => detailSurahBloc),
+        BlocProvider(create: (context) => verseAudioCubit),
+        BlocProvider(create: (context) => sl<BookmarkBloc>()),
       ],
       child: AppScaffold(
         appBar: AppBar(
@@ -70,54 +65,44 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
             }
           },
           builder: (context, state) {
-            if (state is DetailSurahLoaded) {
-              SurahDetail surahDetail = state.detailSurah;
-              List<Verse> verses = surahDetail.verses!;
-              String playSurah = surahDetail.name!.transliteration!.id!;
-              String totalVerse = '${surahDetail.numberOfVerses} ayat';
+            return state.maybeWhen(
+              initial: () => const Center(),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              loaded: (surah) {
+                SurahDetail surahDetail = surah;
+                List<Verse> verses = surahDetail.verses!;
+                String playSurah = surahDetail.name!.transliteration!.id!;
+                String totalVerse = '${surahDetail.numberOfVerses} ayat';
 
-              final isPlayedAll =
-                  context.select<VerseAudioCubit, bool>((cubit) {
-                final result = cubit.state;
-                return result is VersePlayingAll ? false : true;
-              });
-              return Stack(
-                children: [
-                  SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      children: [
-                        Gap(10.h),
-                        DetailHeader(
-                          surahDetail: surahDetail,
-                          verseAudioCubit: verseAudioCubit,
-                        ),
-                        OpeningBismillah(surahDetail: surahDetail),
-                        Verses(
-                          verses: verses,
-                          surah: surahDetail,
-                          appNavigator: appNavigator,
-                        ),
-                        const Gap(20),
-                      ],
+                final isPlayedAll = context.select<VerseAudioCubit, bool>((cubit) {
+                  final result = cubit.state;
+                  return result is VersePlayingAll ? false : true;
+                });
+
+                return Stack(
+                  children: [
+                    SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          Gap(10.h),
+                          DetailHeader(surahDetail: surahDetail, verseAudioCubit: verseAudioCubit),
+                          OpeningBismillah(surahDetail: surahDetail),
+                          Verses(verses: verses, surah: surahDetail, appNavigator: appNavigator),
+                          const Gap(20),
+                        ],
+                      ),
                     ),
-                  ),
-                  AudioTime(
-                    isPlayedAll: isPlayedAll,
-                    playSurah: playSurah,
-                    totalVerse: totalVerse,
-                  ),
-                ],
-              );
-            } else if (state is DetailSurahLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return const Center(
-                child: Text('Something went wrong'),
-              );
-            }
+                    AudioTime(
+                      isPlayedAll: isPlayedAll,
+                      playSurah: playSurah,
+                      totalVerse: totalVerse,
+                    ),
+                  ],
+                );
+              },
+              orElse: () => const Center(child: Text('Something went wrong')),
+            );
           },
         ),
       ),
@@ -143,6 +128,7 @@ class AudioTime extends StatefulWidget {
 
 class _AudioTimeState extends State<AudioTime> {
   Duration _position = Duration.zero;
+
   // ignore: unused_field
   Duration _duration = Duration.zero;
 
@@ -153,16 +139,14 @@ class _AudioTimeState extends State<AudioTime> {
   void initState() {
     super.initState();
     final verseAudioCubit = context.read<VerseAudioCubit>();
-    _durationSubscription =
-        verseAudioCubit.player?.onDurationChanged.listen((newDuration) {
+    _durationSubscription = verseAudioCubit.player?.onDurationChanged.listen((newDuration) {
       if (mounted) {
         setState(() {
           _duration = newDuration;
         });
       }
     });
-    _positionSubscription =
-        verseAudioCubit.player?.onPositionChanged.listen((newPosition) {
+    _positionSubscription = verseAudioCubit.player?.onPositionChanged.listen((newPosition) {
       if (mounted) {
         setState(() {
           _position = newPosition;
@@ -196,26 +180,17 @@ class _AudioTimeState extends State<AudioTime> {
           children: [
             Text(
               widget.playSurah,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
             ),
             Text(
               widget.totalVerse,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-              ),
+              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
             ),
           ],
         ),
         Text(
           _formatDuration(_position),
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-          ),
+          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
         ),
       ],
     );
