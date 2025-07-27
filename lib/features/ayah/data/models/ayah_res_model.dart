@@ -4,7 +4,7 @@ part 'ayah_res_model.freezed.dart';
 part 'ayah_res_model.g.dart';
 
 @freezed
-class AyahResModel with _$AyahResModel {
+abstract class AyahResModel with _$AyahResModel {
   @JsonSerializable(explicitToJson: true)
   const factory AyahResModel({
     @JsonKey(name: "code") required int code,
@@ -18,7 +18,7 @@ class AyahResModel with _$AyahResModel {
 }
 
 @freezed
-class AyahModel with _$AyahModel {
+abstract class AyahModel with _$AyahModel {
   @JsonSerializable(explicitToJson: true)
   const factory AyahModel({
     @JsonKey(name: "number") required NumberAyahModel number,
@@ -35,7 +35,7 @@ class AyahModel with _$AyahModel {
 }
 
 @freezed
-class AudioAyahModel with _$AudioAyahModel {
+abstract class AudioAyahModel with _$AudioAyahModel {
   const factory AudioAyahModel({
     @JsonKey(name: "primary") required String primary,
     @JsonKey(name: "secondary") required List<String> secondary,
@@ -46,7 +46,7 @@ class AudioAyahModel with _$AudioAyahModel {
 }
 
 @freezed
-class MetaAyahModel with _$MetaAyahModel {
+abstract class MetaAyahModel with _$MetaAyahModel {
   @JsonSerializable(explicitToJson: true)
   const factory MetaAyahModel({
     @JsonKey(name: "juz") required int juz,
@@ -62,7 +62,7 @@ class MetaAyahModel with _$MetaAyahModel {
 }
 
 @freezed
-class SajdaAyahModel with _$SajdaAyahModel {
+abstract class SajdaAyahModel with _$SajdaAyahModel {
   const factory SajdaAyahModel({
     @JsonKey(name: "recommended") required bool recommended,
     @JsonKey(name: "obligatory") required bool obligatory,
@@ -73,7 +73,7 @@ class SajdaAyahModel with _$SajdaAyahModel {
 }
 
 @freezed
-class NumberAyahModel with _$NumberAyahModel {
+abstract class NumberAyahModel with _$NumberAyahModel {
   const factory NumberAyahModel({
     @JsonKey(name: "inQuran") required int inQuran,
     @JsonKey(name: "inSurah") required int inSurah,
@@ -84,7 +84,7 @@ class NumberAyahModel with _$NumberAyahModel {
 }
 
 @freezed
-class SurahAyahModel with _$SurahAyahModel {
+abstract class SurahAyahModel with _$SurahAyahModel {
   @JsonSerializable(explicitToJson: true)
   const factory SurahAyahModel({
     @JsonKey(name: "number") required int number,
@@ -101,7 +101,7 @@ class SurahAyahModel with _$SurahAyahModel {
 }
 
 @freezed
-class NameAyahModel with _$NameAyahModel {
+abstract class NameAyahModel with _$NameAyahModel {
   @JsonSerializable(explicitToJson: true)
   const factory NameAyahModel({
     @JsonKey(name: "short") required String short,
@@ -116,7 +116,7 @@ class NameAyahModel with _$NameAyahModel {
 }
 
 @freezed
-class TranslationAyahModel with _$TranslationAyahModel {
+abstract class TranslationAyahModel with _$TranslationAyahModel {
   const factory TranslationAyahModel({
     @JsonKey(name: "en") required String en,
     @JsonKey(name: "id") required String id,
@@ -127,7 +127,7 @@ class TranslationAyahModel with _$TranslationAyahModel {
 }
 
 @freezed
-class PreBismillahAyahModel with _$PreBismillahAyahModel {
+abstract class PreBismillahAyahModel with _$PreBismillahAyahModel {
   @JsonSerializable(explicitToJson: true)
   const factory PreBismillahAyahModel({
     @JsonKey(name: "text") required TextsAyahModel text,
@@ -140,7 +140,7 @@ class PreBismillahAyahModel with _$PreBismillahAyahModel {
 }
 
 @freezed
-class TextsAyahModel with _$TextsAyahModel {
+abstract class TextsAyahModel with _$TextsAyahModel {
   @JsonSerializable(explicitToJson: true)
   const factory TextsAyahModel({
     @JsonKey(name: "arab") required String arab,
@@ -153,7 +153,7 @@ class TextsAyahModel with _$TextsAyahModel {
 }
 
 @freezed
-class TransliterationAyahModel with _$TransliterationAyahModel {
+abstract class TransliterationAyahModel with _$TransliterationAyahModel {
   const factory TransliterationAyahModel({
     @JsonKey(name: "en") required String en,
   }) = _TransliterationAyahModel;
@@ -163,7 +163,7 @@ class TransliterationAyahModel with _$TransliterationAyahModel {
 }
 
 @freezed
-class RevelationAyahModel with _$RevelationAyahModel {
+abstract class RevelationAyahModel with _$RevelationAyahModel {
   const factory RevelationAyahModel({
     @JsonKey(name: "arab") required String arab,
     @JsonKey(name: "en") required String en,
@@ -175,7 +175,7 @@ class RevelationAyahModel with _$RevelationAyahModel {
 }
 
 @freezed
-class SurahTafsirAyahModel with _$SurahTafsirAyahModel {
+abstract class SurahTafsirAyahModel with _$SurahTafsirAyahModel {
   const factory SurahTafsirAyahModel({
     @JsonKey(name: "id") required String id,
   }) = _SurahTafsirAyahModel;
@@ -185,7 +185,7 @@ class SurahTafsirAyahModel with _$SurahTafsirAyahModel {
 }
 
 @freezed
-class TafsirAyahModel with _$TafsirAyahModel {
+abstract class TafsirAyahModel with _$TafsirAyahModel {
   @JsonSerializable(explicitToJson: true)
   const factory TafsirAyahModel({
     @JsonKey(name: "id") required IdAyahModel id,
@@ -196,7 +196,7 @@ class TafsirAyahModel with _$TafsirAyahModel {
 }
 
 @freezed
-class IdAyahModel with _$IdAyahModel {
+abstract class IdAyahModel with _$IdAyahModel {
   @JsonSerializable(explicitToJson: true)
   const factory IdAyahModel({
     @JsonKey(name: "short") required String short,
