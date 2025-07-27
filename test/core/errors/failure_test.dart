@@ -19,7 +19,7 @@ void main() {
     });
 
     test('AuthFailure should extend Failure', () {
-      const failure = AuthFailure(message: 'Test message');
+      const failure = UnauthorizedFailure(message: 'Test message');
       expect(failure, isA<Failure>());
     });
 
