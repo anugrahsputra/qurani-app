@@ -44,8 +44,8 @@ Future<void> setup() async {
         DioCacheInterceptor(
           options: CacheOptions(
             store: HiveCacheStore(dir.path, hiveBoxName: 'qurani'),
-            priority: CachePriority.high,
-            policy: CachePolicy.forceCache,
+            priority: CachePriority.normal,
+            policy: CachePolicy.refreshForceCache,
             maxStale: const Duration(days: 7),
             hitCacheOnErrorExcept: [],
           ),
@@ -168,4 +168,5 @@ Future<void> setup() async {
   sl.registerFactory<PrayerTimeCubit>(
     () => PrayerTimeCubit(location: sl<UserLocation>()),
   );
+
 }
