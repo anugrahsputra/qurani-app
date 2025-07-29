@@ -3,15 +3,14 @@ import 'dart:ui';
 
 import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hijri/hijri_calendar.dart' as hijri;
 import 'package:intl/intl.dart' as dt;
-import 'package:logging/logging.dart';
 import 'package:redacted/redacted.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -21,6 +20,7 @@ import '../../../features/surah/surah.dart';
 import '../../presentation.dart';
 
 part 'homepage.component.dart';
+
 part 'homepage.widget.dart';
 
 class Homepage extends StatefulWidget {
@@ -30,8 +30,7 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage>
-    with SingleTickerProviderStateMixin {
+class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin {
   final SurahBloc surahBloc = sl<SurahBloc>();
   final AppbarBloc appbarBloc = sl<AppbarBloc>();
   final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
@@ -46,16 +45,11 @@ class _HomepageState extends State<Homepage>
   void initState() {
     super.initState();
     controller.addListener(() {
-      if (BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
-          controller.offset < 0.2.sh) {
-        BlocProvider.of<AppbarBloc>(context).add(
-          const ToggleDisplay(),
-        );
+      if (BlocProvider.of<AppbarBloc>(context).state.displayAppbar && controller.offset < 0.2.sh) {
+        BlocProvider.of<AppbarBloc>(context).add(const ToggleDisplay());
       } else if (!BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
           controller.offset > 0.2.sh) {
-        BlocProvider.of<AppbarBloc>(context).add(
-          const ToggleDisplay(),
-        );
+        BlocProvider.of<AppbarBloc>(context).add(const ToggleDisplay());
       }
     });
     tabController = TabController(length: 2, vsync: this);
@@ -79,12 +73,8 @@ class _HomepageState extends State<Homepage>
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => surahBloc,
-        ),
-        BlocProvider(
-          create: (context) => prayerTimeCubit,
-        ),
+        BlocProvider(create: (context) => surahBloc),
+        BlocProvider(create: (context) => prayerTimeCubit),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -117,18 +107,12 @@ class _HomepageState extends State<Homepage>
                     child: CustomScrollView(
                       controller: controller,
                       slivers: [
-                        HomeAppbar(
-                          tabController: tabController,
-                          appNavigator: appNavigator,
-                        ),
+                        HomeAppbar(tabController: tabController, appNavigator: appNavigator),
                         SurahCards(),
                       ],
                     ),
                   ),
-                  FloatingMenu(
-                    appNavigator: appNavigator,
-                    isScrolled: state.displayAppbar,
-                  )
+                  FloatingMenu(appNavigator: appNavigator, isScrolled: state.displayAppbar),
                 ],
               );
             },
