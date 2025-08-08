@@ -23,8 +23,8 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
   // }
 
   CustomInterceptor({RequestRetrier? requestRetrier})
-      : requestRetrier =
-      requestRetrier ??
+    : requestRetrier =
+          requestRetrier ??
           RequestRetrier(
             dio: sl<Dio>(instanceName: "interceptor"),
             internetConnectionChecker: InternetConnectionChecker.createInstance(
@@ -46,7 +46,13 @@ class CustomInterceptor extends Interceptor with InterceptorMixin {
   void onResponse(response, handler) {
     log.fine("Response: ${response.requestOptions.uri}");
     if (response.data is String) {
-      jsonDecode(response.data);
+      // Try to parse string body to JSON if possible
+      try {
+        final decoded = jsonDecode(response.data as String);
+        response.data = decoded;
+      } catch (_) {
+        // Leave as string if not JSON
+      }
     }
     if (response.statusCode == 304) {
       log.shout("cache hit: ${response.requestOptions.uri}");

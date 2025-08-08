@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:logging/logging.dart';
@@ -8,18 +10,29 @@ typedef ResponseConverter<T> = T Function(Map<String, dynamic> json);
 final Logger log = Logger("DioClient");
 
 extension DioClientParsed on DioClient {
-
   Future<T> getParsed<T>(
-      String url, {
-        required ResponseConverter<T> converter,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        bool useIsolate = true,
-      }) async {
-    final response = await get(url, queryParameters: queryParameters, options: options);
+    String url, {
+    required ResponseConverter<T> converter,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    bool useIsolate = true,
+  }) async {
+    final response = await get(
+      url,
+      queryParameters: queryParameters,
+      options: options,
+    );
 
-    final data = response.data;
+    dynamic data = response.data;
     log.info(data);
+    if (data is String) {
+      // Attempt to parse string bodies into JSON maps
+      try {
+        data = jsonDecode(data) as Map<String, dynamic>;
+      } catch (_) {
+        throw Exception("Invalid response format: expected JSON object string");
+      }
+    }
     if (data is! Map<String, dynamic>) {
       throw Exception("Invalid response format");
     }
@@ -30,16 +43,26 @@ extension DioClientParsed on DioClient {
   }
 
   Future<List<T>> getParsedList<T>(
-      String url, {
-        required T Function(Map<String, dynamic>) converter,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        bool useIsolate = true,
-      }) async {
-    final response = await get(url, queryParameters: queryParameters, options: options);
+    String url, {
+    required T Function(Map<String, dynamic>) converter,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    bool useIsolate = true,
+  }) async {
+    final response = await get(
+      url,
+      queryParameters: queryParameters,
+      options: options,
+    );
 
-    final data = response.data;
-
+    dynamic data = response.data;
+    if (data is String) {
+      try {
+        data = jsonDecode(data);
+      } catch (_) {
+        throw Exception("Invalid response format: expected JSON array string");
+      }
+    }
     if (data is! List) {
       throw Exception("Expected list but got ${data.runtimeType}");
     }
@@ -50,13 +73,13 @@ extension DioClientParsed on DioClient {
   }
 
   Future<T> postParsed<T>(
-      String url, {
-        required ResponseConverter<T> converter,
-        Map<String, dynamic>? queryParameters,
-        dynamic data,
-        Options? options,
-        bool useIsolate = true,
-      }) async {
+    String url, {
+    required ResponseConverter<T> converter,
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+    Options? options,
+    bool useIsolate = true,
+  }) async {
     final response = await post(
       url,
       queryParameters: queryParameters,
@@ -64,7 +87,14 @@ extension DioClientParsed on DioClient {
       options: options,
     );
 
-    final responseData = response.data;
+    dynamic responseData = response.data;
+    if (responseData is String) {
+      try {
+        responseData = jsonDecode(responseData) as Map<String, dynamic>;
+      } catch (_) {
+        throw Exception("Invalid response format: expected JSON object string");
+      }
+    }
     if (responseData is! Map<String, dynamic>) {
       throw Exception("Invalid response format");
     }
@@ -75,14 +105,14 @@ extension DioClientParsed on DioClient {
   }
 
   Future<Either<Failure, T>> getParsedSafe<T>(
-      String url, {
-        required ResponseConverter<T> converter,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        bool useIsolate = true,
-      }) {
+    String url, {
+    required ResponseConverter<T> converter,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    bool useIsolate = true,
+  }) {
     return safeCall(
-          () => getParsed<T>(
+      () => getParsed<T>(
         url,
         converter: converter,
         queryParameters: queryParameters,
@@ -93,14 +123,14 @@ extension DioClientParsed on DioClient {
   }
 
   Future<Either<Failure, List<T>>> getParsedListSafe<T>(
-      String url, {
-        required T Function(Map<String, dynamic>) converter,
-        Map<String, dynamic>? queryParameters,
-        Options? options,
-        bool useIsolate = true,
-      }) {
+    String url, {
+    required T Function(Map<String, dynamic>) converter,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    bool useIsolate = true,
+  }) {
     return safeCall(
-          () => getParsedList<T>(
+      () => getParsedList<T>(
         url,
         converter: converter,
         queryParameters: queryParameters,
@@ -111,15 +141,15 @@ extension DioClientParsed on DioClient {
   }
 
   Future<Either<Failure, T>> postParsedSafe<T>(
-      String url, {
-        required ResponseConverter<T> converter,
-        Map<String, dynamic>? queryParameters,
-        dynamic data,
-        Options? options,
-        bool useIsolate = true,
-      }) {
+    String url, {
+    required ResponseConverter<T> converter,
+    Map<String, dynamic>? queryParameters,
+    dynamic data,
+    Options? options,
+    bool useIsolate = true,
+  }) {
     return safeCall(
-          () => postParsed<T>(
+      () => postParsed<T>(
         url,
         converter: converter,
         queryParameters: queryParameters,
