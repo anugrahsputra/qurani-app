@@ -27,9 +27,14 @@ class BannerWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             BuildDates(prayerTimes: currentPrayerTime),
-            CurrentLocWidget(
-              currentLoc: address,
-              currentPrayer: currentPrayerTime,
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: CurrentLocWidget(
+                  currentLoc: address,
+                  currentPrayer: currentPrayerTime,
+                ),
+              ),
             ),
           ],
         ),
@@ -56,11 +61,7 @@ class BannerWidget extends StatelessWidget {
 }
 
 class CurrentLocWidget extends StatelessWidget with PrayerTimeMixin {
-  const CurrentLocWidget({
-    super.key,
-    this.currentLoc,
-    this.currentPrayer,
-  });
+  const CurrentLocWidget({super.key, this.currentLoc, this.currentPrayer});
   final String? currentLoc;
   final String? currentPrayer;
 
@@ -68,34 +69,36 @@ class CurrentLocWidget extends StatelessWidget with PrayerTimeMixin {
   Widget build(BuildContext context) {
     var color = getTextColor(currentPrayer!);
 
-    return Row(
-      children: [
-        Icon(
-          Icons.location_on,
-          size: 15.sp,
-          color: color,
-        ),
-        const Gap(5),
-        Text(
-          currentLoc!,
-          overflow: TextOverflow.ellipsis,
-          style: GoogleFonts.poppins(
-            fontSize: 12.sp,
-            color: color,
-            fontWeight: FontWeight.w500,
+    return SizedBox(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 5,
+        children: [
+          Icon(Icons.location_on, size: 15.sp, color: color),
+          Flexible(
+            child: Text(
+              currentLoc ?? '',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+              style: GoogleFonts.poppins(
+                fontSize: 12.sp,
+                color: color,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.right,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
 
 class PrayerWidget extends StatelessWidget {
-  const PrayerWidget({
-    super.key,
-    required this.text,
-    required this.textColor,
-  });
+  const PrayerWidget({super.key, required this.text, required this.textColor});
 
   final String text;
   final Color textColor;
@@ -136,7 +139,8 @@ class PrayerScheduleWidget extends StatelessWidget {
         Gap(0.01.sh),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: prayerTimes?.entries.map((e) {
+          children:
+              prayerTimes?.entries.map((e) {
                 final isHighlighted =
                     e.key == highlightedPrayerTime?['current'];
                 final textColor = isHighlighted
@@ -160,7 +164,7 @@ class PrayerScheduleWidget extends StatelessWidget {
                         offset: const Offset(8, 8),
                         blurRadius: 14.r,
                         spreadRadius: -8,
-                      )
+                      ),
                     ],
                   ),
                   child: Column(
@@ -175,8 +179,10 @@ class PrayerScheduleWidget extends StatelessWidget {
                       ),
                       SvgPicture.asset(
                         prayerTimeIcon?[e.key] ?? SvgPath.fajr,
-                        colorFilter:
-                            ColorFilter.mode(iconColor, BlendMode.srcIn),
+                        colorFilter: ColorFilter.mode(
+                          iconColor,
+                          BlendMode.srcIn,
+                        ),
                       ),
                       Text(
                         dt.DateFormat('HH:mm').format(e.value),
@@ -221,24 +227,18 @@ class PrayerScheduleLoading extends StatelessWidget {
                     offset: const Offset(8, 8),
                     blurRadius: 14,
                     spreadRadius: -8,
-                  )
+                  ),
                 ],
               ),
               child: const Column(
                 children: [
                   Text(
                     'shalat',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                   ),
                   Text(
                     '00:00',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
