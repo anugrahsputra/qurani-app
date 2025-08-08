@@ -1,9 +1,7 @@
 part of 'detail_surah_page.dart';
 
 class DetailTitle extends StatelessWidget {
-  const DetailTitle({
-    super.key,
-  });
+  const DetailTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,17 +13,11 @@ class DetailTitle extends StatelessWidget {
             children: [
               Text(
                 '${surahDetail.number}. ',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18.sp,
-                ),
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
               ),
               Text(
                 surahDetail.name!.transliteration!.id ?? 'Error',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18.sp,
-                ),
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.sp),
               ),
             ],
           );
@@ -38,8 +30,11 @@ class DetailTitle extends StatelessWidget {
 }
 
 class DetailHeader extends StatelessWidget {
-  const DetailHeader(
-      {super.key, required this.surahDetail, required this.verseAudioCubit});
+  const DetailHeader({
+    super.key,
+    required this.surahDetail,
+    required this.verseAudioCubit,
+  });
 
   final SurahDetail surahDetail;
   final VerseAudioCubit verseAudioCubit;
@@ -48,10 +43,7 @@ class DetailHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(
-        horizontal: 16.w,
-        vertical: 10.h,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
       padding: EdgeInsets.fromLTRB(15.w, 15.h, 0.w, 15.h),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,
@@ -130,10 +122,7 @@ class OpeningBismillah extends StatelessWidget {
     return surahDetail.preBismillah != null
         ? Container(
             width: double.infinity.w,
-            margin: EdgeInsets.symmetric(
-              horizontal: 10.w,
-              vertical: 5.h,
-            ),
+            margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
             child: SvgPicture.asset(
               SvgPath.bismillah,
               clipBehavior: Clip.antiAlias,
@@ -166,17 +155,23 @@ class Verses extends StatelessWidget {
       itemCount: verses.length,
       itemBuilder: (ctx, i) {
         Verse verse = verses[i];
-        return VerseView(
-          verse: verse,
-          surahNumber: surah.number!,
-          numberInQuran: verse.number!.inQuran!,
-          numberInSurah: verse.number!.inSurah!,
-          surahName: surah.name!.transliteration!.id!,
-          verseText: verse.text!.arab!,
-          translation: verse.translation!.id!,
-          transliteration: verse.text!.transliteration!.en!,
-          goToAyahPage: () => appNavigator.goToAyah(context,
-              surahNumber: surah.number!, ayahNumber: verse.number!.inSurah!),
+        return BlocProvider(
+          create: (_) => sl<BookmarkBloc>(),
+          child: VerseView(
+            verse: verse,
+            surahNumber: surah.number!,
+            numberInQuran: verse.number!.inQuran!,
+            numberInSurah: verse.number!.inSurah!,
+            surahName: surah.name!.transliteration!.id!,
+            verseText: verse.text!.arab!,
+            translation: verse.translation!.id!,
+            transliteration: verse.text!.transliteration!.en!,
+            goToAyahPage: () => appNavigator.goToAyah(
+              context,
+              surahNumber: surah.number!,
+              ayahNumber: verse.number!.inSurah!,
+            ),
+          ),
         );
       },
     );
@@ -228,20 +223,17 @@ class _VerseViewState extends State<VerseView> {
     });
     return Container(
       key: Key(key.toString()),
-      margin: EdgeInsets.symmetric(
-        horizontal: 16.w,
-        vertical: 10.h,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
       decoration: BoxDecoration(
         color: AppColors.onPrimary,
         borderRadius: BorderRadius.circular(10.r),
         boxShadow: [
           BoxShadow(
-            color: AppColors.shadow.withOpacity(0.15),
+            color: AppColors.shadow.withValues(alpha: 0.15),
             offset: const Offset(8, 8),
             blurRadius: 14,
             spreadRadius: -8,
-          )
+          ),
         ],
       ),
       child: Column(
@@ -257,9 +249,7 @@ class _VerseViewState extends State<VerseView> {
               children: [
                 Text(
                   '${widget.numberInSurah}.',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: const TextStyle(fontWeight: FontWeight.w600),
                 ),
                 const Spacer(),
                 PlayButton(
@@ -270,17 +260,21 @@ class _VerseViewState extends State<VerseView> {
                 InkWell(
                   onTap: () {
                     if (!isBookmarked) {
-                      context.read<BookmarkBloc>().add(OnAddBookmark(
-                            widget.verse,
-                            widget.surahName,
-                            widget.surahNumber,
-                          ));
+                      context.read<BookmarkBloc>().add(
+                        OnAddBookmark(
+                          widget.verse,
+                          widget.surahName,
+                          widget.surahNumber,
+                        ),
+                      );
                     } else {
-                      context.read<BookmarkBloc>().add(OnRemoveBookmark(
-                            widget.verse,
-                            widget.surahName,
-                            widget.surahNumber,
-                          ));
+                      context.read<BookmarkBloc>().add(
+                        OnRemoveBookmark(
+                          widget.verse,
+                          widget.surahName,
+                          widget.surahNumber,
+                        ),
+                      );
                     }
 
                     String message = !isBookmarked
@@ -291,30 +285,29 @@ class _VerseViewState extends State<VerseView> {
 
                     if (state is BookmarkMessage || state is BookmarkCheck) {
                       AppSnackbar.showSuccess(context, message);
-                      BlocProvider.of<BookmarkBloc>(context)
-                          .add(OnBookmarkStatus(key));
+                      BlocProvider.of<BookmarkBloc>(
+                        context,
+                      ).add(OnBookmarkStatus(key));
                     } else {
                       showDialog(
-                          context: context,
-                          builder: (context) {
-                            return const AlertDialog(
-                              content: Text('Failed'),
-                            );
-                          });
+                        context: context,
+                        builder: (context) {
+                          return const AlertDialog(content: Text('Failed'));
+                        },
+                      );
                     }
                   },
-                  child: const Icon(
-                    Icons.bookmark_border_rounded,
+                  child: Icon(
+                    isBookmarked
+                        ? Icons.bookmark_rounded
+                        : Icons.bookmark_border_rounded,
                     size: 18,
                   ),
                 ),
                 Gap(10.w),
                 InkWell(
                   onTap: widget.goToAyahPage,
-                  child: const Icon(
-                    Icons.chevron_right_rounded,
-                    size: 18,
-                  ),
+                  child: const Icon(Icons.chevron_right_rounded, size: 18),
                 ),
               ],
             ),
@@ -391,10 +384,9 @@ class PlayButton extends StatefulWidget {
 class _PlayButtonState extends State<PlayButton> {
   @override
   void initState() {
-    context
-        .read<VerseAudioCubit>()
-        .audioPlayerManager
-        .verseAudio(widget.verseNumber);
+    context.read<VerseAudioCubit>().audioPlayerManager.verseAudio(
+      widget.verseNumber,
+    );
     super.initState();
   }
 
@@ -408,22 +400,14 @@ class _PlayButtonState extends State<PlayButton> {
             onTap: () {
               cubit.stopVerse();
             },
-            child: Icon(
-              Icons.stop,
-              color: Colors.black,
-              size: 25.dm,
-            ),
+            child: Icon(Icons.stop, color: Colors.black, size: 25.dm),
           );
         } else {
           return InkWell(
             onTap: () {
               cubit.playVerse(widget.verseNumber, widget.audioSource);
             },
-            child: Icon(
-              Icons.play_arrow,
-              color: Colors.black,
-              size: 25.dm,
-            ),
+            child: Icon(Icons.play_arrow, color: Colors.black, size: 25.dm),
           );
         }
       },
