@@ -22,29 +22,33 @@ mixin ShareScreenshotMixin {
     );
 
     final mediaQuery = MediaQuery.of(context);
-    final pixelRatio = mediaQuery.devicePixelRatio * 3;
+    // Use a higher pixel ratio for crisper shared images
+    final double pixelRatio = 4.0;
     await screenshotController
         .captureFromWidget(
-      MediaQuery(data: mediaQuery, child: AyahImagePreview(ayah: ayah)),
-      delay: const Duration(milliseconds: 500),
-      pixelRatio: pixelRatio,
-    )
-        .then(
-      (image) async {
-        String fileName =
-            "${ayah.surah.name.transliteration.id}_${ayah.surah.number}${ayah.number.inSurah}"
-                .replaceAll('-', '_')
-                .toLowerCase();
+          MediaQuery(
+            data: mediaQuery,
+            child: AyahImagePreview(ayah: ayah, includeBackground: true),
+          ),
+          delay: const Duration(milliseconds: 500),
+          pixelRatio: pixelRatio,
+        )
+        .then((image) async {
+          String fileName =
+              "${ayah.surah.name.transliteration.id}_${ayah.surah.number}${ayah.number.inSurah}"
+                  .replaceAll('-', '_')
+                  .toLowerCase();
 
-        final dir = await getApplicationDocumentsDirectory();
-        final imagePath = await File('${dir.path}/$fileName.png').create();
-        await imagePath.writeAsBytes(image);
+          final dir = await getApplicationDocumentsDirectory();
+          final imagePath = await File('${dir.path}/$fileName.png').create();
+          await imagePath.writeAsBytes(image);
 
-        await Share.shareXFiles(
-          [XFile(imagePath.path)],
-          text: ayah.surah.name.transliteration.id,
-        );
-      },
-    );
+          await SharePlus.instance.share(
+            ShareParams(
+              text: ayah.surah.name.transliteration.id,
+              files: [XFile(imagePath.path)],
+            ),
+          );
+        });
   }
 }
