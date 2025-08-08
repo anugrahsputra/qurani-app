@@ -4,113 +4,103 @@ class AyahImagePreview extends StatelessWidget {
   const AyahImagePreview({
     super.key,
     required this.ayah,
+    this.includeBackground = true,
   });
   final Ayah ayah;
+  final bool includeBackground;
 
   @override
   Widget build(BuildContext context) {
     String ayahSource =
         '${ayah.surah.name.transliteration.id} ${ayah.surah.number}: ${ayah.number.inSurah}';
 
-    var size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height,
-      padding: EdgeInsets.symmetric(
-        vertical: 30.h,
-        horizontal: 20.w,
+    final card = Container(
+      constraints: BoxConstraints(maxWidth: 720.w),
+      margin: const EdgeInsets.all(10),
+      padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 16.w),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.r),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.shadow.withValues(alpha: 0.12),
+            offset: const Offset(0, 8),
+            blurRadius: 24,
+            spreadRadius: -8,
+          ),
+        ],
       ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            ayahSource,
+            style: GoogleFonts.poppins(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+            ),
+          ),
+          Gap(12.h),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              ayah.text.arab,
+              style: GoogleFonts.amiri(
+                height: 2,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.sp,
+                color: Colors.black,
+              ),
+              textDirection: TextDirection.ltr,
+              textAlign: TextAlign.end,
+            ),
+          ),
+          Gap(14.h),
+          Text(
+            ayah.translation.id,
+            style: GoogleFonts.poppins(fontSize: 13.sp, color: Colors.black87),
+            textAlign: TextAlign.start,
+          ),
+          Gap(18.h),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              'Qurani',
+              style: GoogleFonts.poppins(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.black45,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    if (!includeBackground) {
+      return card;
+    }
+
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 20.w),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            AppColors.primaryContainer,
-            AppColors.primary,
-          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [AppColors.primaryContainer, AppColors.primary],
         ),
       ),
-      child: SafeArea(
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.r),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.shadow.withOpacity(0.85),
-                offset: const Offset(4, 4),
-                blurRadius: 14,
-                spreadRadius: -8,
-              )
-            ],
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Gap(50.h),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  ayah.text.arab,
-                  style: GoogleFonts.amiri(
-                    height: 2,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24.sp,
-                    color: Colors.black,
-                  ),
-                  textDirection: TextDirection.ltr,
-                  textAlign: TextAlign.end,
-                ),
-              ),
-              Gap(15.h),
-              Text(
-                ayah.translation.id,
-                style: GoogleFonts.poppins(
-                  fontSize: 16.sp,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.start,
-              ),
-              const Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    ayahSource,
-                    style: GoogleFonts.poppins(
-                      fontSize: 16.sp,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    'Qurani v1.0',
-                    style: GoogleFonts.poppins(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+      child: SafeArea(bottom: false, child: Center(child: card)),
     );
   }
 }
 
 class AyahView extends StatelessWidget {
-  const AyahView({
-    super.key,
-    required this.ayah,
-    this.onPressed,
-  });
+  const AyahView({super.key, required this.ayah, this.onPressed});
 
   final Ayah ayah;
   final void Function()? onPressed;
@@ -141,11 +131,11 @@ class AyahView extends StatelessWidget {
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                color: AppColors.shadow.withOpacity(0.85),
+                color: AppColors.shadow.withValues(alpha: 0.85),
                 offset: const Offset(3, 4),
                 blurRadius: 14,
                 spreadRadius: -9,
-              )
+              ),
             ],
           ),
           child: Stack(
@@ -218,11 +208,7 @@ class AyahView extends StatelessWidget {
 }
 
 class TafsirView extends StatelessWidget {
-  const TafsirView({
-    super.key,
-    required this.ayah,
-    required this.appNavigator,
-  });
+  const TafsirView({super.key, required this.ayah, required this.appNavigator});
 
   final Ayah ayah;
   final AppNavigator appNavigator;
@@ -254,7 +240,7 @@ class TafsirView extends StatelessWidget {
                   appNavigator.back(context);
                 },
                 icon: const Icon(Icons.close_rounded),
-              )
+              ),
             ],
           ),
           Gap(15.h),
@@ -264,10 +250,7 @@ class TafsirView extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               color: Colors.blueGrey[50],
             ),
-            child: Text(
-              ayah.tafsir.id.short,
-              textAlign: TextAlign.left,
-            ),
+            child: Text(ayah.tafsir.id.short, textAlign: TextAlign.left),
           ),
         ],
       ),
@@ -300,11 +283,8 @@ class _ShareIconState extends State<ShareIcon> with ShareScreenshotMixin {
           );
         } else if (state is AyahLoaded) {
           return IconButton(
-            onPressed: () => shareButton(
-              context,
-              state.ayah,
-              _screenshotController,
-            ),
+            onPressed: () =>
+                shareButton(context, state.ayah, _screenshotController),
             icon: const Icon(Icons.share_rounded),
           );
         } else {
