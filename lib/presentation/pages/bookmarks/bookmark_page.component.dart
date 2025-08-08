@@ -29,7 +29,7 @@ class BookmarkCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: AppColors.shadow.withOpacity(0.15),
+              color: AppColors.shadow.withValues(alpha: 0.15),
               offset: const Offset(8, 8),
               blurRadius: 14,
               spreadRadius: -8,
