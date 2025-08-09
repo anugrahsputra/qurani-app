@@ -6,7 +6,10 @@ import '../../../../core/core.dart';
 import '../models/models.dart';
 
 abstract class AyahRemoteDatasource {
-  Future<Either<Failure, AyahResModel>> getAyah(int surahNumber, int ayahNumber);
+  Future<Either<Failure, AyahResModel>> getAyah(
+    int surahNumber,
+    int ayahNumber,
+  );
 
   Future<Either<Failure, AyahResModel>> getRandomAyah();
 }
@@ -17,7 +20,10 @@ class IAyahRemoteDatasource implements AyahRemoteDatasource {
   IAyahRemoteDatasource({required this.dioClient});
 
   @override
-  Future<Either<Failure, AyahResModel>> getAyah(int surahNumber, int ayahNumber) async {
+  Future<Either<Failure, AyahResModel>> getAyah(
+    int surahNumber,
+    int ayahNumber,
+  ) async {
     return await dioClient.getParsedSafe(
       '${Endpoint.ayah}/$surahNumber/$ayahNumber',
       converter: (json) => AyahResModel.fromJson(json),

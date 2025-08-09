@@ -40,10 +40,7 @@ extension NameModelX on NameModel {
 
 extension TranslationModelX on TranslationModel {
   Translation toEntity() {
-    return Translation(
-      en: en,
-      id: id,
-    );
+    return Translation(en: en, id: id);
   }
 }
 
@@ -59,45 +56,31 @@ extension PreBismillahModelX on PreBismillahModel {
 
 extension AudioModelX on AudioModel {
   Audio toEntity() {
-    return Audio(
-      primary: primary,
-      secondary: secondary,
-    );
+    return Audio(primary: primary, secondary: secondary);
   }
 }
 
 extension TextsModelX on TextsModel {
   Texts toEntity() {
-    return Texts(
-      arab: arab,
-      transliteration: transliteration?.toEntity(),
-    );
+    return Texts(arab: arab, transliteration: transliteration?.toEntity());
   }
 }
 
 extension TransliterationModelX on TransliterationModel {
   Transliteration toEntity() {
-    return Transliteration(
-      en: en,
-    );
+    return Transliteration(en: en);
   }
 }
 
 extension RevelationModelX on RevelationModel {
   Revelation toEntity() {
-    return Revelation(
-      arab: arab,
-      en: en,
-      id: id,
-    );
+    return Revelation(arab: arab, en: en, id: id);
   }
 }
 
 extension TafsirModelX on TafsirModel {
   Tafsir toEntity() {
-    return Tafsir(
-      id: id,
-    );
+    return Tafsir(id: id);
   }
 }
 
@@ -129,36 +112,25 @@ extension MetaX on MetaModel {
 
 extension SajdaModelX on SajdaModel {
   Sajda toEntity() {
-    return Sajda(
-      recommended: recommended,
-      obligatory: obligatory,
-    );
+    return Sajda(recommended: recommended, obligatory: obligatory);
   }
 }
 
 extension VerseTafsirModelX on VerseTafsirModel {
   VerseTafsir toEntity() {
-    return VerseTafsir(
-      id: id?.toEntity(),
-    );
+    return VerseTafsir(id: id?.toEntity());
   }
 }
 
 extension IdX on IdModel {
   Id toEntity() {
-    return Id(
-      short: short,
-      long: long,
-    );
+    return Id(short: short, long: long);
   }
 }
 
 extension NumberModelX on NumberModel {
   Number toEntity() {
-    return Number(
-      inQuran: inQuran,
-      inSurah: inSurah,
-    );
+    return Number(inQuran: inQuran, inSurah: inSurah);
   }
 }
 

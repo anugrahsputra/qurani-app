@@ -16,14 +16,14 @@ class BookmarkCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        appNavigator.goToAyah(context,
-            surahNumber: bookmark.surahNumber!, ayahNumber: bookmark.inSurah!);
+        appNavigator.goToAyah(
+          context,
+          surahNumber: bookmark.surahNumber!,
+          ayahNumber: bookmark.inSurah!,
+        );
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 10,
-        ),
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
           color: AppColors.onPrimary,
           borderRadius: BorderRadius.circular(10),
@@ -33,7 +33,7 @@ class BookmarkCard extends StatelessWidget {
               offset: const Offset(8, 8),
               blurRadius: 14,
               spreadRadius: -8,
-            )
+            ),
           ],
         ),
         child: Column(
@@ -50,18 +50,13 @@ class BookmarkCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
                   InkWell(
                     onTap: () {
                       // TODO: go to surah
                     },
-                    child: const Icon(
-                      Icons.chevron_right_rounded,
-                      size: 18,
-                    ),
+                    child: const Icon(Icons.chevron_right_rounded, size: 18),
                   ),
                 ],
               ),

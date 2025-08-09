@@ -43,10 +43,7 @@ class _SearchPageState extends State<SearchPage> {
       child: AppScaffold(
         appBar: AppBar(
           titleSpacing: 0,
-          title: SearchTextField(
-            surahBloc: surahBloc,
-            focusNode: focusNode,
-          ),
+          title: SearchTextField(surahBloc: surahBloc, focusNode: focusNode),
         ),
         body: SearchList(appNavigator: appNavigator),
       ),

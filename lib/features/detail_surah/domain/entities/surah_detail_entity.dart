@@ -33,7 +33,11 @@ abstract class Translation with _$Translation {
 
 @freezed
 abstract class PreBismillah with _$PreBismillah {
-  const factory PreBismillah({Texts? text, Translation? translation, Audio? audio}) = _PreBismillah;
+  const factory PreBismillah({
+    Texts? text,
+    Translation? translation,
+    Audio? audio,
+  }) = _PreBismillah;
 }
 
 @freezed
@@ -43,7 +47,8 @@ abstract class Audio with _$Audio {
 
 @freezed
 abstract class Texts with _$Texts {
-  const factory Texts({String? arab, Transliteration? transliteration}) = _Texts;
+  const factory Texts({String? arab, Transliteration? transliteration}) =
+      _Texts;
 }
 
 @freezed
@@ -53,7 +58,8 @@ abstract class Transliteration with _$Transliteration {
 
 @freezed
 abstract class Revelation with _$Revelation {
-  const factory Revelation({String? arab, String? en, String? id}) = _Revelation;
+  const factory Revelation({String? arab, String? en, String? id}) =
+      _Revelation;
 }
 
 @freezed

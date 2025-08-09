@@ -28,10 +28,7 @@ extension AyahModelX on AyahModel {
 
 extension AudioAyahModelX on AudioAyahModel {
   AudioAyah toEntity() {
-    return AudioAyah(
-      primary: primary,
-      secondary: secondary,
-    );
+    return AudioAyah(primary: primary, secondary: secondary);
   }
 }
 
@@ -50,19 +47,13 @@ extension MetaAyahModelX on MetaAyahModel {
 
 extension NumberAyahModelX on NumberAyahModel {
   NumberAyah toEntity() {
-    return NumberAyah(
-      inQuran: inQuran,
-      inSurah: inSurah,
-    );
+    return NumberAyah(inQuran: inQuran, inSurah: inSurah);
   }
 }
 
 extension SajdaAyahModelX on SajdaAyahModel {
   SajdaAyah toEntity() {
-    return SajdaAyah(
-      recommended: recommended,
-      obligatory: obligatory,
-    );
+    return SajdaAyah(recommended: recommended, obligatory: obligatory);
   }
 }
 
@@ -82,9 +73,7 @@ extension SurahAyahModelX on SurahAyahModel {
 
 extension SurahAyahTafsirModelX on SurahTafsirAyahModel {
   SurahAyahTafsir toEntity() {
-    return SurahAyahTafsir(
-      id: id,
-    );
+    return SurahAyahTafsir(id: id);
   }
 }
 
@@ -100,18 +89,13 @@ extension PreBismillahAyahModelX on PreBismillahAyahModel {
 
 extension TextAyahModelX on TextsAyahModel {
   TextAyah toEntity() {
-    return TextAyah(
-      arab: arab,
-      transliteration: transliteration.toEntity(),
-    );
+    return TextAyah(arab: arab, transliteration: transliteration.toEntity());
   }
 }
 
 extension TransliterationAyahModelX on TransliterationAyahModel {
   TransliterationAyah toEntity() {
-    return TransliterationAyah(
-      en: en,
-    );
+    return TransliterationAyah(en: en);
   }
 }
 
@@ -128,36 +112,24 @@ extension NameAyahModelX on NameAyahModel {
 
 extension TranslationAyahModelX on TranslationAyahModel {
   TranslationAyah toEntity() {
-    return TranslationAyah(
-      id: id,
-      en: en,
-    );
+    return TranslationAyah(id: id, en: en);
   }
 }
 
 extension RevelationAyahModelX on RevelationAyahModel {
   RevelationAyah toEntity() {
-    return RevelationAyah(
-      arab: arab,
-      en: en,
-      id: id,
-    );
+    return RevelationAyah(arab: arab, en: en, id: id);
   }
 }
 
 extension TafsirAyahModelX on TafsirAyahModel {
   TafsirAyah toEntity() {
-    return TafsirAyah(
-      id: id.toEntity(),
-    );
+    return TafsirAyah(id: id.toEntity());
   }
 }
 
 extension IdAyahModelX on IdAyahModel {
   IdAyah toEntity() {
-    return IdAyah(
-      short: short,
-      long: long,
-    );
+    return IdAyah(short: short, long: long);
   }
 }

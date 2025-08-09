@@ -23,9 +23,7 @@ class SearchTextField extends StatelessWidget {
           hintText: "cth: 'Al-Baqarah'",
           contentPadding: EdgeInsets.zero,
           prefixIcon: const Icon(Icons.search),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16.r),
-          ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16.r)),
         ),
       ),
     );
@@ -33,10 +31,7 @@ class SearchTextField extends StatelessWidget {
 }
 
 class SearchList extends StatelessWidget {
-  const SearchList({
-    super.key,
-    required this.appNavigator,
-  });
+  const SearchList({super.key, required this.appNavigator});
 
   final AppNavigator appNavigator;
   @override
@@ -68,10 +63,7 @@ class SearchList extends StatelessWidget {
 }
 
 class BuildSurahList extends StatelessWidget {
-  const BuildSurahList({
-    super.key,
-    required this.listSurah,
-  });
+  const BuildSurahList({super.key, required this.listSurah});
 
   final List<SurahEntity> listSurah;
 
@@ -82,10 +74,8 @@ class BuildSurahList extends StatelessWidget {
       itemBuilder: (context, index) {
         var surah = listSurah[index];
         return InkWell(
-          onTap: () => sl<AppNavigator>().goToDetail(
-            context,
-            surahNumber: surah.number,
-          ),
+          onTap: () =>
+              sl<AppNavigator>().goToDetail(context, surahNumber: surah.number),
           child: SurahCardView(surah: surah),
         );
       },

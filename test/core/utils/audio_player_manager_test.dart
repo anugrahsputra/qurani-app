@@ -11,9 +11,7 @@ void main() {
 
   setUp(() {
     mockPlayer = MockAudioPlayer();
-    manager = AudioPlayerManagerImpl(audioPlayers: {
-      '1': mockPlayer,
-    });
+    manager = AudioPlayerManagerImpl(audioPlayers: {'1': mockPlayer});
   });
 
   group('AudioPlayerManager', () {
@@ -25,10 +23,9 @@ void main() {
     test('stopAll stops all players', () {
       final mockPlayer1 = MockAudioPlayer();
       final mockPlayer2 = MockAudioPlayer();
-      final manager = AudioPlayerManagerImpl(audioPlayers: {
-        '1': mockPlayer1,
-        '2': mockPlayer2,
-      });
+      final manager = AudioPlayerManagerImpl(
+        audioPlayers: {'1': mockPlayer1, '2': mockPlayer2},
+      );
 
       manager.stopAll();
 
@@ -36,19 +33,19 @@ void main() {
       verify(mockPlayer2.stop()).called(1);
     });
     test(
-        'stopAllExcept stops all players except the one with the given verse number',
-        () {
-      final mockPlayer1 = MockAudioPlayer();
-      final mockPlayer2 = MockAudioPlayer();
-      final manager = AudioPlayerManagerImpl(audioPlayers: {
-        '1': mockPlayer1,
-        '2': mockPlayer2,
-      });
+      'stopAllExcept stops all players except the one with the given verse number',
+      () {
+        final mockPlayer1 = MockAudioPlayer();
+        final mockPlayer2 = MockAudioPlayer();
+        final manager = AudioPlayerManagerImpl(
+          audioPlayers: {'1': mockPlayer1, '2': mockPlayer2},
+        );
 
-      manager.stopAllExcept('2');
+        manager.stopAllExcept('2');
 
-      verify(mockPlayer1.stop()).called(1);
-      verifyNever(mockPlayer2.stop());
-    });
+        verify(mockPlayer1.stop()).called(1);
+        verifyNever(mockPlayer2.stop());
+      },
+    );
   });
 }

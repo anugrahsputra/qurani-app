@@ -23,22 +23,19 @@ void main() {
             "manzil": 1,
             "ruku": 1,
             "hizbQuarter": 1,
-            "sajda": {"recommended": false, "obligatory": false}
+            "sajda": {"recommended": false, "obligatory": false},
           },
           "text": {
             "arab": "arab",
-            "transliteration": {"en": "en"}
+            "transliteration": {"en": "en"},
           },
           "translation": {"en": "en", "id": "id"},
           "audio": {
             "primary": "primary",
-            "secondary": [
-              "secondary",
-              "secondary",
-            ]
+            "secondary": ["secondary", "secondary"],
           },
           "tafsir": {
-            "id": {"short": "short", "long": "long"}
+            "id": {"short": "short", "long": "long"},
           },
           "surah": {
             "number": 1,
@@ -48,23 +45,23 @@ void main() {
               "short": "short",
               "long": "long",
               "transliteration": {"en": "en", "id": "id"},
-              "translation": {"en": "en", "id": "id"}
+              "translation": {"en": "en", "id": "id"},
             },
             "revelation": {"arab": "arab", "en": "en", "id": "id"},
             "tafsir": {"id": "id"},
             "preBismillah": {
               "text": {
                 "arab": "arab",
-                "transliteration": {"en": "en"}
+                "transliteration": {"en": "en"},
               },
               "translation": {"en": "en", "id": "id"},
               "audio": {
                 "primary": "primary",
-                "secondary": ["secondary", "secondary"]
-              }
-            }
-          }
-        }
+                "secondary": ["secondary", "secondary"],
+              },
+            },
+          },
+        },
       };
 
       final result = AyahResModel.fromJson(jsonMap);
@@ -87,22 +84,19 @@ void main() {
             "manzil": 1,
             "ruku": 1,
             "hizbQuarter": 1,
-            "sajda": {"recommended": false, "obligatory": false}
+            "sajda": {"recommended": false, "obligatory": false},
           },
           "text": {
             "arab": "arab",
-            "transliteration": {"en": "en"}
+            "transliteration": {"en": "en"},
           },
           "translation": {"en": "en", "id": "id"},
           "audio": {
             "primary": "primary",
-            "secondary": [
-              "secondary",
-              "secondary",
-            ]
+            "secondary": ["secondary", "secondary"],
           },
           "tafsir": {
-            "id": {"short": "short", "long": "long"}
+            "id": {"short": "short", "long": "long"},
           },
           "surah": {
             "number": 1,
@@ -112,23 +106,23 @@ void main() {
               "short": "short",
               "long": "long",
               "transliteration": {"en": "en", "id": "id"},
-              "translation": {"en": "en", "id": "id"}
+              "translation": {"en": "en", "id": "id"},
             },
             "revelation": {"arab": "arab", "en": "en", "id": "id"},
             "tafsir": {"id": "id"},
             "preBismillah": {
               "text": {
                 "arab": "arab",
-                "transliteration": {"en": "en"}
+                "transliteration": {"en": "en"},
               },
               "translation": {"en": "en", "id": "id"},
               "audio": {
                 "primary": "primary",
-                "secondary": ["secondary", "secondary"]
-              }
-            }
-          }
-        }
+                "secondary": ["secondary", "secondary"],
+              },
+            },
+          },
+        },
       };
 
       expect(result, expectedJsonMap);

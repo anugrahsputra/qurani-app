@@ -30,24 +30,18 @@ class _BookmarksPageState extends State<BookmarksPage> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => bookmarkBloc,
-        ),
-      ],
+      providers: [BlocProvider(create: (context) => bookmarkBloc)],
       child: AppScaffold(
         appBar: AppBar(
-          title: Text(
-            'Bookmarks',
-            style: GoogleFonts.poppins(),
-          ),
+          title: Text('Bookmarks', style: GoogleFonts.poppins()),
           backgroundColor: AppColors.primaryContainer,
         ),
         body: BlocBuilder<BookmarkBloc, BookmarkState>(
           builder: (ctx, state) {
             if (state is BookmarkInitial) {
               return const Center(
-                  child: Text('Anda belum menambahkan bookmark'));
+                child: Text('Anda belum menambahkan bookmark'),
+              );
             } else if (state is BookmarkLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is BookmarkLoaded) {

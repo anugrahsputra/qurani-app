@@ -11,7 +11,8 @@ class ISurahDetailRepository implements SurahDetailRepository {
 
   @override
   Future<Either<Failure, SurahDetailRes>> getDetailSurah(
-      int surahNumber) async {
+    int surahNumber,
+  ) async {
     final result = await remoteDataSource.getDetailSurah(surahNumber);
     return result.fold(
       (failure) => Left(failure),
@@ -21,11 +22,10 @@ class ISurahDetailRepository implements SurahDetailRepository {
 
   @override
   Future<Either<Failure, AudioFile>> getFullAudio(int surahNumber) async {
-
     final result = await remoteDataSource.getFullAudio(surahNumber);
     return result.fold(
-          (failure) => Left(failure),
-          (data) => Right(data.toEntity()),
+      (failure) => Left(failure),
+      (data) => Right(data.toEntity()),
     );
   }
 }

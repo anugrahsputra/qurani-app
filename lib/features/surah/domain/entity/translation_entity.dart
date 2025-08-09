@@ -4,8 +4,6 @@ part 'translation_entity.freezed.dart';
 
 @freezed
 abstract class TranslationEntity with _$TranslationEntity {
-  const factory TranslationEntity({
-    required String en,
-    required String id,
-  }) = _TranslationEntity;
+  const factory TranslationEntity({required String en, required String id}) =
+      _TranslationEntity;
 }

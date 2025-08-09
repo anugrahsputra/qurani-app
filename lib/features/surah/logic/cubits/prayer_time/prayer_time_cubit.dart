@@ -53,10 +53,7 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
       final timezone = tz.getLocation('Asia/Jakarta');
       final now = tz.TZDateTime.now(timezone);
 
-      final coordinates = Coordinates(
-        position.latitude,
-        position.longitude,
-      );
+      final coordinates = Coordinates(position.latitude, position.longitude);
       PrayerTimes times = PrayerTimes(
         coordinates,
         DateComponents.from(now),
@@ -88,9 +85,13 @@ class PrayerTimeCubit extends Cubit<PrayerTimeState> {
     } on PlatformException catch (e) {
       if (e.code == 'IO_ERROR' && e.message == 'Service not Available') {
         _log.warning(
-            'Failed to get address: Location services are not available or disabled.');
-        emit(const LocationError(
-            'Tidak dapat mengakses lokasi. Pastikan layanan lokasi diaktifkan.'));
+          'Failed to get address: Location services are not available or disabled.',
+        );
+        emit(
+          const LocationError(
+            'Tidak dapat mengakses lokasi. Pastikan layanan lokasi diaktifkan.',
+          ),
+        );
         return 'Tidak dapat mengakses lokasi. Pastikan layanan lokasi diaktifkan.';
       } else {
         _log.warning('Failed to get address: ${e.message}');

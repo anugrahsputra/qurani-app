@@ -37,8 +37,9 @@ void main() {
       'should emit [BookmarkLoading, BookmarkLoaded] if OnFetchBookmark is called and list is not empty',
       build: () => bookmarkBloc,
       setUp: () {
-        when(mockGetBookmarkUsecase.call())
-            .thenAnswer((_) async => const Right([tBookmark]));
+        when(
+          mockGetBookmarkUsecase.call(),
+        ).thenAnswer((_) async => const Right([tBookmark]));
       },
       act: (bloc) => bookmarkBloc.add(const OnFetchBookmark()),
       expect: () => [
@@ -50,21 +51,21 @@ void main() {
       'should emit [BookmarkLoading, BookmarkInitial] if OnFetchBookmark is called and list is empty',
       build: () => bookmarkBloc,
       setUp: () {
-        when(mockGetBookmarkUsecase.call())
-            .thenAnswer((_) async => const Right([]));
+        when(
+          mockGetBookmarkUsecase.call(),
+        ).thenAnswer((_) async => const Right([]));
       },
       act: (bloc) => bookmarkBloc.add(const OnFetchBookmark()),
-      expect: () => [
-        const BookmarkLoading(),
-        const BookmarkInitial(),
-      ],
+      expect: () => [const BookmarkLoading(), const BookmarkInitial()],
     );
     blocTest(
       'should emit [BookmarkLoading, BookmarkError] if OnFetchBookmark is called and failed to get bookmark',
       build: () => bookmarkBloc,
       setUp: () {
-        when(mockGetBookmarkUsecase.call()).thenAnswer((_) async =>
-            const Left(DatabaseFailure(message: 'Failed get bookmark')));
+        when(mockGetBookmarkUsecase.call()).thenAnswer(
+          (_) async =>
+              const Left(DatabaseFailure(message: 'Failed get bookmark')),
+        );
       },
       act: (bloc) => bookmarkBloc.add(const OnFetchBookmark()),
       expect: () => [
@@ -79,10 +80,7 @@ void main() {
         when(mockIsBookmarkUsecase.call(1)).thenAnswer((_) async => false);
       },
       act: (bloc) => bookmarkBloc.add(const OnBookmarkStatus(1)),
-      expect: () => [
-        const BookmarkLoading(),
-        const BookmarkCheck(false),
-      ],
+      expect: () => [const BookmarkLoading(), const BookmarkCheck(false)],
     );
     blocTest(
       'should emit [BookmarkLoading, BookmarkCheck(true)] if OnBookmarkStatus is called and id is not null (exist in the local database)',
@@ -91,17 +89,15 @@ void main() {
         when(mockIsBookmarkUsecase.call(1)).thenAnswer((_) async => true);
       },
       act: (bloc) => bookmarkBloc.add(const OnBookmarkStatus(1)),
-      expect: () => [
-        const BookmarkLoading(),
-        const BookmarkCheck(true),
-      ],
+      expect: () => [const BookmarkLoading(), const BookmarkCheck(true)],
     );
     blocTest(
       'should emit [BookmarkLoading, BookmarkMessage] if OnAddBookmark is called when adding bookmark is success',
       build: () => bookmarkBloc,
       setUp: () {
-        when(mockAddBookmarkUsecase.call(tVerse, '', 1))
-            .thenAnswer((_) async => const Right('Insert bookmark success'));
+        when(
+          mockAddBookmarkUsecase.call(tVerse, '', 1),
+        ).thenAnswer((_) async => const Right('Insert bookmark success'));
       },
       act: (bloc) => bookmarkBloc.add(const OnAddBookmark(tVerse, '', 1)),
       expect: () => [
@@ -113,8 +109,10 @@ void main() {
       'should emit [BookmarkLoading, BookmarkError] if OnAddBookmark is called when adding bookmark is failed',
       build: () => bookmarkBloc,
       setUp: () {
-        when(mockAddBookmarkUsecase.call(tVerse, '', 1)).thenAnswer((_) async =>
-            const Left(DatabaseFailure(message: 'Failed to insert bookmark')));
+        when(mockAddBookmarkUsecase.call(tVerse, '', 1)).thenAnswer(
+          (_) async =>
+              const Left(DatabaseFailure(message: 'Failed to insert bookmark')),
+        );
       },
       act: (bloc) => bookmarkBloc.add(const OnAddBookmark(tVerse, '', 1)),
       expect: () => [
@@ -126,8 +124,9 @@ void main() {
       'should emit [BookmarkLoading, BookmarkMessage] if OnRemoveBookmark is called when removing bookmark is success',
       build: () => bookmarkBloc,
       setUp: () {
-        when(mockRemoveBookmarkUsecase.call(tVerse, '', 1))
-            .thenAnswer((_) async => const Right('Remove bookmark success'));
+        when(
+          mockRemoveBookmarkUsecase.call(tVerse, '', 1),
+        ).thenAnswer((_) async => const Right('Remove bookmark success'));
       },
       act: (bloc) => bookmarkBloc.add(const OnRemoveBookmark(tVerse, '', 1)),
       expect: () => [
@@ -140,8 +139,9 @@ void main() {
       build: () => bookmarkBloc,
       setUp: () {
         when(mockRemoveBookmarkUsecase.call(tVerse, '', 1)).thenAnswer(
-            (_) async => const Left(
-                DatabaseFailure(message: 'Failed to remove bookmark')));
+          (_) async =>
+              const Left(DatabaseFailure(message: 'Failed to remove bookmark')),
+        );
       },
       act: (bloc) => bookmarkBloc.add(const OnRemoveBookmark(tVerse, '', 1)),
       expect: () => [

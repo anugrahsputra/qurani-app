@@ -1,7 +1,11 @@
 part of 'homepage.dart';
 
 class HomeAppbar extends StatelessWidget {
-  const HomeAppbar({super.key, required this.tabController, required this.appNavigator});
+  const HomeAppbar({
+    super.key,
+    required this.tabController,
+    required this.appNavigator,
+  });
 
   final TabController tabController;
   final AppNavigator appNavigator;
@@ -119,7 +123,9 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
     super.initState();
 
     _timeSubscription = _timeStream.stream.listen((time) {
-      final timezone = tz.getLocation("Asia/Jakarta"); // hardcoded IANA timezone
+      final timezone = tz.getLocation(
+        "Asia/Jakarta",
+      ); // hardcoded IANA timezone
       _currentTime = tz.TZDateTime.from(time, timezone);
     });
   }
@@ -180,7 +186,9 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
             child: Container(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(color: AppColors.primaryContainer.withValues(alpha: 0.8)),
+              decoration: BoxDecoration(
+                color: AppColors.primaryContainer.withValues(alpha: 0.8),
+              ),
               child: Image.asset(imagePath, fit: BoxFit.cover),
             ),
           ),
@@ -196,7 +204,9 @@ class _DisplayBannerState extends State<DisplayBanner> with PrayerTimeMixin {
                 stream: _timeStream.stream,
                 builder: (context, snapshot) {
                   final currentTime = snapshot.data ?? DateTime.now();
-                  final currentTimeString = dt.DateFormat('HH:mm').format(currentTime);
+                  final currentTimeString = dt.DateFormat(
+                    'HH:mm',
+                  ).format(currentTime);
                   return BannerWidget(
                     currentTimeString: currentTimeString,
                     currentPrayerTime: currentPrayerTime,
@@ -271,7 +281,10 @@ class BuildDates extends StatelessWidget with PrayerTimeMixin {
     String formattedHijriDate =
         '${hijriCalendar.hDay} ${hijriCalendar.longMonthName} ${hijriCalendar.hYear} AH';
 
-    String formattedGregorianDate = dt.DateFormat('EEEE, d MMMM', 'id_ID').format(now);
+    String formattedGregorianDate = dt.DateFormat(
+      'EEEE, d MMMM',
+      'id_ID',
+    ).format(now);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -279,11 +292,19 @@ class BuildDates extends StatelessWidget with PrayerTimeMixin {
       children: [
         Text(
           formattedGregorianDate,
-          style: TextStyle(fontSize: 16.sp, color: textColor, fontWeight: FontWeight.w600),
+          style: TextStyle(
+            fontSize: 16.sp,
+            color: textColor,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         Text(
           formattedHijriDate,
-          style: TextStyle(fontSize: 14.sp, color: textColor, fontWeight: FontWeight.w400),
+          style: TextStyle(
+            fontSize: 14.sp,
+            color: textColor,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ],
     );
@@ -300,13 +321,22 @@ class PrayerSchedule extends StatelessWidget with PrayerTimeMixin {
     return BlocBuilder<PrayerTimeCubit, PrayerTimeState>(
       builder: (context, state) {
         if ((state is PrayerTimeInitial) && (state is PrayerTimeLoading)) {
-          return const PrayerScheduleLoading().redacted(context: context, redact: true);
+          return const PrayerScheduleLoading().redacted(
+            context: context,
+            redact: true,
+          );
         } else if (state is LocationPermissionDenied) {
-          return const PrayerScheduleLoading().redacted(context: context, redact: true);
+          return const PrayerScheduleLoading().redacted(
+            context: context,
+            redact: true,
+          );
         } else if (state is LocationLoaded) {
           var prayerTime = state.prayerTime;
           final now = DateTime.now();
-          final highlightedPrayerTime = getCurrentPrayerTimeMap(now, prayerTime);
+          final highlightedPrayerTime = getCurrentPrayerTimeMap(
+            now,
+            prayerTime,
+          );
           String next = highlightedPrayerTime['next'];
           final timeRemaining = highlightedPrayerTime['remainingTime'];
           Color titleColor = getTextColor(currentTime);
@@ -323,7 +353,10 @@ class PrayerSchedule extends StatelessWidget with PrayerTimeMixin {
             highlightedPrayerTime: highlightedPrayerTime,
           );
         } else {
-          return const PrayerScheduleLoading().redacted(context: context, redact: true);
+          return const PrayerScheduleLoading().redacted(
+            context: context,
+            redact: true,
+          );
         }
       },
     );
@@ -346,7 +379,8 @@ class SurahCards extends StatelessWidget {
             itemBuilder: (context, index) {
               final surah = state.listSurah[index];
               return InkWell(
-                onTap: () => appNavigator.goToDetail(context, surahNumber: surah.number),
+                onTap: () =>
+                    appNavigator.goToDetail(context, surahNumber: surah.number),
                 child: SurahCardView(surah: surah),
               );
             },
@@ -359,7 +393,9 @@ class SurahCards extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 1.sw, vertical: 1.sh),
                 height: 75.sh,
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ).redacted(context: context, redact: true);
             },
           );

@@ -27,10 +27,7 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
     required this.getSurahAudioUsecase,
   }) : super(const VerseInitial());
 
-  Future<void> playVerse(
-    String verseNumber,
-    String audioSource,
-  ) async {
+  Future<void> playVerse(String verseNumber, String audioSource) async {
     try {
       emit(VerseLoading(verseNumber));
       audioPlayerManager.stopAllExcept(verseNumber);
@@ -46,24 +43,25 @@ class VerseAudioCubit extends Cubit<VerseAudioState> {
     }
   }
 
-  Future<void> playAllVerse(
-    int surahNumber,
-  ) async {
+  Future<void> playAllVerse(int surahNumber) async {
     emit(VerseLoading(surahNumber.toString()));
     final result = await getSurahAudioUsecase(surahNumber);
-    result.fold((l) {
-      emit(const VerseStopped());
-      stopVerse();
-    }, (r) async {
-      audioPlayerManager.stopAllExcept(surahNumber.toString());
-
-      emit(VersePlayingAll(surahNumber.toString()));
-      await player?.play(UrlSource(r.audioUrl), position: Duration.zero);
-      player?.state = PlayerState.playing;
-      player?.onPlayerComplete.listen((event) {
+    result.fold(
+      (l) {
+        emit(const VerseStopped());
         stopVerse();
-      });
-    });
+      },
+      (r) async {
+        audioPlayerManager.stopAllExcept(surahNumber.toString());
+
+        emit(VersePlayingAll(surahNumber.toString()));
+        await player?.play(UrlSource(r.audioUrl), position: Duration.zero);
+        player?.state = PlayerState.playing;
+        player?.onPlayerComplete.listen((event) {
+          stopVerse();
+        });
+      },
+    );
   }
 
   Future<void> resetVerse() async {

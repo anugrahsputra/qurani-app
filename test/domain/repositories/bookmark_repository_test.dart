@@ -23,8 +23,9 @@ void main() {
   group('BookmarkRepository', () {
     group('getBookmarks', () {
       test('should return list of bookmarks', () async {
-        when(mockDatasource.getBookmarks())
-            .thenAnswer((_) async => [tBookmarkTable]);
+        when(
+          mockDatasource.getBookmarks(),
+        ).thenAnswer((_) async => [tBookmarkTable]);
 
         final result = await repository.getBookmarks();
 
@@ -37,16 +38,19 @@ void main() {
 
         final result = await repository.getBookmarks();
 
-        expect(result,
-            const Left(DatabaseFailure(message: 'Failed get bookmarks')));
+        expect(
+          result,
+          const Left(DatabaseFailure(message: 'Failed get bookmarks')),
+        );
         verify(mockDatasource.getBookmarks());
       });
     });
 
     group('isBookmarked', () {
       test('check if bookmark is not null', () async {
-        when(mockDatasource.getBookmarkById(1))
-            .thenAnswer((_) async => tBookmarkTable);
+        when(
+          mockDatasource.getBookmarkById(1),
+        ).thenAnswer((_) async => tBookmarkTable);
 
         final result = await repository.isBookmarked(1);
 
@@ -64,52 +68,68 @@ void main() {
     });
 
     group('insertBookmark', () {
-      test('should return success message if insert bookmark is success',
-          () async {
-        when(mockDatasource.insertBookmark(tBookmarkTable))
-            .thenAnswer((_) async => 'Insert bookmark success');
+      test(
+        'should return success message if insert bookmark is success',
+        () async {
+          when(
+            mockDatasource.insertBookmark(tBookmarkTable),
+          ).thenAnswer((_) async => 'Insert bookmark success');
 
-        final result = await repository.insertBookmark(tVerse, '', 1);
+          final result = await repository.insertBookmark(tVerse, '', 1);
 
-        expect(result, const Right('Insert bookmark success'));
-        verify(mockDatasource.insertBookmark(tBookmarkTable));
-      });
+          expect(result, const Right('Insert bookmark success'));
+          verify(mockDatasource.insertBookmark(tBookmarkTable));
+        },
+      );
 
-      test('should return database exception if insert bookmark is fail',
-          () async {
-        when(mockDatasource.insertBookmark(tBookmarkTable))
-            .thenThrow(DatabaseException());
+      test(
+        'should return database exception if insert bookmark is fail',
+        () async {
+          when(
+            mockDatasource.insertBookmark(tBookmarkTable),
+          ).thenThrow(DatabaseException());
 
-        final result = await repository.insertBookmark(tVerse, '', 1);
+          final result = await repository.insertBookmark(tVerse, '', 1);
 
-        expect(result,
-            const Left(DatabaseFailure(message: 'Failed to insert bookmark')));
-        verify(mockDatasource.insertBookmark(tBookmarkTable));
-      });
+          expect(
+            result,
+            const Left(DatabaseFailure(message: 'Failed to insert bookmark')),
+          );
+          verify(mockDatasource.insertBookmark(tBookmarkTable));
+        },
+      );
     });
 
     group('removeBookmark', () {
-      test('should return success message if bookmark removed successfully',
-          () async {
-        when(mockDatasource.removeBookmark(tBookmarkTable))
-            .thenAnswer((_) async => 'Remove bookmark success');
+      test(
+        'should return success message if bookmark removed successfully',
+        () async {
+          when(
+            mockDatasource.removeBookmark(tBookmarkTable),
+          ).thenAnswer((_) async => 'Remove bookmark success');
 
-        final result = await repository.removeBookmark(tVerse, '', 1);
+          final result = await repository.removeBookmark(tVerse, '', 1);
 
-        expect(result, const Right('Remove bookmark success'));
-        verify(mockDatasource.removeBookmark(tBookmarkTable));
-      });
-      test('should return failure message if bookmark removed failed',
-          () async {
-        when(mockDatasource.removeBookmark(tBookmarkTable))
-            .thenThrow(DatabaseException());
+          expect(result, const Right('Remove bookmark success'));
+          verify(mockDatasource.removeBookmark(tBookmarkTable));
+        },
+      );
+      test(
+        'should return failure message if bookmark removed failed',
+        () async {
+          when(
+            mockDatasource.removeBookmark(tBookmarkTable),
+          ).thenThrow(DatabaseException());
 
-        final result = await repository.removeBookmark(tVerse, '', 1);
+          final result = await repository.removeBookmark(tVerse, '', 1);
 
-        expect(result,
-            const Left(DatabaseFailure(message: 'Failed to remove bookmark')));
-        verify(mockDatasource.removeBookmark(tBookmarkTable));
-      });
+          expect(
+            result,
+            const Left(DatabaseFailure(message: 'Failed to remove bookmark')),
+          );
+          verify(mockDatasource.removeBookmark(tBookmarkTable));
+        },
+      );
     });
   });
 }

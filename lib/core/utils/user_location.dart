@@ -15,9 +15,7 @@ class IUserLocation implements UserLocation {
 
   @override
   Future<Position> getCurrentPosition() async =>
-      await Geolocator.getCurrentPosition(
-        forceAndroidLocationManager: false,
-      );
+      await Geolocator.getCurrentPosition(forceAndroidLocationManager: false);
 
   @override
   Future<bool> isLocationServiceEnabled() async =>

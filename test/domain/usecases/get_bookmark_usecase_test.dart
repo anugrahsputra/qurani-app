@@ -18,8 +18,9 @@ void main() {
 
   group('GetBookmarkRepository', () {
     test('should return list bookmark from repositroy', () async {
-      when(mockRepository.getBookmarks())
-          .thenAnswer((_) async => const Right([tBookmark]));
+      when(
+        mockRepository.getBookmarks(),
+      ).thenAnswer((_) async => const Right([tBookmark]));
 
       final result = await usecase.call();
 

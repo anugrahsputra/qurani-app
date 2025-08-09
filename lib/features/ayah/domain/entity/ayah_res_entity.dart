@@ -55,10 +55,8 @@ abstract class SajdaAyah with _$SajdaAyah {
 
 @freezed
 abstract class NumberAyah with _$NumberAyah {
-  const factory NumberAyah({
-    required int inQuran,
-    required int inSurah,
-  }) = _NumberAyah;
+  const factory NumberAyah({required int inQuran, required int inSurah}) =
+      _NumberAyah;
 }
 
 @freezed
@@ -86,10 +84,8 @@ abstract class NameAyah with _$NameAyah {
 
 @freezed
 abstract class TranslationAyah with _$TranslationAyah {
-  const factory TranslationAyah({
-    required String en,
-    required String id,
-  }) = _TranslationAyah;
+  const factory TranslationAyah({required String en, required String id}) =
+      _TranslationAyah;
 }
 
 @freezed
@@ -111,9 +107,8 @@ abstract class TextAyah with _$TextAyah {
 
 @freezed
 abstract class TransliterationAyah with _$TransliterationAyah {
-  const factory TransliterationAyah({
-    required String en,
-  }) = _TransliterationAyah;
+  const factory TransliterationAyah({required String en}) =
+      _TransliterationAyah;
 }
 
 @freezed
@@ -127,22 +122,15 @@ abstract class RevelationAyah with _$RevelationAyah {
 
 @freezed
 abstract class SurahAyahTafsir with _$SurahAyahTafsir {
-  const factory SurahAyahTafsir({
-    required String id,
-  }) = _SurahAyahTafsir;
+  const factory SurahAyahTafsir({required String id}) = _SurahAyahTafsir;
 }
 
 @freezed
 abstract class TafsirAyah with _$TafsirAyah {
-  const factory TafsirAyah({
-    required IdAyah id,
-  }) = _TafsirAyah;
+  const factory TafsirAyah({required IdAyah id}) = _TafsirAyah;
 }
 
 @freezed
 abstract class IdAyah with _$IdAyah {
-  const factory IdAyah({
-    required String short,
-    required String long,
-  }) = _IdAyah;
+  const factory IdAyah({required String short, required String long}) = _IdAyah;
 }

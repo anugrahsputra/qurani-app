@@ -11,18 +11,13 @@ class AyahsBloc extends Bloc<AyahsEvent, AyahsState> {
   final GetAyahUsecase getAyahUsecase;
   final GetRandomAyahUsecase getRandomAyahUsecase;
 
-  AyahsBloc({
-    required this.getAyahUsecase,
-    required this.getRandomAyahUsecase,
-  }) : super(const AyahInitial()) {
+  AyahsBloc({required this.getAyahUsecase, required this.getRandomAyahUsecase})
+    : super(const AyahInitial()) {
     on<OnGetAyah>(_onGetAyah);
     on<OnGetRandomAyah>(_onGetRandomAyah);
   }
 
-  void _onGetAyah(
-    OnGetAyah event,
-    Emitter<AyahsState> emit,
-  ) async {
+  void _onGetAyah(OnGetAyah event, Emitter<AyahsState> emit) async {
     int surahNumber = event.surahNumber;
     int ayahNumber = event.ayahNumber;
     emit(const AyahLoading());
@@ -33,10 +28,7 @@ class AyahsBloc extends Bloc<AyahsEvent, AyahsState> {
     );
   }
 
-  void _onGetRandomAyah(
-    OnGetRandomAyah event,
-    Emitter<AyahsState> emit,
-  ) async {
+  void _onGetRandomAyah(OnGetRandomAyah event, Emitter<AyahsState> emit) async {
     emit(const AyahLoading());
     final result = await getRandomAyahUsecase();
     result.fold(

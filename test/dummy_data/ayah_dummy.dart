@@ -17,20 +17,16 @@ const translation = TranslationAyahModel(en: "en", id: "id");
 
 const audio = AudioAyahModel(
   primary: "primary",
-  secondary: [
-    "secondary",
-    "secondary",
-  ],
+  secondary: ["secondary", "secondary"],
 );
 
-const tafsir = TafsirAyahModel(id: IdAyahModel(short: "short", long: "long"));
+const tafsir = TafsirAyahModel(
+  id: IdAyahModel(short: "short", long: "long"),
+);
 
 const tTafsirAyahModel = SurahTafsirAyahModel(id: "id");
 
-const text = TextsAyahModel(
-  arab: "arab",
-  transliteration: transliteration,
-);
+const text = TextsAyahModel(arab: "arab", transliteration: transliteration);
 
 const surah = SurahAyahModel(
   number: 1,
@@ -88,14 +84,13 @@ const tAudio = AudioAyah(
   secondary: ["secondary", "secondary"],
 );
 
-const tTafsir = TafsirAyah(id: IdAyah(short: "short", long: "long"));
+const tTafsir = TafsirAyah(
+  id: IdAyah(short: "short", long: "long"),
+);
 
 const tTafsirAyah = SurahAyahTafsir(id: "id");
 
-const tText = TextAyah(
-  arab: "arab",
-  transliteration: tTransliterationAyah,
-);
+const tText = TextAyah(arab: "arab", transliteration: tTransliterationAyah);
 
 const tSurah = SurahAyah(
   number: 1,

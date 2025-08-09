@@ -38,7 +38,7 @@ class FloatingBottomBar extends StatelessWidget {
               offset: const Offset(8, 6),
               blurRadius: 14,
               spreadRadius: -8,
-            )
+            ),
           ],
         ),
         child: Row(

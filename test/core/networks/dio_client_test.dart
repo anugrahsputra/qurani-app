@@ -27,15 +27,15 @@ void main() {
   dynamic data = {'key': 'value'};
   group('DioClientImpl', () {
     test('get - should make a GET request', () async {
-      when(mockDio.get(
-        any,
-        queryParameters: anyNamed('queryParameters'),
-        options: anyNamed('options'),
-        cancelToken: anyNamed('cancelToken'),
-        onReceiveProgress: anyNamed('onReceiveProgress'),
-      )).thenAnswer(
-        (_) async => response,
-      );
+      when(
+        mockDio.get(
+          any,
+          queryParameters: anyNamed('queryParameters'),
+          options: anyNamed('options'),
+          cancelToken: anyNamed('cancelToken'),
+          onReceiveProgress: anyNamed('onReceiveProgress'),
+        ),
+      ).thenAnswer((_) async => response);
 
       final result = await dioClient.get(
         url,
@@ -46,25 +46,29 @@ void main() {
       );
 
       expect(result, equals(response));
-      verify(mockDio.get(
-        url,
-        queryParameters: queryParameters,
-        options: options,
-        cancelToken: cancelToken,
-        onReceiveProgress: onReceiveProgress,
-      )).called(1);
+      verify(
+        mockDio.get(
+          url,
+          queryParameters: queryParameters,
+          options: options,
+          cancelToken: cancelToken,
+          onReceiveProgress: onReceiveProgress,
+        ),
+      ).called(1);
     });
 
     test('post - should make a POST request', () async {
-      when(mockDio.post(
-        any,
-        queryParameters: anyNamed('queryParameters'),
-        data: anyNamed('data'),
-        options: anyNamed('options'),
-        cancelToken: anyNamed('cancelToken'),
-        onReceiveProgress: anyNamed('onReceiveProgress'),
-        onSendProgress: anyNamed('onSendProgress'),
-      )).thenAnswer((_) async => response);
+      when(
+        mockDio.post(
+          any,
+          queryParameters: anyNamed('queryParameters'),
+          data: anyNamed('data'),
+          options: anyNamed('options'),
+          cancelToken: anyNamed('cancelToken'),
+          onReceiveProgress: anyNamed('onReceiveProgress'),
+          onSendProgress: anyNamed('onSendProgress'),
+        ),
+      ).thenAnswer((_) async => response);
 
       final result = await dioClient.post(
         url,
@@ -77,23 +81,27 @@ void main() {
       );
 
       expect(result, equals(response));
-      verify(mockDio.post(
-        url,
-        queryParameters: queryParameters,
-        data: anyNamed('data'),
-        options: options,
-        cancelToken: cancelToken,
-        onReceiveProgress: onReceiveProgress,
-        onSendProgress: onReceiveProgress,
-      )).called(1);
+      verify(
+        mockDio.post(
+          url,
+          queryParameters: queryParameters,
+          data: anyNamed('data'),
+          options: options,
+          cancelToken: cancelToken,
+          onReceiveProgress: onReceiveProgress,
+          onSendProgress: onReceiveProgress,
+        ),
+      ).called(1);
     });
 
     test('put - should make a PUT request', () async {
-      when(mockDio.put(
-        any,
-        queryParameters: anyNamed('queryParameters'),
-        data: anyNamed('data'),
-      )).thenAnswer((_) async => response);
+      when(
+        mockDio.put(
+          any,
+          queryParameters: anyNamed('queryParameters'),
+          data: anyNamed('data'),
+        ),
+      ).thenAnswer((_) async => response);
 
       final result = await dioClient.put(
         url,
@@ -102,18 +110,15 @@ void main() {
       );
 
       expect(result, equals(response));
-      verify(mockDio.put(
-        url,
-        queryParameters: queryParameters,
-        data: data,
-      )).called(1);
+      verify(
+        mockDio.put(url, queryParameters: queryParameters, data: data),
+      ).called(1);
     });
 
     test('delete - should make a DELETE request', () async {
-      when(mockDio.delete(
-        any,
-        queryParameters: anyNamed('queryParameters'),
-      )).thenAnswer((_) async => response);
+      when(
+        mockDio.delete(any, queryParameters: anyNamed('queryParameters')),
+      ).thenAnswer((_) async => response);
 
       final result = await dioClient.delete(
         url,
@@ -121,10 +126,7 @@ void main() {
       );
 
       expect(result, equals(response));
-      verify(mockDio.delete(
-        url,
-        queryParameters: queryParameters,
-      )).called(1);
+      verify(mockDio.delete(url, queryParameters: queryParameters)).called(1);
     });
   });
 }

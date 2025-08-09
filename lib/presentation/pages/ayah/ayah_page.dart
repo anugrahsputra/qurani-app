@@ -53,16 +53,12 @@ class _AyahPageState extends State<AyahPage> {
         appBar: AppBar(
           title: const Text('Detail Ayat'),
           backgroundColor: AppColors.primaryContainer,
-          actions: const [
-            ShareIcon(),
-          ],
+          actions: const [ShareIcon()],
         ),
         body: BlocBuilder<AyahsBloc, AyahsState>(
           builder: (context, state) {
             if ((state is AyahInitial) || (state is AyahLoading)) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
             } else if (state is AyahLoaded) {
               Ayah ayah = state.ayah;
               return SingleChildScrollView(

@@ -18,8 +18,9 @@ void main() {
   const tSurahNumber = 1;
 
   test('should get surah detail from the repository', () async {
-    when(mockSurahDetailRepository.getDetailSurah(tSurahNumber))
-        .thenAnswer((_) async => const Right(tSurahDetailRes));
+    when(
+      mockSurahDetailRepository.getDetailSurah(tSurahNumber),
+    ).thenAnswer((_) async => const Right(tSurahDetailRes));
 
     final result = await usecase.execute(tSurahNumber);
 

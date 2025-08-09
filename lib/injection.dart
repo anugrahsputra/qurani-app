@@ -33,31 +33,31 @@ Future<void> setup() async {
     instanceName: "interceptor",
   );
   sl.registerFactory<Dio>(
-    () => Dio(
-      BaseOptions(
-        connectTimeout: const Duration(seconds: 35),
-        receiveTimeout: const Duration(seconds: 35),
-        sendTimeout: const Duration(seconds: 35),
-      ),
-    )..interceptors.addAll([
-        CustomInterceptor(),
-        DioCacheInterceptor(
-          options: CacheOptions(
-            store: HiveCacheStore(dir.path, hiveBoxName: 'qurani'),
-            priority: CachePriority.normal,
-            policy: CachePolicy.refreshForceCache,
-            maxStale: const Duration(days: 7),
-            hitCacheOnErrorExcept: [],
-          ),
-        ),
-      ]),
+    () =>
+        Dio(
+            BaseOptions(
+              connectTimeout: const Duration(seconds: 35),
+              receiveTimeout: const Duration(seconds: 35),
+              sendTimeout: const Duration(seconds: 35),
+            ),
+          )
+          ..interceptors.addAll([
+            CustomInterceptor(),
+            DioCacheInterceptor(
+              options: CacheOptions(
+                store: HiveCacheStore(dir.path, hiveBoxName: 'qurani'),
+                priority: CachePriority.normal,
+                policy: CachePolicy.refreshForceCache,
+                maxStale: const Duration(days: 7),
+                hitCacheOnErrorExcept: [],
+              ),
+            ),
+          ]),
   );
   /* -----------------> External <-----------------*/
   sl.registerFactory<AudioPlayer>(() => AudioPlayer());
   /* -----------------> Core <-----------------*/
-  sl.registerFactory<DioClient>(
-    () => DioClientImpl(dio: sl<Dio>()),
-  );
+  sl.registerFactory<DioClient>(() => DioClientImpl(dio: sl<Dio>()));
   sl.registerFactory<AppNavigator>(() => AppNavigator());
   sl.registerFactory<UserLocation>(() => IUserLocation());
   sl.registerFactory<DatabaseHelper>(() => DatabaseHelper());
@@ -80,9 +80,7 @@ Future<void> setup() async {
   );
 
   sl.registerLazySingleton<BookmarkLocalDatasource>(
-    () => IBookmarkLocalDatasource(
-      databaseHelper: sl<DatabaseHelper>(),
-    ),
+    () => IBookmarkLocalDatasource(databaseHelper: sl<DatabaseHelper>()),
   );
   /* -----------------> Repository <-----------------*/
   sl.registerLazySingleton<BaseSurahRepository>(
@@ -91,7 +89,8 @@ Future<void> setup() async {
 
   sl.registerLazySingleton<SurahDetailRepository>(
     () => ISurahDetailRepository(
-        remoteDataSource: sl<DetailSurahRemoteDataSource>()),
+      remoteDataSource: sl<DetailSurahRemoteDataSource>(),
+    ),
   );
 
   sl.registerLazySingleton<AyahRepository>(
@@ -107,9 +106,7 @@ Future<void> setup() async {
   );
 
   sl.registerLazySingleton<GetSurahDetailUseCase>(
-    () => GetSurahDetailUseCase(
-      repository: sl<SurahDetailRepository>(),
-    ),
+    () => GetSurahDetailUseCase(repository: sl<SurahDetailRepository>()),
   );
   sl.registerLazySingleton<GetSurahAudioUsecase>(
     () => GetSurahAudioUsecase(sl<SurahDetailRepository>()),
@@ -132,7 +129,8 @@ Future<void> setup() async {
     () => RemoveBookmarkUsecase(repository: sl<BookmarkRepository>()),
   );
   sl.registerLazySingleton<IsBookmarkUsecase>(
-      () => IsBookmarkUsecase(repository: sl<BookmarkRepository>()));
+    () => IsBookmarkUsecase(repository: sl<BookmarkRepository>()),
+  );
   /* -----------------> Bloc <-----------------*/
   sl.registerFactory<SurahBloc>(
     () => SurahBloc(getSurahsUseCase: sl<GetSurahsUseCase>()),
@@ -154,9 +152,7 @@ Future<void> setup() async {
       isBookmarkUsecase: sl<IsBookmarkUsecase>(),
     ),
   );
-  sl.registerFactory<AppbarBloc>(
-    () => AppbarBloc(),
-  );
+  sl.registerFactory<AppbarBloc>(() => AppbarBloc());
   /* -----------------> Cubit <-----------------*/
   sl.registerFactory<VerseAudioCubit>(
     () => VerseAudioCubit(
@@ -168,5 +164,4 @@ Future<void> setup() async {
   sl.registerFactory<PrayerTimeCubit>(
     () => PrayerTimeCubit(location: sl<UserLocation>()),
   );
-
 }

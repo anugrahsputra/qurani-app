@@ -5,19 +5,11 @@ import '../../core/core.dart';
 
 class AppSnackbar {
   static void showError(BuildContext context, String message) {
-    showSnackBar(
-      context,
-      message: message,
-      snackbarColor: AppColors.error,
-    );
+    showSnackBar(context, message: message, snackbarColor: AppColors.error);
   }
 
   static void showSuccess(BuildContext context, String message) {
-    showSnackBar(
-      context,
-      message: message,
-      snackbarColor: Colors.green,
-    );
+    showSnackBar(context, message: message, snackbarColor: Colors.green);
   }
 
   static void showSnackBar(

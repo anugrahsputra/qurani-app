@@ -3,12 +3,7 @@ import 'package:qurani/features/surah/data/data.dart';
 import 'package:qurani/features/surah/domain/domain.dart';
 
 void main() {
-  const tSurahRes = SurahRes(
-    code: 0,
-    status: "",
-    message: "",
-    data: [],
-  );
+  const tSurahRes = SurahRes(code: 0, status: "", message: "", data: []);
 
   const tSurahResEntity = SurahResEntity(
     code: 0,
@@ -37,12 +32,7 @@ void main() {
 
     test('should return a valid json', () {
       final result = tSurahRes.toJson();
-      final expectedJson = {
-        "code": 0,
-        "status": "",
-        "message": "",
-        "data": [],
-      };
+      final expectedJson = {"code": 0, "status": "", "message": "", "data": []};
       expect(result, expectedJson);
     });
   });

@@ -56,9 +56,7 @@ abstract class Revelation with _$Revelation {
 
 @freezed
 abstract class Tafsir with _$Tafsir {
-  const factory Tafsir({
-    @JsonKey(name: "id") required String? id,
-  }) = _Tafsir;
+  const factory Tafsir({@JsonKey(name: "id") required String? id}) = _Tafsir;
 
   factory Tafsir.fromJson(Map<String, dynamic> json) => _$TafsirFromJson(json);
 }

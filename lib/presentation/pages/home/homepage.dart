@@ -30,7 +30,8 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin {
+class _HomepageState extends State<Homepage>
+    with SingleTickerProviderStateMixin {
   final SurahBloc surahBloc = sl<SurahBloc>();
   final AppbarBloc appbarBloc = sl<AppbarBloc>();
   final PrayerTimeCubit prayerTimeCubit = sl<PrayerTimeCubit>();
@@ -45,7 +46,8 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
     controller.addListener(() {
-      if (BlocProvider.of<AppbarBloc>(context).state.displayAppbar && controller.offset < 0.2.sh) {
+      if (BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
+          controller.offset < 0.2.sh) {
         BlocProvider.of<AppbarBloc>(context).add(const ToggleDisplay());
       } else if (!BlocProvider.of<AppbarBloc>(context).state.displayAppbar &&
           controller.offset > 0.2.sh) {
@@ -107,12 +109,18 @@ class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin
                     child: CustomScrollView(
                       controller: controller,
                       slivers: [
-                        HomeAppbar(tabController: tabController, appNavigator: appNavigator),
+                        HomeAppbar(
+                          tabController: tabController,
+                          appNavigator: appNavigator,
+                        ),
                         SurahCards(),
                       ],
                     ),
                   ),
-                  FloatingMenu(appNavigator: appNavigator, isScrolled: state.displayAppbar),
+                  FloatingMenu(
+                    appNavigator: appNavigator,
+                    isScrolled: state.displayAppbar,
+                  ),
                 ],
               );
             },

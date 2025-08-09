@@ -33,19 +33,28 @@ class AppNavigator {
     Navigator.of(context).pushNamed(routeName, arguments: arguments);
   }
 
-  void pushReplacementNamed(BuildContext context, String routeName,
-      {Object? arguments}) {
+  void pushReplacementNamed(
+    BuildContext context,
+    String routeName, {
+    Object? arguments,
+  }) {
     if (!canNavigate(context)) return;
 
     Navigator.of(context).pushReplacementNamed(routeName, arguments: arguments);
   }
 
-  void pushNamedAndRemoveUntil(BuildContext context, String routeName,
-      {Object? arguments}) {
+  void pushNamedAndRemoveUntil(
+    BuildContext context,
+    String routeName, {
+    Object? arguments,
+  }) {
     if (!canNavigate(context)) return;
 
-    Navigator.of(context).pushNamedAndRemoveUntil(routeName, (route) => false,
-        arguments: arguments);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      routeName,
+      (route) => false,
+      arguments: arguments,
+    );
   }
 
   void goToMain(BuildContext context) {
@@ -63,9 +72,11 @@ class AppNavigator {
   void goToDetail(BuildContext context, {required int surahNumber}) {
     if (!canNavigate(context)) return;
 
-    pushNamed(context, AppPages.detail, arguments: {
-      "surahNumber": surahNumber,
-    });
+    pushNamed(
+      context,
+      AppPages.detail,
+      arguments: {"surahNumber": surahNumber},
+    );
   }
 
   void goToAyah(
@@ -75,10 +86,11 @@ class AppNavigator {
   }) {
     if (!canNavigate(context)) return;
 
-    pushNamed(context, AppPages.ayah, arguments: {
-      "ayahNumber": ayahNumber,
-      "surahNumber": surahNumber,
-    });
+    pushNamed(
+      context,
+      AppPages.ayah,
+      arguments: {"ayahNumber": ayahNumber, "surahNumber": surahNumber},
+    );
   }
 
   void goToBookmarks(BuildContext context) {

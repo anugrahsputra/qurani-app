@@ -14,12 +14,13 @@ class DetailSurahRemoteDataSourceImpl implements DetailSurahRemoteDataSource {
   DetailSurahRemoteDataSourceImpl({required this.dioClient});
 
   @override
-  Future<Either<Failure, SurahDetailResModel>> getDetailSurah(int surahNumber) async {
+  Future<Either<Failure, SurahDetailResModel>> getDetailSurah(
+    int surahNumber,
+  ) async {
     return await dioClient.getParsedSafe(
       '${Endpoint.surah}/$surahNumber',
       converter: (json) => SurahDetailResModel.fromJson(json),
     );
-
   }
 
   @override
@@ -30,7 +31,7 @@ class DetailSurahRemoteDataSourceImpl implements DetailSurahRemoteDataSource {
         final data = json['audio_file'];
         return AudioFileModel.fromJson(data);
       },
-      useIsolate: true
+      useIsolate: true,
     );
   }
 }

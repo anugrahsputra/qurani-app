@@ -18,8 +18,9 @@ void main() {
 
   group('RemoveBookmarkUsecase', () {
     test('should called removebookmark from repository', () async {
-      when(mockRepository.removeBookmark(tVerse, '', 1))
-          .thenAnswer((_) async => const Right('Remove bookmark success'));
+      when(
+        mockRepository.removeBookmark(tVerse, '', 1),
+      ).thenAnswer((_) async => const Right('Remove bookmark success'));
 
       final result = await usecase.call(tVerse, '', 1);
 

@@ -18,8 +18,9 @@ void main() {
   const tSurahNumber = 1;
 
   test('should get surah detail from the repository', () async {
-    when(mockSurahDetailRepository.getFullAudio(tSurahNumber))
-        .thenAnswer((_) async => const Right(tAudioFile));
+    when(
+      mockSurahDetailRepository.getFullAudio(tSurahNumber),
+    ).thenAnswer((_) async => const Right(tAudioFile));
 
     final result = await usecase.call(tSurahNumber);
 

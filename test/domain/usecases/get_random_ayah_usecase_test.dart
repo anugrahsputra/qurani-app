@@ -16,8 +16,9 @@ void main() {
   });
 
   test('should get ayah from the repository', () async {
-    when(mockAyahRepository.getRandomAyah())
-        .thenAnswer((_) async => const Right(tAyahRes));
+    when(
+      mockAyahRepository.getRandomAyah(),
+    ).thenAnswer((_) async => const Right(tAyahRes));
 
     final result = await getRandomAyahUsecase.call();
 

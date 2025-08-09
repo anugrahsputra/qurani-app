@@ -70,10 +70,10 @@ void main() {
             "short": "",
             "long": "",
             "transliteration": {"en": "", "id": ""},
-            "translation": {"en": "", "id": ""}
+            "translation": {"en": "", "id": ""},
           },
           "revelation": {"arab": "", "en": "", "id": ""},
-          "tafsir": {"id": ""}
+          "tafsir": {"id": ""},
         };
 
         final result = Surah.fromJson(jsonMap);
@@ -90,10 +90,10 @@ void main() {
             "short": "",
             "long": "",
             "transliteration": {"en": "", "id": ""},
-            "translation": {"en": "", "id": ""}
+            "translation": {"en": "", "id": ""},
           },
           "revelation": {"arab": "", "en": "", "id": ""},
-          "tafsir": {"id": ""}
+          "tafsir": {"id": ""},
         });
       });
     });
@@ -109,7 +109,7 @@ void main() {
           "short": "",
           "long": "",
           "transliteration": {"en": "", "id": ""},
-          "translation": {"en": "", "id": ""}
+          "translation": {"en": "", "id": ""},
         };
 
         final result = Name.fromJson(jsonMap);
@@ -122,7 +122,7 @@ void main() {
           "short": "",
           "long": "",
           "transliteration": {"en": "", "id": ""},
-          "translation": {"en": "", "id": ""}
+          "translation": {"en": "", "id": ""},
         });
       });
     });
@@ -134,10 +134,7 @@ void main() {
       });
 
       test('should return a valid model', () async {
-        final Map<String, dynamic> jsonMap = {
-          "en": "",
-          "id": "",
-        };
+        final Map<String, dynamic> jsonMap = {"en": "", "id": ""};
 
         final result = Translation.fromJson(jsonMap);
         expect(result, tTranslation);
@@ -145,10 +142,7 @@ void main() {
 
       test('should return a valid json', () async {
         final result = tTranslation.toJson();
-        expect(result, {
-          "en": "",
-          "id": "",
-        });
+        expect(result, {"en": "", "id": ""});
       });
     });
 
@@ -159,11 +153,7 @@ void main() {
       });
 
       test('should return a valid model', () async {
-        final Map<String, dynamic> jsonMap = {
-          "arab": "",
-          "en": "",
-          "id": "",
-        };
+        final Map<String, dynamic> jsonMap = {"arab": "", "en": "", "id": ""};
 
         final result = Revelation.fromJson(jsonMap);
         expect(result, tRevelation);
@@ -171,11 +161,7 @@ void main() {
 
       test('should return a valid json', () async {
         final result = tRevelation.toJson();
-        expect(result, {
-          "arab": "",
-          "en": "",
-          "id": "",
-        });
+        expect(result, {"arab": "", "en": "", "id": ""});
       });
     });
 
@@ -186,9 +172,7 @@ void main() {
       });
 
       test('should return a valid model', () async {
-        final Map<String, dynamic> jsonMap = {
-          "id": "",
-        };
+        final Map<String, dynamic> jsonMap = {"id": ""};
 
         final result = Tafsir.fromJson(jsonMap);
         expect(result, tTafsir);
@@ -196,9 +180,7 @@ void main() {
 
       test('should return a valid json', () async {
         final result = tTafsir.toJson();
-        expect(result, {
-          "id": "",
-        });
+        expect(result, {"id": ""});
       });
     });
   });

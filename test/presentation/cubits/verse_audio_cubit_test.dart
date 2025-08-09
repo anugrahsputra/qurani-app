@@ -55,10 +55,7 @@ void main() {
       return verseAudioCubit;
     },
     act: (cubit) => cubit.playVerse('1', 'audioSource'),
-    expect: () => [
-      const VerseLoading('1'),
-      const VersePlaying('1'),
-    ],
+    expect: () => [const VerseLoading('1'), const VersePlaying('1')],
   );
 
   blocTest<VerseAudioCubit, VerseAudioState>(
@@ -88,28 +85,24 @@ void main() {
   blocTest(
     'should emit [VerseLoading, VerseStopped] when getSurahAudioUsecase returns an error',
     build: () {
-      when(mockGetSurahAudioUsecase(1)).thenAnswer(
-          (_) => Future.value(const Left(ServerFailure(message: ''))));
+      when(
+        mockGetSurahAudioUsecase(1),
+      ).thenAnswer((_) => Future.value(const Left(ServerFailure(message: ''))));
       return verseAudioCubit;
     },
     act: (cubit) => cubit.playAllVerse(1),
-    expect: () => [
-      const VerseLoading('1'),
-      const VerseStopped(),
-    ],
+    expect: () => [const VerseLoading('1'), const VerseStopped()],
   );
 
   blocTest(
     'should emit [VerseLoading, VersePlayingAll, PlayerState.playing] when getSurahAudioUsecase returns success',
     build: () {
-      when(mockGetSurahAudioUsecase(1))
-          .thenAnswer((_) => Future.value(const Right(tAudioFile)));
+      when(
+        mockGetSurahAudioUsecase(1),
+      ).thenAnswer((_) => Future.value(const Right(tAudioFile)));
       return verseAudioCubit;
     },
     act: (cubit) => cubit.playAllVerse(1),
-    expect: () => [
-      const VerseLoading('1'),
-      const VersePlayingAll('1'),
-    ],
+    expect: () => [const VerseLoading('1'), const VersePlayingAll('1')],
   );
 }

@@ -74,7 +74,9 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
                 String playSurah = surahDetail.name!.transliteration!.id!;
                 String totalVerse = '${surahDetail.numberOfVerses} ayat';
 
-                final isPlayedAll = context.select<VerseAudioCubit, bool>((cubit) {
+                final isPlayedAll = context.select<VerseAudioCubit, bool>((
+                  cubit,
+                ) {
                   final result = cubit.state;
                   return result is VersePlayingAll ? false : true;
                 });
@@ -86,9 +88,16 @@ class _DetailSurahPageState extends State<DetailSurahPage> {
                       child: Column(
                         children: [
                           Gap(10.h),
-                          DetailHeader(surahDetail: surahDetail, verseAudioCubit: verseAudioCubit),
+                          DetailHeader(
+                            surahDetail: surahDetail,
+                            verseAudioCubit: verseAudioCubit,
+                          ),
                           OpeningBismillah(surahDetail: surahDetail),
-                          Verses(verses: verses, surah: surahDetail, appNavigator: appNavigator),
+                          Verses(
+                            verses: verses,
+                            surah: surahDetail,
+                            appNavigator: appNavigator,
+                          ),
                           const Gap(20),
                         ],
                       ),
@@ -139,14 +148,18 @@ class _AudioTimeState extends State<AudioTime> {
   void initState() {
     super.initState();
     final verseAudioCubit = context.read<VerseAudioCubit>();
-    _durationSubscription = verseAudioCubit.player?.onDurationChanged.listen((newDuration) {
+    _durationSubscription = verseAudioCubit.player?.onDurationChanged.listen((
+      newDuration,
+    ) {
       if (mounted) {
         setState(() {
           _duration = newDuration;
         });
       }
     });
-    _positionSubscription = verseAudioCubit.player?.onPositionChanged.listen((newPosition) {
+    _positionSubscription = verseAudioCubit.player?.onPositionChanged.listen((
+      newPosition,
+    ) {
       if (mounted) {
         setState(() {
           _position = newPosition;

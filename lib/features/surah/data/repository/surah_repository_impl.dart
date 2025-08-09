@@ -12,9 +12,6 @@ class SurahRepositoryImpl implements BaseSurahRepository {
   @override
   Future<Either<Failure, SurahResEntity>> getSurahs() async {
     final result = await remoteDataSource.getSurahs();
-    return result.fold(
-      (l) => Left(l),
-      (r) => Right(r.toEntity()),
-    );
+    return result.fold((l) => Left(l), (r) => Right(r.toEntity()));
   }
 }

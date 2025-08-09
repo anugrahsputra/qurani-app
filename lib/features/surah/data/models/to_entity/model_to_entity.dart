@@ -39,27 +39,18 @@ extension NameModelX on Name {
 
 extension TranslationModelX on Translation {
   TranslationEntity toEntity() {
-    return TranslationEntity(
-      en: en!,
-      id: id!,
-    );
+    return TranslationEntity(en: en!, id: id!);
   }
 }
 
 extension RevelationModelX on Revelation {
   RevelationEntity toEntity() {
-    return RevelationEntity(
-      arab: arab!,
-      en: en!,
-      id: id!,
-    );
+    return RevelationEntity(arab: arab!, en: en!, id: id!);
   }
 }
 
 extension TafsirModelX on Tafsir {
   TafsirEntity toEntity() {
-    return TafsirEntity(
-      id: id!,
-    );
+    return TafsirEntity(id: id!);
   }
 }

@@ -25,7 +25,7 @@ class SurahRemoteDataSourceImpl implements SurahRemoteDataSource {
     return await dioClient.getParsedSafe(
       Endpoint.surah,
       converter: (json) => SurahRes.fromJson(json),
-      useIsolate: false
+      useIsolate: false,
     );
   }
 }

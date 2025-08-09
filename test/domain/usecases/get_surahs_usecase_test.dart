@@ -21,8 +21,9 @@ void main() {
     data: [],
   );
   test('should get surahs from the repository', () async {
-    when(mockBaseSurahRepository.getSurahs())
-        .thenAnswer((_) async => const Right(tSurahResEntity));
+    when(
+      mockBaseSurahRepository.getSurahs(),
+    ).thenAnswer((_) async => const Right(tSurahResEntity));
 
     final result = await getSurahsUseCase();
 

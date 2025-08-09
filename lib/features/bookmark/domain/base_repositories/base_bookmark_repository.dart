@@ -6,9 +6,15 @@ import '../domain.dart';
 
 abstract class BookmarkRepository {
   Future<Either<Failure, String>> insertBookmark(
-      Verse verse, String surah, int surahNumber);
+    Verse verse,
+    String surah,
+    int surahNumber,
+  );
   Future<Either<Failure, String>> removeBookmark(
-      Verse verse, String surah, int surahNumber);
+    Verse verse,
+    String surah,
+    int surahNumber,
+  );
   Future<Either<Failure, List<Bookmark>>> getBookmarks();
   Future<bool> isBookmarked(int id);
 }

@@ -11,7 +11,10 @@ class IAyahRepository implements AyahRepository {
   IAyahRepository({required this.remoteDatasource});
 
   @override
-  Future<Either<Failure, AyahRes>> getAyah(int surahNumber, int ayahNumber) async {
+  Future<Either<Failure, AyahRes>> getAyah(
+    int surahNumber,
+    int ayahNumber,
+  ) async {
     final result = await remoteDatasource.getAyah(surahNumber, ayahNumber);
     return result.fold((l) => Left(l), (r) => Right(r.toEntity()));
   }

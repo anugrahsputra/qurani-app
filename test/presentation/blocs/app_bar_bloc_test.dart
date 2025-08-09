@@ -11,8 +11,6 @@ void main() {
     'emits [AppbarDisplay] when ToggleDisplay is added.',
     build: () => appbarBloc,
     act: (bloc) => appbarBloc.add(const ToggleDisplay()),
-    expect: () => const [
-      AppbarDisplay(true),
-    ],
+    expect: () => const [AppbarDisplay(true)],
   );
 }

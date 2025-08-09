@@ -84,9 +84,8 @@ abstract class TextsModel with _$TextsModel {
 
 @freezed
 abstract class TransliterationModel with _$TransliterationModel {
-  const factory TransliterationModel({
-    @JsonKey(name: "en") String? en,
-  }) = _TransliterationModel;
+  const factory TransliterationModel({@JsonKey(name: "en") String? en}) =
+      _TransliterationModel;
 
   factory TransliterationModel.fromJson(Map<String, dynamic> json) =>
       _$TransliterationModelFromJson(json);
@@ -106,9 +105,7 @@ abstract class RevelationModel with _$RevelationModel {
 
 @freezed
 abstract class TafsirModel with _$TafsirModel {
-  const factory TafsirModel({
-    @JsonKey(name: "id") String? id,
-  }) = _TafsirModel;
+  const factory TafsirModel({@JsonKey(name: "id") String? id}) = _TafsirModel;
 
   factory TafsirModel.fromJson(Map<String, dynamic> json) =>
       _$TafsirModelFromJson(json);
@@ -171,9 +168,8 @@ abstract class NumberModel with _$NumberModel {
 @freezed
 abstract class VerseTafsirModel with _$VerseTafsirModel {
   @JsonSerializable(explicitToJson: true)
-  const factory VerseTafsirModel({
-    @JsonKey(name: "id") IdModel? id,
-  }) = _VerseTafsirModel;
+  const factory VerseTafsirModel({@JsonKey(name: "id") IdModel? id}) =
+      _VerseTafsirModel;
 
   factory VerseTafsirModel.fromJson(Map<String, dynamic> json) =>
       _$VerseTafsirModelFromJson(json);

@@ -10,10 +10,7 @@ class AppbarBloc extends Bloc<AppbarEvent, AppbarState> {
     on<ToggleDisplay>(_toggleDisplay);
   }
 
-  void _toggleDisplay(
-    ToggleDisplay event,
-    Emitter<AppbarState> emit,
-  ) {
+  void _toggleDisplay(ToggleDisplay event, Emitter<AppbarState> emit) {
     emit(AppbarDisplay(!state.displayAppbar));
   }
 }

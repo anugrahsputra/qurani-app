@@ -33,16 +33,13 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
   ) async {
     emit(const BookmarkLoading());
     final result = await usecase();
-    result.fold(
-      (fail) => emit(BookmarkError(fail.message)),
-      (r) {
-        if (r.isNotEmpty) {
-          emit(BookmarkLoaded(r));
-        } else {
-          emit(const BookmarkInitial());
-        }
-      },
-    );
+    result.fold((fail) => emit(BookmarkError(fail.message)), (r) {
+      if (r.isNotEmpty) {
+        emit(BookmarkLoaded(r));
+      } else {
+        emit(const BookmarkInitial());
+      }
+    });
   }
 
   void _onBookmarkStatus(
@@ -54,10 +51,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
     emit(BookmarkCheck(result));
   }
 
-  void _onAddBookmark(
-    OnAddBookmark event,
-    Emitter<BookmarkState> emit,
-  ) async {
+  void _onAddBookmark(OnAddBookmark event, Emitter<BookmarkState> emit) async {
     emit(const BookmarkLoading());
     final result = await addBookmarkUsecase(
       event.verse,

@@ -15,15 +15,17 @@ void main() {
 
   setUp(() {
     mockGetSurahDetailUseCase = MockGetSurahDetailUseCase();
-    detailSurahBloc =
-        DetailSurahBloc(getSurahDetailUsecase: mockGetSurahDetailUseCase);
+    detailSurahBloc = DetailSurahBloc(
+      getSurahDetailUsecase: mockGetSurahDetailUseCase,
+    );
   });
 
   blocTest<DetailSurahBloc, DetailSurahState>(
     'emits [DetailSurahLoading, DetailSurahLoaded] when OnGetSurah is added.',
     build: () {
-      when(mockGetSurahDetailUseCase.execute(1))
-          .thenAnswer((_) async => const Right(tSurahDetailRes));
+      when(
+        mockGetSurahDetailUseCase.execute(1),
+      ).thenAnswer((_) async => const Right(tSurahDetailRes));
 
       return detailSurahBloc;
     },
@@ -38,7 +40,8 @@ void main() {
     'emits [DetailSurahLoading, DetailSurahError] when OnGetSurah is added.',
     build: () {
       when(mockGetSurahDetailUseCase.execute(1)).thenAnswer(
-          (_) async => const Left(ServerFailure(message: "Server Error")));
+        (_) async => const Left(ServerFailure(message: "Server Error")),
+      );
 
       return detailSurahBloc;
     },

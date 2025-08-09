@@ -13,45 +13,22 @@ void main() {
       name: NameModel(
         short: "",
         long: "",
-        transliteration: TranslationModel(
-          en: "",
-          id: "",
-        ),
-        translation: TranslationModel(
-          en: "",
-          id: "",
-        ),
+        transliteration: TranslationModel(en: "", id: ""),
+        translation: TranslationModel(en: "", id: ""),
       ),
-      revelation: RevelationModel(
-        arab: "",
-        en: "",
-        id: "",
-      ),
-      tafsir: TafsirModel(
-        id: "",
-      ),
+      revelation: RevelationModel(arab: "", en: "", id: ""),
+      tafsir: TafsirModel(id: ""),
       preBismillah: PreBismillahModel(
         text: TextsModel(
           arab: "",
-          transliteration: TransliterationModel(
-            en: "",
-          ),
+          transliteration: TransliterationModel(en: ""),
         ),
-        translation: TranslationModel(
-          en: "",
-          id: "",
-        ),
-        audio: AudioModel(
-          primary: "",
-          secondary: [],
-        ),
+        translation: TranslationModel(en: "", id: ""),
+        audio: AudioModel(primary: "", secondary: []),
       ),
       verses: [
         VerseModel(
-          number: NumberModel(
-            inQuran: 1,
-            inSurah: 1,
-          ),
+          number: NumberModel(inQuran: 1, inSurah: 1),
           meta: MetaModel(
             hizbQuarter: 1,
             sajda: SajdaModel(recommended: false, obligatory: false),
@@ -62,23 +39,12 @@ void main() {
           ),
           text: TextsModel(
             arab: "",
-            transliteration: TransliterationModel(
-              en: "",
-            ),
+            transliteration: TransliterationModel(en: ""),
           ),
-          translation: TranslationModel(
-            en: "",
-            id: "",
-          ),
-          audio: AudioModel(
-            primary: "",
-            secondary: [],
-          ),
+          translation: TranslationModel(en: "", id: ""),
+          audio: AudioModel(primary: "", secondary: []),
           tafsir: VerseTafsirModel(
-            id: IdModel(
-              short: "",
-              long: "",
-            ),
+            id: IdModel(short: "", long: ""),
           ),
         ),
       ],
@@ -95,45 +61,22 @@ void main() {
       name: Name(
         short: "",
         long: "",
-        transliteration: Translation(
-          en: "",
-          id: "",
-        ),
-        translation: Translation(
-          en: "",
-          id: "",
-        ),
+        transliteration: Translation(en: "", id: ""),
+        translation: Translation(en: "", id: ""),
       ),
-      revelation: Revelation(
-        arab: "",
-        en: "",
-        id: "",
-      ),
-      tafsir: Tafsir(
-        id: "",
-      ),
+      revelation: Revelation(arab: "", en: "", id: ""),
+      tafsir: Tafsir(id: ""),
       preBismillah: PreBismillah(
         text: Texts(
           arab: "",
-          transliteration: Transliteration(
-            en: "",
-          ),
+          transliteration: Transliteration(en: ""),
         ),
-        translation: Translation(
-          en: "",
-          id: "",
-        ),
-        audio: Audio(
-          primary: "",
-          secondary: [],
-        ),
+        translation: Translation(en: "", id: ""),
+        audio: Audio(primary: "", secondary: []),
       ),
       verses: [
         Verse(
-          number: Number(
-            inQuran: 1,
-            inSurah: 1,
-          ),
+          number: Number(inQuran: 1, inSurah: 1),
           meta: Meta(
             hizbQuarter: 1,
             sajda: Sajda(recommended: false, obligatory: false),
@@ -144,23 +87,12 @@ void main() {
           ),
           text: Texts(
             arab: "",
-            transliteration: Transliteration(
-              en: "",
-            ),
+            transliteration: Transliteration(en: ""),
           ),
-          translation: Translation(
-            en: "",
-            id: "",
-          ),
-          audio: Audio(
-            primary: "",
-            secondary: [],
-          ),
+          translation: Translation(en: "", id: ""),
+          audio: Audio(primary: "", secondary: []),
           tafsir: VerseTafsir(
-            id: Id(
-              short: "",
-              long: "",
-            ),
+            id: Id(short: "", long: ""),
           ),
         ),
       ],
@@ -186,17 +118,17 @@ void main() {
             "short": "",
             "long": "",
             "transliteration": {"en": "", "id": ""},
-            "translation": {"en": "", "id": ""}
+            "translation": {"en": "", "id": ""},
           },
           "revelation": {"arab": "", "en": "", "id": ""},
           "tafsir": {"id": ""},
           "preBismillah": {
             "text": {
               "arab": "",
-              "transliteration": {"en": ""}
+              "transliteration": {"en": ""},
             },
             "translation": {"en": "", "id": ""},
-            "audio": {"primary": "", "secondary": []}
+            "audio": {"primary": "", "secondary": []},
           },
           "verses": [
             {
@@ -207,19 +139,19 @@ void main() {
                 "juz": 1,
                 "ruku": 1,
                 "manzil": 1,
-                "page": 1
+                "page": 1,
               },
               "text": {
                 "arab": "",
-                "transliteration": {"en": ""}
+                "transliteration": {"en": ""},
               },
               "translation": {"en": "", "id": ""},
               "audio": {"primary": "", "secondary": []},
               "tafsir": {
-                "id": {"short": "", "long": ""}
-              }
-            }
-          ]
+                "id": {"short": "", "long": ""},
+              },
+            },
+          ],
         },
       };
 
@@ -241,17 +173,17 @@ void main() {
             'short': '',
             'long': '',
             'transliteration': {'en': '', 'id': ''},
-            'translation': {'en': '', 'id': ''}
+            'translation': {'en': '', 'id': ''},
           },
           'revelation': {'arab': '', 'en': '', 'id': ''},
           'tafsir': {'id': ''},
           'preBismillah': {
             'text': {
               'arab': '',
-              'transliteration': {'en': ''}
+              'transliteration': {'en': ''},
             },
             'translation': {'en': '', 'id': ''},
-            'audio': {'primary': '', 'secondary': []}
+            'audio': {'primary': '', 'secondary': []},
           },
           'verses': [
             {
@@ -262,20 +194,20 @@ void main() {
                 'juz': 1,
                 'ruku': 1,
                 'manzil': 1,
-                'page': 1
+                'page': 1,
               },
               'text': {
                 'arab': '',
-                'transliteration': {'en': ''}
+                'transliteration': {'en': ''},
               },
               'translation': {'en': '', 'id': ''},
               'audio': {'primary': '', 'secondary': []},
               'tafsir': {
-                'id': {'short': '', 'long': ''}
-              }
-            }
-          ]
-        }
+                'id': {'short': '', 'long': ''},
+              },
+            },
+          ],
+        },
       };
       expect(result, expectedJson);
     });

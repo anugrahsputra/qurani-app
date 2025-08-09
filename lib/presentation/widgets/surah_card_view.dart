@@ -20,10 +20,7 @@ class SurahCardView extends StatelessWidget {
     String name = surah?.name.transliteration.id ?? 'unknown';
 
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 10.w,
-        vertical: 10.h,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -34,7 +31,7 @@ class SurahCardView extends StatelessWidget {
             offset: const Offset(8, 8),
             blurRadius: 14,
             spreadRadius: -8,
-          )
+          ),
         ],
       ),
       child: Row(
@@ -60,19 +57,13 @@ class SurahCardView extends StatelessWidget {
             children: [
               Text(
                 name,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.sp,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
               ),
               Gap(5.h),
               Text(
                 '$revelationType - $numberOfVerses ayat',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.grey,
-                ),
-              )
+                style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+              ),
             ],
           ),
           const Spacer(),

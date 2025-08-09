@@ -33,11 +33,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => sl<AppbarBloc>(),
-        ),
-      ],
+      providers: [BlocProvider(create: (context) => sl<AppbarBloc>())],
       child: ScreenUtilInit(
         designSize: const Size(412.0, 916.0),
         builder: (context, child) {

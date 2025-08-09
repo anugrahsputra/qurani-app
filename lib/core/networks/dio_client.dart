@@ -23,10 +23,7 @@ abstract class DioClient {
     Map<String, dynamic>? queryParameters,
     dynamic data,
   });
-  Future<Response> delete(
-    String url, {
-    Map<String, dynamic>? queryParameters,
-  });
+  Future<Response> delete(String url, {Map<String, dynamic>? queryParameters});
 }
 
 class DioClientImpl implements DioClient {
@@ -79,19 +76,14 @@ class DioClientImpl implements DioClient {
     Map<String, dynamic>? queryParameters,
     data,
   }) async {
-    return dio.put(
-      url,
-      queryParameters: queryParameters,
-      data: data,
-    );
+    return dio.put(url, queryParameters: queryParameters, data: data);
   }
 
   @override
-  Future<Response> delete(String url,
-      {Map<String, dynamic>? queryParameters}) async {
-    return dio.delete(
-      url,
-      queryParameters: queryParameters,
-    );
+  Future<Response> delete(
+    String url, {
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    return dio.delete(url, queryParameters: queryParameters);
   }
 }

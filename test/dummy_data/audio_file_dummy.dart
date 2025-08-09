@@ -9,4 +9,9 @@ const tAudioFileModel = AudioFileModel(
 );
 
 const tAudioFile = AudioFile(
-    id: 1, chapterId: 1, fileSize: 1, format: "format", audioUrl: "audioUrl");
+  id: 1,
+  chapterId: 1,
+  fileSize: 1,
+  format: "format",
+  audioUrl: "audioUrl",
+);

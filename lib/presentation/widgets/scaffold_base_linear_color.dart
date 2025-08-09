@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/core.dart';
 
 class AppScaffoldLinearBaseColor extends StatelessWidget {
-  const AppScaffoldLinearBaseColor({
-    super.key,
-    required this.child,
-  });
+  const AppScaffoldLinearBaseColor({super.key, required this.child});
 
   final Widget child;
 
@@ -17,10 +14,7 @@ class AppScaffoldLinearBaseColor extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
-          colors: [
-            AppColors.primary,
-            AppColors.primaryContainer,
-          ],
+          colors: [AppColors.primary, AppColors.primaryContainer],
         ),
       ),
       child: child,
